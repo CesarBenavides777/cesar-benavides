@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "faust dev --experimental-https",
     "build": "faust build",
-    "generate": "faust generatePossibleTypes",
+    "generate": "faust generatePossibleTypes && bun codegen",
     "stylesheet": "faust generateGlobalStylesheet",
-    "start": "faust start"
+    "start": "faust start",
+    "clean": "rimraf .next node_modules bun.lockb",
+    "codegen": "graphql-codegen --config graphql.config.yaml --errors-only",
+    "format": "prettier --write './**/*.{js,jsx,md,mdx,css,scss,ts,tsx}' '!.next/**' '!out/**' '!possibleTypes.json' '!public/~partytown/**'"
   },
   "dependencies": {
     "@apollo/client": "^3.10.7",
@@ -15,20 +18,49 @@
     "@faustwp/cli": "^3.0.2",
     "@faustwp/core": "^3.0.3",
     "@faustwp/experimental-app-router": "^0.3.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "framer-motion": "^11.2.12",
     "graphql": "^16.9.0",
     "next": "^14.2.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sonner": "^1.5.0",
+    "tailwind-merge": "^2.3.0"
   },
   "engines": {
     "node": ">=18",
     "npm": ">=8"
   },
   "devDependencies": {
-    "@types/node": "^20.14.9",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "next-secure-headers": "^2.2.0",
-    "typescript": "^5.5.2"
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.0",
+    "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/apollo-upload-client": "^18.0.0",
+    "@types/node": "^20.11.27",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-next": "^14.1.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-prettier": "5.1.3",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unicorn": "^51.0.1",
+    "eslint-plugin-unused-imports": "^3.1.0",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.2"
   }
 }
