@@ -7,12 +7,28 @@ index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-92850e0b33f189ed b/.bun-tag-92850e0b33f189ed
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-a11d7b66f87737aa b/.bun-tag-a11d7b66f87737aa
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-be2dbda66f0762de b/.bun-tag-be2dbda66f0762de
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-c7bb2297719194bf b/.bun-tag-c7bb2297719194bf
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
+index ac898fa819de4e249c1bd0a70d8214ffed56426e..80bd9ac66ba6176782c62c902e1b7e90a87e8564 100644
+--- a/dist/server/auth/fetchTokens.js
++++ b/dist/server/auth/fetchTokens.js
+@@ -19,7 +19,7 @@ export async function fetchTokens(code) {
+     }
+     let url = `${getUrl()}/api/faust/token`;
+     if (code) {
+-        url += `?code=${encodeURIComponent(code)}`;
++        url += `?code=${code}`;
+     }
+     try {
+         const response = await fetch(url, {
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
 index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..053399590be1e5cb68da585a27e22f2d5dffd089 100644
 --- a/dist/server/routeHandler/tokenHandler.js
