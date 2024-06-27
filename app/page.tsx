@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import Link from "next/link";
 
 export default async function Home() {
-  let client = await getClient();
+  const client = await getClient();
 
   const { data } = await client.query({
     query: gql`
@@ -25,7 +25,9 @@ export default async function Home() {
       <h2>Posts</h2>
       <ul>
         {data.posts.nodes.map((post) => (
-          <li>
+          <li
+            key={post.id}
+          >
             <Link href={`/${post.slug}`}>{post.title}</Link>
           </li>
         ))}

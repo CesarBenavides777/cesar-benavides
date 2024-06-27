@@ -1,4 +1,5 @@
 import { PleaseLogin } from "@/components/please-login";
+import type { User } from "@/types/wp";
 import { gql } from "@apollo/client";
 import { getAuthClient, onLogout } from "@faustwp/experimental-app-router";
 
@@ -14,6 +15,7 @@ export default async function Page() {
       query GetViewer {
         viewer {
           name
+          firstName
           posts {
             nodes {
               id
@@ -25,9 +27,11 @@ export default async function Page() {
     `,
   });
 
+  const { firstName } = data.viewer as User;
+
   return (
     <>
-      <h2>Welcome {data.viewer.name}</h2>
+      <h2>Hello {firstName} </h2>
 
       <h3>My Posts</h3>
       <ul>

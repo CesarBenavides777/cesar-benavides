@@ -8,7 +8,10 @@ function SubmitButton() {
   const status = useFormStatus();
 
   return (
-    <button disabled={status.pending}>
+    <button 
+      disabled={status.pending}
+      type={status.pending ? "button" : "submit"}
+    >
       {status.pending ? "Loading..." : "Login"}
     </button>
   );
@@ -35,7 +38,10 @@ export default function Page() {
         <SubmitButton />
 
         {state.error && (
-          <p dangerouslySetInnerHTML={{ __html: state.error }}></p>
+          <p 
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+            dangerouslySetInnerHTML={{ __html: state.error }}
+          />
         )}
       </form>
     </>

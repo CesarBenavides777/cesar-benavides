@@ -7,7 +7,7 @@ export default async function Page(props) {
   const isPreview = hasPreviewProps(props);
   const id = isPreview ? props.searchParams.p : props.params.slug;
 
-  let client = isPreview ? await getAuthClient() : await getClient();
+  const client = isPreview ? await getAuthClient() : await getClient();
 
   if (!client) {
     return <PleaseLogin />;
@@ -42,6 +42,7 @@ export default async function Page(props) {
     <main>
       <h2>{data?.contentNode?.title}</h2>
       <div
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
         dangerouslySetInnerHTML={{ __html: data?.contentNode?.content ?? "" }}
       />
     </main>

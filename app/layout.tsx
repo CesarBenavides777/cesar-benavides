@@ -46,7 +46,9 @@ export default async function RootLayout({ children }) {
 
             <ul>
               {data.primaryMenuItems.nodes.map((node) => (
-                <li>
+                <li
+                  key={node.id}
+                >
                   <Link href={node.uri}>{node.label}</Link>
                 </li>
               ))}
