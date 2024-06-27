@@ -5,6 +5,7 @@ import { loginAction } from "./action";
 
 function SubmitButton() {
   const status = useFormStatus();
+
   return (
     <button disabled={status.pending}>
       {status.pending ? "Loading..." : "Login"}
