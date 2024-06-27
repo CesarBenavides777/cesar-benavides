@@ -1,17 +1,14 @@
-// login/actions.ts
-"use server";
+'use server';
 
-import { customLogin } from "@/utils/customLoginHandler";
-// login/actions.ts
+import { onLogin } from '@faustwp/experimental-app-router';
+import { redirect } from 'next/navigation';
 
-import { redirect } from "next/navigation";
 export async function loginAction(prevData: any, formData: FormData) {
-  const res = await customLogin(formData);
+  const res = await onLogin(formData);
 
   if (res.error) {
-    console.error("Login Error:", res.error);
     return res;
   }
 
-  redirect("/my-account");
+  redirect('/my-account');
 }
