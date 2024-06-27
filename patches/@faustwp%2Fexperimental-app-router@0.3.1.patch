@@ -1,6 +1,9 @@
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-40dd6610341962b6 b/.bun-tag-40dd6610341962b6
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-6a87d334ce6b81ae b/.bun-tag-6a87d334ce6b81ae
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-910ee77fcb7bbb05 b/.bun-tag-910ee77fcb7bbb05
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -13,24 +16,20 @@ index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-be2dbda66f0762de b/.bun-tag-be2dbda66f0762de
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-c22bf20fe8a62757 b/.bun-tag-c22bf20fe8a62757
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-c7bb2297719194bf b/.bun-tag-c7bb2297719194bf
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
-diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
-index ac898fa819de4e249c1bd0a70d8214ffed56426e..80bd9ac66ba6176782c62c902e1b7e90a87e8564 100644
---- a/dist/server/auth/fetchTokens.js
-+++ b/dist/server/auth/fetchTokens.js
-@@ -19,7 +19,7 @@ export async function fetchTokens(code) {
-     }
-     let url = `${getUrl()}/api/faust/token`;
-     if (code) {
--        url += `?code=${encodeURIComponent(code)}`;
-+        url += `?code=${code}`;
-     }
-     try {
-         const response = await fetch(url, {
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-cab7e1b76c1415b4 b/.bun-tag-cab7e1b76c1415b4
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-f862effb3d244c60 b/.bun-tag-f862effb3d244c60
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..053399590be1e5cb68da585a27e22f2d5dffd089 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..3586c44cb3a8f3347ceda8b87310dc313d72621d 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
 @@ -1,5 +1,6 @@
@@ -40,7 +39,7 @@ index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..053399590be1e5cb68da585a27e22f2d
  export async function tokenHandler(req, s) {
      var _a, _b;
      try {
-@@ -59,9 +60,15 @@ export async function tokenHandler(req, s) {
+@@ -59,9 +60,18 @@ export async function tokenHandler(req, s) {
           * @TODO Set the refresh token cookie with the new refresh token
           * and expiration.
           */
@@ -49,6 +48,9 @@ index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..053399590be1e5cb68da585a27e22f2d
 +
          const res = new s.NextResponse(JSON.stringify(data), {
              status: 200,
++            headers: {
++                'Content-Type': 'application/json',
++            },
          });
 +
 +        console.log("res", res)
