@@ -7,6 +7,9 @@ index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-6a87d334ce6b81ae b/.bun-tag-6a87d334ce6b81ae
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-83a6a084bc4e9acb b/.bun-tag-83a6a084bc4e9acb
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-910ee77fcb7bbb05 b/.bun-tag-910ee77fcb7bbb05
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -38,10 +41,10 @@ diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-f862effb3d24
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/server/routeHandler/index.js b/dist/server/routeHandler/index.js
-index 59e5d2087f55396a43699cc342736d74c67b806d..1924c1d56e4782ad3e839f0ddbfa58fbac28bfde 100644
+index 59e5d2087f55396a43699cc342736d74c67b806d..e10321d8f05ad45cade27540592b204fca0ecb36 100644
 --- a/dist/server/routeHandler/index.js
 +++ b/dist/server/routeHandler/index.js
-@@ -3,6 +3,7 @@ import * as server from 'next/server.js';
+@@ -3,10 +3,13 @@ import * as server from 'next/server.js';
  import { tokenHandler } from './tokenHandler.js';
  export async function GetFn(req) {
      const { pathname } = new URL(req.url);
@@ -49,43 +52,32 @@ index 59e5d2087f55396a43699cc342736d74c67b806d..1924c1d56e4782ad3e839f0ddbfa58fb
      switch (pathname) {
          case '/api/faust/token/':
          case '/api/faust/token': {
+-            return tokenHandler(req, server);
++            return tokenHandler(req, {
++                NextResponse: server.NextResponse,
++            });
+         }
+         default: {
+             return notFound();
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..0298e0f2ecf19c6ab54009d00aeda713c03ca831 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..28c87010f3c4f161e37686b3b7c9a4028281cdd7 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
-@@ -1,5 +1,7 @@
+@@ -1,5 +1,6 @@
  import { cookies } from 'next/headers.js';
  import { getWpUrl, getWpSecret } from '../../faust-core-utils.js';
-+import { NextResponse } from 'next/server.js';
 +
  export async function tokenHandler(req, s) {
      var _a, _b;
      try {
-@@ -59,9 +61,28 @@ export async function tokenHandler(req, s) {
+@@ -59,9 +60,11 @@ export async function tokenHandler(req, s) {
           * @TODO Set the refresh token cookie with the new refresh token
           * and expiration.
           */
-+        console.log("server", s)
-+        console.log("data", data)
-+
-+        if (!s.NextResponse) {
-+            // return without NextResponse if it's not available
-+            return new Response(JSON.stringify(data), {
-+                status: 200,
-+                headers: {
-+                    'Content-Type': 'application/json',
-+                },
-+            });
-+        }
 +
          const res = new s.NextResponse(JSON.stringify(data), {
              status: 200,
-+            headers: {
-+                'Content-Type': 'application/json',
-+            },
          });
-+
-+        console.log("res", res)
 +        
          res.cookies.set(cookieName, data.refreshToken, {
              secure: true,
