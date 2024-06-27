@@ -3,6 +3,10 @@ import { createSecureHeaders } from "next-secure-headers";
 
 /** @type {import('next').NextConfig} */
 export default withFaust({
+  experimental: {
+    turbo: true,
+    reactCompiler: true,
+  },
   trailingSlash: false,
   async headers() {
     return [
