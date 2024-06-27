@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { loginAction } from './action';
+import { useFormState, useFormStatus } from "react-dom";
+import { loginAction } from "./action";
 
 function SubmitButton() {
   const status = useFormStatus();
   return (
     <button disabled={status.pending}>
-      {status.pending ? 'Loading...' : 'Login'}
+      {status.pending ? "Loading..." : "Login"}
     </button>
   );
 }

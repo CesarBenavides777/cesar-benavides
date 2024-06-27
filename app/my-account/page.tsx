@@ -1,6 +1,6 @@
-import { PleaseLogin } from '@/components/please-login';
-import { gql } from '@apollo/client';
-import { getAuthClient, onLogout } from '@faustwp/experimental-app-router';
+import { PleaseLogin } from "@/components/please-login";
+import { gql } from "@apollo/client";
+import { getAuthClient, onLogout } from "@faustwp/experimental-app-router";
 
 export default async function Page() {
   const client = await getAuthClient();

@@ -2,11 +2,10 @@
 import { onLogin } from "@faustwp/experimental-app-router";
 
 export async function customLogin(
-  formData: FormData
+  formData: FormData,
 ): Promise<{ error?: string; message?: string }> {
   // Safely retrieve the environment variable with a fallback URL
-  const wordpressUrl =
-    process.env.NEXT_PUBLIC_WORDPRESS_URL;
+  const wordpressUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 
   console.log("Using WordPress URL:", wordpressUrl);
 

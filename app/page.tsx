@@ -1,6 +1,6 @@
-import { getClient } from '@faustwp/experimental-app-router';
-import { gql } from '@apollo/client';
-import Link from 'next/link';
+import { getClient } from "@faustwp/experimental-app-router";
+import { gql } from "@apollo/client";
+import Link from "next/link";
 
 export default async function Home() {
   let client = await getClient();
