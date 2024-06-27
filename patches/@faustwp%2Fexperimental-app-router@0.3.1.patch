@@ -1,3 +1,6 @@
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-40dd6610341962b6 b/.bun-tag-40dd6610341962b6
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-910ee77fcb7bbb05 b/.bun-tag-910ee77fcb7bbb05
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -7,29 +10,33 @@ index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-be2dbda66f0762de b/.bun-tag-be2dbda66f0762de
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-c7bb2297719194bf b/.bun-tag-c7bb2297719194bf
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..c4c88a4d39d0d10cbee12ceec4aeefd438753614 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..053399590be1e5cb68da585a27e22f2d5dffd089 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
-@@ -1,5 +1,7 @@
+@@ -1,5 +1,6 @@
  import { cookies } from 'next/headers.js';
  import { getWpUrl, getWpSecret } from '../../faust-core-utils.js';
-+import { NextResponse } from 'next/server';
 +
  export async function tokenHandler(req, s) {
      var _a, _b;
      try {
-@@ -59,9 +61,12 @@ export async function tokenHandler(req, s) {
+@@ -59,9 +60,15 @@ export async function tokenHandler(req, s) {
           * @TODO Set the refresh token cookie with the new refresh token
           * and expiration.
           */
--        const res = new s.NextResponse(JSON.stringify(data), {
-+        const res = new NextResponse(JSON.stringify(data), {
++        console.log("server", s)
++        console.log("data", data)
++
+         const res = new s.NextResponse(JSON.stringify(data), {
              status: 200,
          });
 +
-+        console.log("data", data)
 +        console.log("res", res)
++        
          res.cookies.set(cookieName, data.refreshToken, {
              secure: true,
              httpOnly: true,
