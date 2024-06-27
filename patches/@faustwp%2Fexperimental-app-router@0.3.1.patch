@@ -1,0 +1,23 @@
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-910ee77fcb7bbb05 b/.bun-tag-910ee77fcb7bbb05
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-92850e0b33f189ed b/.bun-tag-92850e0b33f189ed
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-be2dbda66f0762de b/.bun-tag-be2dbda66f0762de
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..82e17f6049d9bbe2b53afbf028c3f18239f57695 100644
+--- a/dist/server/routeHandler/tokenHandler.js
++++ b/dist/server/routeHandler/tokenHandler.js
+@@ -62,6 +62,9 @@ export async function tokenHandler(req, s) {
+         const res = new s.NextResponse(JSON.stringify(data), {
+             status: 200,
+         });
++
++        console.log("data", data)
++        console.log("res", res)
+         res.cookies.set(cookieName, data.refreshToken, {
+             secure: true,
+             httpOnly: true,
