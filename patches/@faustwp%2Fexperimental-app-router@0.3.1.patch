@@ -7,6 +7,9 @@ index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-54ff5039d7429f0f b/.bun-tag-54ff5039d7429f0f
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-55fa145ee4e98ebb b/.bun-tag-55fa145ee4e98ebb
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-6a87d334ce6b81ae b/.bun-tag-6a87d334ce6b81ae
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -47,13 +50,13 @@ diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-f862effb3d24
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..6b265406f9c2bb2112cbff283248c8ff7f37a406 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..9b7b275dcb63736cb4f6e520a36ec99ee154f17a 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
 @@ -1,5 +1,7 @@
  import { cookies } from 'next/headers.js';
  import { getWpUrl, getWpSecret } from '../../faust-core-utils.js';
-+import { NextResponse } from 'next/server'; // Ensure correct import
++import { NextResponse } from 'next/server';
 +
  export async function tokenHandler(req, s) {
      var _a, _b;
