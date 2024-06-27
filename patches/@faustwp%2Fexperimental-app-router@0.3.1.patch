@@ -8,11 +8,23 @@ diff --git a/node_modules/@faustwp/experimental-app-router/.bun-tag-be2dbda66f07
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..82e17f6049d9bbe2b53afbf028c3f18239f57695 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..c4c88a4d39d0d10cbee12ceec4aeefd438753614 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
-@@ -62,6 +62,9 @@ export async function tokenHandler(req, s) {
-         const res = new s.NextResponse(JSON.stringify(data), {
+@@ -1,5 +1,7 @@
+ import { cookies } from 'next/headers.js';
+ import { getWpUrl, getWpSecret } from '../../faust-core-utils.js';
++import { NextResponse } from 'next/server';
++
+ export async function tokenHandler(req, s) {
+     var _a, _b;
+     try {
+@@ -59,9 +61,12 @@ export async function tokenHandler(req, s) {
+          * @TODO Set the refresh token cookie with the new refresh token
+          * and expiration.
+          */
+-        const res = new s.NextResponse(JSON.stringify(data), {
++        const res = new NextResponse(JSON.stringify(data), {
              status: 200,
          });
 +
