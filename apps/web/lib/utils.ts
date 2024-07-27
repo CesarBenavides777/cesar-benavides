@@ -31,7 +31,6 @@ export function flatListToHierarchical(
     }
     childrenOf[id] = childrenOf[id] || [];
     newItem[childrenKey] = childrenOf[id];
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     parentId
       ? // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
         (childrenOf[parentId] = childrenOf[parentId] || []).push(newItem)

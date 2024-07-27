@@ -4,14 +4,14 @@ import { createSecureHeaders } from "next-secure-headers";
 /** @type {import('next').NextConfig} */
 export default withFaust({
   experimental: {
-      turbo: {
-        rules: {
-          "*.svg": {
-            loaders: ["@svgr/webpack"],
-            as: "*.js",
-          },
+    turbo: {
+      rules: {
+        "*.svg": {
+          loaders: ["@svgr/webpack"],
+          as: "*.js",
         },
       },
+    },
     reactCompiler: true,
   },
   trailingSlash: false,
