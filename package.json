@@ -8,8 +8,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo run clean"
   },
+  "dependencies": {
+    "babel-plugin-react-compiler": "^0.0.0-experimental-334f00b-20240725"
+  },
   "devDependencies": {
-    "babel-plugin-react-compiler": "^0.0.0-experimental-334f00b-20240725",
     "prettier": "^3.3.3",
     "turbo": "^2.0.9",
     "typescript": "^5.5.4"
