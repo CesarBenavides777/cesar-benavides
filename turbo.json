@@ -5,6 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": ["FAUST_SECRET_KEY", "NEXT_PUBLIC_URL", "NEXT_PUBLIC_WORDPRESS_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
