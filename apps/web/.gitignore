@@ -25,7 +25,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# env files (can opt-in for commiting if needed)
+# local env files
+.env*.local
+.env
 .env*
 
 # vercel
@@ -34,3 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+certificates
+*storybook.log

@@ -5,7 +5,7 @@ const project = resolve(process.cwd(), "tsconfig.json");
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   extends: [
-    "eslint:recommended",
+    "eslint-plugin-react-compiler",
     "prettier",
     require.resolve("@vercel/style-guide/eslint/next"),
     "turbo",
@@ -32,4 +32,7 @@ module.exports = {
     "node_modules/",
   ],
   overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
+  rules: {
+    "react-compiler/react-compiler": "error",
+  },
 };

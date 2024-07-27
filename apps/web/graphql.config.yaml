@@ -1,0 +1,10 @@
+schema:
+  - https://cms.cesarbenavides.com/index.php?graphql
+generates:
+  ./types/wp.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withRefetchFn: true
