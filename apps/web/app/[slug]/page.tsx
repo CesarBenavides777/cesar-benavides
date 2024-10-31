@@ -23,13 +23,13 @@ export default async function Page(props) {
     query: GET_PAGE,
     variables: {
       id: id,
-      idType: "URI",
+      idType: isPreview ? "DATABASE_ID" : "URI",
       asPreview: isPreview,
     },
   });
 
-  const { pageContent, title } = data.page;
-  const { blocks } = pageContent;
+  const { pageContent, title } = data?.page ?? {};
+  const { blocks } = pageContent ?? {}
 
   return (
     <Main>
