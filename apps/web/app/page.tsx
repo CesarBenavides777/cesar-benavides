@@ -15,12 +15,12 @@ export default async function Home() {
     },
   });
 
-  const { pageContent } = data.page;
+  const { pageContent, title } = data.page;
   const { blocks } = pageContent;
 
   return (
     <Main>
-      <BlockReturner blocks={blocks} />
+      <BlockReturner blocks={blocks} title={title} />
     </Main>
   );
 }

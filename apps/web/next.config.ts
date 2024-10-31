@@ -1,7 +1,7 @@
 import { withFaust } from "@faustwp/core";
+import type { NextConfig } from "next";
 import { createSecureHeaders } from "next-secure-headers";
 
-/** @type {import('next').NextConfig} */
 export default withFaust({
   experimental: {
     turbo: {
@@ -42,4 +42,4 @@ export default withFaust({
       },
     ];
   },
-});
+} as NextConfig);

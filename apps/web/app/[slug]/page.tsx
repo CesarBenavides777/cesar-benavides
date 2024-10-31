@@ -1,12 +1,17 @@
 import { getAuthClient, getClient } from "@faustwp/experimental-app-router";
-import { gql } from "@apollo/client";
 import { hasPreviewProps } from "./hasPreviewProps";
 import { PleaseLogin } from "@/components/please-login";
 import Main from "@/components/ui/main";
+import { GET_PAGE } from "@/queries";
+import BlockReturner from "@/features/BlockReturner/BlockReturner";
 
 export default async function Page(props) {
-  const isPreview = hasPreviewProps(props);
-  const id = isPreview ? props.searchParams.p : props.params.slug;
+  const isPreview = await hasPreviewProps(props);
+  const { searchParams, params } = props;
+  const sParams = await searchParams;
+  const param = await params;
+
+  const id = isPreview ? sParams.p : param.slug;
 
   const client = isPreview ? await getAuthClient() : await getClient();
 
@@ -15,39 +20,20 @@ export default async function Page(props) {
   }
 
   const { data } = await client.query({
-    query: gql`
-      query GetContentNode(
-        $id: ID!
-        $idType: ContentNodeIdTypeEnum!
-        $asPreview: Boolean!
-      ) {
-        contentNode(id: $id, idType: $idType, asPreview: $asPreview) {
-          ... on NodeWithTitle {
-            title
-          }
-          ... on NodeWithContentEditor {
-            content
-          }
-          date
-        }
-      }
-    `,
+    query: GET_PAGE,
     variables: {
-      id,
-      idType: isPreview ? "DATABASE_ID" : "URI",
+      id: id,
+      idType: "URI",
       asPreview: isPreview,
     },
   });
 
+  const { pageContent, title } = data.page;
+  const { blocks } = pageContent;
+
   return (
     <Main>
-      <h2>{data?.contentNode?.title}</h2>
-      <div
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-        dangerouslySetInnerHTML={{
-          __html: data?.contentNode?.content ?? "",
-        }}
-      />
+      <BlockReturner blocks={blocks} title={title} />
     </Main>
   );
 }

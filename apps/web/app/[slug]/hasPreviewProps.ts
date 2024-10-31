@@ -1,4 +1,7 @@
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function hasPreviewProps(props: any) {
-  return props?.searchParams?.preview === "true" && !!props?.searchParams?.p;
+export async function hasPreviewProps(props: any) {
+  const { searchParams } = await props;
+  const data = await searchParams;
+
+  return data?.preview === "true" && !!props?.searchParams?.p;
 }

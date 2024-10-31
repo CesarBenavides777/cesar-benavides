@@ -1,0 +1,52 @@
+diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
+index ac898fa819de4e249c1bd0a70d8214ffed56426e..fe490504764f20405521167495a6818791cef81c 100644
+--- a/dist/server/auth/fetchTokens.js
++++ b/dist/server/auth/fetchTokens.js
+@@ -11,7 +11,7 @@ import { getWpUrl } from '../../faust-core-utils.js';
+  */
+ export async function fetchTokens(code) {
+     var _a;
+-    const cookieStore = cookies();
++    const cookieStore = await cookies();
+     const cookieName = `${getWpUrl()}-rt`;
+     if (!((_a = cookieStore.get(cookieName)) === null || _a === void 0 ? void 0 : _a.value) && !code) {
+         // The user is not authenticated.
+diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..b04b616c4a51045a75002eb010a4c928ea5c1635 100644
+--- a/dist/server/routeHandler/tokenHandler.js
++++ b/dist/server/routeHandler/tokenHandler.js
+@@ -9,7 +9,7 @@ export async function tokenHandler(req, s) {
+         }
+         const { url } = req;
+         const code = (_a = new URL(url).searchParams.get('code')) !== null && _a !== void 0 ? _a : undefined;
+-        const cookieStore = cookies();
++        const cookieStore = await cookies();
+         const cookieName = `${getWpUrl()}-rt`;
+         const refreshToken = (_b = cookieStore.get(cookieName)) === null || _b === void 0 ? void 0 : _b.value;
+         if (!refreshToken && !code) {
+diff --git a/dist/server-actions/logoutAction.js b/dist/server-actions/logoutAction.js
+index 1057ac5343a446d7f9aad81c3e68a023ae6a4a2f..edf84f7894ae1923c159cfb3abbc8c7d9920bcaa 100644
+--- a/dist/server-actions/logoutAction.js
++++ b/dist/server-actions/logoutAction.js
+@@ -3,7 +3,7 @@ import { getWpUrl } from '../faust-core-utils.js';
+ export async function onLogout() {
+     'use server';
+     const wpCookieName = `${getWpUrl()}-rt`;
+-    const cookieStore = cookies();
++    const cookieStore = await cookies();
+     const wpCookie = cookieStore.get(wpCookieName);
+     if (wpCookie === null || wpCookie === void 0 ? void 0 : wpCookie.name) {
+         cookieStore.delete(wpCookieName);
+diff --git a/dist/server-actions/utils/setRefreshToken.js b/dist/server-actions/utils/setRefreshToken.js
+index d54c28a955f79692007a490ac5d34cf9305bb3a1..434c6c6cb1f608ddd6bd023c674907c83632de82 100644
+--- a/dist/server-actions/utils/setRefreshToken.js
++++ b/dist/server-actions/utils/setRefreshToken.js
+@@ -8,7 +8,7 @@ import { getWpUrl } from '../../faust-core-utils.js';
+  * @param refreshTokenExpiration The refresh token expiration from the token endpoint
+  */
+ export async function setRefreshToken(refreshToken, refreshTokenExpiration) {
+-    const cookieStore = cookies();
++    const cookieStore = await cookies();
+     const cookieName = `${getWpUrl()}-rt`;
+     cookieStore.set(cookieName, refreshToken, {
+         secure: true,

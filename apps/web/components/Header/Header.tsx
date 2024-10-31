@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
           height={50}
           alt={`${title} | ${subTitle}`}
         />
-        <div className="flex flex-col gap-[2px]">
+        <div className="flex-col gap-[2px] hidden lg:flex">
           <h1 className="text-2xl font-medium">{title}</h1>
           <p className="text-sm font-light">{subTitle}</p>
         </div>

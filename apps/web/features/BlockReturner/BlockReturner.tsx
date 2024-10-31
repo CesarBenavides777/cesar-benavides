@@ -7,13 +7,20 @@ type Block = PageContentBlocksHeroLayout & {
 
 type BlockReturnerProps = {
   blocks: Block[];
+  title?: string;
 };
 
 const componentMap = {
   PageContentBlocksHeroLayout: Hero,
 };
 
-const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks }) => {
+const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title }) => {
+
+  if (!blocks || blocks.length === 0) {
+    return <Hero title={title} />;
+  }
+
+
   return (
     <>
       {blocks.map((block, index) => {
