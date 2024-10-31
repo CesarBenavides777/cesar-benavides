@@ -1,7 +1,7 @@
 import { PleaseLogin } from "@/components/please-login";
 import type { User } from "@/types/wp";
 import { gql } from "@apollo/client";
-import { getAuthClient, onLogout } from "@faustwp/experimental-app-router";
+import { getAuthClient } from "@faustwp/experimental-app-router";
 import { logoutAction } from "./action";
 
 export default async function Page() {
