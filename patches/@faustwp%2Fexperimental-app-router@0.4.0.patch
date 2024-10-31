@@ -1,21 +1,53 @@
 diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
-index ac898fa819de4e249c1bd0a70d8214ffed56426e..fe490504764f20405521167495a6818791cef81c 100644
+index ac898fa819de4e249c1bd0a70d8214ffed56426e..5ed8940de63d78c96729f965ce3a5cee02b486c5 100644
 --- a/dist/server/auth/fetchTokens.js
 +++ b/dist/server/auth/fetchTokens.js
-@@ -11,7 +11,7 @@ import { getWpUrl } from '../../faust-core-utils.js';
+@@ -1,3 +1,4 @@
++
+ // eslint-disable-next-line import/extensions
+ import { cookies } from 'next/headers.js';
+ import { getUrl } from '../../lib/getUrl.js';
+@@ -11,7 +12,8 @@ import { getWpUrl } from '../../faust-core-utils.js';
   */
  export async function fetchTokens(code) {
      var _a;
 -    const cookieStore = cookies();
 +    const cookieStore = await cookies();
++    console.log('cookieStore', cookieStore);
      const cookieName = `${getWpUrl()}-rt`;
      if (!((_a = cookieStore.get(cookieName)) === null || _a === void 0 ? void 0 : _a.value) && !code) {
          // The user is not authenticated.
+diff --git a/dist/server/routeHandler/index.js b/dist/server/routeHandler/index.js
+index 59e5d2087f55396a43699cc342736d74c67b806d..fc82bc67b7209bd8ee631d4b8143d00e21487578 100644
+--- a/dist/server/routeHandler/index.js
++++ b/dist/server/routeHandler/index.js
+@@ -1,10 +1,9 @@
+-import { notFound } from 'next/navigation.js';
++import { notFound } from 'next/navigation';
+ import * as server from 'next/server.js';
+ import { tokenHandler } from './tokenHandler.js';
+ export async function GetFn(req) {
+     const { pathname } = new URL(req.url);
+     switch (pathname) {
+-        case '/api/faust/token/':
+         case '/api/faust/token': {
+             return tokenHandler(req, server);
+         }
 diff --git a/dist/server/routeHandler/tokenHandler.js b/dist/server/routeHandler/tokenHandler.js
-index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..b04b616c4a51045a75002eb010a4c928ea5c1635 100644
+index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..282c16daacec6ccebe25907a93d3fdde981bbed9 100644
 --- a/dist/server/routeHandler/tokenHandler.js
 +++ b/dist/server/routeHandler/tokenHandler.js
-@@ -9,7 +9,7 @@ export async function tokenHandler(req, s) {
+@@ -1,6 +1,8 @@
+ import { cookies } from 'next/headers.js';
+ import { getWpUrl, getWpSecret } from '../../faust-core-utils.js';
+-export async function tokenHandler(req, s) {
++import { NextResponse } from 'next/server'
++
++export async function tokenHandler(req, p) {
+     var _a, _b;
+     try {
+         const secretKey = getWpSecret();
+@@ -9,7 +11,7 @@ export async function tokenHandler(req, s) {
          }
          const { url } = req;
          const code = (_a = new URL(url).searchParams.get('code')) !== null && _a !== void 0 ? _a : undefined;
@@ -24,6 +56,15 @@ index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..b04b616c4a51045a75002eb010a4c928
          const cookieName = `${getWpUrl()}-rt`;
          const refreshToken = (_b = cookieStore.get(cookieName)) === null || _b === void 0 ? void 0 : _b.value;
          if (!refreshToken && !code) {
+@@ -59,7 +61,7 @@ export async function tokenHandler(req, s) {
+          * @TODO Set the refresh token cookie with the new refresh token
+          * and expiration.
+          */
+-        const res = new s.NextResponse(JSON.stringify(data), {
++        const res = new NextResponse(JSON.stringify(data), {
+             status: 200,
+         });
+         res.cookies.set(cookieName, data.refreshToken, {
 diff --git a/dist/server-actions/logoutAction.js b/dist/server-actions/logoutAction.js
 index 1057ac5343a446d7f9aad81c3e68a023ae6a4a2f..edf84f7894ae1923c159cfb3abbc8c7d9920bcaa 100644
 --- a/dist/server-actions/logoutAction.js

@@ -21,16 +21,19 @@ export default function Page() {
   const [state, formAction] = useActionState(loginAction, {});
 
   return (
-    <>
+    <div className={`container max-w-6xl mx-auto py-12 px-4 flex flex-col gap-4`}>
       <h2>Login</h2>
 
-      <form action={formAction}>
-        <fieldset>
+      <form 
+        className={`grid gap-2`}
+        action={formAction}
+      >
+        <fieldset className={"flex flex-col gap-2"}>
           <label htmlFor="usernameEmail">Username or Email</label>
           <input type="name" name="usernameEmail" />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={"flex flex-col gap-2"}>
           <label htmlFor="password">Password</label>
           <input type="password" name="password" />
         </fieldset>
@@ -46,6 +49,6 @@ export default function Page() {
           />
         )}
       </form>
-    </>
+    </div>
   );
 }

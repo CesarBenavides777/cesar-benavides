@@ -15,8 +15,10 @@ export default async function Home() {
     },
   });
 
-  const { pageContent, title } = data.page;
-  const { blocks } = pageContent;
+  const { pageContent, title } = data.page ?? {};
+  const { blocks } = pageContent ?? {
+    blocks: [],
+  };
 
   return (
     <Main>
