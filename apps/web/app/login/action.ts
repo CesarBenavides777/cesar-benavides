@@ -7,9 +7,15 @@ import { redirect } from "next/navigation";
 export async function loginAction(prevData: any, formData: FormData) {
   const res = await onLogin(formData);
 
+  const redirectUrl = formData.get("redirect");
+
   if (res.error) {
     return res;
   }
 
-  redirect("/my-account");
+  if (redirectUrl) {
+    redirect(redirectUrl as string);
+  } else {
+    redirect("/my-account");
+  }
 }

@@ -10,13 +10,18 @@ export default async function Page(props) {
   const { searchParams, params } = props;
   const sParams = await searchParams;
   const param = await params;
+  const { slug } = param;
+  // consruct redirect url based
+  const paramsForRedirect = new URLSearchParams(sParams);
+  const fullRedirectUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}?${paramsForRedirect.toString()}`;
+  const redirectUrl = encodeURIComponent(fullRedirectUrl);
 
   const id = isPreview ? sParams.p : param.slug;
 
   const client = isPreview ? await getAuthClient() : await getClient();
 
   if (!client) {
-    return <PleaseLogin />;
+    return <PleaseLogin redirect={redirectUrl} />;
   }
 
   const { data } = await client.query({
