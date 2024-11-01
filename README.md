@@ -1,14 +1,38 @@
-# Turborepo starter
+# Headless WordPress Turborepo starter
 
-This is an official starter Turborepo.
+Monorepo for my personal website & projects
 
-## Using this example
+## Prerequisites:
+1. Working WordPress Instance with these plugins installed:
+- [Add WPGraphQL SEO](https://github.com/ashhitch/wp-graphql-yoast-seo)
+- [Advanced Custom Fields](https://www.advancedcustomfields.com/) (NOT Secure Custom Fields)
+    - ```
+    Our ACF plugin has been taken over forcibly by wordpressdotorg without our consent.
 
-Run the following command:
+    If you are a WP Engine, Flywheel or ACF PRO customer, you do not need to take any action and will continue to get the latest from the ACF team.
 
-```sh
-npx create-turbo@latest
-```
+    If you have a site managed elsewhere using ACF, in order to get ACF updates you must perform a one-time download of the latest genuine version to remain safe in the future.
+
+    You’ve been trusting ACF for over a decade. The experts that maintain ACF will continue to support and enhance the capabilities that our users love and trust.
+    ```
+    - Add The ACF Json within `wp-assets/acf-fields/acf-export.json`
+    - To this page: `/wp-admin/edit.php?post_type=acf-field-group&page=acf-tools`
+- [Faust.js™](https://faustjs.org/)
+- [Generate WpGraphql Image DataUrl](https://github.com/dipankarmaikap/wp-graphql-image-dataurl)
+- [Gravity Forms](https://www.gravityforms.com/)
+- [WPGraphQL](https://www.wpgraphql.com/)
+- [WPGraphQL CORS](https://www.wpgraphql.com/extenstion-plugins/wpgraphql-cors)
+- [WPGraphQL for ACF](https://github.com/wp-graphql/wpgraphql-acf)
+- [WPGraphQL for Gravity Forms](https://github.com/AxeWP/wp-graphql-gravity-forms)
+
+
+## Features:
+- Preview Draft Posts
+- Custom ACF Flexible Content Components for Page Building
+- Tailwind CSS for styling
+- Gravity Forms Component (IN DEVELOPMENT)
+- Auth / My Account Page
+- More Coming Soon!
 
 ## What's inside?
 
@@ -16,15 +40,16 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
+- `docs`: a [Next.js](https://nextjs.org/) app (IN DEVELOPMENT)
+- `web`: a Headless WordPress website using Faust JS
 - `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@repo/cb-headless-gravity-forms`: A headless gravity forms component (IN DEVELOPMENT)
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+### Utilities Used
 
 This Turborepo has some additional tools already setup for you:
 
