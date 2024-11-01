@@ -12,6 +12,7 @@
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
+    "@types/babel__traverse": "^7.20.6",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@turbo/gen": "^1.12.4",

@@ -1,5 +1,5 @@
 import { MdEmail } from "react-icons-all-files/md/MdEmail";
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { Button } from "../ui/button";
 
 type FooterProps = {
@@ -34,6 +34,15 @@ const Footer: React.FC<FooterProps> = ({
           className={"p-2"}
         >
           <FaXTwitter className="h-6 w-6" />
+          <span className="sr-only">X</span>
+        </Button>
+        <Button
+          href={linkedinUrl}
+          variant="outline"
+          size="icon-lg"
+          className={"p-2"}
+        >
+          <FaLinkedin className="h-6 w-6" />
           <span className="sr-only">LinkedIn</span>
         </Button>
         <Button
