@@ -22,6 +22,8 @@ Monorepo for my personal website & projects
 - [WPGraphQL CORS](https://www.wpgraphql.com/extenstion-plugins/wpgraphql-cors)
 - [WPGraphQL for ACF](https://github.com/wp-graphql/wpgraphql-acf)
 - [WPGraphQL for Gravity Forms](https://github.com/AxeWP/wp-graphql-gravity-forms)
+2. [Vercel](https://vercel.com/) Account for delpoyment
+3. Github Account to push code to
 
 
 ## Features:
