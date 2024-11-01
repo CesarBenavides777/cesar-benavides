@@ -1,3 +1,5 @@
+"use client";
+
 import type { MenuItem } from "@/types/wp";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,20 +14,38 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { cn, flatListToHierarchical } from "@/lib/utils";
+import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
+import clsx from "clsx";
+
+type SpecialMenuItem = MenuItem&{
+  children: SpecialMenuItem[];
+}
 
 type HeaderProps = {
   title: string;
   subTitle: string;
-  menuItems: MenuItem[];
+  menuItems: SpecialMenuItem[];
 };
 
 const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
   const hierarchicalMenuItems = flatListToHierarchical(menuItems);
+  let [hasScrolledDown, setHasScrolledDown] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 0) {
+      setHasScrolledDown(true);
+    } else {
+      setHasScrolledDown(false);
+    }
+  });
+
 
   function renderMenu(items) {
     return (
       <NavigationMenuList>
-        {items.map((item) => {
+        {items.map((item: SpecialMenuItem) => {
           const { id, path, label, children, cssClasses } = item;
 
           // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
@@ -57,7 +77,11 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
   }
 
   return (
-    <header className="container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6 md:py-4 top-0 left-0 sticky">
+    <header 
+      className={clsx("container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6 md:py-4 top-0 left-0 sticky", {
+        "bg-white dark:bg-[#242424] shadow-md": hasScrolledDown,
+        "bg-transparent": !hasScrolledDown,
+      })}>
       <Link href="/" className="flex flex-row items-start gap-2">
         <Image
           className="dark:hidden"
