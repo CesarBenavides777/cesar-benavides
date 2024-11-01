@@ -6,15 +6,13 @@ Monorepo for my personal website & projects
 1. Working WordPress Instance with these plugins installed:
 - [Add WPGraphQL SEO](https://github.com/ashhitch/wp-graphql-yoast-seo)
 - [Advanced Custom Fields](https://www.advancedcustomfields.com/) (NOT Secure Custom Fields)
-    - ```
-    Our ACF plugin has been taken over forcibly by wordpressdotorg without our consent.
+    - ```Our ACF plugin has been taken over forcibly by wordpressdotorg without our consent.
 
     If you are a WP Engine, Flywheel or ACF PRO customer, you do not need to take any action and will continue to get the latest from the ACF team.
 
     If you have a site managed elsewhere using ACF, in order to get ACF updates you must perform a one-time download of the latest genuine version to remain safe in the future.
 
-    You’ve been trusting ACF for over a decade. The experts that maintain ACF will continue to support and enhance the capabilities that our users love and trust.
-    ```
+    You’ve been trusting ACF for over a decade. The experts that maintain ACF will continue to support and enhance the capabilities that our users love and trust.```
     - Add The ACF Json within `wp-assets/acf-fields/acf-export.json`
     - To this page: `/wp-admin/edit.php?post_type=acf-field-group&page=acf-tools`
 - [Faust.js™](https://faustjs.org/)
