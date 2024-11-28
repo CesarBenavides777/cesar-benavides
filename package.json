@@ -10,6 +10,7 @@
     "publish-packages": "turbo run build lint test && changeset version && changeset publish"
   },
   "dependencies": {
+    "@changesets/cli": "^2.27.10",
     "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
     "react": "^19.0.0-rc-fb9a90fa48-20240614",
     "react-dom": "^19.0.0-rc-fb9a90fa48-20240614"
