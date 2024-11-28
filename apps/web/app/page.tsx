@@ -1,24 +1,17 @@
-import { getClient } from "@faustwp/experimental-app-router";
 import Main from "@/components/ui/main";
-import { GET_PAGE } from "@/queries";
 import { BlockReturner } from "@/features/BlockReturner";
+import getPageData from "@/lib/wp/getPageData";
+import { PageIdType } from "@/types/wp";
 
 export default async function Home() {
-  const client = await getClient();
-
-  const { data } = await client.query({
-    query: GET_PAGE,
-    variables: {
-      id: "/",
-      idType: "URI",
-      asPreview: false,
-    },
+  const pageData = await getPageData({
+    pageId: "/" as PageIdType,
+    asPreview: false,
   });
 
+  const { data } = pageData;
   const { pageContent, title } = data?.page ?? {};
-  const { blocks } = pageContent ?? {
-    blocks: [],
-  };
+  const { blocks } = pageContent ?? {};
 
   return (
     <Main>

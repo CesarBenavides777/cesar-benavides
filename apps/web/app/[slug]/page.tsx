@@ -1,9 +1,9 @@
-import { getAuthClient, getClient } from "@faustwp/experimental-app-router";
 import { hasPreviewProps } from "./hasPreviewProps";
 import { PleaseLogin } from "@/components/please-login";
 import Main from "@/components/ui/main";
-import { GET_PAGE } from "@/queries";
 import BlockReturner from "@/features/BlockReturner/BlockReturner";
+import { PageIdType } from "@/types/wp";
+import getPageData from "@/lib/wp/getPageData";
 
 export default async function Page(props) {
   const isPreview = await hasPreviewProps(props);
@@ -18,23 +18,18 @@ export default async function Page(props) {
 
   const id = isPreview ? sParams.p : param.slug;
 
-  const client = isPreview ? await getAuthClient() : await getClient();
-
-  if (!client) {
-    return <PleaseLogin redirect={redirectUrl} />;
-  }
-
-  const { data } = await client.query({
-    query: GET_PAGE,
-    variables: {
-      id: id,
-      idType: isPreview ? "DATABASE_ID" : "URI",
-      asPreview: isPreview,
-    },
+  const pageData = await getPageData({
+    pageId: id as PageIdType,
+    asPreview: isPreview,
   });
 
+  const { data, hasClient } = pageData;
   const { pageContent, title } = data?.page ?? {};
-  const { blocks } = pageContent ?? {}
+  const { blocks } = pageContent ?? {};
+
+  if (!hasClient) {
+    return <PleaseLogin redirect={redirectUrl} />;
+  }
 
   return (
     <Main>

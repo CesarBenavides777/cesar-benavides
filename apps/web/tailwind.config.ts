@@ -74,6 +74,13 @@ const config = {
       },
     },
   },
+  safelist: [
+    "flex-row",
+    "sm:flex-row",
+    "mb-4",
+    "mb-6",
+    "rounded",
+  ],
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 

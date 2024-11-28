@@ -3,17 +3,37 @@
   "type": "module",
   "scripts": {
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "build": "tsup src/index.ts --format cjs,esm --dts"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "generate": "bun generate.js"
   },
   "exports": {
     ".": "./dist/index.js"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typescript-operations": "^4.3.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.2",
     "@repo/typescript-config": "workspace:*",
     "@types/babel__traverse": "^7.20.6",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
+    "tailwindcss": "^3.4.15",
     "typescript": "latest"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts"
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@apollo/client": "^3.11.8",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0",
+    "react": "^19.0.0-rc-b7e21579-20241031",
+    "react-dom": "^19.0.0-rc-b7e21579-20241031",
+    "react-select": "^5.8.3",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }

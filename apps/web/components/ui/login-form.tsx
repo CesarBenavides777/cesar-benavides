@@ -17,18 +17,11 @@ function SubmitButton() {
   );
 }
 
-export default function LoginForm({
-    redirect 
-}: {
-    redirect?: string;
-}) {
+export default function LoginForm({ redirect }: { redirect?: string }) {
   const [state, formAction] = useActionState(loginAction, {});
 
   return (
-    <form 
-      className="grid gap-2"
-      action={formAction}
-    >
+    <form className="grid gap-2" action={formAction}>
       <fieldset className="flex flex-col gap-2">
         <label htmlFor="usernameEmail">Username or Email</label>
         <input type="name" name="usernameEmail" />

@@ -1,8 +1,7 @@
-// Inital package file for Headless Gravity Forms React component
-// This file will be the entry point for the package
+import GravityForm from "./components/form/GravityForm.js";
+import useGravityForm from "./hooks/useGravityForm.js";
 
-const headlesssGravityForms = () => {
-    console.log('Headless Gravity Forms React component');
+export { 
+    useGravityForm,
+    GravityForm
 };
-
-export default headlesssGravityForms;

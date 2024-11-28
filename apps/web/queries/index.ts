@@ -84,6 +84,12 @@ export const GET_PAGE_CONTENT_FRAGMENT = gql`
             }
           }
         }
+        # Form Block
+        ... on PageContentBlocksFormblockLayout {
+          gravityformid
+          showTitle
+          showDescription
+        }
       }
     }
   }
@@ -99,4 +105,128 @@ export const GET_PAGE = gql`
     }
   }
   ${GET_PAGE_CONTENT_FRAGMENT}
+`;
+
+export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
+  fragment GfFormToFormFieldConnectionFragment on GfFormToFormFieldConnection {
+    edges {
+      node {
+        id
+        type
+        ... on NameField {
+          id
+          databaseId
+          inputs {
+            ... on NameInputProperty {
+              id
+              name
+              autocompleteAttribute
+              customLabel
+              defaultValue
+              hasChoiceValue
+              isHidden
+              key
+              label
+              placeholder
+            }
+          }
+          isRequired
+          type
+          value
+          label
+        }
+        ... on PhoneField {
+          id
+          databaseId
+          label
+          placeholder
+          inputType
+          type
+          value
+          isRequired
+          inputName
+          defaultValue
+          description
+          autocompleteAttribute
+          databaseId
+        }
+        ... on TextField {
+          id
+          databaseId
+          value
+          type
+          placeholder
+          databaseId
+          inputName
+          inputType
+          isRequired
+          label
+          cssClass
+          size
+          hasAutocomplete
+          autocompleteAttribute
+        }
+        ... on TextAreaField {
+          id
+          databaseId
+          type
+          size
+          placeholder
+          visibility
+          value
+          inputType
+          inputName
+          isRequired
+          label
+          cssClass
+          errorMessage
+          defaultValue
+          databaseId
+        }
+        ... on EmailField {
+          id
+          databaseId
+          value
+          type
+          placeholder
+          label
+          inputs {
+            label
+            id
+          }
+          isRequired
+        }
+      }
+    }
+  }
+`;
+
+
+export const GF_FORM_FRAGMENT = gql`
+  ${FORM_TO_FIELD_CONNECTION_FRAGMENT}
+  fragment GfFormFragment on GfForm {
+    id
+    confirmations {
+      message
+    }
+    submitButton {
+      text
+    }
+    databaseId
+    title
+    description
+    formFields {
+      ...GfFormToFormFieldConnectionFragment
+    }
+  }
+`;
+
+
+export const FORM_QUERY = gql`
+  ${GF_FORM_FRAGMENT}
+  query FormQuery($id: ID!) {
+    gfForm(id: $id, idType: ID) {
+      ...GfFormFragment
+    }
+  }
 `;

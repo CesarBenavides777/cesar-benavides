@@ -18,9 +18,9 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
-type SpecialMenuItem = MenuItem&{
+type SpecialMenuItem = MenuItem & {
   children: SpecialMenuItem[];
-}
+};
 
 type HeaderProps = {
   title: string;
@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
       setHasScrolledDown(false);
     }
   });
-
 
   function renderMenu(items) {
     return (
@@ -77,11 +76,15 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
   }
 
   return (
-    <header 
-      className={clsx("container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6 md:py-4 top-0 left-0 sticky", {
-        "bg-white dark:bg-[#242424] shadow-md": hasScrolledDown,
-        "bg-transparent": !hasScrolledDown,
-      })}>
+    <header
+      className={clsx(
+        "container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6 md:py-4 top-0 left-0 sticky",
+        {
+          "bg-white dark:bg-[#242424] shadow-md": hasScrolledDown,
+          "bg-transparent": !hasScrolledDown,
+        },
+      )}
+    >
       <Link href="/" className="flex flex-row items-start gap-2">
         <Image
           className="dark:hidden"

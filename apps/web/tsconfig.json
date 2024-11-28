@@ -36,9 +36,10 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "node_modules/@repo/cb-headless-gravity-forms/dist/index.js"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

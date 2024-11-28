@@ -1,0 +1,10 @@
+schema:
+  - ${NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql
+generates:
+  ./src/types/wp.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withRefetchFn: true

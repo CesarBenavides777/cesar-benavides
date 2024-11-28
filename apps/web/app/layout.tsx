@@ -8,6 +8,7 @@ import { GeistMono } from "geist/font/mono";
 import { Header } from "@/components/Header";
 import { DynamicFavicon } from "@/components/DynamicFavicon";
 import { Footer } from "@/components/Footer";
+import { Toaster } from "sonner";
 
 export default async function RootLayout({ children }) {
   const client = await getClient();
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
             twitterUrl={xLink}
             email={email}
           />
+          <Toaster richColors position="bottom-center" />
         </Providers>
       </body>
     </html>

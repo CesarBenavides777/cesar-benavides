@@ -32,7 +32,13 @@ const Hero: React.FC<HeroProps> = ({
             </h1>
           )}
           {subCaption && (
-            <p className={"font-sans text-sm md:text-md text-gray-500 dark:text-gray-200/40"}>{subCaption}</p>
+            <p
+              className={
+                "font-sans text-sm md:text-md text-gray-500 dark:text-gray-200/40"
+              }
+            >
+              {subCaption}
+            </p>
           )}
         </div>
         {body && (
