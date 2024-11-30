@@ -16,7 +16,7 @@ const Footer: React.FC<FooterProps> = ({
   email,
 }) => {
   return (
-    <footer className="flex flex-col items-center justify-center w-full h-24 border-t dark:border-night max-w-5xl mx-auto sticky bottom-0 top-full px-2 md:px-6">
+    <footer className="flex flex-col items-center justify-center w-full h-24 border-t dark:border-night max-w-5xl mx-auto mt-auto px-2 md:px-6">
       <div className="flex space-x-4">
         <Button href={githubUrl} variant="outline" size="sm" className={"p-2"}>
           <FaGithub className="h-6 w-6" />

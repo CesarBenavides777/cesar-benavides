@@ -62,7 +62,6 @@ const LampPullChord: React.FC = () => {
           className="w-10 h-10 bg-yellow-400 rounded-full shadow-md mb-4"
           style={{
             y: yTransform,
-            touchAction: "none",
           }}
           onPointerDown={startDrag}
         />

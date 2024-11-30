@@ -19,18 +19,20 @@ interface Props {
   formId?: number | string;
   showTitle?: boolean;
   submitForm: (formData: SubmitGfFormInput) => Promise<any>;
+  useToast?: boolean;
+  styled?: boolean;
 }
 
 const successOptions = {
   autoClose: 3000,
   hideProgressBar: false,
-  position: "top-right",
+  position: "bottom-center",
 };
 
 const fieldError = {
   autoClose: 3000,
   hideProgressBar: false,
-  position: "top-right",
+  position: "bottom-center",
   pauseOnHover: true,
 };
 
@@ -168,7 +170,13 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
                   })
                 : null}
 
-              <Button className="w-fit rounded" variant="outline" size="lg" type="submit" disabled={isLoading}>
+              <Button
+                className="w-fit rounded"
+                variant="outline"
+                size="lg"
+                type="submit"
+                disabled={isLoading}
+              >
                 {submitButton?.text ?? "Submit"}
               </Button>
             </div>

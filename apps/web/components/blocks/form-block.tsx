@@ -24,7 +24,17 @@ const FormBlock: React.FC<FormBlockProps> = ({
         wrapperClassNames
       )}
     >
-      <GravityForm form={form} showTitle={showTitle} submitForm={submitForm} />
+      <GravityForm 
+        form={form} 
+        showTitle={showTitle} 
+        submitForm={submitForm}
+        useToast
+        styled
+        toastProps={{
+          richColors: true,
+          position: "bottom-center",
+        }}
+      />
     </section>
   );
 };
