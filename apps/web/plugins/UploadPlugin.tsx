@@ -1,5 +1,5 @@
 import { FaustHooks, FaustPlugin } from "@faustwp/core";
-import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { createUploadLink } from "apollo-upload-client";
 import { ApolloClientOptions, NormalizedCacheObject } from "@apollo/client";
 
 export class UploadPlugin implements FaustPlugin {
@@ -9,7 +9,7 @@ export class UploadPlugin implements FaustPlugin {
     // Modify the Apollo Client's options
     addFilter(
       "apolloClientOptions",
-      "faust",
+      "ApolloClient",
       (
         apolloClientOptions: ApolloClientOptions<NormalizedCacheObject>,
         context: Record<string, never>
@@ -18,14 +18,21 @@ export class UploadPlugin implements FaustPlugin {
         const uploadLink = createUploadLink({
           uri: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql`,
         });
-        apolloClientOptions.link = uploadLink;
+
+        // Update the 'link' property of the Apollo Client options
+
+        // Return the modified Apollo Client options
+        return {
+          ...apolloClientOptions,
+          link: uploadLink,
+        };
       }
     );
 
     // Modify the GraphQL Endpoint
     addFilter(
       "graphqlEndpoint",
-      "faust",
+      "ApolloClient",
       (graphqlEndpoint: string, context: { wpUrl: string }) => {
         // Set the GraphQL endpoint to the value of the environment variable
         return `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql`;
