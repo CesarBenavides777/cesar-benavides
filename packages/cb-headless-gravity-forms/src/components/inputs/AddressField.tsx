@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
-import React from "react";
+import { Input } from "@/components/ui/input.js"; 
+import { Label } from "@/components/ui/label.js"; 
 
 import type {
   AddressField as AddressFieldType,
@@ -51,11 +52,21 @@ const AUTOCOMPLETE_ATTRIBUTES: { [key: string]: string } = {
 };
 
 export default function AddressField({ field, fieldErrors, formId }: Props) {
-  const { id, type, label, description, cssClass, inputs, isRequired } = field;
-  const htmlId = `field_${formId}_${id}`;
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    inputs,
+    isRequired,
+    databaseId,
+  } = field;
+  const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id.toString() === id.toString(),
+    (fieldValue: FieldValue) =>
+      fieldValue.id.toString() === databaseId.toString()
   ) as AddressFieldValue | undefined;
   const addressValues = fieldValue?.addressValues || DEFAULT_VALUE;
 
@@ -66,7 +77,7 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
     dispatch({
       type: ACTION_TYPES.updateAddressFieldValue,
       fieldValue: {
-        id,
+        id: databaseId,
         addressValues: newAddressValues,
       },
     });
@@ -77,48 +88,41 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
       id={htmlId}
       className={`gfield flex flex-col gap-4 gfield-${type} ${cssClass}`.trim()}
     >
-      <legend
-        className={`text-body mb-2 block text-left font-body text-lg leading-5 text-gray-800`}
-      >
+      <legend className="text-xl mb-2 block text-left font-sans text-lg leading-5">
         {isRequired ? (
           <>
             {label}
-            <sup className={`text-secondary`}>*</sup>
+            <sup className="text-secondary">*</sup>
           </>
         ) : (
           label
         )}
       </legend>
       {inputs?.map((input) => {
-        // @ts-expect-error
         const key = input?.key as keyof AddressFieldInput;
         const inputLabel = input?.label || "";
-        // @ts-expect-error
         const placeholder = input?.placeholder || "";
         const isCountry = key === "country";
-        // @ts-expect-error
         const isHidden = input?.isHidden;
 
         if (isHidden) {
           return null;
         }
 
-        // Enforce country to folllow the ISO 3166-1 alpha-2 standard
+        // Enforce country to follow the ISO 3166-1 alpha-2 standard
         if (isCountry) {
           return (
-            <div key={key}>
-              <label
-                className={`hidden`}
+            <div key={key} className="flex flex-col gap-1">
+              <Label
                 htmlFor={`input_${formId}_${id}_${key}`}
               >
                 {inputLabel}
-              </label>
-              <input
+              </Label>
+              <Input
                 type="text"
                 name={String(key)}
                 id={`input_${formId}_${id}_${key}`}
-                className={`form-input[type='text'] w-full rounded-lg px-4 py-2 font-body text-gray-700`}
-                placeholder={`${inputLabel}`}
+                placeholder={inputLabel}
                 autoComplete={AUTOCOMPLETE_ATTRIBUTES[key]}
                 value={addressValues?.[key] ?? "US"}
                 onChange={handleChange}
@@ -130,18 +134,14 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
         }
 
         return (
-          <div key={key}>
-            <label
-              className={`hidden`}
-              htmlFor={`input_${formId}_${id}_${key}`}
-            >
+          <div key={key} className="flex flex-col gap-1">
+            <Label htmlFor={`input_${formId}_${id}_${key}`}>
               {inputLabel}
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               name={String(key)}
               id={`input_${formId}_${id}_${key}`}
-              className={`form-input[type='text'] w-full rounded-lg px-4 py-2 font-body text-gray-700`}
               placeholder={inputLabel}
               autoComplete={AUTOCOMPLETE_ATTRIBUTES[key]}
               value={addressValues?.[key] ?? ""}

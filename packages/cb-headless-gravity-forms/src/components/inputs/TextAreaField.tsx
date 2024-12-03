@@ -7,6 +7,8 @@ import useGravityForm, {
   FieldValue,
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
+import { Textarea } from "../ui/textarea.js";
+import { Label } from "../ui/label.js";
 
 interface Props {
   field: TextAreaFieldType;
@@ -27,26 +29,23 @@ export default function TextAreaField({ field, fieldErrors, formId }: Props) {
 
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
-      <label
-        className={`text-body mb-2 text-left font-body text-lg leading-5 text-gray-800 hidden`}
-        htmlFor={htmlId}
-      >
+      <Label htmlFor={htmlId}>
         {isRequired ? (
           <>
             {label}
-            <sup className={`text-secondary`}>*</sup>
+            <sup className={`text-red-500`}>*</sup>
           </>
         ) : (
           label
         )}
-      </label>
-      <textarea
+      </Label>
+      <Textarea
         name={String(databaseId)}
         id={htmlId}
+        className={`form-input[type='text'] font-sans`}
         required={Boolean(isRequired)}
-        value={value}
-        className={`form-input[type='textarea'] min-h-[175px] w-full rounded-lg px-4 py-2 font-body text-gray-500 bg-gray-200`}
         placeholder={(isRequired ? `${label}*` : label) ?? ``}
+        value={value}
         onChange={(event) => {
           dispatch({
             type: ACTION_TYPES.updateTextAreaFieldValue,

@@ -13,7 +13,7 @@ export default function HTMLField({ field, fieldErrors, formId }: Props) {
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
       <div
-        className={`text-md block px-2 py-8 text-left font-body leading-5 text-gray-800`}
+        className={`font-sans`}
         dangerouslySetInnerHTML={{ __html: content ?? `` }}
       />
     </div>

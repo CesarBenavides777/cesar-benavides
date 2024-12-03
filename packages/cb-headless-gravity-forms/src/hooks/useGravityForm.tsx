@@ -7,7 +7,7 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { AddressFieldInput, CheckboxFieldInput, EmailFieldInput, NameFieldInput,   FileUploadFieldValue as FileUpload,
+import type { AddressFieldInput, CheckboxFieldInput, EmailFieldInput, NameFieldInput,FileUploadFieldValue as FileUpload,
  } from "../types/wp.js";
 
 export interface FieldValue {
@@ -35,8 +35,9 @@ export interface StringFieldValue extends FieldValue {
 }
 
 export interface FileUploadFieldValue extends FieldValue {
-  fileUploadValues: FileUpload;
+  fileUploadValues: [File];
 }
+
 
 export interface StringFieldValues extends FieldValue {
   values: string[];
@@ -72,6 +73,7 @@ export enum ACTION_TYPES {
   updateWebsiteFieldValue = "updateWebsiteFieldValue",
   updateNumberFieldValue = "updateNumberFieldValue",
   updateFileUploadFieldValue = "updateFileUploadFieldValue",
+  updateCaptchaValue = "updateCaptchaValue",
 }
 
 function reducer(state: FieldValueUnion[], action: Action) {
@@ -103,6 +105,11 @@ function reducer(state: FieldValueUnion[], action: Action) {
       const { id, fileUploadValues } =
         action.fieldValue as FileUploadFieldValue;
       return [...getOtherFieldValues(id), { id, fileUploadValues }];
+    }
+
+    case ACTION_TYPES.updateCaptchaValue: {
+      const { id, value } = action.fieldValue as StringFieldValue;
+      return [...getOtherFieldValues(id), { id, value }];
     }
     case ACTION_TYPES.updateDateFieldValue:
     case ACTION_TYPES.updatePhoneFieldValue:

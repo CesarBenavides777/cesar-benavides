@@ -1,24 +1,13 @@
-import { gql } from "@apollo/client";
+"use client";
 
-import type { RadioField as RadioFieldType, FieldError } from "@/types/wp.js";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.js";
+import { Label } from "@/components/ui/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
-
-export const RADIO_FIELD_FIELDS = gql`
-  fragment RadioFieldFields on RadioField {
-    id
-    label
-    description
-    cssClass
-    choices {
-      text
-      value
-    }
-  }
-`;
+import type { RadioField as RadioFieldType, FieldError } from "@/types/wp.js";
 
 interface Props {
   field: RadioFieldType;
@@ -28,7 +17,7 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function RadioField({ field, fieldErrors, formId }: Props) {
+const RadioField = ({ field, fieldErrors, formId }: Props) => {
   const { id, type, label, description, cssClass, choices, databaseId } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
@@ -37,55 +26,55 @@ export default function RadioField({ field, fieldErrors, formId }: Props) {
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(value: string) {
     dispatch({
       type: ACTION_TYPES.updateRadioFieldValue,
       fieldValue: {
         id: databaseId,
-        value: event.target.value,
+        value: value,
       },
     });
   }
 
   return (
-    <fieldset
-      id={htmlId}
-      className={`gfield gfield-${type} ${cssClass}`.trim()}
-    >
-      <legend className="font-heading text-gray-800">{label}</legend>
-      {choices?.map((input) => {
-        const text = input?.text || "";
-        const inputValue = input?.value || "";
-        return (
-          <div key={inputValue} className={`flex gap-4`}>
-            <input
-              type="radio"
-              name={String(databaseId)}
-              id={`choice_${formId}_${databaseId}_${inputValue}`}
-              value={inputValue}
-              onChange={handleChange}
-            />
-            <label
-              htmlFor={`choice_${formId}_${databaseId}_${value}`}
-              className="font-body text-gray-800"
-            >
-              {text}
-            </label>
-          </div>
-        );
-      })}
-      {description ? (
-        <p className="field-description mt-4 font-body text-sm italic text-gray-700">
-          {description}
-        </p>
-      ) : null}
-      {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
-            <p key={fieldError.id} className="error-message">
+    <div id={htmlId} className={`space-y-4 ${cssClass || ""}`.trim()}>
+      <Label className="text-base font-semibold leading-7 text-foreground">
+        {label}
+      </Label>
+      <RadioGroup onValueChange={handleChange} defaultValue={value}>
+        {choices?.map((input) => {
+          const text = input?.text || "";
+          const inputValue = input?.value || "";
+          return (
+            <div key={inputValue} className="flex items-center space-x-2">
+              <RadioGroupItem
+                value={inputValue}
+                id={`choice_${formId}_${databaseId}_${inputValue}`}
+              />
+              <Label
+                htmlFor={`choice_${formId}_${databaseId}_${inputValue}`}
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                {text}
+              </Label>
+            </div>
+          );
+        })}
+      </RadioGroup>
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
+      {fieldErrors?.length > 0 && (
+        <div className="mt-2">
+          {fieldErrors.map((fieldError) => (
+            <p key={fieldError.id} className="text-sm text-destructive">
               {fieldError.message}
             </p>
-          ))
-        : null}
-    </fieldset>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
+
+export default RadioField;

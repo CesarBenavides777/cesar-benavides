@@ -1,12 +1,11 @@
-import type { 
+import type {
   FieldError,
-  FileUploadField as GFFileUploadField,
 } from "@/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
-  FieldValue,
-  FileUploadFieldValue,
 } from "../../hooks/useGravityForm.js";
+import { Label } from "../ui/label.js";
+import { Input } from "../ui/input.js";
 
 interface Props {
   field: any;
@@ -15,53 +14,58 @@ interface Props {
 }
 
 export default function FileUploadField({ field, fieldErrors, formId }: Props) {
-  const { id, type, label, description, cssClass, isRequired, databaseId } = field;
+  const { id, type, label, description, cssClass, isRequired, databaseId } =
+    field;
   const htmlId = `field_${formId}_${databaseId}`;
-  const { state, dispatch } = useGravityForm();
+  const { dispatch } = useGravityForm();
 
-  const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId,
-  ) as FileUploadFieldValue | undefined;
+const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const file = event.target.files?.[0]; // Capture the first file
+
+  if (file) {
+    console.log("Captured File:", file); // Debugging: Log the captured file
+    dispatch({
+      type: ACTION_TYPES.updateFileUploadFieldValue,
+      fieldValue: {
+        id: databaseId,
+        fileUploadValues: [file], // Pass the File object
+      },
+    });
+  } else {
+    console.error("No file selected or file input is empty");
+  }
+};
+
+
 
   return (
     <fieldset
       id={htmlId}
-      className={`gfield flex w-full flex-col justify-center gap-4 md:flex-row gfield-${type} ${
+      className={`gfield flex w-full flex-col justify-center gap-1 gfield-${type} ${
         cssClass ?? ""
       }`.trim()}
     >
-      <label
-        className={`text-body mb-2 block text-left font-body text-lg leading-5 text-gray-800`}
-        htmlFor={htmlId}
-      >
-        {isRequired ? (
-          <>
-            {label}
-            <sup className={`text-secondary`}>*</sup>
-          </>
-        ) : (
-          label
-        )}
-      </label>
-      <input
+      {label && (
+        <Label htmlFor={htmlId}>
+          {isRequired ? (
+            <>
+              {label}
+              <sup className={`text-secondary`}>*</sup>
+            </>
+          ) : (
+            label
+          )}
+        </Label>
+      )}
+
+      <Input
         type="file"
         name={String(databaseId)}
         id={`input_${formId}_${databaseId}`}
         required={Boolean(isRequired)}
-        onChange={(event) => {
-          const { files } = event.target;
-          const file = files?.[0];
-          dispatch({
-            type: ACTION_TYPES.updateFileUploadFieldValue,
-            fieldValue: {
-              id: databaseId,
-              fileUploadValues: [
-                file,
-              ] as FileUploadFieldValue["fileUploadValues"],
-            },
-          });
-        }}
+        onChange={handleFileChange}
       />
+
       {description ? (
         <p className="text-left font-body text-sm text-gray-500">
           {description}

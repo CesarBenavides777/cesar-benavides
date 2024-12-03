@@ -1,3 +1,32 @@
+diff --git a/dist/client/ssr.js b/dist/client/ssr.js
+index 4010f7c80374b8d8c13183fb8abda78b894f3a4e..f85862074d0cb4530ab07ef85324aaf3fceb4fbb 100644
+--- a/dist/client/ssr.js
++++ b/dist/client/ssr.js
+@@ -1,15 +1,17 @@
+ 'use client';
+-// eslint-disable-next-line import/extensions
+-import { ApolloNextAppProvider, NextSSRApolloClient, NextSSRInMemoryCache,
+-// eslint-disable-next-line import/extensions
+- } from '@apollo/experimental-nextjs-app-support/ssr';
++
+ import React from 'react';
+ import { createApolloConfig } from './config.js';
++import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
++import { ApolloNextAppProvider, ApolloClient, InMemoryCache } from "@apollo/experimental-nextjs-app-support";
+ export function createSSRApolloClient(authenticated = false) {
++       const uploadLink = createUploadLink({
++          uri: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql`,
++        });
+     const [inMemoryCacheObject, linkChain] = createApolloConfig(authenticated);
+-    return new NextSSRApolloClient({
+-        cache: new NextSSRInMemoryCache(inMemoryCacheObject),
+-        link: linkChain,
++    return new ApolloClient({
++        cache: new InMemoryCache(inMemoryCacheObject),
++        link: uploadLink,
+     });
+ }
+ export function FaustSSRProvider({ children }) {
 diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
 index ac898fa819de4e249c1bd0a70d8214ffed56426e..5ed8940de63d78c96729f965ce3a5cee02b486c5 100644
 --- a/dist/server/auth/fetchTokens.js

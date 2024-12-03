@@ -1,3 +1,6 @@
+import { Input } from "@/components/ui/input.js"; 
+import { Label } from "@/components/ui/label.js"; 
+
 import type {
   WebsiteField as WebsiteFieldType,
   FieldError,
@@ -17,8 +20,16 @@ interface Props {
 const DEFAULT_VALUE = "";
 
 export default function WebsiteField({ field, fieldErrors, formId }: Props) {
-  const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
-    field;
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    isRequired,
+    placeholder,
+    databaseId,
+  } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
@@ -28,15 +39,17 @@ export default function WebsiteField({ field, fieldErrors, formId }: Props) {
 
   return (
     <div className={`gfield gfield-${type} ${cssClass ?? ""}`.trim()}>
-      <label className={`text-md font-heading text-gray-800`} htmlFor={htmlId}>
-        {label}
-      </label>
-      <input
+      {label && (
+        <Label className="text-md" htmlFor={htmlId}>
+          {label}
+        </Label>
+      )}
+      <Input
         type="url"
         name={String(databaseId)}
         id={htmlId}
-        placeholder={field?.isRequired ? `${label}*` : `${placeholder}` || ""}
-        className={`form-input[type='url'] w-full rounded-lg font-body text-gray-700 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-300`}
+        placeholder={isRequired ? `${label}*` : `${placeholder}` || ""}
+        className="w-full"
         required={isRequired || false}
         value={value}
         onChange={(event) => {

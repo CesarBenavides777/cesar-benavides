@@ -5,6 +5,8 @@ import useGravityForm, {
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
 import { gql } from "@apollo/client";
+import { Label } from "../ui/label.js";
+import { Input } from "../ui/input.js";
 
 export const TEXT_FIELD_FIELDS = gql`
   fragment TextFieldFields on TextField {
@@ -38,24 +40,21 @@ export default function TextField({ field, fieldErrors, formId }: Props) {
 
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
-      <label
-        className={`text-body mb-2 block text-left font-body text-lg leading-5 text-gray-800`}
-        htmlFor={htmlId}
-      >
+      <Label htmlFor={htmlId}>
         {isRequired ? (
           <>
             {label}
-            <sup className={`text-secondary`}>*</sup>
+            <sup className={`text-red-500`}>*</sup>
           </>
         ) : (
           label
         )}
-      </label>
-      <input
+      </Label>
+      <Input
         type="text"
         name={String(databaseId)}
         id={htmlId}
-        className={`form-input[type='text'] w-full rounded-lg px-4 py-2 font-body text-gray-700`}
+        className={`form-input[type='text'] font-sans`}
         required={Boolean(isRequired)}
         placeholder={placeholder || isRequired ? `${label}*` : label || ""}
         value={value}

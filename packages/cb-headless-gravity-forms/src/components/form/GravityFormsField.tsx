@@ -15,6 +15,7 @@ import WebsiteField from "../inputs/WebsiteField.js";
 import NumberField from "../inputs/NumberField.js";
 import FileUploadField from "../inputs/FileUploadField.js";
 import HTMLField from "../inputs/HTMLField.js";
+import CaptchaField from "../inputs/CaptchaField.js";
 
 interface Props {
   field: any;
@@ -55,6 +56,10 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
           fieldErrors={fieldErrors}
           formId={formId}
         />
+      );
+    case "CAPTCHA":
+      return (
+        <CaptchaField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
     case "NAME":
       return field ? (

@@ -113,6 +113,73 @@ export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
       node {
         id
         type
+        databaseId
+        inputType
+        visibility
+        ... on AddressField {
+          addressType
+          addressValues {
+            city
+            country
+            lineTwo
+            state
+            street
+            zip
+          }
+          adminLabel
+          canPrepopulate
+          conditionalLogic {
+            actionType
+            logicType
+            rules {
+              fieldId
+              operator
+              value
+            }
+          }
+          copyValuesOptionFieldId
+          copyValuesOptionLabel
+          cssClass
+          databaseId
+          defaultCountry
+          defaultProvince
+          defaultState
+          description
+          descriptionPlacement
+          displayOnly
+          errorMessage
+          hasAutocomplete
+          id
+          inputName
+          inputType
+          inputs {
+            autocompleteAttribute
+            customLabel
+            defaultValue
+            id
+            isHidden
+            key
+            label
+            name
+            placeholder
+          }
+          isRequired
+          label
+          labelPlacement
+          layoutGridColumnSpan
+          layoutSpacerGridColumnSpan
+          pageNumber
+          personalData {
+            isIdentificationField
+            shouldErase
+            shouldExport
+          }
+          shouldCopyValuesOption
+          subLabelPlacement
+          type
+          value
+          visibility
+        }
         ... on NameField {
           id
           databaseId
@@ -134,6 +201,131 @@ export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
           type
           value
           label
+        }
+        ... on CheckboxField {
+          id
+          databaseId
+          label
+          isRequired
+          description
+          cssClass
+          choices {
+            isSelected
+            text
+            value
+          }
+          inputs {
+            id
+          }
+        }
+        ... on WebsiteField {
+          id
+          placeholder
+          label
+          description
+          isRequired
+          cssClass
+          value
+          databaseId
+        }
+        ... on PhoneField {
+          id
+          databaseId
+          label
+          description
+          cssClass
+          isRequired
+          placeholder
+          databaseId
+        }
+        ... on DateField {
+          id
+          databaseId
+          label
+          description
+          cssClass
+          isRequired
+          placeholder
+        }
+        ... on RadioField {
+          id
+          databaseId
+          label
+          description
+          cssClass
+          isRequired
+          choices {
+            isSelected
+            text
+            value
+          }
+        }
+        ... on FileUploadField {
+          id
+          databaseId
+          databaseId
+          label
+          type
+          description
+          isRequired
+          cssClass
+        }
+        ... on HiddenField {
+          id
+          databaseId
+          inputType
+          label
+          type
+          value
+          displayOnly
+          defaultValue
+          canPrepopulate
+          inputName
+        }
+        ... on HtmlField {
+          id
+          databaseId
+          content
+          cssClass
+          displayOnly
+          hasMargins
+          inputType
+          label
+          layoutGridColumnSpan
+          layoutSpacerGridColumnSpan
+          pageNumber
+          type
+          visibility
+        }
+
+        ... on SelectField {
+          id
+          databaseId
+          label
+          description
+          isRequired
+          defaultValue
+          cssClass
+          placeholder
+          choices {
+            text
+            isSelected
+            value
+          }
+        }
+
+        ... on MultiSelectField {
+          id
+          databaseId
+          label
+          description
+          isRequired
+          cssClass
+          choices {
+            isSelected
+            text
+            value
+          }
         }
         ... on PhoneField {
           id
@@ -183,6 +375,76 @@ export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
           defaultValue
           databaseId
         }
+        ... on CaptchaField {
+          captchaBadgePosition
+          captchaLanguage
+          captchaTheme
+          captchaType
+          conditionalLogic {
+            actionType
+            logicType
+            rules {
+              fieldId
+              operator
+              value
+            }
+          }
+          cssClass
+          databaseId
+          description
+          descriptionPlacement
+          displayOnly
+          errorMessage
+          id
+          inputType
+          label
+          labelPlacement
+          layoutGridColumnSpan
+          layoutSpacerGridColumnSpan
+          pageNumber
+          simpleCaptchaBackgroundColor
+          simpleCaptchaFontColor
+          simpleCaptchaSize
+          type
+          value
+          visibility
+        }
+        ... on ConsentField {
+          adminLabel
+          checkboxLabel
+          conditionalLogic {
+            actionType
+            logicType
+            rules {
+              fieldId
+              operator
+              value
+            }
+          }
+          consentValue
+          cssClass
+          databaseId
+          description
+          descriptionPlacement
+          displayOnly
+          errorMessage
+          id
+          inputType
+          isRequired
+          label
+          labelPlacement
+          layoutGridColumnSpan
+          layoutSpacerGridColumnSpan
+          pageNumber
+          personalData {
+            isIdentificationField
+            shouldErase
+            shouldExport
+          }
+          type
+          value
+          visibility
+        }
         ... on EmailField {
           id
           databaseId
@@ -201,7 +463,6 @@ export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
   }
 `;
 
-
 export const GF_FORM_FRAGMENT = gql`
   ${FORM_TO_FIELD_CONNECTION_FRAGMENT}
   fragment GfFormFragment on GfForm {
@@ -215,12 +476,11 @@ export const GF_FORM_FRAGMENT = gql`
     databaseId
     title
     description
-    formFields {
+    formFields(first: 100) {
       ...GfFormToFormFieldConnectionFragment
     }
   }
 `;
-
 
 export const FORM_QUERY = gql`
   ${GF_FORM_FRAGMENT}

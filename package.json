@@ -11,9 +11,13 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.10",
+    "apollo-upload-client": "^18.0.1",
     "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
+    "graphql-tag": "^2.12.6",
+    "object-path": "^0.11.8",
     "react": "^19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "^19.0.0-rc-fb9a90fa48-20240614"
+    "react-dom": "^19.0.0-rc-fb9a90fa48-20240614",
+    "recursive-iterator": "^3.3.0"
   },
   "devDependencies": {
     "eslint-plugin-unused-imports": "^4.1.4",

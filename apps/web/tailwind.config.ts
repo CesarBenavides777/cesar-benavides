@@ -7,6 +7,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/@repo/cb-headless-gravity-forms/src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -53,11 +54,6 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -80,6 +76,8 @@ const config = {
     "mb-4",
     "mb-6",
     "rounded",
+    "rounded-md",
+    "bg-background",
   ],
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

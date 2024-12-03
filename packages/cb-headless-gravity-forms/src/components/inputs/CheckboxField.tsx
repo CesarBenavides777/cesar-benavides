@@ -1,15 +1,17 @@
-// import { gql } from "@apollo/client";
+"use client";
 
-import type {
-  CheckboxField as CheckboxFieldType,
-  CheckboxFieldInput as CheckboxInput,
-  FieldError,
-} from "@/types/wp.js";
+import { Checkbox } from "@/components/ui/checkbox.js";
+import { Label } from "@/components/ui/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   CheckboxFieldValue,
 } from "../../hooks/useGravityForm.js";
+import type {
+  CheckboxField as CheckboxFieldType,
+  CheckboxFieldInput as CheckboxInput,
+  FieldError,
+} from "@/types/wp.js";
 
 interface Props {
   field: CheckboxFieldType;
@@ -19,9 +21,10 @@ interface Props {
 
 const DEFAULT_VALUE: CheckboxInput[] = [];
 
-export default function CheckboxField({ field, fieldErrors, formId }: Props) {
+const CheckboxField = ({ field, fieldErrors, formId }: Props) => {
   const {
     id,
+    databaseId,
     type,
     label,
     description,
@@ -33,77 +36,73 @@ export default function CheckboxField({ field, fieldErrors, formId }: Props) {
   const checkboxInputs =
     choices?.map((choice, index) => ({ ...choice, id: inputs?.[index]?.id })) ||
     [];
-  const htmlId = `field_${formId}_${id}`;
+  const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === id,
+    (fieldValue: FieldValue) => fieldValue.id === databaseId
   ) as CheckboxFieldValue | undefined;
   const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE;
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value, checked } = event.target;
+  function handleChange(inputId: number, checked: boolean, value: string) {
     const otherCheckboxValues = checkboxValues.filter(
-      (checkboxValue: CheckboxInput) => checkboxValue.inputId !== Number(name),
+      (checkboxValue: CheckboxInput) => checkboxValue.inputId !== inputId
     );
     const newCheckboxValues = checked
-      ? [...otherCheckboxValues, { inputId: Number(name), value }]
+      ? [...otherCheckboxValues, { inputId, value }]
       : otherCheckboxValues;
 
     dispatch({
       type: ACTION_TYPES.updateCheckboxFieldValue,
       fieldValue: {
-        id,
+        id: databaseId,
         checkboxValues: newCheckboxValues,
       },
     });
   }
 
   return (
-    <fieldset
-      id={htmlId}
-      className={`gfield gfield-${type} ${cssClass}`.trim()}
-    >
-      <legend
-        className={`text-body mb-2 block text-left font-body text-lg leading-5 text-gray-800`}
-      >
-        {isRequired ? (
-          <>
-            {label}
-            <sup className={`text-secondary`}>*</sup>
-          </>
-        ) : (
-          label
-        )}
+    <fieldset id={htmlId} className={`space-y-4 ${cssClass || ""}`.trim()}>
+      <legend className="text-base font-semibold leading-7 text-foreground">
+        {label}
+        {isRequired && <span className="text-destructive ml-1">*</span>}
       </legend>
-      {checkboxInputs.map(({ id: inputId, text, value }, i) => (
-        <div key={`${inputId}_${i}`} className={`flex gap-4`}>
-          <input
-            type="checkbox"
-            name={String(inputId)}
-            id={`input_${formId}_${id}_${inputId}`}
-            value={String(value)}
-            onChange={handleChange}
-          />
-          <label
-            className="text-gray-800"
-            htmlFor={`input_${formId}_${id}_${inputId}`}
-          >
-            {text}
-          </label>
-        </div>
-      ))}
-      {description ? (
-        <p className="text-left font-body text-sm text-gray-500">
-          {description}
-        </p>
-      ) : null}
-      {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
-            <p key={fieldError.id} className="error-message">
+      <div className="space-y-2">
+        {checkboxInputs.map(({ id: inputId, text, value }, i) => (
+          <div key={`${inputId}_${i}`} className="flex items-center space-x-2">
+            <Checkbox
+              id={`input_${formId}_${id}_${inputId}`}
+              name={String(inputId)}
+              value={String(value)}
+              onCheckedChange={(checked) => {
+                if (checked === undefined) return;
+
+                handleChange(Number(inputId), checked as boolean, String(value));
+              }
+              }
+            />
+            <Label
+              htmlFor={`input_${formId}_${id}_${inputId}`}
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              {text}
+            </Label>
+          </div>
+        ))}
+      </div>
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
+      {fieldErrors?.length > 0 && (
+        <div className="mt-2">
+          {fieldErrors.map((fieldError) => (
+            <p key={fieldError.id} className="text-sm text-destructive">
               {fieldError.message}
             </p>
-          ))
-        : null}
+          ))}
+        </div>
+      )}
     </fieldset>
   );
 }
+
+export default CheckboxField;

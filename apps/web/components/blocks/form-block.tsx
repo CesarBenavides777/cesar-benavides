@@ -4,9 +4,11 @@ import { cn } from "@/lib/utils";
 import type { GfForm, PageContentBlocksFormblockLayout } from "@/types/wp";
 import { GravityForm } from "@repo/cb-headless-gravity-forms";
 import { submitForm } from "./form-action/action";
+
 type FormBlockProps = PageContentBlocksFormblockLayout & {
   form?: GfForm;
 };
+
 
 const FormBlock: React.FC<FormBlockProps> = ({
   form,
@@ -21,20 +23,23 @@ const FormBlock: React.FC<FormBlockProps> = ({
         "px-2 md:px-4 py-6 md:py-12",
         "border-[2px] border-gray-200/40",
         "rounded-xl",
-        wrapperClassNames
+        wrapperClassNames,
       )}
     >
-      <GravityForm 
-        form={form} 
-        showTitle={showTitle} 
-        submitForm={submitForm}
-        useToast
-        styled
-        toastProps={{
-          richColors: true,
-          position: "bottom-center",
-        }}
-      />
+      <div className="max-w-xl mx-auto">
+        <GravityForm
+          form={form}
+          formId={form?.databaseId}
+          showTitle={showTitle}
+          submitForm={submitForm}
+          useToast
+          styled
+          toastProps={{
+            richColors: true,
+            position: "bottom-center",
+          }}
+        />
+      </div>
     </section>
   );
 };

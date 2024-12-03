@@ -11,21 +11,20 @@ import useGravityForm from "../../hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
 import { Button } from "@/components/ui/button.js";
-import { useId, useState } from "react";
+import { useActionState, useEffect, useId, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import { removeHtml } from "@/utils/removeHtml.js";
 
 interface Props {
   form: GravityFormsFormType;
   formId?: number | string;
   showTitle?: boolean;
-  submitForm: (formData: SubmitGfFormInput) => Promise<any>;
+  submitForm: (prevData: any, data: FormData) => Promise<any>;
   useToast?: boolean;
   styled?: boolean;
 }
 
 const successOptions = {
-  autoClose: 3000,
-  hideProgressBar: false,
   position: "bottom-center",
 };
 
@@ -35,6 +34,25 @@ const fieldError = {
   position: "bottom-center",
   pauseOnHover: true,
 };
+
+const submitGfForm = gql`
+  mutation SubmitGfForm($input: SubmitGfFormInput!) {
+    submitGfForm(input: $input) {
+      clientMutationId
+      confirmation {
+        message
+      }
+      entry {
+        formId
+        id
+      }
+      errors {
+        message
+        id
+      }
+    }
+  }
+`;
 
 const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
   const {
@@ -47,7 +65,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
     confirmations,
   } = form ?? {
     formFields: {
-      nodes: [],
+      edges: [],
     },
     title: "",
     id: "",
@@ -63,84 +81,81 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
   };
 
   const { state } = useGravityForm();
+  const [files, setFiles] = useState<File[]>([]);
+  useEffect(() => {
+    // @ts-ignore
+    const fileFields = state.filter((field) => field.fileUploadValues && field.fileUploadValues.length > 0);
 
-  let [data, setData] = useState({
-    entry: {
-      id: "",
-    },
-    errors: [
-      {
-        message: "",
-      },
-    ],
-    confirmation: {
-      message: "",
-    },
-  } as SubmitGfFormPayload);
-
-  let [isLoading, setIsLoading] = useState(false);
-
-  const submitGfForm = async (input: SubmitGfFormInput) => {
-    setIsLoading(true);
-    const res = await submitForm(input);
-
-    if (res) {
-      setIsLoading(false);
+    if (fileFields.length > 0) {
+      // @ts-ignore
+      const files = fileFields.map((field) => field.fileUploadValues[0]);
+      setFiles(files);
     }
 
-    setData(res);
+  }, [state]);
 
-    return res;
-  };
+  
 
-  const haveEntryId = Boolean(data?.entry?.id !== "");
-  const haveFieldErrors = Boolean(data && data?.errors && data?.errors?.length);
+  const [mutateFunction, { data, loading, error }] = useMutation(submitGfForm);
+
+  const haveEntryId = Boolean(data?.submitGfForm?.entry?.id);
+  const haveFieldErrors = Boolean(data?.submitGfForm?.entry?.errors?.length);
   const wasSuccessfullySubmitted = haveEntryId && !haveFieldErrors;
-  const hasConfirmation =
-    data && data?.confirmation && data.confirmation.message;
-  const defaultConfirmation =
-    hasConfirmation && data.confirmation && data.confirmation.message;
+  const hasConfirmation = confirmations && confirmations.length > 0;
+  const defaultConfirmation = hasConfirmation && confirmations[0]?.message;
   const fields = (formFields?.edges as any) || [];
 
-  const confirmationId = useId();
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    submitGfForm({
-      // @ts-ignore
-      fieldValues: state,
-      id: form.databaseId.toString(),
-      clientMutationId: confirmationId,
-    })
-      .catch((errors: any) => toast.error(errors.message))
-      .then((data: any) => {
-        if (haveFieldErrors && data?.errors?.length) {
-          toast.error(data?.errors[0]?.message);
-        } else {
-          console.log("Success", data);
-          toast.success(removeHtml(data?.confirmation?.message));
-        }
-      });
-  };
-
+  const uniqueId = useId();
   function getFieldErrors(id: number): FieldError[] {
     if (!haveFieldErrors) return [];
     // @ts-ignore
     return data?.errors.filter((error: FieldError) => error?.id === id);
   }
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const input = {
+      fieldValues: state,
+      id: databaseId,
+      clientMutationId: uniqueId,
+    };
+
+    try {
+      const response = await mutateFunction({
+        variables: {
+          input,
+        },
+        context: {
+          multipart: true,
+        },
+      });
+
+      if (response?.data?.submitGfForm?.errors) {
+        response?.data?.submitGfForm?.errors.map((error: FieldError) => {
+          toast.error(error.message);
+        });
+      } else {
+        toast.success(
+          removeHtml(response?.data?.submitGfForm?.confirmation?.message)
+        );
+      }
+    } catch (error) {
+      toast.error("Error submitting form");
+    }
+  };
+
   return (
     <>
       {wasSuccessfullySubmitted ? (
         <div
-          className="mx-auto mb-6 max-w-2xl"
+          className="mx-auto max-w-xl flex flex-col gap-4"
           dangerouslySetInnerHTML={{ __html: defaultConfirmation as string }}
         />
       ) : (
         <>
           {showTitle && (
-            <h3 className={`text-left font-bold text-2xl font-sans mb-4 px-2`}>
+            <h3 className={`text-left font-bold text-2xl font-sans mb-4`}>
               {title}
             </h3>
           )}
@@ -149,11 +164,8 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
               {description}
             </div>
           ) : null}
-          <form
-            // className={`${styles[`form`]}`}
-            method="post"
+          <form 
             onSubmit={handleSubmit}
-            autoComplete="on"
           >
             <div className={`mx-auto flex max-w-xl flex-col gap-4`}>
               {fields
@@ -169,13 +181,13 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
                     );
                   })
                 : null}
-
+              <input type="hidden" name="files" id="files" value={JSON.stringify(files)} />
               <Button
                 className="w-fit rounded"
                 variant="outline"
                 size="lg"
                 type="submit"
-                disabled={isLoading}
+                disabled={loading}
               >
                 {submitButton?.text ?? "Submit"}
               </Button>

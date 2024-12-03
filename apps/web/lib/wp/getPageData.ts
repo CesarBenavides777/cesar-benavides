@@ -55,5 +55,4 @@ const getPageData = async ({ pageId, asPreview }: GetPageData) => {
   };
 };
 
-
 export default getPageData;

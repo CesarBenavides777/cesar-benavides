@@ -12,9 +12,24 @@ export default withFaust({
         },
       },
     },
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
     reactCompiler: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   trailingSlash: false,
+  async redirects() {
+      return [
+        {
+          source: "/wp-content/uploads/:splat*",
+          destination: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-content/uploads/:splat*`,
+          permanent: true,
+        },
+      ];
+  },
   async headers() {
     return [
       {
@@ -42,4 +57,4 @@ export default withFaust({
       },
     ];
   },
-} as NextConfig);
+}) as NextConfig;

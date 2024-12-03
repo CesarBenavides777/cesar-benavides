@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { DynamicFavicon } from "@/components/DynamicFavicon";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "sonner";
+import Script from "next/script";
 
 export default async function RootLayout({ children }) {
   const client = await getClient();
@@ -27,6 +28,11 @@ export default async function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
+      <Script
+        src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
+      ></Script>
       <DynamicFavicon />
       <body className="flex flex-col min-h-screen">
         <Providers>

@@ -9,6 +9,8 @@ import useGravityForm, {
   NameFieldValue,
 } from "../../hooks/useGravityForm.js";
 import { gql } from "@apollo/client";
+import { Label } from "../ui/label.js";
+import { Input } from "../ui/input.js";
 
 export const NAME_FIELD_FIELDS = gql`
   fragment NameFieldFields on NameField {
@@ -125,21 +127,16 @@ export default function NameField({ field, fieldErrors, formId }: Props) {
             return (
               (key === "first" || key === "last") && (
                 <div key={key} className={`w-full`}>
-                  <label
-                    style={{ display: `none` }}
-                    htmlFor={`input_${formId}_${databaseId}_${key}`}
-                  >
+                  <Label htmlFor={`input_${formId}_${databaseId}_${key}`}>
                     {inputLabel}
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
-                    className={`form-input[type='text'] w-full rounded-full px-4 py-2 font-body bg-gray-200`}
                     name={String(key)}
                     id={`input_${formId}_${databaseId}_${key}`}
-                    placeholder={
-                      placeholder || isRequired ? `${inputLabel}*` : inputLabel
-                    }
-                    autoComplete={AUTOCOMPLETE_ATTRIBUTES[key]}
+                    className={`form-input[type='text'] font-sans`}
+                    required={Boolean(isRequired)}
+                    placeholder={placeholder || isRequired ? `${inputLabel}*` : inputLabel || ""}
                     value={nameValues?.[key] || ""}
                     onChange={handleChange}
                   />

@@ -1,23 +1,11 @@
-// import { gql } from "@apollo/client";
-
 import type { EmailField as EmailFieldType, FieldError } from "@/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   EmailFieldValue,
 } from "../../hooks/useGravityForm.js";
-
-// export const EMAIL_FIELD_FIELDS = gql`
-//   fragment EmailFieldFields on EmailField {
-//     id
-//     formId
-//     label
-//     description
-//     cssClass
-//     isRequired
-//     placeholder
-//   }
-// `;
+import { Label } from "../ui/label.js";
+import { Input } from "../ui/input.js";
 
 interface Props {
   field: EmailFieldType;
@@ -39,26 +27,23 @@ export default function EmailField({ field, fieldErrors, formId }: Props) {
 
   return (
     <div className={`gfield gfield-${type} ${cssClass ?? ""}`.trim()}>
-      <label
-        className={`text-body mb-2 text-left font-body text-lg leading-5 text-gray-800 hidden`}
-        htmlFor={htmlId}
-      >
+      <Label htmlFor={htmlId}>
         {isRequired ? (
           <>
             {label}
-            <sup className={`text-secondary`}>*</sup>
+            <sup className={`text-red-500`}>*</sup>
           </>
         ) : (
           label
         )}
-      </label>
-      <input
+      </Label>
+      <Input 
         type="email"
         name={String(databaseId)}
-        className={`form-input[type='email'] w-full rounded-full px-4 py-2 font-body bg-gray-200`}
         id={htmlId}
-        placeholder={field?.isRequired ? `${label}*` : label || ""}
-        required={isRequired || false}
+        className={`form-input[type='email'] font-sans`}
+        required={Boolean(isRequired)}
+        placeholder={placeholder || isRequired ? `${label}*` : label || ""}
         value={value}
         onChange={(event) => {
           dispatch({

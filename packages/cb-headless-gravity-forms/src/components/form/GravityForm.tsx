@@ -2,7 +2,6 @@
 
 import type { GfForm as GravityFormsFormType, SubmitGfFormInput } from "@/types/wp.js";
 import { GravityFormProvider } from "../../hooks/useGravityForm.js";
-import "../../styles/globals.css";
 import { Toaster } from "sonner";
 import type { ToasterProps } from "sonner";
 
@@ -12,7 +11,7 @@ interface Props {
   form: GravityFormsFormType;
   formId?: number | string;
   showTitle?: boolean;
-  submitForm: (formData: SubmitGfFormInput) => Promise<any>;
+  submitForm: (prevData: any, data: FormData) => Promise<any>;
   useToast?: boolean;
   toastProps?: ToasterProps;
   styled?: boolean;

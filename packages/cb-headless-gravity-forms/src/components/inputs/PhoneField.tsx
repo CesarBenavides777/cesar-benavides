@@ -4,6 +4,8 @@ import useGravityForm, {
   FieldValue,
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
+import { Label } from "../ui/label.js";
+import { Input } from "../ui/input.js";
 
 interface Props {
   field: PhoneFieldType;
@@ -25,8 +27,7 @@ export default function PhoneField({ field, fieldErrors, formId }: Props) {
 
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
-      <label
-        className={`text-body mb-2text-left font-body text-lg leading-5 text-gray-800 hidden`}
+      <Label 
         htmlFor={htmlId}
       >
         {isRequired ? (
@@ -37,12 +38,12 @@ export default function PhoneField({ field, fieldErrors, formId }: Props) {
         ) : (
           label
         )}
-      </label>
-      <input
+      </Label>
+      <Input 
         type="tel"
         name={String(databaseId)}
-        className={`form-input[type='tel'] w-full rounded-full px-4 py-2 font-body text-gray-700 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-300 bg-gray-200`}
         id={htmlId}
+        className={`form-input[type='tel'] font-sans`}
         required={Boolean(isRequired)}
         placeholder={placeholder || isRequired ? `${label}*` : label || ""}
         value={value}
@@ -50,11 +51,12 @@ export default function PhoneField({ field, fieldErrors, formId }: Props) {
           dispatch({
             type: ACTION_TYPES.updatePhoneFieldValue,
             fieldValue: {
-              id: databaseId,
-              value: event.target.value,
-            },
-          });
-        }}
+                id: databaseId,
+                value: event.target.value,
+              },
+            });
+          }
+        }
       />
       {description ? (
         <p className="field-description font-body text-sm italic">

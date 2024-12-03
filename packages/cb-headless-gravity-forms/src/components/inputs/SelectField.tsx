@@ -1,5 +1,13 @@
-// import { gql } from "@apollo/client";
+"use client";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select.js";
+import { Label } from "@/components/ui/label.js";
 import type { SelectField as SelectFieldType, FieldError } from "@/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
@@ -33,59 +41,47 @@ export default function SelectField({ field, fieldErrors, formId }: Props) {
   const value = fieldValue?.value || String(defaultValue);
 
   return (
-    <div
-      className={`gfield flex flex-col gap-2 gfield-${type} ${cssClass}`.trim()}
-    >
-      <label
-        htmlFor={htmlId}
-        className={`text-body mb-2 block text-left font-body text-lg leading-5 text-gray-800`}
-      >
-        {isRequired ? (
-          <>
-            {label}
-            <sup className={`text-secondary`}>*</sup>
-          </>
-        ) : (
-          label
-        )}
-      </label>
-      <select
-        className={`ml-xs my-sm rounded-lg px-4 py-2`}
+    <div className={`space-y-2 ${cssClass}`}>
+      <Label htmlFor={htmlId}>
+        {label}
+        {isRequired && <span className="text-red-500 ml-1">*</span>}
+      </Label>
+      <Select
         name={String(databaseId)}
-        id={htmlId}
-        required={Boolean(isRequired)}
         value={value}
-        onChange={(event) => {
+        onValueChange={(newValue) => {
           dispatch({
             type: ACTION_TYPES.updateSelectFieldValue,
             fieldValue: {
               id: databaseId,
-              value: event.target.value,
+              value: newValue,
             },
           });
         }}
       >
-        {choices?.map((choice, i) => (
-          <option
-            key={`choice-${i}-${choice?.value}`}
-            value={choice?.value || ""}
-          >
-            {choice?.text || ""}
-          </option>
-        ))}
-      </select>
-      {description ? (
-        <p className="text-left font-body text-sm text-gray-500">
-          {description}
+        {/* @ts-ignore */}
+        <SelectTrigger id={htmlId} className="bg-background">
+          <SelectValue placeholder="Select an option" />
+        </SelectTrigger>
+        {/* @ts-ignore */}
+        <SelectContent className="bg-background">
+          {choices?.map((choice, i) => (
+            // @ts-ignore
+            <SelectItem
+              key={`choice-${i}-${choice?.value}`}
+              value={choice?.value || ""}
+            >
+              {choice?.text || ""}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {description && <p className="text-xs">{description}</p>}
+      {fieldErrors?.map((fieldError) => (
+        <p key={fieldError.id} className="text-sm text-red-500">
+          {fieldError.message}
         </p>
-      ) : null}
-      {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
-            <p key={fieldError.id} className="error-message">
-              {fieldError.message}
-            </p>
-          ))
-        : null}
+      ))}
     </div>
   );
 }
