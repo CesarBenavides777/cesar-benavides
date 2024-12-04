@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
-  // Animation variants for the text
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: (i: number) => ({
