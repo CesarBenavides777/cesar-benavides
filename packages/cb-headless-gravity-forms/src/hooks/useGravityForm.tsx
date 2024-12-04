@@ -43,6 +43,10 @@ export interface StringFieldValues extends FieldValue {
   values: string[];
 }
 
+export interface ConsentFieldValue extends FieldValue {
+  value: string;
+}
+
 export type FieldValueUnion =
   | AddressFieldValue
   | CheckboxFieldValue
@@ -74,6 +78,7 @@ export enum ACTION_TYPES {
   updateNumberFieldValue = "updateNumberFieldValue",
   updateFileUploadFieldValue = "updateFileUploadFieldValue",
   updateCaptchaValue = "updateCaptchaValue",
+  updateConsentFieldValue = "updateConsentFieldValue",
 }
 
 function reducer(state: FieldValueUnion[], action: Action) {
@@ -120,6 +125,10 @@ function reducer(state: FieldValueUnion[], action: Action) {
     case ACTION_TYPES.updateTimeFieldValue:
     case ACTION_TYPES.updateNumberFieldValue:
     case ACTION_TYPES.updateWebsiteFieldValue: {
+      const { id, value } = action.fieldValue as StringFieldValue;
+      return [...getOtherFieldValues(id), { id, value }];
+    }
+    case ACTION_TYPES.updateConsentFieldValue: {
       const { id, value } = action.fieldValue as StringFieldValue;
       return [...getOtherFieldValues(id), { id, value }];
     }

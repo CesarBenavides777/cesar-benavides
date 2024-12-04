@@ -14,7 +14,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { cn, flatListToHierarchical } from "@/lib/utils";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useScroll, useMotionValueEvent } from "motion/react";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
@@ -79,9 +79,11 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
     <header
       className={clsx(
         "container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6 top-4 left-0 sticky",
+        "transition-all duration-200 ease-in-out",
+        "dark:bg-[#242424] bg-[#f9f9f9]",
+        "rounded-lg",
         {
-          "bg-background rounded shadow-md": hasScrolledDown,
-          "bg-transparent": !hasScrolledDown,
+          "shadow-lg": hasScrolledDown,
         },
       )}
     >

@@ -4,6 +4,8 @@ import Main from "@/components/ui/main";
 import BlockReturner from "@/features/BlockReturner/BlockReturner";
 import { PageIdType } from "@/types/wp";
 import getPageData from "@/lib/wp/getPageData";
+import { notFound } from "next/navigation";
+
 
 export default async function Page(props) {
   const isPreview = await hasPreviewProps(props);
@@ -24,8 +26,12 @@ export default async function Page(props) {
   });
 
   const { data, hasClient } = pageData;
-  const { pageContent, title } = data?.page ?? {};
+  const { pageContent, title, id: pageId } = data?.page ?? {};
   const { blocks } = pageContent ?? {};
+
+  if (!pageId) {
+    return notFound();
+  }
 
   if (!hasClient) {
     return <PleaseLogin redirect={redirectUrl} />;

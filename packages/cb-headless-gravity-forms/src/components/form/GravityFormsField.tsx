@@ -16,6 +16,7 @@ import NumberField from "../inputs/NumberField.js";
 import FileUploadField from "../inputs/FileUploadField.js";
 import HTMLField from "../inputs/HTMLField.js";
 import CaptchaField from "../inputs/CaptchaField.js";
+import ConsentField from "../inputs/ConsentField.js";
 
 interface Props {
   field: any;
@@ -56,6 +57,10 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
           fieldErrors={fieldErrors}
           formId={formId}
         />
+      );
+    case "CONSENT":
+      return (
+        <ConsentField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
     case "CAPTCHA":
       return (

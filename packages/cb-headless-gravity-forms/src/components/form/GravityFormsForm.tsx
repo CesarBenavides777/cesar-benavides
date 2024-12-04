@@ -4,14 +4,12 @@ import type {
   FieldError,
   FormField,
   GfForm as GravityFormsFormType,
-  SubmitGfFormInput,
-  SubmitGfFormPayload,
 } from "@/types/wp.js";
 import useGravityForm from "../../hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
 import { Button } from "@/components/ui/button.js";
-import { useActionState, useEffect, useId, useState } from "react";
+import { useId, } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { removeHtml } from "@/utils/removeHtml.js";
 
@@ -81,18 +79,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
   };
 
   const { state } = useGravityForm();
-  const [files, setFiles] = useState<File[]>([]);
-  useEffect(() => {
-    // @ts-ignore
-    const fileFields = state.filter((field) => field.fileUploadValues && field.fileUploadValues.length > 0);
-
-    if (fileFields.length > 0) {
-      // @ts-ignore
-      const files = fileFields.map((field) => field.fileUploadValues[0]);
-      setFiles(files);
-    }
-
-  }, [state]);
+  console.log(state);
 
   
 
@@ -141,6 +128,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
         );
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error submitting form");
     }
   };
@@ -181,7 +169,6 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
                     );
                   })
                 : null}
-              <input type="hidden" name="files" id="files" value={JSON.stringify(files)} />
               <Button
                 className="w-fit rounded"
                 variant="outline"

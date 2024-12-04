@@ -356,11 +356,13 @@ export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`
           cssClass
           size
           hasAutocomplete
+          description
           autocompleteAttribute
         }
         ... on TextAreaField {
           id
           databaseId
+          description
           type
           size
           placeholder

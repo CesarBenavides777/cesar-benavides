@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useTransform,
   useDragControls,
-} from "framer-motion";
+} from "motion/react";
 import useSound from "use-sound";
 
 const LampPullChord: React.FC = () => {
