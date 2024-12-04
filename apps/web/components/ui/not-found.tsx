@@ -41,7 +41,7 @@ export default function NotFound() {
         variants={textVariants}
         custom={1}
       >
-        Oops! Looks like you've wandered into the void.
+        {`Oops! Looks like you've wandered into the void.`}
       </motion.p>
       <motion.div
         initial="hidden"
