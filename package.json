@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.11",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "apollo-upload-client": "^18.0.1",
     "babel-plugin-react-compiler": "^19.0.0-beta-b2e8e9c-20241220",
     "graphql-tag": "^2.12.6",
