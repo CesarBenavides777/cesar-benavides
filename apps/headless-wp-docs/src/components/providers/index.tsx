@@ -8,7 +8,7 @@ export default function RootProviders({ children }: { children: React.ReactNode 
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      {children as React.ReactNode}
     </ThemeProvider>
   );
 }
