@@ -79,9 +79,6 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
   };
 
   const { state } = useGravityForm();
-  console.log(state);
-
-  
 
   const [mutateFunction, { data, loading, error }] = useMutation(submitGfForm);
 
@@ -137,7 +134,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
     <>
       {wasSuccessfullySubmitted ? (
         <div
-          className="mx-auto max-w-xl flex flex-col gap-4"
+          className="mx-auto max-w-xl flex flex-col gap-4 text-center"
           dangerouslySetInnerHTML={{ __html: defaultConfirmation as string }}
         />
       ) : (

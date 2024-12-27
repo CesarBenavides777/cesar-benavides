@@ -5,6 +5,7 @@ import type {
   PageContentBlocksFormblockLayout,
   GfForm,
 } from "@/types/wp";
+import ProjectsBlock from "@/components/blocks/projects-block";
 
 type Block = PageContentBlocksHeroLayout & {
   __typename: string;
@@ -19,6 +20,7 @@ type BlockReturnerProps = {
 const componentMap = {
   PageContentBlocksHeroLayout: Hero,
   PageContentBlocksFormblockLayout: FormBlock,
+  PageContentBlocksProjectsBlockLayout: ProjectsBlock,
 };
 
 const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title }) => {
@@ -33,7 +35,6 @@ const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title }) => {
         return Component ? (
           <Component
             key={`${block.__typename}-${index}`}
-            id={`${block.__typename}-${index}`}
             form={block.form}
             {...block}
           />

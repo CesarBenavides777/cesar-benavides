@@ -90,10 +90,82 @@ export const GET_PAGE_CONTENT_FRAGMENT = gql`
           showTitle
           showDescription
         }
+        # Projects Block
+        ... on PageContentBlocksProjectsBlockLayout {
+          uniqueId
+          projectItems {
+            edges {
+              node {
+                ... on Project {
+                  id
+                  title
+                  featuredImage {
+                    node {
+                      ...MediaItemFragment
+                    }
+                  }
+                  excerpt
+                  projectTags {
+                    nodes {
+                      name
+                    }
+                  }
+                  uri
+                  projectOptions {
+                    githubLink
+                    liveLink
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
   ${MEDIA_ITEM_FRAGMENT}
+`;
+
+
+export const SEO_FRAGMENT = gql`
+  fragment SEOFragment on PostTypeSEO {
+    twitterTitle
+    twitterImage {
+      sourceUrl
+    }
+    twitterDescription
+    title
+    readingTime
+    opengraphUrl
+    opengraphType
+    opengraphTitle
+    opengraphSiteName
+    opengraphPublisher
+    opengraphPublishedTime
+    opengraphModifiedTime
+    opengraphImage {
+      sourceUrl
+    }
+    opengraphDescription
+    opengraphAuthor
+    metaRobotsNoindex
+    metaRobotsNofollow
+    metaKeywords
+    metaDesc
+    fullHead
+    focuskw
+    cornerstone
+    canonical
+    breadcrumbs {
+      text
+      url
+    }
+    schema {
+      articleType
+      pageType
+      raw
+    }
+  }
 `;
 
 export const GET_PAGE = gql`
@@ -102,9 +174,13 @@ export const GET_PAGE = gql`
       id
       title
       ...PageContentFragment
+      seo {
+        ...SEOFragment
+      }
     }
   }
   ${GET_PAGE_CONTENT_FRAGMENT}
+  ${SEO_FRAGMENT}
 `;
 
 export const FORM_TO_FIELD_CONNECTION_FRAGMENT = gql`

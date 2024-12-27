@@ -34,7 +34,7 @@ const getPageData = async ({ pageId, asPreview }: GetPageData) => {
     ) {
       const formId = block.gravityformid[0]; // Use gravityformid as the form ID
       const { gfForm } = await getForm(formId); // Fetch form data
-      moddedBlocks.push({ ...block, form: gfForm });
+      moddedBlocks.push({ ...block, form: gfForm }); // Inject form data
     } else {
       moddedBlocks.push(block); // Push other blocks as-is
     }

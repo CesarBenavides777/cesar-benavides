@@ -22,8 +22,7 @@ export default function FileUploadField({ field, fieldErrors, formId }: Props) {
 const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const file = event.target.files?.[0]; // Capture the first file
 
-  if (file) {
-    console.log("Captured File:", file); // Debugging: Log the captured file
+  if (file) { // Debugging: Log the captured file
     dispatch({
       type: ACTION_TYPES.updateFileUploadFieldValue,
       fieldValue: {

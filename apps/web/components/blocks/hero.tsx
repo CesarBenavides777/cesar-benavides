@@ -3,7 +3,6 @@ import type { PageContentBlocksHeroLayout } from "@/types/wp";
 
 type HeroProps = PageContentBlocksHeroLayout & {
   className?: string;
-  id?: string;
 };
 
 const Hero: React.FC<HeroProps> = ({
@@ -12,7 +11,7 @@ const Hero: React.FC<HeroProps> = ({
   variant,
   body,
   className,
-  id,
+  uniqueId,
 }) => {
   return (
     <section
@@ -20,9 +19,9 @@ const Hero: React.FC<HeroProps> = ({
         "px-2 md:px-4 py-6 md:py-12",
         "border-[2px] border-gray-200/40",
         "rounded-xl",
-        className,
+        className
       )}
-      id={id}
+      id={uniqueId}
     >
       <div className={"flex flex-col gap-4"}>
         <div className={"flex flex-col"}>
@@ -34,7 +33,7 @@ const Hero: React.FC<HeroProps> = ({
           {subCaption && (
             <p
               className={
-                "font-sans text-sm md:text-md text-gray-500 dark:text-gray-200/40"
+                "font-sans text-sm md:text-md text-foreground/70"
               }
             >
               {subCaption}
@@ -43,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({
         </div>
         {body && (
           <div
-            className={"font-sans text-sm md:text-base lg:text-lg"}
+            className={"font-sans text-sm md:text-base lg:text-lg content-wrapper w-full"}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
             dangerouslySetInnerHTML={{ __html: body }}
           />
