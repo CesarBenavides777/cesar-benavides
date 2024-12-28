@@ -11,10 +11,10 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@repo/headless-wp-components/components",
-    "utils": "@repo/headless-wp-components/lib/utils",
-    "hooks": "@repo/headless-wp-components/hooks",
-    "lib": "@repo/headless-wp-components/lib",
-    "ui": "@repo/headless-wp-components/components"
+    "components": "@workspace/headless-wp-components/components",
+    "utils": "@workspace/headless-wp-components/lib/utils",
+    "hooks": "@workspace/headless-wp-components/hooks",
+    "lib": "@workspace/headless-wp-components/lib",
+    "ui": "@workspace/headless-wp-components/components"
   }
 }

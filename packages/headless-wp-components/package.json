@@ -1,5 +1,5 @@
 {
-  "name": "@repo/headless-wp-components",
+  "name": "@workspace/headless-wp-components",
   "type": "module",
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -9,7 +9,7 @@
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript-operations": "^4.3.1",
     "@graphql-codegen/typescript-react-apollo": "^4.3.2",
-    "@repo/typescript-config": "repo:*",
+    "@workspace/typescript-config": "workspace:*",
     "@types/babel__traverse": "^7.20.6",
     "autoprefixer": "^10.4.20",
     "child_process": "^1.0.2",
@@ -30,8 +30,8 @@
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@repo/tailwind-config": "*",
-    "@repo/typescript-config": "*",
+    "@workspace/tailwind-config": "*",
+    "@workspace/typescript-config": "*",
     "@types/node": "^22.10.1",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",

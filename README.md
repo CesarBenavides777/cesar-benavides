@@ -38,9 +38,9 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app (IN DEVELOPMENT)
 - `web`: a Headless WordPress website using Faust JS
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-- `@repo/headless-wp-components`: A collection of Headless WordPress Components.
+- `@workspace/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@workspace/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@workspace/headless-wp-components`: A collection of Headless WordPress Components.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 

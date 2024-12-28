@@ -1,10 +1,10 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "@workspace/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@repo/headless-wp-components/*": ["../../packages/headless-wp-components/src/*"]
+      "@workspace/headless-wp-components/*": ["../../packages/headless-wp-components/src/*"]
     },
     "plugins": [
       {

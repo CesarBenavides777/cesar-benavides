@@ -1,10 +1,10 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@workspace/typescript-config/react-library.json",
   "compilerOptions": {
     //"outDir": "dist"
     "baseUrl": ".",
     "paths": {
-      "@repo/headless-wp-components/*": ["./src/*"],
+      "@workspace/headless-wp-components/*": ["./src/*"],
       "@types/*": ["./types/*"],
       "@/*": [
         "./*"

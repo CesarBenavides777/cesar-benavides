@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import type { GfForm, PageContentBlocksFormblockLayout } from "@/types/wp";
-import GravityForm from "@repo/headless-wp-components/components/form/GravityForm";
+import GravityForm from "@workspace/headless-wp-components/components/form/GravityForm";
 import { submitForm } from "./form-action/action";
 
 type FormBlockProps = PageContentBlocksFormblockLayout & {
