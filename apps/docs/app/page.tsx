@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/headless-wp-components/components/ui/button";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -46,6 +46,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+        {/* @ts-ignore */}
         <Button appName="docs" className={styles.secondary}>
           Open alert
         </Button>

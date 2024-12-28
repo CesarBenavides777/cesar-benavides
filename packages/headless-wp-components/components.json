@@ -11,10 +11,10 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@repo/ui/components",
-    "utils": "@repo/ui/lib/utils",
-    "hooks": "@repo/ui/hooks",
-    "lib": "@repo/ui/lib",
-    "ui": "@repo/ui/components"
+    "components": "@repo/headless-wp-components/components",
+    "utils": "@repo/headless-wp-components/lib/utils",
+    "hooks": "@repo/headless-wp-components/hooks",
+    "lib": "@repo/headless-wp-components/lib",
+    "ui": "@repo/headless-wp-components/components"
   }
 }
