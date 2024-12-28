@@ -1,4 +1,4 @@
-import type { FieldError, FormField } from "@/types/wp.js";
+import type { FieldError } from "@/src/types/wp.js";
 
 import AddressField from "../inputs/AddressField.js";
 import CheckboxField from "../inputs/CheckboxField.js";

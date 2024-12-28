@@ -1,6 +1,6 @@
 import ThemeToggler from "@/components/theme/toggler";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookText, CircleDollarSign, Github } from "lucide-react";
+import { ArrowRight, BookText, CircleDollarSign } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site.config";
 
