@@ -26,7 +26,7 @@ export default async function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.className} ${GeistMono.className}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <Script
         src="https://www.google.com/recaptcha/api.js"
