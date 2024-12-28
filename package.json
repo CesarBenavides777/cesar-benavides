@@ -7,6 +7,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo run clean",
+    "generate": "turbo run generate",
     "publish-packages": "turbo run build lint test && changeset version && changeset publish"
   },
   "dependencies": {
@@ -22,6 +23,8 @@
     "recursive-iterator": "^3.3.0"
   },
   "devDependencies": {
+    "@repo/eslint-config": "repo:*",
+    "@repo/typescript-config": "repo:*",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",

@@ -26,7 +26,7 @@ export default async function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.className} ${GeistMono.className}`}
     >
       <Script
         src="https://www.google.com/recaptcha/api.js"
@@ -48,6 +48,7 @@ export default async function RootLayout({ children }) {
             twitterUrl={xLink}
             email={email}
           />
+          {/* @ts-ignore */}
           <Toaster richColors position="bottom-center" />
         </Providers>
       </body>

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import type { GfForm, PageContentBlocksFormblockLayout } from "@/types/wp";
-import { GravityForm } from "@repo/cb-headless-gravity-forms";
+import GravityForm from "@repo/headless-wp-components/components/form/GravityForm";
 import { submitForm } from "./form-action/action";
 
 type FormBlockProps = PageContentBlocksFormblockLayout & {
@@ -21,16 +21,14 @@ const FormBlock: React.FC<FormBlockProps> = ({
     <section
       className={cn(
         "px-2 md:px-4 py-6 md:py-12",
-        "border-[2px] border-gray-200/40",
-        "rounded-xl",
         wrapperClassNames,
       )}
     >
       <div className="max-w-xl mx-auto">
         <GravityForm
-          form={form}
+          form={form as GfForm}
           formId={form?.databaseId}
-          showTitle={showTitle}
+          showTitle={showTitle ?? true}
           submitForm={submitForm}
           useToast
           styled

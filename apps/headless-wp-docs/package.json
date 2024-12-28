@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "velite && next dev --turbopack",
+    "dev": "velite && next dev --turbo --port 3002 --experimental-https",
     "build": "velite && next build",
+    "clean": "rimraf .next node_modules bun.lockb .turbo",
     "start": "velite && next start",
     "lint": "next lint"
   },

@@ -1,45 +1,23 @@
 {
+  "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "react-dom/experimental"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@repo/ui/*": ["../../packages/headless-wp-components/src/*"]
     },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "target": "ES2017"
+    ]
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
+    "next.config.mjs",
     "**/*.ts",
     "**/*.tsx",
-    "node_modules/@repo/cb-headless-gravity-forms/dist/index.js"
+    ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"]
 }

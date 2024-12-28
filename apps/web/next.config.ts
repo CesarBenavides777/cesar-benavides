@@ -1,4 +1,4 @@
-import { withFaust } from "@faustwp/core";
+import { getWpHostname, withFaust } from "@faustwp/core";
 import type { NextConfig } from "next";
 import { createSecureHeaders } from "next-secure-headers";
 
@@ -20,15 +20,25 @@ export default withFaust({
   typescript: {
     ignoreBuildErrors: true,
   },
+  sassOptions: {
+    includePaths: ["node_modules"],
+  },
+  images: {
+    domains: [getWpHostname()],
+  },
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   trailingSlash: false,
   async redirects() {
-      return [
-        {
-          source: "/wp-content/uploads/:splat*",
-          destination: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-content/uploads/:splat*`,
-          permanent: true,
-        },
-      ];
+    return [
+      {
+        source: "/wp-content/uploads/:splat*",
+        destination: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-content/uploads/:splat*`,
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [

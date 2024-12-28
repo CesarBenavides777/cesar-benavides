@@ -3,8 +3,11 @@
   "private": false,
   "type": "module",
   "scripts": {
+    "predev": "faust generatePossibleTypes && faust generateGlobalStylesheet",
+    "prebuild": "faust generatePossibleTypes && faust generateGlobalStylesheet",
     "dev": "faust dev --experimental-https --turbo",
     "build": "faust build",
+    "blockset": "faust blockset",
     "generate": "faust generatePossibleTypes && bun codegen",
     "stylesheet": "faust generateGlobalStylesheet",
     "start": "faust start",
@@ -19,13 +22,14 @@
     "@apollo/client": "^3.11.10",
     "@apollo/experimental-nextjs-app-support": "^0.11.6",
     "@faustwp/cli": "^3.1.1",
+    "@faustwp/blocks": "^4.1.0",
     "@faustwp/core": "^3.1.0",
     "@faustwp/experimental-app-router": "^0.4.0",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-navigation-menu": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-icons/all-files": "^4.1.0",
-    "@repo/cb-headless-gravity-forms": "*",
+    "@repo/headless-wp-components": "*",
     "apollo-upload-client": "^17.0.0",
     "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
     "class-variance-authority": "^0.7.1",
@@ -52,6 +56,9 @@
     "use-sound": "^4.0.3"
   },
   "devDependencies": {
+    "@faustwp/block-editor-utils": "0.3.0",
+    "@wordpress/base-styles": "^5.1.0",
+    "@wordpress/block-library": "^9.1.0",
     "@biomejs/biome": "1.9.4",
     "@chromatic-com/storybook": "^3.2.2",
     "@graphql-codegen/cli": "^5.0.3",
@@ -87,6 +94,9 @@
     "tr46": "^5.0.0",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"
+  },
+  "optionalDependencies": {
+    "@wordpress/scripts": "^28.1.0"
   },
   "patchedDependencies": {
     "@faustwp/experimental-app-router@0.3.1": "/apps/web/patches/@faustwp%2Fexperimental-app-router@0.3.1.patch"

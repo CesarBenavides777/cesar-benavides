@@ -17,11 +17,9 @@ const Hero: React.FC<HeroProps> = ({
     <section
       className={cn(
         "px-2 md:px-4 py-6 md:py-12",
-        "border-[2px] border-gray-200/40",
-        "rounded-xl",
         className
       )}
-      id={uniqueId}
+      id={uniqueId || undefined}
     >
       <div className={"flex flex-col gap-4"}>
         <div className={"flex flex-col"}>
