@@ -23,8 +23,8 @@
     "recursive-iterator": "^3.3.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "repo:*",
-    "@repo/typescript-config": "repo:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",
