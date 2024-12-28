@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookText, Github, Check, House } from "lucide-react";
+import { BookText, Check, House } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site.config";
 import ThemeToggler from "@/components/theme/toggler";
@@ -236,7 +236,7 @@ export default function PricingPage() {
                 View Documentation
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            {/* <Button size="lg" variant="outline" asChild>
               <Link
                 href={siteConfig.socials.github}
                 className="gap-2"
@@ -245,7 +245,7 @@ export default function PricingPage() {
                 <Github size={20} />
                 Get Template
               </Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
