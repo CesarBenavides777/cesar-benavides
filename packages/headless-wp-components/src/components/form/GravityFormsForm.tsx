@@ -1,7 +1,7 @@
 "use client";
 
 
-import useGravityForm from "../../hooks/useGravityForm.js";
+import useGravityForm from "@/src/hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
 import { Button } from "@/src/components/ui/button.js";
