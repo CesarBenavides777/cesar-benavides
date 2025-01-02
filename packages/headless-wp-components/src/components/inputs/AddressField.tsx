@@ -101,7 +101,7 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
       {inputs?.map((input) => {
         const key = input?.key as keyof AddressFieldInput;
         const inputLabel = input?.label || "";
-        const placeholder = input?.placeholder || "";
+        // const placeholder = input?.placeholder || "";
         const isCountry = key === "country";
         const isHidden = input?.isHidden;
 
