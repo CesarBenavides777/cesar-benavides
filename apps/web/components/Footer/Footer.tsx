@@ -2,6 +2,7 @@ import { MdEmail } from "react-icons-all-files/md/MdEmail";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { Button } from "../ui/button";
 
+
 type FooterProps = {
   githubUrl: string;
   linkedinUrl: string;

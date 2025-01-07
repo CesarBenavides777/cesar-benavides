@@ -7,8 +7,8 @@ import useGravityForm, {
   FieldValue,
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
-import { Textarea } from "../ui/textarea.js";
-import { Label } from "../ui/label.js";
+import { Textarea } from "@/src/components/textarea.js";
+import { Label } from "@/src/components/label.js";
 
 interface Props {
   field: TextAreaFieldType;

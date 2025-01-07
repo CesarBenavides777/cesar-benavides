@@ -4,8 +4,8 @@ import type {
 import useGravityForm, {
   ACTION_TYPES,
 } from "../../hooks/useGravityForm.js";
-import { Label } from "../ui/label.js";
-import { Input } from "../ui/input.js";
+import { Label } from "@/src/components/label.js";
+import { Input } from "@/src/components/input.js";
 
 interface Props {
   field: any;

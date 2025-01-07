@@ -40,7 +40,7 @@ This Turborepo includes the following packages/apps:
 - `web`: a Headless WordPress website using Faust JS
 - `@workspace/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@workspace/typescript-config`: `tsconfig.json`s used throughout the monorepo
-- `@workspace/headless-wp-components`: A collection of Headless WordPress Components.
+- `@workspace/ui`: A collection of Headless WordPress Components.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 

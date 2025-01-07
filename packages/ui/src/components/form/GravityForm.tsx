@@ -1,11 +1,12 @@
 "use client";
 
-import type { GfForm as GravityFormsFormType } from "../../types/wp.js";
-import { GravityFormProvider } from "../../hooks/useGravityForm.js";
+import type { GfForm as GravityFormsFormType } from "@workspace/ui/types/wp.js";
+
 import { Toaster } from "sonner";
 import type { ToasterProps } from "sonner";
 
 import GravityFormsForm from "./GravityFormsForm.js";
+import { GravityFormProvider } from "@workspace/ui/hooks/useGravityForm.js";
 
 interface Props {
   form: GravityFormsFormType;

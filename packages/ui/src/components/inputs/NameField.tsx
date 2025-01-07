@@ -9,8 +9,8 @@ import useGravityForm, {
   NameFieldValue,
 } from "../../hooks/useGravityForm.js";
 import { gql } from "@apollo/client";
-import { Label } from "../ui/label.js";
-import { Input } from "../ui/input.js";
+import { Label } from "@/src/components/label.js";
+import { Input } from "@/src/components/input.js";
 
 export const NAME_FIELD_FIELDS = gql`
   fragment NameFieldFields on NameField {

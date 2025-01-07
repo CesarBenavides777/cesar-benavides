@@ -1,2 +1,2 @@
 
-export * from "@workspace/headless-wp-components/tailwind.config"
+export * from "@workspace/ui/tailwind.config"

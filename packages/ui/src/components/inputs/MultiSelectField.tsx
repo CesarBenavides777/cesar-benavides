@@ -7,7 +7,7 @@ import useGravityForm, {
   FieldValue,
   StringFieldValues,
 } from "../../hooks/useGravityForm.js";
-import { MultiSelect } from "@/src/components/ui/multi-select.js";
+import { MultiSelect } from "@/src/components/multi-select.js";
 
 interface Props {
   field: MultiSelectFieldType;

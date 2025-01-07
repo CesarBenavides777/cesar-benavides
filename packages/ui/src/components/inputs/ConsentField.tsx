@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@/src/components/ui/checkbox.js";
-import { Label } from "@/src/components/ui/label.js";
+import { Checkbox } from "@/src/components/checkbox.js";
+import { Label } from "@/src/components/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,

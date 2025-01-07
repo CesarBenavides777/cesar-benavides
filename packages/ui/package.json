@@ -1,5 +1,5 @@
 {
-  "name": "@workspace/headless-wp-components",
+  "name": "@workspace/ui",
   "type": "module",
   "scripts": {
     "lint": "eslint . --max-warnings 0",

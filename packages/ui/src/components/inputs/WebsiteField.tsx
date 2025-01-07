@@ -1,5 +1,5 @@
-import { Input } from "@/src/components/ui/input.js"; 
-import { Label } from "@/src/components/ui/label.js"; 
+import { Input } from "@/src/components/input.js"; 
+import { Label } from "@/src/components/label.js"; 
 
 import type {
   WebsiteField as WebsiteFieldType,

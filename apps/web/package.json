@@ -29,7 +29,7 @@
     "@radix-ui/react-navigation-menu": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-icons/all-files": "^4.1.0",
-    "@workspace/headless-wp-components": "*",
+    "@workspace/ui": "*",
     "apollo-upload-client": "^17.0.0",
     "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
     "class-variance-authority": "^0.7.1",

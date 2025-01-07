@@ -1,6 +1,6 @@
 import { Project, ProjectTag } from "@/types/wp";
 import { cn } from "@/lib/utils";
-import { Badge } from "../ui/badge";
+import { Badge } from "@workspace/ui/components/badge";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 

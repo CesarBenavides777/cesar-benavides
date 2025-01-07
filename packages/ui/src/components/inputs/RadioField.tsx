@@ -1,7 +1,7 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "@/src/components/ui/radio-group.js";
-import { Label } from "@/src/components/ui/label.js";
+import { RadioGroup, RadioGroupItem } from "@/src/components/radio-group.js";
+import { Label } from "@/src/components/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,

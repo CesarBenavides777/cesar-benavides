@@ -4,7 +4,7 @@
 import useGravityForm from "../../hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
-import { Button } from "../../components/ui/button.js";
+import { Button } from "@/src/components/button.js";
 import { useId, } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { removeHtml } from "../../utils/removeHtml.js";
