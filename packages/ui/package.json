@@ -16,9 +16,6 @@
     "dotenv-cli": "^7.4.2",
     "typescript": "latest"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "dependencies": {
     "@apollo/client": "^3.11.8",
     "@radix-ui/react-checkbox": "^1.1.2",
@@ -61,7 +58,8 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
-    "./hooks/*": "./src/hooks/*.ts",
-    "./utils/*": "./src/utils/*.ts"
+    "./hooks/*": "./src/hooks/*.tsx",
+    "./utils/*": "./src/utils/*.ts",
+    "./types/*": "./src/types/*.ts"
   }
 }

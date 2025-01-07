@@ -1,13 +1,13 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "@workspace/ui/components/radio-group.js";
-import { Label } from "@workspace/ui/components/label.js";
+import { RadioGroup, RadioGroupItem } from "@workspace/ui/components/radio-group";
+import { Label } from "@workspace/ui/components/label";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
-import type { RadioField as RadioFieldType, FieldError } from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/hooks/useGravityForm";
+import type { RadioField as RadioFieldType, FieldError } from "@workspace/ui/types/wp";
 
 interface Props {
   field: RadioFieldType;

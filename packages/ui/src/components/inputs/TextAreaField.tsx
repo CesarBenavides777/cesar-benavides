@@ -1,14 +1,14 @@
 import type {
   TextAreaField as TextAreaFieldType,
   FieldError,
-} from "@/types/wp.js";
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
-import { Textarea } from "@workspace/ui/components/textarea.js";
-import { Label } from "@workspace/ui/components/label.js";
+} from "@workspace/ui/hooks/useGravityForm";
+import { Textarea } from "@workspace/ui/components/textarea";
+import { Label } from "@workspace/ui/components/label";
 
 interface Props {
   field: TextAreaFieldType;

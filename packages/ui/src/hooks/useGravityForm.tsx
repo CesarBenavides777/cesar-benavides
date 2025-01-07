@@ -7,8 +7,13 @@ import {
   useContext,
   useReducer,
 } from "react";
-import type { AddressFieldInput, CheckboxFieldInput, EmailFieldInput, NameFieldInput,FileUploadFieldValue as FileUpload,
- } from "../types/wp.js";
+import type {
+  AddressFieldInput,
+  CheckboxFieldInput,
+  EmailFieldInput,
+  NameFieldInput,
+  FileUploadFieldValue as FileUpload,
+} from "@workspace/ui/types/wp";
 
 export interface FieldValue {
   id: number | string;

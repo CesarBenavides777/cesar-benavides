@@ -1,21 +1,21 @@
 import { gql } from "@apollo/client";
 
-import type { DateField as DateFieldType, FieldError } from "@workspace/ui/types/wp.js";
+import type { DateField as DateFieldType, FieldError } from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
-import { Label } from "@workspace/ui/components/label.js";
-import { Popover, PopoverContent, PopoverTrigger } from "@workspace/ui/components/popover.js";
+} from "@workspace/ui/hooks/useGravityForm";
+import { Label } from "@workspace/ui/components/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@workspace/ui/components/popover";
 import { CalendarIcon } from "lucide-react";
-import { Button } from "@workspace/ui/components/button.js";
-import { cn } from "@/src/lib/utils.js";
+import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
 import { format, isValid, parse } from "date-fns";
-import { Calendar } from "@workspace/ui/components/calendar.js";
+import { Calendar } from "@workspace/ui/components/calendar";
 import { useId, useState } from "react";
 // import { SelectSingleEventHandler } from "react-day-picker";
-import { Input } from "@workspace/ui/components/input.js";
+import { Input } from "@workspace/ui/components/input";
 
 export const DATE_FIELD_FIELDS = gql`
   fragment DateFieldFields on DateField {

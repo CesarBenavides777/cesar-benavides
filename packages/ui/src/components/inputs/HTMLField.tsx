@@ -1,4 +1,4 @@
-import type { FieldError, HtmlField as HTMLFieldType } from "@workspace/ui/types/wp.js";
+import type { FieldError, HtmlField as HTMLFieldType } from "@workspace/ui/types/wp";
 
 interface Props {
   field: HTMLFieldType;

@@ -1,15 +1,15 @@
-import { Input } from "@workspace/ui/components/input.js"; 
-import { Label } from "@workspace/ui/components/label.js"; 
+import { Input } from "@workspace/ui/components/input"; 
+import { Label } from "@workspace/ui/components/label"; 
 
 import type {
   WebsiteField as WebsiteFieldType,
   FieldError,
-} from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
+} from "@workspace/ui/hooks/useGravityForm";
 
 interface Props {
   field: WebsiteFieldType;

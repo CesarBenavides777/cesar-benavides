@@ -6,14 +6,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@workspace/ui/components/select.js";
-import { Label } from "@workspace/ui/components/label.js";
-import type { SelectField as SelectFieldType, FieldError } from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/components/select";
+import { Label } from "@workspace/ui/components/label";
+import type { SelectField as SelectFieldType, FieldError } from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
+} from "@workspace/ui/hooks/useGravityForm";
 
 interface Props {
   field: SelectFieldType;

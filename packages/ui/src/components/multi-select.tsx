@@ -8,15 +8,15 @@ import {
   WandSparkles,
 } from "lucide-react";
 
-import { cn } from "@/src/lib/utils.js";
-import { Separator } from "@workspace/ui/components/separator.js";
-import { Button } from "@workspace/ui/components/button.js";
-import { Badge } from "@workspace/ui/components/badge.js";
+import { cn } from "@workspace/ui/lib/utils";
+import { Separator } from "@workspace/ui/components/separator";
+import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@workspace/ui/components/badge";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@workspace/ui/components/popover.js";
+} from "@workspace/ui/components/popover";
 import {
   Command,
   CommandEmpty,
@@ -25,7 +25,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@workspace/ui/components/command.js";
+} from "@workspace/ui/components/command";
 
 /**
  * Variants for the multi-select component to handle different styles.

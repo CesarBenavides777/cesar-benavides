@@ -1,12 +1,12 @@
-import type { FieldError, TextField as TextFieldType } from "@workspace/ui/types/wp.js";
+import type { FieldError, TextField as TextFieldType } from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
+} from "@workspace/ui/hooks/useGravityForm";
 import { gql } from "@apollo/client";
-import { Label } from "@workspace/ui/components/label.js";
-import { Input } from "@workspace/ui/components/input.js";
+import { Label } from "@workspace/ui/components/label";
+import { Input } from "@workspace/ui/components/input";
 
 export const TEXT_FIELD_FIELDS = gql`
   fragment TextFieldFields on TextField {

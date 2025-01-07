@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import useGravityForm, { ACTION_TYPES } from "../../hooks/useGravityForm.js";
-import { FieldError } from "@workspace/ui/types/wp.js";
+import useGravityForm, {
+  ACTION_TYPES,
+} from "@workspace/ui/hooks/useGravityForm";
+import { FieldError } from "@workspace/ui/types/wp";
 
 interface Props {
   field: any;

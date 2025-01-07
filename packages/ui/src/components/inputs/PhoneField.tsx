@@ -1,11 +1,11 @@
-import type { PhoneField as PhoneFieldType, FieldError } from "@workspace/ui/types/wp.js";
+import type { PhoneField as PhoneFieldType, FieldError } from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
-} from "../../hooks/useGravityForm.js";
-import { Label } from "@workspace/ui/components/label.js";
-import { Input } from "@workspace/ui/components/input.js";
+} from "@workspace/ui/hooks/useGravityForm";
+import { Label } from "@workspace/ui/components/label";
+import { Input } from "@workspace/ui/components/input";
 
 interface Props {
   field: PhoneFieldType;

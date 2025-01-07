@@ -1,13 +1,13 @@
 "use client";
 
-import { Checkbox } from "@workspace/ui/components/checkbox.js";
-import { Label } from "@workspace/ui/components/label.js";
+import { Checkbox } from "@workspace/ui/components/checkbox";
+import { Label } from "@workspace/ui/components/label";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   ConsentFieldValue,
-} from "../../hooks/useGravityForm.js";
-import type { ConsentField as ConsentFieldType, FieldError } from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/hooks/useGravityForm";
+import type { ConsentField as ConsentFieldType, FieldError } from "@workspace/ui/types/wp";
 
 interface Props {
   field: ConsentFieldType;
