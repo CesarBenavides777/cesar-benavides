@@ -1,18 +1,18 @@
 "use client";
 
 
-import useGravityForm from "@workspace/headless-wp-components/hooks/useGravityForm.js";
+import useGravityForm from "../../hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
-import { Button } from "@workspace/headless-wp-components/components/ui/button.js";
+import { Button } from "../../components/ui/button.js";
 import { useId, } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { removeHtml } from "@workspace/headless-wp-components/utils/removeHtml.js";
+import { removeHtml } from "../../utils/removeHtml.js";
 import type {
   FieldError,
   FormField,
   GfForm as GravityFormsFormType,
-} from "@workspace/headless-wp-components/types/wp.js";
+} from "../../types/wp.js";
 
 interface Props {
   form: GravityFormsFormType;
