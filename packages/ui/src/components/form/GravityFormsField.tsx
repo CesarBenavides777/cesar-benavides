@@ -1,22 +1,22 @@
 import type { FieldError } from "@workspace/ui/types/wp.js";
 
-import AddressField from "../inputs/AddressField.js";
-import CheckboxField from "../inputs/CheckboxField.js";
-import DateField from "../inputs/DateField.js";
-import EmailField from "../inputs/EmailField.js";
-import MultiSelectField from "../inputs/MultiSelectField.js";
-import NameField from "../inputs/NameField.js";
-import PhoneField from "../inputs/PhoneField.js";
-import RadioField from "../inputs/RadioField.js";
-import SelectField from "../inputs/SelectField.js";
-import TextAreaField from "../inputs/TextAreaField.js";
-import TextField from "../inputs/TextField.js";
-import WebsiteField from "../inputs/WebsiteField.js";
-import NumberField from "../inputs/NumberField.js";
-import FileUploadField from "../inputs/FileUploadField.js";
-import HTMLField from "../inputs/HTMLField.js";
-import CaptchaField from "../inputs/CaptchaField.js";
-import ConsentField from "../inputs/ConsentField.js";
+import AddressField from "@workspace/ui/components/inputs/AddressField";
+import CheckboxField from "@workspace/ui/components/inputs/CheckboxField";
+import DateField from "@workspace/ui/components/inputs/DateField";
+import EmailField from "@workspace/ui/components/inputs/EmailField";
+import MultiSelectField from "@workspace/ui/components/inputs/MultiSelectField";
+import NameField from "@workspace/ui/components/inputs/NameField";
+import PhoneField from "@workspace/ui/components/inputs/PhoneField";
+import RadioField from "@workspace/ui/components/inputs/RadioField";
+import SelectField from "@workspace/ui/components/inputs/SelectField";
+import TextAreaField from "@workspace/ui/components/inputs/TextAreaField";
+import TextField from "@workspace/ui/components/inputs/TextField";
+import WebsiteField from "@workspace/ui/components/inputs/WebsiteField";
+import NumberField from "@workspace/ui/components/inputs/NumberField";
+import FileUploadField from "@workspace/ui/components/inputs/FileUploadField";
+import HTMLField from "@workspace/ui/components/inputs/HTMLField";
+import CaptchaField from "@workspace/ui/components/inputs/CaptchaField";
+import ConsentField from "@workspace/ui/components/inputs/ConsentField";
 
 interface Props {
   field: any;
