@@ -1,18 +1,18 @@
 "use client";
 
 
-import useGravityForm from "../../hooks/useGravityForm.js";
+import useGravityForm from "@workspace/ui/hooks/useGravityForm.js";
 import { toast } from "sonner";
 import GravityFormsField from "./GravityFormsField.js";
-import { Button } from "@/src/components/button.js";
+import { Button } from "@workspace/ui/components/button.js";
 import { useId, } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { removeHtml } from "../../utils/removeHtml.js";
+import { removeHtml } from "@workspace/ui/utils/removeHtml.js";
 import type {
   FieldError,
   FormField,
   GfForm as GravityFormsFormType,
-} from "../../types/wp.js";
+} from "@workspace/ui/types/wp.js";
 
 interface Props {
   form: GravityFormsFormType;
