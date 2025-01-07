@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
-import { Input } from "@/src/components/input.js"; 
-import { Label } from "@/src/components/label.js"; 
+import { Input } from "@workspace/ui/components/input.js"; 
+import { Label } from "@workspace/ui/components/label.js"; 
 
 import type {
   AddressField as AddressFieldType,
   AddressFieldInput,
   FieldError,
-} from "@/src/types/wp.js";
+} from "@workspace/ui/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,

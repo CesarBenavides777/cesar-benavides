@@ -12,7 +12,7 @@ import type {
   FieldError,
   FormField,
   GfForm as GravityFormsFormType,
-} from "@workspace/ui/types/wp";
+} from "@workspace/ui/types/wp.js";
 
 interface Props {
   form: GravityFormsFormType;

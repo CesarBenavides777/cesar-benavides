@@ -1,11 +1,11 @@
-import type { EmailField as EmailFieldType, FieldError } from "@/src/types/wp.js";
+import type { EmailField as EmailFieldType, FieldError } from "@workspace/ui/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   EmailFieldValue,
 } from "../../hooks/useGravityForm.js";
-import { Label } from "@/src/components/label.js";
-import { Input } from "@/src/components/input.js";
+import { Label } from "@workspace/ui/components/label.js";
+import { Input } from "@workspace/ui/components/input.js";
 
 interface Props {
   field: EmailFieldType;

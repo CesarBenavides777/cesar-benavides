@@ -6,9 +6,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/select.js";
-import { Label } from "@/src/components/label.js";
-import type { SelectField as SelectFieldType, FieldError } from "@/src/types/wp.js";
+} from "@workspace/ui/components/select.js";
+import { Label } from "@workspace/ui/components/label.js";
+import type { SelectField as SelectFieldType, FieldError } from "@workspace/ui/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,

@@ -1,13 +1,13 @@
 import type {
   MultiSelectField as MultiSelectFieldType,
   FieldError,
-} from "@/src/types/wp.js";
+} from "@workspace/ui/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValues,
 } from "../../hooks/useGravityForm.js";
-import { MultiSelect } from "@/src/components/multi-select.js";
+import { MultiSelect } from "@workspace/ui/components/multi-select.js";
 
 interface Props {
   field: MultiSelectFieldType;

@@ -2,15 +2,15 @@ import type {
   NameField as NameFieldType,
   NameFieldInput,
   FieldError,
-} from "@/src/types/wp.js";
+} from "@workspace/ui/types/wp.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   NameFieldValue,
 } from "../../hooks/useGravityForm.js";
 import { gql } from "@apollo/client";
-import { Label } from "@/src/components/label.js";
-import { Input } from "@/src/components/input.js";
+import { Label } from "@workspace/ui/components/label.js";
+import { Input } from "@workspace/ui/components/input.js";
 
 export const NAME_FIELD_FIELDS = gql`
   fragment NameFieldFields on NameField {

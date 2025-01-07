@@ -1,12 +1,12 @@
 
-import { Input } from "@/src/components/input.js";
-import { Label } from "@/src/components/label.js";
+import { Input } from "@workspace/ui/components/input.js";
+import { Label } from "@workspace/ui/components/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
 } from "../../hooks/useGravityForm.js";
-import type { FieldError, NumberField as NumberFieldType } from "@/src/types/wp.js";
+import type { FieldError, NumberField as NumberFieldType } from "@workspace/ui/types/wp.js";
 
 interface Props {
   field: NumberFieldType;

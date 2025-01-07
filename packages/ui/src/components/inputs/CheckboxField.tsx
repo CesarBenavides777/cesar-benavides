@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@/src/components/checkbox.js";
-import { Label } from "@/src/components/label.js";
+import { Checkbox } from "@workspace/ui/components/checkbox.js";
+import { Label } from "@workspace/ui/components/label.js";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
@@ -11,7 +11,7 @@ import type {
   CheckboxField as CheckboxFieldType,
   CheckboxFieldInput as CheckboxInput,
   FieldError,
-} from "@/src/types/wp.js";
+} from "@workspace/ui/types/wp.js";
 
 interface Props {
   field: CheckboxFieldType;
