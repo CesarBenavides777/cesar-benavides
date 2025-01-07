@@ -1,17 +1,17 @@
 import { gql } from "@apollo/client";
-import { Input } from "@workspace/ui/components/input.js"; 
-import { Label } from "@workspace/ui/components/label.js"; 
+import { Input } from "@workspace/ui/components/input"; 
+import { Label } from "@workspace/ui/components/label"; 
 
 import type {
   AddressField as AddressFieldType,
   AddressFieldInput,
   FieldError,
-} from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   AddressFieldValue,
-} from "../../hooks/useGravityForm.js";
+} from "../../hooks/useGravityForm";
 
 export const ADDRESS_FIELD_FIELDS = gql`
   fragment AddressFieldFields on AddressField {

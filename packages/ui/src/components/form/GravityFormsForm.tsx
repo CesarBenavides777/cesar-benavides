@@ -1,7 +1,7 @@
 "use client";
 
 
-import useGravityForm from "@workspace/ui/hooks/useGravityForm.js";
+import useGravityForm from "@workspace/ui/hooks/useGravityForm";
 import { toast } from "sonner";
 import GravityFormsField from "@workspace/ui/components/form/GravityFormsField";
 import { Button } from "@workspace/ui/components/button";
@@ -12,7 +12,7 @@ import type {
   FieldError,
   FormField,
   GfForm as GravityFormsFormType,
-} from "@workspace/ui/types/wp.js";
+} from "@workspace/ui/types/wp";
 
 interface Props {
   form: GravityFormsFormType;
