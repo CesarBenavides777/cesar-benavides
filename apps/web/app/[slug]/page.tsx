@@ -31,11 +31,11 @@ export async function generateMetadata(
 
 export async function generateStaticParams() {
   const pages = await getAllPages();
-
-
-  return pages.map((page) => ({
+  return pages.map((page: {
+    slug: string;
+  }) => ({
     params: {
-      slug: `/${page.slug}`,
+      slug: page.slug,
     },
   }));
 }

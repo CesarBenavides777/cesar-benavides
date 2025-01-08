@@ -36,7 +36,7 @@ export async function generateStaticParams() {
     slug: string;
   }) => ({
     params: {
-      slug: `${post.slug}`,
+      slug: post.slug,
     },
   }));
 }
