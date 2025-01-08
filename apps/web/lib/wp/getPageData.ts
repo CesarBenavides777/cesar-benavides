@@ -1,10 +1,10 @@
 import { GET_PAGE } from "@/queries";
-import { PageIdType } from "@/types/wp";
+import { ContentNodeIdTypeEnum } from "@/types/wp";
 import { getAuthClient, getClient } from "@faustwp/experimental-app-router";
 import { getForm } from "./getForm";
 
 type GetPageData = {
-  pageId: PageIdType;
+  pageId: ContentNodeIdTypeEnum;
   asPreview: boolean;
 };
 
@@ -15,13 +15,21 @@ const getPageData = async ({ pageId, asPreview }: GetPageData) => {
 
   const client = asPreview ? await getAuthClient() : await getClient();
 
+  if (!client) {
+    throw new Error("Failed to get client");
+  }
+  // @ts-expect-error
+  const isBlog = pageId === "blog";
+  const blogId = 259; // Blog page ID for Archive page query
+
   const { data } = await client.query({
     query: GET_PAGE,
     variables: {
-      id: pageId,
-      idType: asPreview ? "DATABASE_ID" : "URI",
+      id: isBlog ? blogId : pageId,
+      idType: asPreview || isBlog ? "DATABASE_ID" : "URI",
       asPreview,
     },
+    fetchPolicy: asPreview ? "no-cache" : "cache-first",
   });
 
   const blocks = data?.page?.pageContent?.blocks || [];

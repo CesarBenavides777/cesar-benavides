@@ -98,6 +98,17 @@ export type AcfFieldGroupFields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** ACF Link field */
+export type AcfLink = {
+  __typename?: 'AcfLink';
+  /** The target of the link (_blank, etc) */
+  target?: Maybe<Scalars['String']['output']>;
+  /** The title of the link */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The url of the link */
+  url?: Maybe<Scalars['String']['output']>;
+};
+
 /** Connection between the PageContentBlocksHeroLayout_Fields type and the MediaItem type */
 export type AcfMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & OneToOneConnection & {
   __typename?: 'AcfMediaItemConnectionEdge';
@@ -15531,6 +15542,82 @@ export type PageContentBlocksHeroLayout_Fields = {
   variant?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
+/** The &quot;PageContentBlocksParagraphs&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PageContentBlocksParagraphs = AcfFieldGroup & AcfFieldGroupFields & PageContentBlocksParagraphs_Fields & {
+  __typename?: 'PageContentBlocksParagraphs';
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  cta?: Maybe<AcfLink>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PageContentBlocksParagraphs&quot; Field Group */
+export type PageContentBlocksParagraphs_Fields = {
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;link&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  cta?: Maybe<AcfLink>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksParagraphs&quot; Field Group */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;PageContentBlocksPostsBlockLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PageContentBlocksPostsBlockLayout = AcfFieldGroup & AcfFieldGroupFields & PageContentBlocksPostsBlockLayout_Fields & PageContentBlocks_Layout & {
+  __typename?: 'PageContentBlocksPostsBlockLayout';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+  postItems?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+  uniqueId?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The &quot;PageContentBlocksPostsBlockLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PageContentBlocksPostsBlockLayoutPostItemsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+export type PageContentBlocksPostsBlockLayout_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+  postItems?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+  uniqueId?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PageContentBlocksPostsBlockLayout&quot; Field Group */
+export type PageContentBlocksPostsBlockLayout_FieldsPostItemsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** The &quot;PageContentBlocksProjectsBlockLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PageContentBlocksProjectsBlockLayout = AcfFieldGroup & AcfFieldGroupFields & PageContentBlocksProjectsBlockLayout_Fields & PageContentBlocks_Layout & {
   __typename?: 'PageContentBlocksProjectsBlockLayout';
@@ -15574,6 +15661,45 @@ export type PageContentBlocksProjectsBlockLayout_FieldsProjectItemsArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The &quot;PageContentBlocksRichContentLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PageContentBlocksRichContentLayout = AcfFieldGroup & AcfFieldGroupFields & PageContentBlocksRichContentLayout_Fields & PageContentBlocks_Layout & {
+  __typename?: 'PageContentBlocksRichContentLayout';
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  animateOnScroll?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  lineSeparated?: Maybe<Scalars['Boolean']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  mainTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  paragraphs?: Maybe<Array<Maybe<PageContentBlocksParagraphs>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  uniqueId?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+export type PageContentBlocksRichContentLayout_Fields = {
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  animateOnScroll?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  lineSeparated?: Maybe<Scalars['Boolean']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  mainTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;repeater&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  paragraphs?: Maybe<Array<Maybe<PageContentBlocksParagraphs>>>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PageContentBlocksRichContentLayout&quot; Field Group */
+  uniqueId?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;PageContentBlocksTextblockLayout&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -16093,7 +16219,7 @@ export enum PluginStatusEnum {
 }
 
 /** The post type */
-export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfComponentStyleOptions & {
+export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & WithAcfComponentStyleOptions & WithAcfPageContent & {
   __typename?: 'Post';
   /**
    * The ancestors of the content node.
@@ -16180,6 +16306,8 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   modified?: Maybe<Scalars['String']['output']>;
   /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
   modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Fields of the PageContent ACF Field Group */
+  pageContent?: Maybe<PageContent>;
   /**
    * The parent of the content node.
    * @deprecated This content type is not hierarchical and typically will not have a parent

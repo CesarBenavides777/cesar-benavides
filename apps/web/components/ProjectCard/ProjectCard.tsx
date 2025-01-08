@@ -4,11 +4,9 @@ import { Badge } from "@workspace/ui/components/badge";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 
-
-
 type ProjectCardProps = Project & {
-    className?: string;
-}
+  className?: string;
+};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -16,22 +14,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
   projectTags,
   excerpt,
-  projectOptions
+  projectOptions,
 }) => {
   const tags = projectTags?.nodes.map((tag: ProjectTag) => tag?.name) as
     | string[]
     | undefined;
-    const { githubLink, liveLink } = projectOptions || {};
+  const { githubLink, liveLink } = projectOptions || {};
 
   return (
     <div className={cn("flex flex-col gap-2 bg-background", className)} id={id}>
       <div className="flex flex-row justify-between items-center">
         {title && <h3 className={"font-sans text-xl font-bold"}>{title}</h3>}
         {githubLink && (
-          <Link 
-            href={githubLink} 
+          <Link
+            href={githubLink}
             className="bg-foreground text-background p-1 rounded-full hover:bg-foreground/80"
-            >
+          >
             <FaGithub />
             <span className="sr-only">View the source code on GitHub</span>
           </Link>

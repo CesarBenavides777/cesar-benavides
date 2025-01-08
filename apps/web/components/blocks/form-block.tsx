@@ -9,21 +9,14 @@ type FormBlockProps = PageContentBlocksFormblockLayout & {
   form?: GfForm;
 };
 
-
 const FormBlock: React.FC<FormBlockProps> = ({
   form,
   wrapperClassNames,
   showTitle,
   showDescription,
 }) => {
-
   return (
-    <section
-      className={cn(
-        "px-2 md:px-4 py-6 md:py-12",
-        wrapperClassNames,
-      )}
-    >
+    <section className={cn("px-2 md:px-4 py-6 md:py-12", wrapperClassNames)}>
       <div className="max-w-xl mx-auto">
         <GravityForm
           form={form as GfForm}

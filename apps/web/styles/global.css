@@ -54,4 +54,47 @@
   .content-wrapper a {
     @apply underline hover:text-muted-foreground hover:transition-colors hover:duration-200;
   }
+
+    .content-wrapper ul {
+      @apply list-disc list-inside my-4 ml-6;
+      /* Adjusted for better indentation */
+    }
+  
+    .content-wrapper ol {
+      @apply list-decimal list-inside my-4 ml-6;
+      /* Added ordered list styles */
+    }
+  
+    .content-wrapper li {
+      @apply leading-relaxed text-foreground;
+      /* Improved spacing and color */
+    }
+  
+    .content-wrapper ul ul,
+    .content-wrapper ol ol,
+    .content-wrapper ul ol,
+    .content-wrapper ol ul {
+      @apply list-disc ml-6 mt-0 text-muted-foreground;
+      /* Styling for nested lists */
+    }
+  
+    .content-wrapper ul ul {
+      @apply list-disc;
+      /* Specific nested unordered list styles */
+    }
+  
+    .content-wrapper ol ol {
+      @apply list-decimal;
+      /* Specific nested ordered list styles */
+    }
+  
+    .content-wrapper ul>li::marker {
+      @apply text-primary;
+      /* Custom marker color for unordered lists */
+    }
+  
+    .content-wrapper ol>li::marker {
+      @apply text-secondary;
+      /* Custom marker color for ordered lists */
+    }
 }

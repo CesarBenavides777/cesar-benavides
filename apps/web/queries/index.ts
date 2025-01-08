@@ -69,51 +69,76 @@ export const MEDIA_ITEM_FRAGMENT = gql`
   }
 `;
 
-export const GET_PAGE_CONTENT_FRAGMENT = gql`
-  fragment PageContentFragment on Page {
-    pageContent {
-      blocks {
-        ... on PageContentBlocksHeroLayout {
-          body
-          title
-          subCaption
-          variant
-          media {
+
+export const BLOCKS_FRAGMENT = gql`
+  fragment BlocksFragment on PageContent {
+    blocks {
+      ... on PageContentBlocksHeroLayout {
+        body
+        title
+        subCaption
+        variant
+        media {
+          node {
+            ...MediaItemFragment
+          }
+        }
+      }
+      # Form Block
+      ... on PageContentBlocksFormblockLayout {
+        gravityformid
+        showTitle
+        showDescription
+      }
+      # Projects Block
+      ... on PageContentBlocksProjectsBlockLayout {
+        uniqueId
+        projectItems {
+          edges {
             node {
-              ...MediaItemFragment
+              ... on Project {
+                id
+                title
+                featuredImage {
+                  node {
+                    ...MediaItemFragment
+                  }
+                }
+                excerpt
+                projectTags {
+                  nodes {
+                    name
+                  }
+                }
+                uri
+                projectOptions {
+                  githubLink
+                  liveLink
+                }
+              }
             }
           }
         }
-        # Form Block
-        ... on PageContentBlocksFormblockLayout {
-          gravityformid
-          showTitle
-          showDescription
-        }
-        # Projects Block
-        ... on PageContentBlocksProjectsBlockLayout {
-          uniqueId
-          projectItems {
-            edges {
-              node {
-                ... on Project {
-                  id
-                  title
-                  featuredImage {
-                    node {
-                      ...MediaItemFragment
-                    }
+      }
+      # Posts Block
+      ... on PageContentBlocksPostsBlockLayout {
+        uniqueId
+        postItems {
+          edges {
+            node {
+              ... on Post {
+                id
+                title
+                excerpt
+                featuredImage {
+                  node {
+                    ...MediaItemFragment
                   }
-                  excerpt
-                  projectTags {
-                    nodes {
-                      name
-                    }
-                  }
-                  uri
-                  projectOptions {
-                    githubLink
-                    liveLink
+                }
+                uri
+                tags {
+                  nodes {
+                    name
                   }
                 }
               }
@@ -121,11 +146,49 @@ export const GET_PAGE_CONTENT_FRAGMENT = gql`
           }
         }
       }
+      # Rich Content Block
+      ... on PageContentBlocksRichContentLayout {
+        mainTitle
+        uniqueId
+        animateOnScroll
+        lineSeparated
+        paragraphs {
+          title
+          content
+          cta {
+            url
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_POST_CONTENT_FRAGMENT = gql`
+  fragment PostContentFragment on Post {
+    pageContent {
+      ...BlocksFragment
+    }
+    tags {
+      nodes {
+        name
+      }
     }
   }
   ${MEDIA_ITEM_FRAGMENT}
+  ${BLOCKS_FRAGMENT}
 `;
 
+export const GET_PAGE_CONTENT_FRAGMENT = gql`
+  fragment PageContentFragment on Page {
+    pageContent {
+      ...BlocksFragment
+    }
+  }
+  ${MEDIA_ITEM_FRAGMENT}
+  ${BLOCKS_FRAGMENT}
+`;
 
 export const SEO_FRAGMENT = gql`
   fragment SEOFragment on PostTypeSEO {
@@ -168,18 +231,72 @@ export const SEO_FRAGMENT = gql`
   }
 `;
 
-export const GET_PAGE = gql`
-  query GetPage($id: ID!, $idType: PageIdType!, $asPreview: Boolean!) {
-    page(id: $id, idType: $idType, asPreview: $asPreview) {
-      id
-      title
-      ...PageContentFragment
-      seo {
-        ...SEOFragment
+export const SEO_CONFIG_FRAGMENT = gql`
+  fragment SEOConfigFragment on SEOConfig {
+    webmaster {
+      baiduVerify
+      googleVerify
+      msVerify
+      yandexVerify
+    }
+    social {
+      facebook {
+        url
       }
+      instagram {
+        url
+      }
+      linkedIn {
+        url
+      }
+      otherSocials
+      twitter {
+        username
+      }
+      youTube {
+        url
+      }
+    }
+    schema {
+      companyLogo {
+        sourceUrl
+      }
+      companyName
+      companyOrPerson
+      homeUrl
+      siteName
+      siteUrl
+    }
+  }
+`;
+
+export const GET_PAGE = gql`
+  query GetPage(
+    $id: ID!
+    $idType: ContentNodeIdTypeEnum!
+    $asPreview: Boolean!
+  ) {
+    page: contentNode(id: $id, idType: $idType, asPreview: $asPreview) {
+      ... on Page {
+        id
+        title
+        seo {
+          ...SEOFragment
+        }
+      }
+      ... on Post {
+        id
+        title
+        seo {
+          ...SEOFragment
+        }
+      }
+      ...PageContentFragment
+      ...PostContentFragment
     }
   }
   ${GET_PAGE_CONTENT_FRAGMENT}
+  ${GET_POST_CONTENT_FRAGMENT}
   ${SEO_FRAGMENT}
 `;
 

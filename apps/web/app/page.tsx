@@ -1,7 +1,7 @@
 import Main from "@/components/ui/main";
 import { BlockReturner } from "@/features/BlockReturner";
 import getPageData from "@/lib/wp/getPageData";
-import { PageIdType, PostTypeSeo } from "@/types/wp";
+import { ContentNodeIdTypeEnum, PostTypeSeo } from "@/types/wp";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -11,14 +11,14 @@ type Props = {
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const pageData = await getPageData({
-    pageId: "/" as PageIdType,
+    pageId: "/" as ContentNodeIdTypeEnum,
     asPreview: false,
   });
 
-  const { seo } = pageData.data.page
+  const { seo } = pageData.data.page;
   const {
     title,
     focuskw,
@@ -63,10 +63,9 @@ export async function generateMetadata(
   };
 }
 
-
 export default async function Home() {
   const pageData = await getPageData({
-    pageId: "/" as PageIdType,
+    pageId: "/" as ContentNodeIdTypeEnum,
     asPreview: false,
   });
 
@@ -80,3 +79,6 @@ export default async function Home() {
     </Main>
   );
 }
+
+export const dynamic = "force-static";
+export const revalidate = 60;

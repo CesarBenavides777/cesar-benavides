@@ -13,5 +13,5 @@ export default {
   CoreButton: CoreBlocks.CoreButton,
   CoreButtons: CoreBlocks.CoreButtons,
   CoreHeading: CoreBlocks.CoreHeading,
-//   CreateBlockBlockB: BlockB,
+  //   CreateBlockBlockB: BlockB,
 };

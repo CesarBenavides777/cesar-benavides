@@ -10,6 +10,7 @@ import { DynamicFavicon } from "@/components/DynamicFavicon";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import PageTransitionEffect from "@/components/PageTransition";
 
 export default async function RootLayout({ children }) {
   const client = await getClient();
@@ -41,7 +42,7 @@ export default async function RootLayout({ children }) {
             subTitle={"Design Engineer & Software Architect"}
             menuItems={primaryMenuItems?.nodes}
           />
-          {children}
+          <PageTransitionEffect>{children}</PageTransitionEffect>
           <Footer
             githubUrl={githubLink}
             linkedinUrl={linkedinLink}

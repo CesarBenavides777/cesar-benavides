@@ -1,4 +1,4 @@
-import { hasPreviewProps } from "./hasPreviewProps";
+
 import { PleaseLogin } from "@/components/please-login";
 import Main from "@/components/ui/main";
 import BlockReturner from "@/features/BlockReturner/BlockReturner";
@@ -7,6 +7,7 @@ import getPageData from "@/lib/wp/getPageData";
 import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getMetaData } from "@/lib/wp/getMetaData";
+import { hasPreviewProps } from "../../[slug]/hasPreviewProps";
 
 type Props = {
   params: Promise<{
@@ -17,18 +18,18 @@ type Props = {
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const slug = (await params).slug;
   const metaData = await getMetaData({
-    slug,
+    slug: `/blog/${slug}`,
     asPreview: await hasPreviewProps({ params, searchParams }),
   });
 
   return metaData;
 }
 
-export default async function Page(props: Props) {
+export default async function BlogPage(props: Props) {
   const isPreview = await hasPreviewProps(props);
   const { searchParams, params } = props;
   const sParams = await searchParams;
@@ -42,25 +43,33 @@ export default async function Page(props: Props) {
   const id = isPreview ? sParams.p : param.slug;
 
   const pageData = await getPageData({
-    pageId: id as ContentNodeIdTypeEnum,
+    pageId: `/blog/${id}` as ContentNodeIdTypeEnum,
     asPreview: isPreview,
   });
+  
 
   const { data, hasClient } = pageData;
-  const { pageContent, title, id: pageId } = data?.page ?? {};
+  const { pageContent, title, id: pageId, tags } = data?.page ?? {};
   const { blocks } = pageContent ?? {};
 
   if (!pageId) {
     return notFound();
   }
+  
 
   if (!hasClient) {
     return <PleaseLogin redirect={redirectUrl} />;
   }
 
+  const tagNames = tags?.nodes.map((tag: any) => tag.name) ?? [];
+
   return (
     <Main>
-      <BlockReturner blocks={blocks} title={title} />
+      <BlockReturner 
+        blocks={blocks} 
+        title={title} 
+        tags={tagNames}
+      />
     </Main>
   );
 }

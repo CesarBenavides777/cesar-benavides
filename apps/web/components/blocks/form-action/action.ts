@@ -41,8 +41,8 @@ export const submitForm = async (prevData: any, data: FormData) => {
         },
       },
       context: {
-        multipart: true
-      }
+        multipart: true,
+      },
     });
 
     return response;

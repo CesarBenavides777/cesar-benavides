@@ -2,7 +2,8 @@
   "name": "@workspace/ui",
   "type": "module",
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "generate": "bun generate.js"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.3",
@@ -26,16 +27,17 @@
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@workspace/tailwind-config": "*",
-    "@workspace/typescript-config": "*",
     "@types/node": "^22.10.1",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
+    "@workspace/tailwind-config": "*",
+    "@workspace/typescript-config": "*",
     "apollo-upload-client": "^18.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",
     "date-fns": "^4.1.0",
+    "html-react-parser": "^5.2.2",
     "lucide-react": "^0.462.0",
     "postcss": "^8.4.49",
     "react": "^19.0.0-rc.1",
@@ -43,6 +45,7 @@
     "react-dom": "^19.0.0-rc.1",
     "react-google-recaptcha": "^3.1.0",
     "react-select": "^5.8.3",
+    "react-syntax-highlighter": "^15.6.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
