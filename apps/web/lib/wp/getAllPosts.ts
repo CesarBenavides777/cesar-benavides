@@ -13,7 +13,7 @@ const getAllPosts = async () => {
     fetchPolicy: "no-cache",
   });
 
-  return data.pages.nodes;
+  return data.posts.nodes;
 };
 
 export { getAllPosts };
