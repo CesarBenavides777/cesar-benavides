@@ -10,6 +10,7 @@ import { getMetaData } from "@/lib/wp/getMetaData";
 import { hasPreviewProps } from "../../[slug]/hasPreviewProps";
 import { getAllPosts } from "@/lib/wp/getAllPosts";
 
+
 type Props = {
   params: Promise<{
     slug: string;
@@ -32,12 +33,6 @@ export async function generateMetadata(
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-
-  console.log("posts", posts);
-
-  if (!posts) {
-    return [];
-  }
 
   return posts.map((post: {
     slug: string;
@@ -93,6 +88,6 @@ export default async function BlogPage(props: Props) {
   );
 }
 
-export const dynamic = "force-static";
+
 export const revalidate = 60;
 
