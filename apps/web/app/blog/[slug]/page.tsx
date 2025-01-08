@@ -34,8 +34,6 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   const posts = await getAllPosts();
 
-  console.log("posts", posts);
-
   return posts.map((post: {
     slug: string;
   }) => ({
@@ -90,6 +88,6 @@ export default async function BlogPage(props: Props) {
   );
 }
 
-
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
