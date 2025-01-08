@@ -32,6 +32,8 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   const pages = await getAllPages();
 
+  console.log("pages", pages);
+
   if (!pages) {
     return [];
   }

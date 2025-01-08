@@ -75,7 +75,6 @@ export const getMetaData = async ({ slug, asPreview }: GetPageDataProps) => {
     },
     keywords: focuskw,
     robots: "index, follow",
-    viewport: "width=device-width, initial-scale=1",
     formatDetection: {
       email: true,
       address: true,
