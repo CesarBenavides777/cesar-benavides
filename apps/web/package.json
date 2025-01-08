@@ -101,6 +101,7 @@
   "optionalDependencies": {
     "@wordpress/scripts": "^28.1.0"
   },
+  "packageManager": "bun@1.1.43",
   "patchedDependencies": {
     "@faustwp/experimental-app-router@0.3.1": "/apps/web/patches/@faustwp%2Fexperimental-app-router@0.3.1.patch"
   },
