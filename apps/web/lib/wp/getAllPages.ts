@@ -1,27 +1,20 @@
-const getAllPages = async () => {
+import { GET_ALL_PAGES } from "@/queries";
+import { getClient } from "@faustwp/experimental-app-router";
 
-    const data = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/graphql`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            query: `
-                {
-                    pages(first: 100) {
-                        nodes {
-                            id
-                            slug
-                        }
-                    }
-                }
-            `
-        }),
+
+const getAllPages = async () => {
+  const client = await getClient();
+
+    if (!client) {
+        throw new Error("Failed to get client");
+    }
+
+    const { data } = await client.query({
+        query: GET_ALL_PAGES,
+        fetchPolicy: "no-cache",
     });
 
-    const json = await data.json();
-
-    return json.data.pages.nodes;
+    return data.pages.nodes;
 };
 
 export { getAllPages };
