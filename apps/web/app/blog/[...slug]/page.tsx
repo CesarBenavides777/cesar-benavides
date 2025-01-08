@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getMetaData } from "@/lib/wp/getMetaData";
 import { hasPreviewProps } from "../../[slug]/hasPreviewProps";
+import { getAllPosts } from "@/lib/wp/getAllPosts";
 
 type Props = {
   params: Promise<{
@@ -27,6 +28,17 @@ export async function generateMetadata(
   });
 
   return metaData;
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post: {
+    slug: string;
+  }) => ({
+    params: {
+      slug: post.slug,
+    },
+  }));
 }
 
 export default async function BlogPage(props: Props) {

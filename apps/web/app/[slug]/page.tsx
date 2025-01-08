@@ -7,6 +7,7 @@ import getPageData from "@/lib/wp/getPageData";
 import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getMetaData } from "@/lib/wp/getMetaData";
+import { getAllPages } from "@/lib/wp/getAllPages";
 
 type Props = {
   params: Promise<{
@@ -26,6 +27,16 @@ export async function generateMetadata(
   });
 
   return metaData;
+}
+
+export async function generateStaticParams() {
+  const pages = await getAllPages();
+
+  return pages.map((page) => ({
+    params: {
+      slug: page.slug,
+    },
+  }));
 }
 
 export default async function Page(props: Props) {

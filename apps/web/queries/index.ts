@@ -17,6 +17,28 @@ const MENU_FRAGMENT = gql`
   }
 `;
 
+export const GET_ALL_POSTS = gql`
+  query AllPostsQuery {
+    posts(first: 100) {
+      nodes {
+        id
+        slug
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PAGES = gql`
+  query AllPagesQuery {
+    pages(first: 100) {
+      nodes {
+        id
+        slug
+      }
+    }
+  }
+`;
+
 const GLOBAL_OPTIONS_FRAGMENT = gql`
   fragment GlobalOptionsFragment on RootQuery {
     siteSettings {
