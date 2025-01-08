@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { WiDaySunny } from "react-icons-all-files/wi/WiDaySunny";
-import { FaMoon } from "react-icons-all-files/fa/FaMoon";
+import { WiDaySunny } from "react-icons/wi";
+import { FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import useSound from "use-sound";

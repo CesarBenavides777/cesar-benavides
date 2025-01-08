@@ -1,4 +1,4 @@
-import { MdEmail } from "react-icons-all-files/md/MdEmail";
+import { MdEmail } from "react-icons/md";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { Button } from "../ui/button";
 
