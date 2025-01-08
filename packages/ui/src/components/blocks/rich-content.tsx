@@ -7,7 +7,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 // @ts-ignore
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import parse, { domToReact, Element } from "html-react-parser";
-import { CopyButton } from "../copy-button.js";
+import { CopyButton } from "@workspace/ui/components/copy-button";
 
 type RichContentProps = PageContentBlocksRichContentLayout & {
   className?: string;
