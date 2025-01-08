@@ -46,9 +46,9 @@ export async function generateMetadata(
       telephone: true,
     },
     openGraph: {
-      title: opengraphTitle,
-      description: opengraphDescription,
-      url: opengraphUrl,
+      title: opengraphTitle || title || "",
+      description: opengraphDescription || metaDesc || "",
+      url: opengraphUrl || "",
       images: opengraphImage?.sourceUrl
         ? [{ url: opengraphImage.sourceUrl }]
         : [],
