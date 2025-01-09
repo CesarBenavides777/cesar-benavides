@@ -7,6 +7,7 @@ import useGravityForm, {
 import { gql } from "@apollo/client";
 import { Label } from "@workspace/ui/components/label";
 import { Input } from "@workspace/ui/components/input";
+import type { FC } from "react";
 
 export const TEXT_FIELD_FIELDS = gql`
   fragment TextFieldFields on TextField {
@@ -28,7 +29,9 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function TextField({ field, fieldErrors, formId }: Props) {
+
+
+const TextField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
     field;
   const htmlId = `field_${formId}_${databaseId}`;
@@ -83,3 +86,5 @@ export default function TextField({ field, fieldErrors, formId }: Props) {
     </div>
   );
 }
+
+export default TextField;

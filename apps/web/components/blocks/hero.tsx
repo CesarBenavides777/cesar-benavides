@@ -1,11 +1,18 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import type { PageContentBlocksHeroLayout } from "@/types/wp";
+import AnimatedImage from "@workspace/ui/components/animated-image";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 type HeroProps = PageContentBlocksHeroLayout & {
   className?: string;
   tags?: string[];
+  postId?: string;
 };
+
+
 
 const Hero: React.FC<HeroProps> = ({
   title,
@@ -15,7 +22,8 @@ const Hero: React.FC<HeroProps> = ({
   className,
   uniqueId,
   media,
-  tags
+  tags,
+  postId = "",
 }) => {
   return (
     <section
@@ -69,17 +77,31 @@ const Hero: React.FC<HeroProps> = ({
           )}
         </div>
         {media && (
-          <div className={"flex flex-col"}>
-            <Image
-              src={media?.node?.sourceUrl || ""}
-              alt={media?.node?.altText || ""}
-              width={media?.node?.mediaDetails?.width || 0}
-              height={media?.node?.mediaDetails?.height || 0}
-              placeholder="blur"
-              blurDataURL={media?.node?.dataUrl || ""}
-              loading="eager"
-            />
-          </div>
+          // <motion.div
+          //   className={"flex flex-col"}
+          //   layoutId={`post-card-${postId}-image`}
+          //   initial="initial"
+          //   animate="animate"
+          //   exit="exit"
+          //   variants={variants}
+          // >
+          //   <Image
+          //     src={media?.node?.sourceUrl || ""}
+          //     alt={media?.node?.altText || ""}
+          //     width={media?.node?.mediaDetails?.width || 0}
+          //     height={media?.node?.mediaDetails?.height || 0}
+          //     placeholder="blur"
+          //     blurDataURL={media?.node?.dataUrl || ""}
+          //     loading="eager"
+          //   />
+          // </motion.div>
+          <AnimatedImage 
+            media={media?.node} 
+            className="flex flex-col" 
+            postId={postId} 
+            loading="eager"
+            main={true}
+          />
         )}
       </div>
     </section>

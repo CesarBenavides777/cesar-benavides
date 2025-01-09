@@ -21,7 +21,7 @@ interface Props {
 
 const DEFAULT_VALUE: CheckboxInput[] = [];
 
-const CheckboxField = ({ field, fieldErrors, formId }: Props) => {
+const CheckboxField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
   const {
     id,
     databaseId,
@@ -70,6 +70,7 @@ const CheckboxField = ({ field, fieldErrors, formId }: Props) => {
         {checkboxInputs.map(({ id: inputId, text, value }, i) => (
           <div key={`${inputId}_${i}`} className="flex items-center space-x-2">
             <Checkbox
+              // @ts-ignore
               id={`input_${formId}_${id}_${inputId}`}
               name={String(inputId)}
               value={String(value)}

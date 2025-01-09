@@ -48,7 +48,7 @@ const AUTOCOMPLETE_ATTRIBUTES: { [key: string]: string } = {
   suffix: "honorific-suffix",
 };
 
-export default function NameField({ field, fieldErrors, formId }: Props) {
+export default function NameField({ field, fieldErrors, formId }: Props): JSX.Element {
   const { id, type, label, description, cssClass, inputs, isRequired, databaseId } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();

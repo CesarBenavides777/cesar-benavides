@@ -21,7 +21,9 @@ interface Props {
   formId: any;
 }
 
-export default function SelectField({ field, fieldErrors, formId }: Props) {
+import { FC } from "react";
+
+const SelectField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const {
     id,
     type,
@@ -85,3 +87,5 @@ export default function SelectField({ field, fieldErrors, formId }: Props) {
     </div>
   );
 }
+
+export default SelectField;

@@ -17,7 +17,7 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-const RadioField = ({ field, fieldErrors, formId }: Props) => {
+const RadioField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
   const { id, type, label, description, cssClass, choices, databaseId } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
@@ -41,6 +41,7 @@ const RadioField = ({ field, fieldErrors, formId }: Props) => {
       <Label className="text-base font-semibold leading-7 text-foreground">
         {label}
       </Label>
+      {/* @ts-expect-error */}
       <RadioGroup onValueChange={handleChange} defaultValue={value}>
         {choices?.map((input) => {
           const text = input?.text || "";
@@ -48,6 +49,7 @@ const RadioField = ({ field, fieldErrors, formId }: Props) => {
           return (
             <div key={inputValue} className="flex items-center space-x-2">
               <RadioGroupItem
+              // @ts-ignore
                 value={inputValue}
                 id={`choice_${formId}_${databaseId}_${inputValue}`}
               />

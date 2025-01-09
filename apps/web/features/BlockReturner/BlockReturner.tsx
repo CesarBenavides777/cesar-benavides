@@ -22,6 +22,7 @@ type BlockReturnerProps = {
   blocks: Block[];
   title?: string;
   tags?: string[];
+  postId?: string;
 };
 
 const componentMap = {
@@ -32,7 +33,7 @@ const componentMap = {
   PageContentBlocksRichContentLayout: RichContent
 };
 
-const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title, tags }) => {
+const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title, tags, postId }) => {
   if (!blocks || blocks.length === 0) {
     return <Hero title={title} />;
   }
@@ -46,6 +47,7 @@ const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title, tags }) =>
             key={`${block.__typename}-${index}`}
             form={block.form}
             tags={tags}
+            postId={postId}
             {...block}
           />
         ) : null;

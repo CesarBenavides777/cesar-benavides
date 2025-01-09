@@ -15,7 +15,9 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function PhoneField({ field, fieldErrors, formId }: Props) {
+import React from "react";
+
+export default function PhoneField({ field, fieldErrors, formId }: Props): React.ReactElement {
   const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
     field;
   const htmlId = `field_${formId}_${databaseId}`;

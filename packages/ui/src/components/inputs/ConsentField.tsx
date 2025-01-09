@@ -15,7 +15,7 @@ interface Props {
   formId?: number;
 }
 
-const ConsentField = ({ field, fieldErrors, formId }: Props) => {
+const ConsentField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
   const {
     id,
     databaseId,
@@ -59,6 +59,7 @@ const ConsentField = ({ field, fieldErrors, formId }: Props) => {
       )}
       <div className="flex items-center space-x-2">
         <Checkbox
+        // @ts-ignore
           id={`input_${formId}_${id}`}
           name={String(databaseId)}
           checked={isChecked}

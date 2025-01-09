@@ -2,12 +2,8 @@
 
 import type { PageContentBlocksRichContentLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
-// @ts-ignore
-import SyntaxHighlighter from "react-syntax-highlighter";
-// @ts-ignore
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import parse, { domToReact, Element } from "html-react-parser";
-import { CopyButton } from "@workspace/ui/components/copy-button";
+import { CodeBlock } from "@workspace/ui/components/code-block";
 
 type RichContentProps = PageContentBlocksRichContentLayout & {
   className?: string;
@@ -39,29 +35,15 @@ const renderContent = (html: string) => {
           const codeContent = domNode.children
             .map((child) => (child.type === "text" ? child.data : ""))
             .join("");
+          // Extract Code Filename from data-filename="platform.ts" on <code> element
+          const filename = domNode.attribs["data-filename"];
 
           return (
-            <div className={"w-full relative max-h-96 overflow-scroll"}>
-              <SyntaxHighlighter
-                language={language || "plaintext"}
-                style={atomOneDark}
-                customStyle={{
-                  display: "block",
-                  paddingLeft: "1em",
-                  paddingRight: "1em",
-                  borderRadius: "4px",
-                  background: "#2d2d2d",
-                  color: "#f8f8f2",
-                  zIndex: 1,
-                }}
-              >
-                {codeContent}
-              </SyntaxHighlighter>
-              <CopyButton 
-                value={codeContent} 
-                className="absolute top-4 right-4"
-              />
-            </div>
+            <CodeBlock
+              language={language || "plaintext"}
+              code={codeContent}
+              filename={filename || ""}
+            />
           );
         }
 

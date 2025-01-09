@@ -1,12 +1,12 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useContext, useRef } from "react";
+import { use, useRef } from "react";
 
 function FrozenRouter(props: { children: React.ReactNode }) {
-  const context = useContext(LayoutRouterContext ?? {});
+  const context = use(LayoutRouterContext ?? {});
   const frozen = useRef(context).current;
 
   if (!frozen) {
@@ -21,9 +21,9 @@ function FrozenRouter(props: { children: React.ReactNode }) {
 }
 
 const variants = {
-  hidden: { opacity: 0, y: -100 },
-  enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 100 },
+  hidden: { opacity: 0 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
@@ -31,18 +31,22 @@ const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
   const key = usePathname();
 
   return (
-    <AnimatePresence mode="popLayout">
-      {/* @ts-expect-error */}
-      <motion.div
+    <AnimatePresence
+      mode="wait"
+      initial={false}
+      onExitComplete={() => window.scrollTo(0, 0)}
+    >
+      {children}
+      {/* <motion.div
         key={key}
         initial="hidden"
         animate="enter"
         exit="exit"
         variants={variants}
-        transition={{ ease: "easeInOut", duration: 0.3 }}
+        transition={{ duration: 0.3 }}
       >
         <FrozenRouter>{children}</FrozenRouter>
-      </motion.div>
+      </motion.div> */}
     </AnimatePresence>
   );
 };

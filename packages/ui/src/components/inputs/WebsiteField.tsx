@@ -19,7 +19,9 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function WebsiteField({ field, fieldErrors, formId }: Props) {
+import type { FC } from "react";
+
+const WebsiteField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const {
     id,
     type,
@@ -73,3 +75,5 @@ export default function WebsiteField({ field, fieldErrors, formId }: Props) {
     </div>
   );
 }
+
+export default WebsiteField;

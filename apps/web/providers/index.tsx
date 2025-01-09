@@ -13,14 +13,19 @@ if (typeof window !== "undefined") {
   });
 }
 
+const isDev = process.env.NODE_ENV === "development";
+
 
 const Providers = ({ children }) => {
+
   return (
     <FaustProvider>
       <ThemeProvider>
-        <PostHogProvider client={posthog}>
-          {children}
-        </PostHogProvider>
+        {isDev ? (
+          <>{children}</>
+        ) : (
+          <PostHogProvider client={posthog}>{children}</PostHogProvider>
+        )}
       </ThemeProvider>
     </FaustProvider>
   );

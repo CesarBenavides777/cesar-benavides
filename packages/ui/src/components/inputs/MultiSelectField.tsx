@@ -17,11 +17,13 @@ interface Props {
 
 const DEFAULT_VALUE: string[] = [];
 
+import React from "react";
+
 export default function MultiSelectField({
   field,
   fieldErrors,
   formId,
-}: Props) {
+}: Props): React.ReactElement {
   const {
     id,
     type,

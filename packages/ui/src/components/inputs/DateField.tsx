@@ -37,7 +37,7 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function DateField({ field, fieldErrors, formId }: Props) {
+export default function DateField({ field, fieldErrors, formId }: Props): JSX.Element {
   const {
     id,
     type,
@@ -114,7 +114,6 @@ export default function DateField({ field, fieldErrors, formId }: Props) {
         </Label>
       )}
       <Popover>
-        {/* @ts-expect-error */}
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}

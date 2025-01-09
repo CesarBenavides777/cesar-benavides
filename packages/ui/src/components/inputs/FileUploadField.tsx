@@ -13,7 +13,9 @@ interface Props {
   formId: string;
 }
 
-export default function FileUploadField({ field, fieldErrors, formId }: Props) {
+import React from 'react';
+
+export default function FileUploadField({ field, fieldErrors, formId }: Props): React.ReactElement {
   const { id, type, label, description, cssClass, isRequired, databaseId } =
     field;
   const htmlId = `field_${formId}_${databaseId}`;

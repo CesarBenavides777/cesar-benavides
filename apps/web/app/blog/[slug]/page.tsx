@@ -85,6 +85,7 @@ export default async function BlogPage(props: Props) {
         blocks={blocks} 
         title={title} 
         tags={tagNames}
+        postId={pageId}
       />
     </Main>
   );

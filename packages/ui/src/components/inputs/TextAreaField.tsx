@@ -9,6 +9,7 @@ import useGravityForm, {
 } from "@workspace/ui/hooks/useGravityForm";
 import { Textarea } from "@workspace/ui/components/textarea";
 import { Label } from "@workspace/ui/components/label";
+import { FC } from "react";
 
 interface Props {
   field: TextAreaFieldType;
@@ -18,7 +19,9 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function TextAreaField({ field, fieldErrors, formId }: Props) {
+
+
+const TextAreaField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const { id, type, label, description, cssClass, isRequired, databaseId } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
@@ -71,3 +74,5 @@ export default function TextAreaField({ field, fieldErrors, formId }: Props) {
     </div>
   );
 }
+
+export default TextAreaField;

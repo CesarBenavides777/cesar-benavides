@@ -11,7 +11,7 @@ import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   AddressFieldValue,
-} from "../../hooks/useGravityForm";
+} from "@workspace/ui/hooks/useGravityForm";
 
 export const ADDRESS_FIELD_FIELDS = gql`
   fragment AddressFieldFields on AddressField {
@@ -51,7 +51,7 @@ const AUTOCOMPLETE_ATTRIBUTES: { [key: string]: string } = {
   country: "country-name",
 };
 
-export default function AddressField({ field, fieldErrors, formId }: Props) {
+const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
   const {
     id,
     type,
@@ -99,10 +99,12 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
         )}
       </legend>
       {inputs?.map((input) => {
+        // @ts-ignore
         const key = input?.key as keyof AddressFieldInput;
         const inputLabel = input?.label || "";
         // const placeholder = input?.placeholder || "";
         const isCountry = key === "country";
+        // @ts-ignore
         const isHidden = input?.isHidden;
 
         if (isHidden) {
@@ -161,3 +163,5 @@ export default function AddressField({ field, fieldErrors, formId }: Props) {
     </fieldset>
   );
 }
+
+export default AddressField;

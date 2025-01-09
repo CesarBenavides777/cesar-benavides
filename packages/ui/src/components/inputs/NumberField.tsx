@@ -16,7 +16,7 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-const NumberField = ({ field, fieldErrors, formId }: Props) => {
+const NumberField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
   const {
     id,
     type,

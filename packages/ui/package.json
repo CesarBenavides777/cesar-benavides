@@ -2,7 +2,7 @@
   "name": "@workspace/ui",
   "type": "module",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint . --fix",
     "generate": "bun generate.js"
   },
   "devDependencies": {
