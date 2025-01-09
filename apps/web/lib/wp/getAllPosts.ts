@@ -10,7 +10,6 @@ const getAllPosts = async () => {
 
   const { data } = await client.query({
     query: GET_ALL_POSTS,
-    fetchPolicy: "no-cache",
   });
 
   return data.posts.nodes;

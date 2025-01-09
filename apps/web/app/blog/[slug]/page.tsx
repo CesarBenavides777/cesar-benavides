@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getMetaData } from "@/lib/wp/getMetaData";
 import { hasPreviewProps } from "../../[slug]/hasPreviewProps";
-import { getAllPosts } from "@/lib/wp/getAllPosts";
+// import { getAllPosts } from "@/lib/wp/getAllPosts";
 
 
 type Props = {
@@ -31,16 +31,16 @@ export async function generateMetadata(
   return metaData;
 }
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
+export function generateStaticParams() {
+  // const posts = await getAllPosts();
 
-  return posts.map((post: {
-    slug: string;
-  }) => ({
-    params: {
-      slug: post.slug ?? "",
+  return [
+    {
+      params: {
+        slug: "how-to-control-ir-subghz-devices-with-homebridge-flipper-zero",
+      },
     },
-  }));
+  ];
 }
 
 export default async function BlogPage(props: Props) {
@@ -88,6 +88,6 @@ export default async function BlogPage(props: Props) {
   );
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 60;
 

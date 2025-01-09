@@ -11,7 +11,6 @@ const getAllPages = async () => {
 
     const { data } = await client.query({
         query: GET_ALL_PAGES,
-        fetchPolicy: "no-cache",
     });
 
     return data.pages.nodes;

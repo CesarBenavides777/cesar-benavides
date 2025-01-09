@@ -29,22 +29,35 @@ export async function generateMetadata(
   return metaData;
 }
 
-export async function generateStaticParams() {
-  const pages = await getAllPages();
+export function generateStaticParams() {
 
-  console.log("pages", pages);
-
-  if (!pages) {
-    return [];
-  }
-
-  return pages.map((page: {
-    slug: string;
-  }) => ({
-    params: {
-      slug: page?.slug ?? "",
+  return [
+    {
+      params: {
+        slug: "/blog",
+      },
     },
-  }));
+    {
+      params: {
+        slug: "/projects",
+      },
+    },
+    {
+      params: {
+        slug: "/about",
+      },
+    },
+    {
+      params: {
+        slug: "/experiments",
+      },
+    },
+    {
+      params: {
+        slug: "/kitchen-sink-form-example",
+      },
+    },
+  ];
 }
 
 export default async function Page(props: Props) {
@@ -84,6 +97,6 @@ export default async function Page(props: Props) {
   );
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 60;
 
