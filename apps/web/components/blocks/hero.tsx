@@ -77,6 +77,7 @@ const Hero: React.FC<HeroProps> = ({
               height={media?.node?.mediaDetails?.height || 0}
               placeholder="blur"
               blurDataURL={media?.node?.dataUrl || ""}
+              loading="eager"
             />
           </div>
         )}
