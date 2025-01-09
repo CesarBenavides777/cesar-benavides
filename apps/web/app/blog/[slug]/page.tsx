@@ -31,17 +31,17 @@ export async function generateMetadata(
   return metaData;
 }
 
-export function generateStaticParams() {
-  // const posts = await getAllPosts();
+// export function generateStaticParams() {
+//   // const posts = await getAllPosts();
 
-  return [
-    {
-      params: {
-        slug: "how-to-control-ir-subghz-devices-with-homebridge-flipper-zero",
-      },
-    },
-  ];
-}
+//   return [
+//     {
+//       params: {
+//         slug: "how-to-control-ir-subghz-devices-with-homebridge-flipper-zero",
+//       },
+//     },
+//   ];
+// }
 
 export default async function BlogPage(props: Props) {
   const isPreview = await hasPreviewProps(props);
@@ -88,6 +88,6 @@ export default async function BlogPage(props: Props) {
   );
 }
 
-export const dynamic = "auto";
+
 export const revalidate = 60;
 

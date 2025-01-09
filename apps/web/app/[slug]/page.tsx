@@ -29,36 +29,36 @@ export async function generateMetadata(
   return metaData;
 }
 
-export function generateStaticParams() {
+// export function generateStaticParams() {
 
-  return [
-    {
-      params: {
-        slug: "/blog",
-      },
-    },
-    {
-      params: {
-        slug: "/projects",
-      },
-    },
-    {
-      params: {
-        slug: "/about",
-      },
-    },
-    {
-      params: {
-        slug: "/experiments",
-      },
-    },
-    {
-      params: {
-        slug: "/kitchen-sink-form-example",
-      },
-    },
-  ];
-}
+//   return [
+//     {
+//       params: {
+//         slug: "/blog",
+//       },
+//     },
+//     {
+//       params: {
+//         slug: "/projects",
+//       },
+//     },
+//     {
+//       params: {
+//         slug: "/about",
+//       },
+//     },
+//     {
+//       params: {
+//         slug: "/experiments",
+//       },
+//     },
+//     {
+//       params: {
+//         slug: "/kitchen-sink-form-example",
+//       },
+//     },
+//   ];
+// }
 
 export default async function Page(props: Props) {
   const isPreview = await hasPreviewProps(props);
@@ -97,6 +97,6 @@ export default async function Page(props: Props) {
   );
 }
 
-export const dynamic = "auto";
+// export const dynamic = "auto";
 export const revalidate = 60;
 
