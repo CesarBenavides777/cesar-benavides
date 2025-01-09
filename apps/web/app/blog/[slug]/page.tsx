@@ -88,6 +88,6 @@ export default async function BlogPage(props: Props) {
   );
 }
 
-export const dynamic = "force-static";
+export const dynamic = "auto";
 export const revalidate = 60;
 

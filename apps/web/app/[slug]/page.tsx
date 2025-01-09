@@ -97,6 +97,6 @@ export default async function Page(props: Props) {
   );
 }
 
-export const dynamic = "force-static";
+export const dynamic = "auto";
 export const revalidate = 60;
 
