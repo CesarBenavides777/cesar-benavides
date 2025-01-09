@@ -2,9 +2,6 @@ import Hero from "@/components/blocks/hero";
 // import FormBlock from "@/components/blocks/form-block";
 import type {
   PageContentBlocksHeroLayout,
-  PageContentBlocksFormblockLayout,
-  PageContentBlocksPostsBlockLayout,
-
   GfForm,
 } from "@/types/wp";
 // import ProjectsBlock from "@/components/blocks/projects-block";

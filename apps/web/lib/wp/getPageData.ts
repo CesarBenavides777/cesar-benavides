@@ -8,12 +8,16 @@ type GetPageData = {
   asPreview: boolean;
 };
 
+const clientFunction = (asPreview: boolean) => {
+  return asPreview ? getAuthClient : getClient;
+}
+
 const getPageData = async ({ pageId, asPreview }: GetPageData) => {
   if (!pageId) {
     throw new Error("Page ID is required");
   }
 
-  const client = asPreview ? await getAuthClient() : await getClient();
+  const client = await clientFunction(asPreview)();
 
   if (!client) {
     throw new Error("Failed to get client");

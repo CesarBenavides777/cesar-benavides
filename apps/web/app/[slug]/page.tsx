@@ -29,36 +29,23 @@ export async function generateMetadata(
   return metaData;
 }
 
-// export function generateStaticParams() {
+export async function generateStaticParams() {
+  const pages = await getAllPages();
 
-//   return [
-//     {
-//       params: {
-//         slug: "/blog",
-//       },
-//     },
-//     {
-//       params: {
-//         slug: "/projects",
-//       },
-//     },
-//     {
-//       params: {
-//         slug: "/about",
-//       },
-//     },
-//     {
-//       params: {
-//         slug: "/experiments",
-//       },
-//     },
-//     {
-//       params: {
-//         slug: "/kitchen-sink-form-example",
-//       },
-//     },
-//   ];
-// }
+  console.log("pages", pages);
+
+  if (!pages) {
+    return [];
+  }
+
+  return pages.map((page: {
+    slug: string;
+  }) => ({
+    params: {
+      slug: page?.slug ?? "",
+    },
+  }));
+}
 
 export default async function Page(props: Props) {
   const isPreview = await hasPreviewProps(props);
@@ -97,6 +84,6 @@ export default async function Page(props: Props) {
   );
 }
 
-// export const dynamic = "auto";
+export const dynamic = "force-static";
 export const revalidate = 60;
 

@@ -31,7 +31,7 @@ const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
   const key = usePathname();
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       {/* @ts-expect-error */}
       <motion.div
         key={key}
@@ -39,7 +39,7 @@ const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
         animate="enter"
         exit="exit"
         variants={variants}
-        transition={{ ease: "easeInOut", duration: 0.5 }}
+        transition={{ ease: "easeInOut", duration: 0.3 }}
       >
         <FrozenRouter>{children}</FrozenRouter>
       </motion.div>
