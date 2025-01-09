@@ -23,7 +23,7 @@ import ConsentField from "@workspace/ui/components/inputs/ConsentField";
 import dynamic from "next/dynamic";
 
 const CaptchaField = dynamic(() =>
-  import("@workspace/ui/components/inputs/CaptchaField/CaptchaField")
+  import("@workspace/ui/components/inputs/CaptchaField")
 );
 
 interface Props {
