@@ -1,5 +1,5 @@
 import Hero from "@/components/blocks/hero";
-import FormBlock from "@/components/blocks/form-block";
+// import FormBlock from "@/components/blocks/form-block";
 import type {
   PageContentBlocksHeroLayout,
   PageContentBlocksFormblockLayout,
@@ -7,9 +7,14 @@ import type {
 
   GfForm,
 } from "@/types/wp";
-import ProjectsBlock from "@/components/blocks/projects-block";
+// import ProjectsBlock from "@/components/blocks/projects-block";
 import PostsBlock from "@workspace/ui/components/blocks/posts-block";
 import RichContent from "@workspace/ui/components/blocks/rich-content";
+
+import dynamic from "next/dynamic";
+
+const ProjectsBlock = dynamic(() => import("@/components/blocks/projects-block"));
+const FormBlock = dynamic(() => import("@/components/blocks/form-block"));
 
 type Block = PageContentBlocksHeroLayout & {
   __typename: string;
