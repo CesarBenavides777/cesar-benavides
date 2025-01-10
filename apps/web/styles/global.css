@@ -97,4 +97,8 @@
       @apply text-secondary;
       /* Custom marker color for ordered lists */
     }
+
+    .transition-child p {
+      @apply transition-all duration-700 delay-200;
+    }
 }

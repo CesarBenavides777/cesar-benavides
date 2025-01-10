@@ -17,12 +17,69 @@ const MENU_FRAGMENT = gql`
   }
 `;
 
+
+export const USER_FIELDS = gql`
+  fragment UserFields on User {
+    auth {
+      authToken
+      authTokenExpiration
+      isUserSecretRevoked
+      linkedIdentities {
+        provider
+        identifier
+      }
+      refreshToken
+      refreshTokenExpiration
+      userSecret
+    }
+    avatar {
+      default
+      extraAttr
+      forceDefault
+      foundAvatar
+      height
+      isRestricted
+      rating
+      scheme
+      size
+      url
+      width
+    }
+    capabilities
+    databaseId
+    description
+    email
+    firstName
+    id
+    lastname
+    name
+    nicename
+    nickname
+    username
+  }
+`;
+
+export const LOGIN = gql`
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      authToken
+      refreshToken
+      user {
+        ...UserFields
+      }
+    }
+    ${USER_FIELDS}
+  }
+`;
+
 export const GET_ALL_POSTS = gql`
   query AllPostsQuery {
     posts(first: 100) {
       nodes {
         id
         slug
+        date
+        modified
       }
     }
   }
@@ -34,6 +91,8 @@ export const GET_ALL_PAGES = gql`
       nodes {
         id
         slug
+        date
+        modified
       }
     }
   }
@@ -126,10 +185,12 @@ export const BLOCKS_FRAGMENT = gql`
                     ...MediaItemFragment
                   }
                 }
+                date
                 excerpt
                 projectTags {
                   nodes {
                     name
+                    slug
                   }
                 }
                 uri

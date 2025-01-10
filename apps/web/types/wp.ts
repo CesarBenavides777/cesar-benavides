@@ -804,6 +804,25 @@ export enum AmPmEnum {
   Pm = 'PM'
 }
 
+/** The Headless Login authentication data. */
+export type AuthenticationData = {
+  __typename?: 'AuthenticationData';
+  /** A new authentication token to use in future requests. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** Whether the user secret has been revoked. */
+  isUserSecretRevoked?: Maybe<Scalars['Boolean']['output']>;
+  /** A list of linked identities from the Headless Login provider. */
+  linkedIdentities?: Maybe<Array<Maybe<LinkedIdentity>>>;
+  /** A new refresh token to use in future requests. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The refresh token expiration timestamp. */
+  refreshTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** The user secret. */
+  userSecret?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   __typename?: 'Avatar';
@@ -9642,6 +9661,36 @@ export type ExperienceToPreviewConnectionEdge = Edge & ExperienceConnectionEdge 
   node: Experience;
 };
 
+/** The Login client options for the facebook provider. */
+export type FacebookClientOptions = LoginClientOptions & {
+  __typename?: 'FacebookClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** Enable the Facebook Beta Tier. */
+  enableBetaTier?: Maybe<Scalars['Boolean']['output']>;
+  /** The Facebook Graph API version. */
+  graphApiVersion?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The fields to request from the Facebook Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available fields. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the facebook provider. */
+export type FacebookLoginOptions = LoginOptions & {
+  __typename?: 'FacebookLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** Field error. */
 export type FieldError = {
   __typename?: 'FieldError';
@@ -11805,6 +11854,32 @@ export type GfSubmittedEntryConnectionPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** The Login client options for the github provider. */
+export type GithubClientOptions = LoginClientOptions & {
+  __typename?: 'GithubClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the provider. See https://docs.github.com/en/developers/apps/building-headless-login-apps/scope-for-headless-login-apps for a list of available scope. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the github provider. */
+export type GithubLoginOptions = LoginOptions & {
+  __typename?: 'GithubLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The &quot;GlobalOptions&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type GlobalOptions = AcfFieldGroup & AcfFieldGroupFields & GlobalOptions_Fields & {
   __typename?: 'GlobalOptions';
@@ -11854,6 +11929,46 @@ export enum GlobalStylesheetTypesEnum {
   Presets = 'PRESETS',
   Styles = 'STYLES',
   Variables = 'VARIABLES'
+}
+
+/** The Login client options for the google provider. */
+export type GoogleClientOptions = LoginClientOptions & {
+  __typename?: 'GoogleClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The Google Cloud organization the OAuth prompt is optimized for. If `*` the prompt is optimized for general use with any Google Cloud organization. */
+  hostedDomain?: Maybe<Scalars['String']['output']>;
+  /** The prompt used for authentication and consent. Defaults to `consent`. */
+  promptType?: Maybe<GoogleProviderPromptTypeEnum>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the Google Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the google provider. */
+export type GoogleLoginOptions = LoginOptions & {
+  __typename?: 'GoogleLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Google OAuth2 Provider prompt type. */
+export enum GoogleProviderPromptTypeEnum {
+  /** TThe authorization server prompts the user for consent before returning information to the client. */
+  Consent = 'CONSENT',
+  /** The authorization server does not display any authentication or user consent screens; it will return an error if the user is not already authenticated and has not pre-configured consent for the requested scopes. You can use none to check for existing authentication and/or consent. */
+  None = 'NONE',
+  /** The authorization server prompts the user to select a user account. This allows a user who has multiple accounts at the authorization server to select amongst the multiple accounts that they may have current sessions for. */
+  SelectAccount = 'SELECT_ACCOUNT'
 }
 
 /** The graphqlDocument type */
@@ -13228,6 +13343,92 @@ export type ImageInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** The Login client options for the instagram provider. */
+export type InstagramClientOptions = LoginClientOptions & {
+  __typename?: 'InstagramClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the Instagram Graph API. See https://developers.facebook.com/docs/instagram-basic-display-api/overview#permissions for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the instagram provider. */
+export type InstagramLoginOptions = LoginOptions & {
+  __typename?: 'InstagramLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the LinkUserIdentity mutation. */
+export type LinkUserIdentityInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The user identity to use when logging in. Required by the SiteToken provider. */
+  identity?: InputMaybe<Scalars['String']['input']>;
+  /** The parsed response from an OAuth2 Authentication Provider. */
+  oauthResponse?: InputMaybe<OAuthProviderResponseInput>;
+  /** The Headless Login provider to use when logging in. */
+  provider: LoginProviderEnum;
+  /** The user ID to link the identity to. Accepts either a global or database ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the LinkUserIdentity mutation. */
+export type LinkUserIdentityPayload = {
+  __typename?: 'LinkUserIdentityPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Whether the identity was successfully linked to the user. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+  /** The user that was logged in. */
+  user?: Maybe<User>;
+};
+
+/** The linked identity from the login provider. */
+export type LinkedIdentity = {
+  __typename?: 'LinkedIdentity';
+  /** The internal user identifier from the login provider. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** The login provider which provided the identity. */
+  provider?: Maybe<LoginProviderEnum>;
+};
+
+/** The Login client options for the linkedin provider. */
+export type LinkedinClientOptions = LoginClientOptions & {
+  __typename?: 'LinkedinClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the provider. See https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication?context=linkedin%2Fcontext#permission-types for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the linkedin provider. */
+export type LinkedinLoginOptions = LoginOptions & {
+  __typename?: 'LinkedinLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A Gravity Forms list field. */
 export type ListField = FormField & GfFieldWithAddIconUrlSetting & GfFieldWithAdminLabelSetting & GfFieldWithChoices & GfFieldWithColumnsSetting & GfFieldWithConditionalLogicSetting & GfFieldWithCssClassSetting & GfFieldWithDeleteIconUrlSetting & GfFieldWithDescriptionSetting & GfFieldWithErrorMessageSetting & GfFieldWithLabelPlacementSetting & GfFieldWithLabelSetting & GfFieldWithMaxRowsSetting & GfFieldWithPersonalData & GfFieldWithPrepopulateFieldSetting & GfFieldWithRulesSetting & Node & {
   __typename?: 'ListField';
@@ -13310,6 +13511,90 @@ export type ListFieldValue = {
   /** Input values. */
   values?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
+
+/** The Headless Login client. */
+export type LoginClient = {
+  __typename?: 'LoginClient';
+  /** The authorization URL. */
+  authorizationUrl?: Maybe<Scalars['String']['output']>;
+  /** The client ID. */
+  clientId?: Maybe<Scalars['ID']['output']>;
+  /** The client options. */
+  clientOptions?: Maybe<LoginClientOptions>;
+  /** Whether the client is enabled. */
+  isEnabled?: Maybe<Scalars['Boolean']['output']>;
+  /** The login options. */
+  loginOptions?: Maybe<LoginOptions>;
+  /** The client name. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** A field used for ordering clients. */
+  order?: Maybe<Scalars['Int']['output']>;
+  /** The provider type. */
+  provider?: Maybe<LoginProviderEnum>;
+};
+
+/** The Client Options for the Headless Login provider. */
+export type LoginClientOptions = {
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the Login mutation. */
+export type LoginInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The WordPress user credentials. Required by the Password provider. */
+  credentials?: InputMaybe<PasswordProviderResponseInput>;
+  /** The user identity to use when logging in. Required by the SiteToken provider. */
+  identity?: InputMaybe<Scalars['String']['input']>;
+  /** The parsed response from an OAuth2 Authentication Provider. */
+  oauthResponse?: InputMaybe<OAuthProviderResponseInput>;
+  /** The Headless Login provider to use when logging in. */
+  provider: LoginProviderEnum;
+};
+
+/** The login options for the Headless Login provider. */
+export type LoginOptions = {
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The payload for the Login mutation. */
+export type LoginPayload = {
+  __typename?: 'LoginPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Refresh Token that can be used to refresh the JWT Token. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The refresh token expiration timestamp. */
+  refreshTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** The user that was logged in. */
+  user?: Maybe<User>;
+};
+
+/** The Headless Login Provider. */
+export enum LoginProviderEnum {
+  /** The Facebook provider. */
+  Facebook = 'FACEBOOK',
+  /** The GitHub provider. */
+  Github = 'GITHUB',
+  /** The Google provider. */
+  Google = 'GOOGLE',
+  /** The Instagram provider. */
+  Instagram = 'INSTAGRAM',
+  /** The LinkedIn provider. */
+  Linkedin = 'LINKEDIN',
+  /** The OAuth2 (Generic) provider. */
+  Oauth2Generic = 'OAUTH2_GENERIC',
+  /** The Password provider. */
+  Password = 'PASSWORD',
+  /** The Site Token provider. */
+  Sitetoken = 'SITETOKEN'
+}
 
 /** Input for the loginWithCookies mutation. */
 export type LoginWithCookiesInput = {
@@ -14854,6 +15139,48 @@ export enum NumberFieldFormatEnum {
   DecimalDot = 'DECIMAL_DOT'
 }
 
+/** The parsed response from the OAuth Provider. */
+export type OAuthProviderResponseInput = {
+  /** The authorization code returned from the OAuth provider. */
+  code: Scalars['String']['input'];
+  /** The state returned from the OAuth provider. */
+  state?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The Login client options for the oauth2-generic provider. */
+export type Oauth2GenericClientOptions = LoginClientOptions & {
+  __typename?: 'Oauth2GenericClientOptions';
+  /** The URL to request an access token. */
+  accessTokenUrl?: Maybe<Scalars['String']['output']>;
+  /** The URL to redirect the user to in order to authorize the client. */
+  authorizationUrl?: Maybe<Scalars['String']['output']>;
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The URL to request the resource owner details. */
+  resourceOwnerUrl?: Maybe<Scalars['String']['output']>;
+  /** The fields to request from the Generic Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available fields. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The scope separator to use when building the authorization URL. Defaults to `,`. */
+  scopeSeparator?: Maybe<Scalars['String']['output']>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the oauth2-generic provider. */
+export type Oauth2GenericLoginOptions = LoginOptions & {
+  __typename?: 'Oauth2GenericLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
 export type OneToOneConnection = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -15990,6 +16317,13 @@ export type PageToRevisionConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** The Login client options for the password provider. */
+export type PasswordClientOptions = LoginClientOptions & {
+  __typename?: 'PasswordClientOptions';
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A Gravity Forms password field. */
 export type PasswordField = FormField & GfFieldWithAdminLabelSetting & GfFieldWithConditionalLogicSetting & GfFieldWithCssClassSetting & GfFieldWithDescriptionSetting & GfFieldWithErrorMessageSetting & GfFieldWithInputs & GfFieldWithLabelPlacementSetting & GfFieldWithLabelSetting & GfFieldWithPasswordSetting & GfFieldWithPasswordStrengthSetting & GfFieldWithPasswordVisibilitySetting & GfFieldWithPersonalData & GfFieldWithRulesSetting & GfFieldWithSizeSetting & GfFieldWithSubLabelPlacementSetting & Node & {
   __typename?: 'PasswordField';
@@ -16072,6 +16406,21 @@ export type PasswordInputProperty = GfFieldInput & GfFieldInputWithPasswordSetti
   label?: Maybe<Scalars['String']['output']>;
   /** Placeholder text to give the user a hint on how to fill out the field. This is not submitted with the form. */
   placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Headless Login options for the password provider. */
+export type PasswordLoginOptions = LoginOptions & {
+  __typename?: 'PasswordLoginOptions';
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The parsed response from the Password Provider. */
+export type PasswordProviderResponseInput = {
+  /** The password for the WordPress user. */
+  password: Scalars['String']['input'];
+  /** The WordPress username to authenticate ass */
+  username: Scalars['String']['input'];
 };
 
 /** A Gravity Forms phone field. */
@@ -21559,6 +21908,52 @@ export enum RecaptchaTypeEnum {
   Invisible = 'INVISIBLE'
 }
 
+/** Input for the RefreshToken mutation. */
+export type RefreshTokenInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** A valid, previously issued JWT refresh token. If valid, a new JWT authentication token will be provided. If invalid, expired, revoked or otherwise invalid, the `authToken` will return null, and the `success` field will return `false`. */
+  refreshToken: Scalars['String']['input'];
+};
+
+/** The payload for the RefreshToken mutation. */
+export type RefreshTokenPayload = {
+  __typename?: 'RefreshTokenPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Whether the auth token was successfully refreshed. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the RefreshUserSecret mutation. */
+export type RefreshUserSecretInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The current WordPress user ID. Accepts either a global or database ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the RefreshUserSecret mutation. */
+export type RefreshUserSecretPayload = {
+  __typename?: 'RefreshUserSecretPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** JWT Token that can be used in future requests for Authentication. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The revoked user secret. */
+  revokedUserSecret?: Maybe<Scalars['String']['output']>;
+  /** Whether the User secret was successfully revoked. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+  /** The new user secret. */
+  userSecret?: Maybe<Scalars['String']['output']>;
+};
+
 /** Input for the registerUser mutation. */
 export type RegisterUserInput = {
   /** User's AOL IM account. */
@@ -21654,6 +22049,25 @@ export type RestoreCommentPayload = {
   restoredId?: Maybe<Scalars['ID']['output']>;
 };
 
+/** Input for the RevokeUserSecret mutation. */
+export type RevokeUserSecretInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The WordPress user ID. Accepts either a database or global ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the RevokeUserSecret mutation. */
+export type RevokeUserSecretPayload = {
+  __typename?: 'RevokeUserSecretPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The revoked user secret. */
+  revokedUserSecret?: Maybe<Scalars['String']['output']>;
+  /** Whether the User secret was successfully revoked. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The root mutation */
 export type RootMutation = {
   __typename?: 'RootMutation';
@@ -21717,16 +22131,26 @@ export type RootMutation = {
   generateAuthorizationCode?: Maybe<GenerateAuthorizationCodePayload>;
   /** Increase the count. */
   increaseCount?: Maybe<Scalars['Int']['output']>;
+  /** The LinkUserIdentity mutation */
+  linkUserIdentity?: Maybe<LinkUserIdentityPayload>;
+  /** The Login mutation */
+  login?: Maybe<LoginPayload>;
   /** The loginWithCookies mutation */
   loginWithCookies?: Maybe<LoginWithCookiesPayload>;
   /** The logout mutation */
   logout?: Maybe<LogoutPayload>;
+  /** The RefreshToken mutation */
+  refreshToken?: Maybe<RefreshTokenPayload>;
+  /** The RefreshUserSecret mutation */
+  refreshUserSecret?: Maybe<RefreshUserSecretPayload>;
   /** The registerUser mutation */
   registerUser?: Maybe<RegisterUserPayload>;
   /** The resetUserPassword mutation */
   resetUserPassword?: Maybe<ResetUserPasswordPayload>;
   /** The restoreComment mutation */
   restoreComment?: Maybe<RestoreCommentPayload>;
+  /** The RevokeUserSecret mutation */
+  revokeUserSecret?: Maybe<RevokeUserSecretPayload>;
   /** Send password reset email to user */
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmailPayload>;
   /** The submitGfDraftEntry mutation */
@@ -21951,6 +22375,18 @@ export type RootMutationIncreaseCountArgs = {
 
 
 /** The root mutation */
+export type RootMutationLinkUserIdentityArgs = {
+  input: LinkUserIdentityInput;
+};
+
+
+/** The root mutation */
+export type RootMutationLoginArgs = {
+  input: LoginInput;
+};
+
+
+/** The root mutation */
 export type RootMutationLoginWithCookiesArgs = {
   input: LoginWithCookiesInput;
 };
@@ -21959,6 +22395,18 @@ export type RootMutationLoginWithCookiesArgs = {
 /** The root mutation */
 export type RootMutationLogoutArgs = {
   input: LogoutInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRefreshTokenArgs = {
+  input: RefreshTokenInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRefreshUserSecretArgs = {
+  input: RefreshUserSecretInput;
 };
 
 
@@ -21977,6 +22425,12 @@ export type RootMutationResetUserPasswordArgs = {
 /** The root mutation */
 export type RootMutationRestoreCommentArgs = {
   input: RestoreCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRevokeUserSecretArgs = {
+  input: RevokeUserSecretInput;
 };
 
 
@@ -22164,6 +22618,10 @@ export type RootQuery = WithAcfOptionsPageSiteSettings & {
   graphqlDocumentGroups?: Maybe<RootQueryToGraphqlDocumentGroupConnection>;
   /** Connection between the RootQuery type and the graphqlDocument type */
   graphqlDocuments?: Maybe<RootQueryToGraphqlDocumentConnection>;
+  /** The Headless Login client for the provided client ID. */
+  loginClient?: Maybe<LoginClient>;
+  /** The registered Headless Login clients. */
+  loginClients?: Maybe<Array<Maybe<LoginClient>>>;
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>;
   /**
@@ -22466,6 +22924,12 @@ export type RootQueryGraphqlDocumentsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryLoginClientArgs = {
+  provider: LoginProviderEnum;
 };
 
 
@@ -25319,6 +25783,20 @@ export type SiteSettings = AcfOptionsPage & Node & WithAcfGlobalOptions & {
   parentId?: Maybe<Scalars['String']['output']>;
 };
 
+/** The Login client options for the siteToken provider. */
+export type SiteTokenClientOptions = LoginClientOptions & {
+  __typename?: 'SiteTokenClientOptions';
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the siteToken provider. */
+export type SiteTokenLoginOptions = LoginOptions & {
+  __typename?: 'SiteTokenLoginOptions';
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The Confirmation object returned on submission. Null if the submission was not successful. */
 export type SubmissionConfirmation = {
   __typename?: 'SubmissionConfirmation';
@@ -27228,6 +27706,8 @@ export type UploadPayload = {
 /** A User object */
 export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdentifiable & {
   __typename?: 'User';
+  /** Headless Login authentication data. */
+  auth?: Maybe<AuthenticationData>;
   /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
   avatar?: Maybe<Avatar>;
   /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */
