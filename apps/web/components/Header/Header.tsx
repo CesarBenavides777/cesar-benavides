@@ -52,6 +52,9 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
             return null;
           }
 
+          // check if url contains cms.
+          const isFile = path && path?.includes("cms") ? true : false;
+
           return (
             <NavigationMenuItem key={id} className={cn(cssClasses)}>
               {children.length ? (
@@ -64,7 +67,16 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
                   </NavigationMenuContent>
                 </>
               ) : (
-                <Link className="md:whitespace-nowrap" href={path ?? ""}>
+                isFile ? (
+                  <a 
+                    className="md:whitespace-nowrap" 
+                    href={path ?? ""}
+                    download
+                    target="_blank"
+                  >
+                    {label ?? ""}
+                  </a>
+                ) : <Link className="md:whitespace-nowrap" href={path ?? ""}>
                   {label ?? ""}
                 </Link>
               )}

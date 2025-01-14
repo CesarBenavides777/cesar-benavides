@@ -27,10 +27,7 @@ const providers: Provider[] = [
       return user;
     },
   }),
-  GitHub({
-    clientId: process.env.AUTH_GITHUB_ID,
-    clientSecret: process.env.AUTH_GITHUB__SECRET,
-  }),
+  GitHub,
 ];
 
 export const providerMap = providers
@@ -164,6 +161,7 @@ const callbacks = {
   },
 
   session: async ({ session, token }) => {
+
     if (token?.auth?.authToken) {
       session.isLoggedIn = true;
       session.user = token;
@@ -188,6 +186,7 @@ export const config = {
     error: "/login",
   },
   callbacks,
+  experimental: { enableWebAuthn: true },
 };
 
 export const { signIn, signOut, handlers, auth } = NextAuth(config);

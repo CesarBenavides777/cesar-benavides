@@ -32,6 +32,8 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     error: undefined,
   });
 
+  console.log("State", state);
+
   const [oAuthState, loginWithOAuthFormAction, isOAuthPending] = useActionState(
     loginWithOAuthAction,
     {
@@ -42,6 +44,8 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
   const filteredLoginClients = loginClients?.filter(
     (client) => client.provider !== "PASSWORD",
   );
+
+  console.log("filteredLoginClients", filteredLoginClients);
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -102,15 +106,35 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
             const Icon = providerMap[client.provider];
             return Icon ? <Icon {...props} /> : null;
           };
+
+          if (!client.provider) {
+            return null;
+          }
           return (
-            <Button
-              variant="secondary"
-              className="w-full cursor-pointer flex flex-row gap-2"
-              href={client.authorizationUrl || ""}
-            >
-              <ProviderIcon className="w-4 h-4" />
-              Login with {client.name}
-            </Button>
+            <form action={loginWithOAuthFormAction} key={client.provider}>
+              <input 
+                type="hidden" 
+                name="provider" 
+                value={client.provider.toLowerCase() ?? ""} 
+                id="provider"
+              />
+              {/* Call back url */}
+              <input
+                type="hidden"
+                name="callbackUrl"
+                id="callbackUrl"
+                value={client.authorizationUrl ?? ""}
+              />
+              <Button
+                variant="secondary"
+                className="w-full cursor-pointer flex flex-row gap-2"
+                type="submit"
+                disabled={isOAuthPending}
+              >
+                <ProviderIcon className="w-4 h-4" />
+                {isOAuthPending ? "Loading..." : `Continue with ${client.name}`}
+              </Button>
+            </form>
           );
         })}
       </CardFooter>
