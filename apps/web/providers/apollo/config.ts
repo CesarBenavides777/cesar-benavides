@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { isTokenExpired } from "@/lib/wp/auth/isTokenExpired";
 import {
   ApolloLink,
   InMemoryCacheConfig,
@@ -9,7 +8,7 @@ import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import {
   getConfig,
-} from "@faustwp/core/dist/cjs/config/index.js";
+} from "@faustwp/core";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
