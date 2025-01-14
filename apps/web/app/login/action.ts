@@ -12,12 +12,10 @@ export async function loginAction(prevData: any, formData: FormData) {
       password,
       redirectTo: "/my-account",
     });
-
   } catch (error) {
-    
     return {
-      error: error
-    }
+      error: error,
+    };
   }
 }
 
@@ -32,11 +30,9 @@ export async function loginWithOAuthAction(prevData: any, formData: FormData) {
       state,
       redirectTo: "/my-account",
     });
-
   } catch (error) {
-    
     return {
-      error: error
-    }
+      error: error,
+    };
   }
 }

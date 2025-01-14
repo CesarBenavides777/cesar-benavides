@@ -25,9 +25,7 @@ type LoginFormProps = {
 
 const providerMap = {
   GITHUB: GithubIcon,
-}
-
-
+};
 
 export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
   const [state, formAction, isPending] = useActionState(loginAction, {
@@ -38,11 +36,11 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     loginWithOAuthAction,
     {
       error: undefined,
-    }
+    },
   );
 
   const filteredLoginClients = loginClients?.filter(
-    (client) => client.provider !== "PASSWORD"
+    (client) => client.provider !== "PASSWORD",
   );
 
   return (
@@ -100,13 +98,10 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
           </div>
         </div>
         {filteredLoginClients?.map((client) => {
-
-          const ProviderIcon = ({
-            ...props
-          }) => {
+          const ProviderIcon = ({ ...props }) => {
             const Icon = providerMap[client.provider];
             return Icon ? <Icon {...props} /> : null;
-          }
+          };
           return (
             <Button
               variant="secondary"

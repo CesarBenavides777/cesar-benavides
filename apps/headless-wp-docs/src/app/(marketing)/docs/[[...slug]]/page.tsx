@@ -17,7 +17,7 @@ import { MDXContentRenderer } from "@/components/mdx/mdx-content-renderer";
 import { DashboardTableOfContents } from "@/components/mdx/toc";
 
 type DocPageProps = {
-    slug: string[];
+  slug: string[];
 };
 
 async function getDocFromParams({ params }: { params: Promise<DocPageProps> }) {
@@ -34,7 +34,9 @@ async function getDocFromParams({ params }: { params: Promise<DocPageProps> }) {
 
 export async function generateMetadata({
   params,
-}: { params: Promise<DocPageProps> }): Promise<Metadata> {
+}: {
+  params: Promise<DocPageProps>;
+}): Promise<Metadata> {
   const doc = await getDocFromParams({ params });
 
   if (!doc) {
@@ -68,15 +70,17 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<
-  { slug: string[] }[]
-> {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   return docs.map((doc) => ({
     slug: doc.slugAsParams.split("/"),
   }));
 }
 
-export default async function DocPage({ params }: { params: Promise<DocPageProps> }) {
+export default async function DocPage({
+  params,
+}: {
+  params: Promise<DocPageProps>;
+}) {
   const doc = await getDocFromParams({ params });
 
   if (!doc) {
@@ -99,7 +103,7 @@ export default async function DocPage({ params }: { params: Promise<DocPageProps
                     className={cn(
                       index === doc.slug.split("/").length - 1
                         ? "text-foreground"
-                        : "text-muted-foreground"
+                        : "text-muted-foreground",
                     )}
                   >
                     {slug.charAt(0).toUpperCase() + slug.slice(1)}

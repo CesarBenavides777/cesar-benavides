@@ -1,18 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { CodeBlockWrapper } from "@/components/mdx/code-block-wrapper"
+import { cn } from "@/lib/utils";
+import { CodeBlockWrapper } from "@/components/mdx/code-block-wrapper";
 
 interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
-  src: string
+  src: string;
 }
 
-export function ComponentSource({
-  children,
-  className,
-}: ComponentSourceProps) {
+export function ComponentSource({ children, className }: ComponentSourceProps) {
   return (
     <CodeBlockWrapper
       expandButtonTitle="Expand"
@@ -20,5 +17,5 @@ export function ComponentSource({
     >
       {children}
     </CodeBlockWrapper>
-  )
+  );
 }

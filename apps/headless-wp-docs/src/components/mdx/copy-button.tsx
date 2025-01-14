@@ -26,15 +26,26 @@ export const CopyButton = ({ children }: { children: React.ReactNode }) => {
     if (React.isValidElement(node)) {
       const { props } = node;
       // @ts-ignore
-      const children = React.Children.map(props.children, extractSourceCode)?.join("");
+      const children = React.Children.map(
+        props.children,
+        extractSourceCode,
+      )?.join("");
       return `${children}`;
     }
     return "";
   };
 
   return (
-    <button disabled={isCopied} onClick={copy} className="text-muted-foreground">
-      {isCopied ? <CopyCheck size={16} strokeWidth={1.5} /> : <Copy size={16} strokeWidth={1.5} />}
+    <button
+      disabled={isCopied}
+      onClick={copy}
+      className="text-muted-foreground"
+    >
+      {isCopied ? (
+        <CopyCheck size={16} strokeWidth={1.5} />
+      ) : (
+        <Copy size={16} strokeWidth={1.5} />
+      )}
     </button>
   );
 };

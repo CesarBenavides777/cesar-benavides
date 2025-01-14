@@ -1,16 +1,15 @@
 import Hero from "@/components/blocks/hero";
 // import FormBlock from "@/components/blocks/form-block";
-import type {
-  PageContentBlocksHeroLayout,
-  GfForm,
-} from "@/types/wp";
+import type { PageContentBlocksHeroLayout, GfForm } from "@/types/wp";
 // import ProjectsBlock from "@/components/blocks/projects-block";
 import PostsBlock from "@workspace/ui/components/blocks/posts-block";
 import RichContent from "@workspace/ui/components/blocks/rich-content";
 
 import dynamic from "next/dynamic";
 
-const ProjectsBlock = dynamic(() => import("@/components/blocks/projects-block"));
+const ProjectsBlock = dynamic(
+  () => import("@/components/blocks/projects-block"),
+);
 const FormBlock = dynamic(() => import("@/components/blocks/form-block"));
 
 type Block = PageContentBlocksHeroLayout & {
@@ -30,10 +29,15 @@ const componentMap = {
   PageContentBlocksFormblockLayout: FormBlock,
   PageContentBlocksProjectsBlockLayout: ProjectsBlock,
   PageContentBlocksPostsBlockLayout: PostsBlock,
-  PageContentBlocksRichContentLayout: RichContent
+  PageContentBlocksRichContentLayout: RichContent,
 };
 
-const BlockReturner: React.FC<BlockReturnerProps> = ({ blocks, title, tags, postId }) => {
+const BlockReturner: React.FC<BlockReturnerProps> = ({
+  blocks,
+  title,
+  tags,
+  postId,
+}) => {
   if (!blocks || blocks.length === 0) {
     return <Hero title={title} />;
   }

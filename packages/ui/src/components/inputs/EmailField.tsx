@@ -1,4 +1,7 @@
-import type { EmailField as EmailFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  EmailField as EmailFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
@@ -17,9 +20,21 @@ const DEFAULT_VALUE = "";
 
 import React from "react";
 
-export default function EmailField({ field, fieldErrors, formId }: Props): React.ReactElement {
-  const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
-    field;
+export default function EmailField({
+  field,
+  fieldErrors,
+  formId,
+}: Props): React.ReactElement {
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    isRequired,
+    placeholder,
+    databaseId,
+  } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
@@ -39,7 +54,7 @@ export default function EmailField({ field, fieldErrors, formId }: Props): React
           label
         )}
       </Label>
-      <Input 
+      <Input
         type="email"
         name={String(databaseId)}
         id={htmlId}

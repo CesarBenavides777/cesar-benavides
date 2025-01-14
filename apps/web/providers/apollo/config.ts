@@ -6,14 +6,13 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
-import { getConfig } from "@faustwp/core/dist/mjs/config/index.js";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(
-        `[GraphQL error]: Message: ${message}, Path: ${path}, Locations: ${locations?.toString()}`
-      )
+        `[GraphQL error]: Message: ${message}, Path: ${path}, Locations: ${locations?.toString()}`,
+      ),
     );
   }
 
@@ -22,15 +21,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-
 export function createApolloConfig(
   authenticated = false,
 ): [InMemoryCacheConfig, ApolloLink] {
-  const { possibleTypes } = getConfig();
-
-
-	let inMemoryCacheObject: InMemoryCacheConfig = {
-    possibleTypes,
+  let inMemoryCacheObject: InMemoryCacheConfig = {
     typePolicies: {
       RootQuery: {
         queryType: true,

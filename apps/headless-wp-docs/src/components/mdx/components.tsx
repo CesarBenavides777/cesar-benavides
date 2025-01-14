@@ -16,7 +16,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Files, File, Folder } from "@/components/ui/files";
@@ -50,7 +50,7 @@ export const mdxComponents = {
     <h1
       className={cn(
         "mt-2 scroll-m-20 text-4xl font-bold tracking-tight",
-        className
+        className,
       )}
       {...props}
     />
@@ -59,7 +59,7 @@ export const mdxComponents = {
     <h2
       className={cn(
         "mt-10 scroll-m-20 pb-1 text-3xl font-semibold tracking-tight first:mt-0 mdx-heading",
-        className
+        className,
       )}
       {...props}
     />
@@ -68,7 +68,7 @@ export const mdxComponents = {
     <h3
       className={cn(
         "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight mdx-heading",
-        className
+        className,
       )}
       {...props}
     />
@@ -77,7 +77,7 @@ export const mdxComponents = {
     <h4
       className={cn(
         "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className
+        className,
       )}
       {...props}
     />
@@ -86,7 +86,7 @@ export const mdxComponents = {
     <h5
       className={cn(
         "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-        className
+        className,
       )}
       {...props}
     />
@@ -95,7 +95,7 @@ export const mdxComponents = {
     <h6
       className={cn(
         "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
-        className
+        className,
       )}
       {...props}
     />
@@ -128,12 +128,15 @@ export const mdxComponents = {
     <blockquote
       className={cn(
         "border p-2 rounded-lg [&>*]:text-foreground/70 [&>*]:dark:text-muted-foreground text-sm flex gap-2",
-        className
+        className,
       )}
       {...props}
     >
       <div className="flex-shrink-0 mt-1">
-        <CircleAlertIcon size={20} className="fill-blue-500 stroke-zinc-100 dark:stroke-zinc-800" />
+        <CircleAlertIcon
+          size={20}
+          className="fill-blue-500 stroke-zinc-100 dark:stroke-zinc-800"
+        />
       </div>
       <div>{props.children}</div>
     </blockquote>
@@ -165,7 +168,7 @@ export const mdxComponents = {
     <th
       className={cn(
         "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
-        className
+        className,
       )}
       {...props}
     />
@@ -177,7 +180,7 @@ export const mdxComponents = {
     <td
       className={cn(
         "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
-        className
+        className,
       )}
       {...props}
     />
@@ -187,7 +190,7 @@ export const mdxComponents = {
     <code
       className={cn(
         "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
-        className
+        className,
       )}
       {...props}
     />
@@ -197,7 +200,7 @@ export const mdxComponents = {
     <h3
       className={cn(
         "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className
+        className,
       )}
       {...props}
     />
@@ -218,7 +221,7 @@ export const mdxComponents = {
     <TabsList
       className={cn(
         "w-full justify-start rounded-none border-b bg-transparent p-0",
-        className
+        className,
       )}
       {...props}
     />
@@ -230,7 +233,7 @@ export const mdxComponents = {
     <TabsTrigger
       className={cn(
         "relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none",
-        className
+        className,
       )}
       {...props}
     />
@@ -242,7 +245,7 @@ export const mdxComponents = {
     <TabsContent
       className={cn(
         "relative [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold",
-        className
+        className,
       )}
       {...props}
     />
@@ -257,7 +260,7 @@ export const mdxComponents = {
     <Link
       className={cn(
         "flex w-full flex-col items-center rounded-xl border bg-card p-6 text-card-foreground shadow transition-colors hover:bg-muted/50 sm:p-10",
-        className
+        className,
       )}
       {...props}
     />

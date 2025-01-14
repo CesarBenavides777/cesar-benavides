@@ -1,4 +1,3 @@
-
 import { PleaseLogin } from "@/components/please-login";
 import Main from "@/components/ui/main";
 import BlockReturner from "@/features/BlockReturner/BlockReturner";
@@ -10,7 +9,6 @@ import { getMetaData } from "@/lib/wp/getMetaData";
 import { hasPreviewProps } from "../../[slug]/hasPreviewProps";
 import { getAllPosts } from "@/lib/wp/getAllPosts";
 
-
 type Props = {
   params: Promise<{
     slug: string;
@@ -20,7 +18,7 @@ type Props = {
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const slug = (await params).slug;
   const metaData = await getMetaData({
@@ -38,10 +36,8 @@ export async function generateStaticParams() {
     return [];
   }
 
-  return posts.map((post: {
-    slug: string;
-  }) => ({
-      slug: post.slug ?? "",
+  return posts.map((post: { slug: string }) => ({
+    slug: post.slug ?? "",
   }));
 }
 
@@ -62,7 +58,6 @@ export default async function BlogPage(props: Props) {
     pageId: `/blog/${id}` as ContentNodeIdTypeEnum,
     asPreview: isPreview,
   });
-  
 
   const { data, hasClient } = pageData;
   const { pageContent, title, id: pageId, tags } = data?.page ?? {};
@@ -71,7 +66,6 @@ export default async function BlogPage(props: Props) {
   if (!pageId) {
     return notFound();
   }
-  
 
   if (!hasClient) {
     return <PleaseLogin redirect={redirectUrl} />;
@@ -81,9 +75,9 @@ export default async function BlogPage(props: Props) {
 
   return (
     <Main>
-      <BlockReturner 
-        blocks={blocks} 
-        title={title} 
+      <BlockReturner
+        blocks={blocks}
+        title={title}
         tags={tagNames}
         postId={pageId}
       />
@@ -93,4 +87,3 @@ export default async function BlogPage(props: Props) {
 
 export const dynamic = "force-static";
 export const revalidate = 60;
-

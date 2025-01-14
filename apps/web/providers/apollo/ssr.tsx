@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   ApolloNextAppProvider,
   ApolloClient,
@@ -18,7 +17,6 @@ export function createSSRApolloClient(authenticated: boolean) {
 }
 
 export function ApolloProvider({ children }: PropsWithChildren<object>) {
-
   return (
     <ApolloNextAppProvider makeClient={() => createSSRApolloClient(false)}>
       {children}

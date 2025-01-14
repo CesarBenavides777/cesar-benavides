@@ -1,5 +1,5 @@
-import { Input } from "@workspace/ui/components/input"; 
-import { Label } from "@workspace/ui/components/label"; 
+import { Input } from "@workspace/ui/components/input";
+import { Label } from "@workspace/ui/components/label";
 
 import type {
   WebsiteField as WebsiteFieldType,
@@ -35,7 +35,7 @@ const WebsiteField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
 
@@ -74,6 +74,6 @@ const WebsiteField: FC<Props> = ({ field, fieldErrors, formId }) => {
         : null}
     </div>
   );
-}
+};
 
 export default WebsiteField;

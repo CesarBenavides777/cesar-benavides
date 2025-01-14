@@ -1,8 +1,8 @@
-import { gql } from '@apollo/client';
-import { __ } from '@wordpress/i18n';
-import { LoginClient, LoginProviderEnum } from '@/types/wp';
-import { OAuth2ClientList } from './OAuth2ClientList';
-import { PasswordForm } from './PasswordForm';
+import { gql } from "@apollo/client";
+import { __ } from "@wordpress/i18n";
+import { LoginClient, LoginProviderEnum } from "@/types/wp";
+import { OAuth2ClientList } from "./OAuth2ClientList";
+import { PasswordForm } from "./PasswordForm";
 
 export const LoginFormContainer = ({
   loginClients,
@@ -15,12 +15,12 @@ export const LoginFormContainer = ({
 
   // Get the Oauth2 Clients.
   const oauthClients = enabledClients.filter(
-    (client) => client?.authorizationUrl
+    (client) => client?.authorizationUrl,
   );
 
   // Get the password client
   const passwordClient = enabledClients.find(
-    (client) => client?.provider === LoginProviderEnum.Password
+    (client) => client?.provider === LoginProviderEnum.Password,
   );
 
   return (
@@ -51,12 +51,12 @@ export const LoginFormContainer = ({
 };
 
 LoginFormContainer.fragments = {
-	loginClients: gql`
-		${ OAuth2ClientList.fragments.client }
-		fragment LoginClientsFrag on RootQuery {
-			loginClients {
-				...LoginClientFrag
-			}
-		}
-	`,
+  loginClients: gql`
+    ${OAuth2ClientList.fragments.client}
+    fragment LoginClientsFrag on RootQuery {
+      loginClients {
+        ...LoginClientFrag
+      }
+    }
+  `,
 };

@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
-import { __, sprintf } from '@wordpress/i18n';
+import { gql } from "@apollo/client";
+import { __, sprintf } from "@wordpress/i18n";
 import { LoginClient } from "@/types/wp";
 
 export const OAuth2ClientList = ({
@@ -28,7 +28,7 @@ export const OAuth2ClientList = ({
             {sprintf(
               // translators: %s: Client name.
               __("Login with %s", "axepress-labs"),
-              client?.name
+              client?.name,
             )}
           </a>
         );
@@ -38,15 +38,14 @@ export const OAuth2ClientList = ({
 };
 
 OAuth2ClientList.fragments = {
-	client: gql`
-		fragment LoginClientFrag on LoginClient {
-			clientId
-			authorizationUrl
-			name
-			provider
-			isEnabled
-			order
-		}
-	`,
+  client: gql`
+    fragment LoginClientFrag on LoginClient {
+      clientId
+      authorizationUrl
+      name
+      provider
+      isEnabled
+      order
+    }
+  `,
 };
-

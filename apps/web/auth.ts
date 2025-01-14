@@ -7,10 +7,9 @@ import { refreshAuthToken } from "./lib/wp/auth/actions";
 import { User } from "./types/wp";
 import { isTokenExpired } from "./lib/wp/auth/isTokenExpired";
 
-
 const providers: Provider[] = [
   Credentials({
-    credentials: { 
+    credentials: {
       password: { label: "Password", type: "password" },
       usernameEmail: { label: "Username or Email", type: "text" },
     },
@@ -20,7 +19,7 @@ const providers: Provider[] = [
         username: usernameEmail as string,
         password: password as string,
       });
-      
+
       if (!user) {
         return null;
       }
@@ -30,10 +29,8 @@ const providers: Provider[] = [
   }),
   GitHub({
     clientId: process.env.AUTH_GITHUB_ID,
-    clientSecret: process.env.AUTH_GITHUB__SECRET
-  },
-
-),
+    clientSecret: process.env.AUTH_GITHUB__SECRET,
+  }),
 ];
 
 export const providerMap = providers
@@ -55,7 +52,7 @@ type SignInCallbackParams = {
   password: string;
   redirect: boolean;
   redirectTo: string;
-}
+};
 
 type SessionCallbackParams = {
   session: {
@@ -73,7 +70,7 @@ type SessionCallbackParams = {
     email: string;
     sub: string;
   };
-}
+};
 
 const callbacks = {
   signIn: async ({
@@ -183,20 +180,14 @@ const callbacks = {
   },
 };
 
-
 export const config = {
-    providers,
-    pages: {
-        signIn: "/login",
-        myProfile: "/my-account",
-        error: "/login",
-    },
-    callbacks,
-}
+  providers,
+  pages: {
+    signIn: "/login",
+    myProfile: "/my-account",
+    error: "/login",
+  },
+  callbacks,
+};
 
-export const { 
-  signIn, 
-  signOut, 
-  handlers, 
-  auth
-} = NextAuth(config);
+export const { signIn, signOut, handlers, auth } = NextAuth(config);

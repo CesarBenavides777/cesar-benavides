@@ -1,6 +1,4 @@
-import type {
-  FieldError,
-} from "@workspace/ui/types/wp";
+import type { FieldError } from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
 } from "@workspace/ui/hooks/useGravityForm";
@@ -13,31 +11,34 @@ interface Props {
   formId: string;
 }
 
-import React from 'react';
+import React from "react";
 
-export default function FileUploadField({ field, fieldErrors, formId }: Props): React.ReactElement {
+export default function FileUploadField({
+  field,
+  fieldErrors,
+  formId,
+}: Props): React.ReactElement {
   const { id, type, label, description, cssClass, isRequired, databaseId } =
     field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { dispatch } = useGravityForm();
 
-const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const file = event.target.files?.[0]; // Capture the first file
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]; // Capture the first file
 
-  if (file) { // Debugging: Log the captured file
-    dispatch({
-      type: ACTION_TYPES.updateFileUploadFieldValue,
-      fieldValue: {
-        id: databaseId,
-        fileUploadValues: [file], // Pass the File object
-      },
-    });
-  } else {
-    console.error("No file selected or file input is empty");
-  }
-};
-
-
+    if (file) {
+      // Debugging: Log the captured file
+      dispatch({
+        type: ACTION_TYPES.updateFileUploadFieldValue,
+        fieldValue: {
+          id: databaseId,
+          fileUploadValues: [file], // Pass the File object
+        },
+      });
+    } else {
+      console.error("No file selected or file input is empty");
+    }
+  };
 
   return (
     <fieldset

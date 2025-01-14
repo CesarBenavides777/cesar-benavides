@@ -1,13 +1,20 @@
 import { gql } from "@apollo/client";
 
-import type { DateField as DateFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  DateField as DateFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
 } from "@workspace/ui/hooks/useGravityForm";
 import { Label } from "@workspace/ui/components/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@workspace/ui/components/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@workspace/ui/components/popover";
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
@@ -37,7 +44,11 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-export default function DateField({ field, fieldErrors, formId }: Props): JSX.Element {
+export default function DateField({
+  field,
+  fieldErrors,
+  formId,
+}: Props): JSX.Element {
   const {
     id,
     type,
@@ -51,51 +62,49 @@ export default function DateField({ field, fieldErrors, formId }: Props): JSX.El
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
-    const inputId = useId();
+  const inputId = useId();
 
-    // Hold the month in state to control the calendar when the input changes
-    const [month, setMonth] = useState(new Date());
+  // Hold the month in state to control the calendar when the input changes
+  const [month, setMonth] = useState(new Date());
 
-    // Hold the selected date in state
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-      undefined
-    );
+  // Hold the selected date in state
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
-    // Hold the input value in state
-    const [inputValue, setInputValue] = useState("");
+  // Hold the input value in state
+  const [inputValue, setInputValue] = useState("");
 
-    const handleDayPickerSelect = (date: Date | undefined) => {
-      if (!date) {
-        setInputValue("");
-        setSelectedDate(undefined);
-      } else {
-        setSelectedDate(date);
-        setMonth(date);
-        setInputValue(format(date, "MM/dd/yyyy"));
-      }
-    };
+  const handleDayPickerSelect = (date: Date | undefined) => {
+    if (!date) {
+      setInputValue("");
+      setSelectedDate(undefined);
+    } else {
+      setSelectedDate(date);
+      setMonth(date);
+      setInputValue(format(date, "MM/dd/yyyy"));
+    }
+  };
 
- const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-   setInputValue(e.target.value); // keep the input value in sync
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value); // keep the input value in sync
 
-   const parsedDate = parse(e.target.value, "MM/dd/yyyy", new Date());
+    const parsedDate = parse(e.target.value, "MM/dd/yyyy", new Date());
 
-   if (isValid(parsedDate)) {
-     setSelectedDate(parsedDate);
-     setMonth(parsedDate);
-       dispatch({
-         type: ACTION_TYPES.updateDateFieldValue,
-         fieldValue: {
-           id,
-           value: selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
-         },
-       });
-   } else {
-     setSelectedDate(undefined);
-   }
- };
+    if (isValid(parsedDate)) {
+      setSelectedDate(parsedDate);
+      setMonth(parsedDate);
+      dispatch({
+        type: ACTION_TYPES.updateDateFieldValue,
+        fieldValue: {
+          id,
+          value: selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
+        },
+      });
+    } else {
+      setSelectedDate(undefined);
+    }
+  };
 
   return (
     <div
@@ -119,7 +128,7 @@ export default function DateField({ field, fieldErrors, formId }: Props): JSX.El
             variant={"outline"}
             className={cn(
               "w-[240px] pl-3 text-left font-normal",
-              !field.value && "text-muted-foreground"
+              !field.value && "text-muted-foreground",
             )}
           >
             <Input
@@ -140,7 +149,7 @@ export default function DateField({ field, fieldErrors, formId }: Props): JSX.El
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0 bg-[background]" align="start">
-        <Calendar
+          <Calendar
             mode="single"
             selected={selectedDate}
             onSelect={handleDayPickerSelect}

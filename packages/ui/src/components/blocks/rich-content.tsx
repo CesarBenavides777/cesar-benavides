@@ -16,54 +16,52 @@ const RichContent: React.FC<RichContentProps> = ({
   lineSeparated,
 }) => {
   // A function to parse and render content
-const renderContent = (html: string) => {
-  return parse(html, {
-    replace: (domNode: any) => {
-      if (domNode instanceof Element) {
-        // Handle <code> elements explicitly
-        if (domNode.tagName === "code") {
-          // Determine language from class attribute
-          const languageClass = domNode.attribs.class || "";
-          let language = "";
+  const renderContent = (html: string) => {
+    return parse(html, {
+      replace: (domNode: any) => {
+        if (domNode instanceof Element) {
+          // Handle <code> elements explicitly
+          if (domNode.tagName === "code") {
+            // Determine language from class attribute
+            const languageClass = domNode.attribs.class || "";
+            let language = "";
 
-          if (languageClass.includes("json")) language = "json";
-          else if (languageClass.includes("python")) language = "python";
-          else if (languageClass.includes("typescript"))
-            language = "typescript";
+            if (languageClass.includes("json")) language = "json";
+            else if (languageClass.includes("python")) language = "python";
+            else if (languageClass.includes("typescript"))
+              language = "typescript";
 
-          // Extract the code content
-          const codeContent = domNode.children
-            .map((child) => (child.type === "text" ? child.data : ""))
-            .join("");
-          // Extract Code Filename from data-filename="platform.ts" on <code> element
-          const filename = domNode.attribs["data-filename"];
+            // Extract the code content
+            const codeContent = domNode.children
+              .map((child) => (child.type === "text" ? child.data : ""))
+              .join("");
+            // Extract Code Filename from data-filename="platform.ts" on <code> element
+            const filename = domNode.attribs["data-filename"];
 
-          return (
-            <CodeBlock
-              language={language || "plaintext"}
-              code={codeContent}
-              filename={filename || ""}
-            />
-          );
+            return (
+              <CodeBlock
+                language={language || "plaintext"}
+                code={codeContent}
+                filename={filename || ""}
+              />
+            );
+          }
+
+          // Avoid wrapping <code> inside <p>
+          if (
+            domNode.tagName === "p" &&
+            domNode.children.some(
+              (child) =>
+                child instanceof Element &&
+                (child.tagName === "code" || child.tagName === "pre"),
+            )
+          ) {
+            return <>{domToReact(domNode.children)}</>;
+          }
         }
-
-        // Avoid wrapping <code> inside <p>
-        if (
-          domNode.tagName === "p" &&
-          domNode.children.some(
-            (child) =>
-              child instanceof Element &&
-              (child.tagName === "code" || child.tagName === "pre")
-          )
-        ) {
-          return <>{domToReact(domNode.children)}</>;
-        }
-      }
-    },
-  });
-};
-
-
+      },
+    });
+  };
 
   return (
     <section className={cn("px-2 md:px-4 py-3 md:py-4", className)}>
@@ -79,7 +77,7 @@ const renderContent = (html: string) => {
               key={index}
               className={cn(
                 "flex flex-col gap-4",
-                lineSeparated ? "border-b border-foreground/20 pb-4" : ""
+                lineSeparated ? "border-b border-foreground/20 pb-4" : "",
               )}
             >
               {title && (

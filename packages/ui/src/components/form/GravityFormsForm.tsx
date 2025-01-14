@@ -1,11 +1,10 @@
 "use client";
 
-
 import useGravityForm from "@workspace/ui/hooks/useGravityForm";
 import { toast } from "sonner";
 import GravityFormsField from "@workspace/ui/components/form/GravityFormsField";
 import { Button } from "@workspace/ui/components/button";
-import { useId, } from "react";
+import { useId } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { removeHtml } from "@workspace/ui/utils/removeHtml";
 import type {
@@ -122,7 +121,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
         });
       } else {
         toast.success(
-          removeHtml(response?.data?.submitGfForm?.confirmation?.message)
+          removeHtml(response?.data?.submitGfForm?.confirmation?.message),
         );
       }
     } catch (error) {
@@ -150,9 +149,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
               {description}
             </div>
           ) : null}
-          <form 
-            onSubmit={handleSubmit}
-          >
+          <form onSubmit={handleSubmit}>
             <div className={`mx-auto flex max-w-xl flex-col gap-4`}>
               {fields
                 ? fields.map((field: { id: any }, index: any) => {

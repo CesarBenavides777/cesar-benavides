@@ -36,10 +36,8 @@ export async function generateStaticParams() {
     return [];
   }
 
-  return pages.map((page: {
-    slug: string;
-  }) => ({
-      slug: page?.slug ?? "",
+  return pages.map((page: { slug: string }) => ({
+    slug: page?.slug ?? "",
   }));
 }
 
@@ -82,4 +80,3 @@ export default async function Page(props: Props) {
 
 export const dynamic = "force-static";
 export const revalidate = 60;
-

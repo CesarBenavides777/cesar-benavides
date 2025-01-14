@@ -18,10 +18,10 @@ interface Props {
   styled?: boolean;
 }
 
-const GravityForm = ({ 
-  form, 
-  formId, 
-  showTitle = true, 
+const GravityForm = ({
+  form,
+  formId,
+  showTitle = true,
   submitForm,
   useToast = true,
   styled = true,

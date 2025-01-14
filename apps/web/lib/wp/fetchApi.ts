@@ -7,7 +7,7 @@ export default async function fetchAPI(
     "Content-Type": "application/json",
     Origin: process.env.NEXT_PUBLIC_URL,
     Authorization: "",
-  }
+  },
 ) {
   try {
     // We get the session from NextAuth.
@@ -31,7 +31,7 @@ export default async function fetchAPI(
           query,
           variables,
         }),
-      }
+      },
     );
 
     const json = await res.json();

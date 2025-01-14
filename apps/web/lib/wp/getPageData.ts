@@ -10,7 +10,7 @@ type GetPageData = {
 
 const clientFunction = (asPreview: boolean) => {
   return asPreview ? getAuthClient : getClient;
-}
+};
 
 const getPageData = async ({ pageId, asPreview }: GetPageData) => {
   if (!pageId) {

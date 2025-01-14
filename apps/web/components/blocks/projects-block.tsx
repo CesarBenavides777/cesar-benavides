@@ -15,8 +15,6 @@ import {
 } from "react-icons/si";
 import { useState } from "react";
 
-
-
 type ProjectsBlockProps = PageContentBlocksProjectsBlockLayout & {
   className?: string;
   id?: string;
@@ -49,7 +47,7 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
   const [isActive, setIsActive] = useState(false);
 
   const projects = projectItems?.edges.map(
-    (project) => project.node
+    (project) => project.node,
   ) as Project[];
 
   return (
@@ -59,7 +57,7 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
         className,
         {
           "overflow-auto": isActive,
-        }
+        },
       )}
       id={id}
       onMouseEnter={() => setIsActive(true)}
@@ -78,14 +76,14 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                 "grid [grid-template-areas:'stack'] place-items-start":
                   !isActive,
                 "flex flex-row gap-4 w-fit relative overflow-scroll": isActive,
-              }
+              },
             )}
             active={isActive}
             cards={[
               ...projects.map((project, i) => {
                 const { xOffset, yOffset } = calculateOffset(
                   i,
-                  projects.length
+                  projects.length,
                 );
 
                 return {
@@ -127,7 +125,7 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                     {
                       "[grid-area:stack] select-none -skew-y-[8deg]": !isActive,
                       "min-w-[6rem]": isActive,
-                    }
+                    },
                   ),
                 };
               }),

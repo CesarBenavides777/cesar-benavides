@@ -3,12 +3,14 @@
 Monorepo for my personal website & projects
 
 ## Prerequisites:
+
 1. Working WordPress Instance with these plugins installed:
+
 - [Add WPGraphQL SEO](https://github.com/ashhitch/wp-graphql-yoast-seo)
 - [Advanced Custom Fields](https://www.advancedcustomfields.com/)
-    - `Our ACF plugin has been taken over forcibly by wordpressdotorg without our consent.` (NOT Secure Custom Fields) [READ MORE](https://www.advancedcustomfields.com/blog/acf-plugin-no-longer-available-on-wordpress-org/)
-    - Add The ACF Json within `wp-assets/acf-fields/acf-export.json`
-    - To this page: `/wp-admin/edit.php?post_type=acf-field-group&page=acf-tools`
+  - `Our ACF plugin has been taken over forcibly by wordpressdotorg without our consent.` (NOT Secure Custom Fields) [READ MORE](https://www.advancedcustomfields.com/blog/acf-plugin-no-longer-available-on-wordpress-org/)
+  - Add The ACF Json within `wp-assets/acf-fields/acf-export.json`
+  - To this page: `/wp-admin/edit.php?post_type=acf-field-group&page=acf-tools`
 - [Faust.js™](https://faustjs.org/)
 - [Generate WpGraphql Image DataUrl](https://github.com/dipankarmaikap/wp-graphql-image-dataurl)
 - [Gravity Forms](https://www.gravityforms.com/)
@@ -17,11 +19,12 @@ Monorepo for my personal website & projects
 - [WPGraphQL for ACF](https://github.com/wp-graphql/wpgraphql-acf)
 - [WPGraphQL for Gravity Forms](https://github.com/AxeWP/wp-graphql-gravity-forms)
 - [Advanced Custom Fields: Gravity Forms Add-on ](https://wordpress.org/plugins/acf-gravityforms-add-on/)
+
 2. [Vercel](https://vercel.com/) Account for delpoyment
 3. Github Account to push code to
 
-
 ## Features:
+
 - Preview Draft Posts
 - Custom ACF Flexible Content Components for Page Building
 - Tailwind CSS for styling
@@ -32,7 +35,6 @@ Monorepo for my personal website & projects
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
-
 
 ### Apps and Packages
 
@@ -53,7 +55,6 @@ This Turborepo has some additional tools already setup for you:
 - [Prettier](https://prettier.io) for code formatting
 
 ### Build
-
 
 To build all apps and packages, run the following command:
 

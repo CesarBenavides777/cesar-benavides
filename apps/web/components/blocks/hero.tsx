@@ -12,8 +12,6 @@ type HeroProps = PageContentBlocksHeroLayout & {
   postId?: string;
 };
 
-
-
 const Hero: React.FC<HeroProps> = ({
   title,
   subCaption,
@@ -95,10 +93,10 @@ const Hero: React.FC<HeroProps> = ({
           //     loading="eager"
           //   />
           // </motion.div>
-          <AnimatedImage 
-            media={media?.node} 
-            className="flex flex-col" 
-            postId={postId} 
+          <AnimatedImage
+            media={media?.node}
+            className="flex flex-col"
+            postId={postId}
             loading="eager"
             main={true}
           />

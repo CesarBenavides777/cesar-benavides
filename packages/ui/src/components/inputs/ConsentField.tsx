@@ -7,7 +7,10 @@ import useGravityForm, {
   FieldValue,
   ConsentFieldValue,
 } from "@workspace/ui/hooks/useGravityForm";
-import type { ConsentField as ConsentFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  ConsentField as ConsentFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 
 interface Props {
   field: ConsentFieldType;
@@ -15,7 +18,11 @@ interface Props {
   formId?: number;
 }
 
-const ConsentField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
+const ConsentField: React.FC<Props> = ({
+  field,
+  fieldErrors,
+  formId,
+}: Props) => {
   const {
     id,
     databaseId,
@@ -31,7 +38,7 @@ const ConsentField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as ConsentFieldValue | undefined;
   const isChecked = fieldValue?.value === "true" ? true : false;
 
@@ -41,7 +48,7 @@ const ConsentField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
       fieldValue: {
         id: databaseId,
         value: checked.toString(),
-      }
+      },
     });
   }
 
@@ -59,7 +66,7 @@ const ConsentField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
       )}
       <div className="flex items-center space-x-2">
         <Checkbox
-        // @ts-ignore
+          // @ts-ignore
           id={`input_${formId}_${id}`}
           name={String(databaseId)}
           checked={isChecked}

@@ -11,20 +11,16 @@ export default async function Page() {
   if (!client) {
     return <PleaseLogin />;
   }
-    const { data, errors } = await client.query({
-      query: gql`
-        query GetViewer {
-          viewer {
-            ...UserFields
-          }
+  const { data, errors } = await client.query({
+    query: gql`
+      query GetViewer {
+        viewer {
+          ...UserFields
         }
-        ${USER_FIELDS}
-      `,
-    });
+      }
+      ${USER_FIELDS}
+    `,
+  });
 
-  return (
-    <MyAccount 
-      user={data?.viewer as User}
-    />
-  );
+  return <MyAccount user={data?.viewer as User} />;
 }

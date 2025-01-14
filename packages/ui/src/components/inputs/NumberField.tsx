@@ -1,4 +1,3 @@
-
 import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import useGravityForm, {
@@ -6,7 +5,10 @@ import useGravityForm, {
   FieldValue,
   StringFieldValue,
 } from "@workspace/ui/hooks/useGravityForm";
-import type { FieldError, NumberField as NumberFieldType } from "@workspace/ui/types/wp";
+import type {
+  FieldError,
+  NumberField as NumberFieldType,
+} from "@workspace/ui/types/wp";
 
 interface Props {
   field: NumberFieldType;
@@ -16,7 +18,11 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-const NumberField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
+const NumberField: React.FC<Props> = ({
+  field,
+  fieldErrors,
+  formId,
+}: Props) => {
   const {
     id,
     type,
@@ -30,7 +36,7 @@ const NumberField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => 
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
 
@@ -78,6 +84,6 @@ const NumberField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => 
       )}
     </div>
   );
-}
+};
 
 export default NumberField;

@@ -27,23 +27,24 @@ export function ZoomableMedia({
 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isZoomed) {
+      if (event.key === "Escape" && isZoomed) {
         setIsZoomed(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [isZoomed]);
 
   return (
-    <MotionConfig
-      transition={{ duration: 0.3, type: "spring", bounce: 0 }}
-    >
-      <motion.div id="media-container" className={cn("relative w-full h-auto border", className)}>
+    <MotionConfig transition={{ duration: 0.3, type: "spring", bounce: 0 }}>
+      <motion.div
+        id="media-container"
+        className={cn("relative w-full h-auto border", className)}
+      >
         <motion.img
           src={src}
           alt={alt}

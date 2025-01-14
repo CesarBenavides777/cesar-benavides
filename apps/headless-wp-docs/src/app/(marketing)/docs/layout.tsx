@@ -1,5 +1,5 @@
-import { SidebarProvider } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import Navbar from "@/components/navbar";
 
 export default function DocsLayout({
@@ -14,9 +14,7 @@ export default function DocsLayout({
         <div className="sticky top-0 z-50 bg-background">
           <Navbar />
         </div>
-        <div className="max-w-7xl mx-auto">
-          {children}
-        </div>
+        <div className="max-w-7xl mx-auto">{children}</div>
       </main>
     </SidebarProvider>
   );

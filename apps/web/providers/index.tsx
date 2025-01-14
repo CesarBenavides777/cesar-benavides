@@ -5,7 +5,6 @@ import { FaustProvider } from "@faustwp/experimental-app-router/ssr";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 
-
 if (typeof window !== "undefined") {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -15,9 +14,7 @@ if (typeof window !== "undefined") {
 
 const isDev = process.env.NODE_ENV === "development";
 
-
 const Providers = ({ children }) => {
-
   return (
     <FaustProvider>
       <ThemeProvider>

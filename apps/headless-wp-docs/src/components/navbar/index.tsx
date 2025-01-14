@@ -52,13 +52,7 @@ export default function Navbar() {
   );
 }
 
-const NavItemComponent = ({
-  title,
-  href,
-}: {
-  title: string;
-  href: string;
-}) => {
+const NavItemComponent = ({ title, href }: { title: string; href: string }) => {
   const pathname = usePathname();
   const active =
     pathname === href || (pathname.startsWith(href) && href !== "/");
@@ -68,9 +62,9 @@ const NavItemComponent = ({
       href={href}
       className={cn(
         "px-3 py-2 text-sm transition-colors",
-        active 
+        active
           ? "text-foreground font-semibold"
-          : "text-muted-foreground hover:text-foreground"
+          : "text-muted-foreground hover:text-foreground",
       )}
     >
       {title}

@@ -43,7 +43,6 @@ export interface FileUploadFieldValue extends FieldValue {
   fileUploadValues: [File];
 }
 
-
 export interface StringFieldValues extends FieldValue {
   values: string[];
 }
@@ -139,7 +138,7 @@ function reducer(state: FieldValueUnion[], action: Action) {
     }
     default:
       throw new Error(
-        `Field value update operation not supported: ${action.type}.`
+        `Field value update operation not supported: ${action.type}.`,
       );
   }
 }

@@ -1,13 +1,19 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "@workspace/ui/components/radio-group";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@workspace/ui/components/radio-group";
 import { Label } from "@workspace/ui/components/label";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   StringFieldValue,
 } from "@workspace/ui/hooks/useGravityForm";
-import type { RadioField as RadioFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  RadioField as RadioFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 
 interface Props {
   field: RadioFieldType;
@@ -22,7 +28,7 @@ const RadioField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
 
@@ -49,7 +55,7 @@ const RadioField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
           return (
             <div key={inputValue} className="flex items-center space-x-2">
               <RadioGroupItem
-              // @ts-ignore
+                // @ts-ignore
                 value={inputValue}
                 id={`choice_${formId}_${databaseId}_${inputValue}`}
               />
@@ -77,6 +83,6 @@ const RadioField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
       )}
     </div>
   );
-}
+};
 
 export default RadioField;

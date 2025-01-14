@@ -25,7 +25,7 @@ export function DashboardTableOfContents({ toc }: TocProps) {
             .filter(Boolean)
             .map((id) => id?.split("#")[1])
         : [],
-    [toc]
+    [toc],
   );
   const activeHeading = useActiveItem(itemIds);
   const mounted = useMounted();
@@ -50,7 +50,7 @@ function useActiveItem(itemIds: (string | undefined)[]) {
           }
         });
       },
-      { rootMargin: `0% 0% -60% 0%` }
+      { rootMargin: `0% 0% -60% 0%` },
     );
 
     itemIds?.forEach((id) => {
@@ -99,7 +99,7 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
                 "inline-block no-underline px-1 py-0.5 rounded",
                 item.url === `#${activeItem}`
                   ? "text-primary font-medium bg-secondary"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {item.title}

@@ -3,9 +3,5 @@ export default function DocsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main className="flex-1 w-full">
-      {children}
-    </main>
-  );
+  return <main className="flex-1 w-full">{children}</main>;
 }

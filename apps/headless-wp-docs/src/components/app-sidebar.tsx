@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Book, FileText, GitFork, Home, ScrollText } from "lucide-react"
+import { Book, FileText, GitFork, Home, ScrollText } from "lucide-react";
 
 import {
   Sidebar,
@@ -11,7 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -41,7 +41,7 @@ const items = [
     url: "/docs/contribute",
     icon: GitFork,
   },
-]
+];
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -68,5 +68,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

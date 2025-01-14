@@ -1,4 +1,3 @@
-
 import "@/faust.config.js";
 import "@/styles/global.css";
 import Providers from "@/providers";
@@ -12,7 +11,6 @@ import { Toaster } from "sonner";
 import Script from "next/script";
 import PageTransitionEffect from "@/components/PageTransition";
 import { getClient } from "@/providers/apollo/rsc";
-
 
 const isDevelopment = process.env.NODE_ENV === "development";
 export default async function RootLayout({ children }) {

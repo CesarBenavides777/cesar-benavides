@@ -4,7 +4,6 @@ import { createApolloConfig } from "./config";
 import { auth } from "@/auth";
 
 export function createRSCApolloClient(authenticated = false) {
-  
   const [inMemoryCacheObject, linkChain] = createApolloConfig(authenticated);
   return new ApolloClient({
     cache: new InMemoryCache(inMemoryCacheObject),

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
-import { Input } from "@workspace/ui/components/input"; 
-import { Label } from "@workspace/ui/components/label"; 
+import { Input } from "@workspace/ui/components/input";
+import { Label } from "@workspace/ui/components/label";
 
 import type {
   AddressField as AddressFieldType,
@@ -51,7 +51,11 @@ const AUTOCOMPLETE_ATTRIBUTES: { [key: string]: string } = {
   country: "country-name",
 };
 
-const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) => {
+const AddressField: React.FC<Props> = ({
+  field,
+  fieldErrors,
+  formId,
+}: Props) => {
   const {
     id,
     type,
@@ -66,7 +70,7 @@ const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
     (fieldValue: FieldValue) =>
-      fieldValue.id.toString() === databaseId.toString()
+      fieldValue.id.toString() === databaseId.toString(),
   ) as AddressFieldValue | undefined;
   const addressValues = fieldValue?.addressValues || DEFAULT_VALUE;
 
@@ -115,9 +119,7 @@ const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
         if (isCountry) {
           return (
             <div key={key} className="flex flex-col gap-1">
-              <Label
-                htmlFor={`input_${formId}_${id}_${key}`}
-              >
+              <Label htmlFor={`input_${formId}_${id}_${key}`}>
                 {inputLabel}
               </Label>
               <Input
@@ -137,9 +139,7 @@ const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
 
         return (
           <div key={key} className="flex flex-col gap-1">
-            <Label htmlFor={`input_${formId}_${id}_${key}`}>
-              {inputLabel}
-            </Label>
+            <Label htmlFor={`input_${formId}_${id}_${key}`}>{inputLabel}</Label>
             <Input
               type="text"
               name={String(key)}
@@ -162,6 +162,6 @@ const AddressField: React.FC<Props> = ({ field, fieldErrors, formId }: Props) =>
         : null}
     </fieldset>
   );
-}
+};
 
 export default AddressField;

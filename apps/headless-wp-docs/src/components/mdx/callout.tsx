@@ -39,7 +39,7 @@ export function Callout({
           "border-yellow-900 bg-yellow-50 dark:bg-yellow-950/50":
             type === "warning",
           "border-blue-900/50 bg-blue-100 dark:bg-blue-950/50": type === "info",
-        }
+        },
       )}
       {...props}
     >

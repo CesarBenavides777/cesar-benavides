@@ -46,7 +46,6 @@ export default function ThemeToggler({ className }: { className?: string }) {
     document.startViewTransition(SWITCH);
   };
 
-
   return (
     <Button
       onClick={toggleTheme}

@@ -1,4 +1,7 @@
-import type { FieldError, TextField as TextFieldType } from "@workspace/ui/types/wp";
+import type {
+  FieldError,
+  TextField as TextFieldType,
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
@@ -29,15 +32,21 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-
-
 const TextField: FC<Props> = ({ field, fieldErrors, formId }) => {
-  const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
-    field;
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    isRequired,
+    placeholder,
+    databaseId,
+  } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
 
@@ -85,6 +94,6 @@ const TextField: FC<Props> = ({ field, fieldErrors, formId }) => {
         : null}
     </div>
   );
-}
+};
 
 export default TextField;

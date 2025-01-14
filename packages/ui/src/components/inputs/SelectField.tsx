@@ -8,7 +8,10 @@ import {
   SelectValue,
 } from "@workspace/ui/components/select";
 import { Label } from "@workspace/ui/components/label";
-import type { SelectField as SelectFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  SelectField as SelectFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
@@ -38,7 +41,7 @@ const SelectField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as StringFieldValue | undefined;
   const value = fieldValue?.value || String(defaultValue);
 
@@ -86,6 +89,6 @@ const SelectField: FC<Props> = ({ field, fieldErrors, formId }) => {
       ))}
     </div>
   );
-}
+};
 
 export default SelectField;

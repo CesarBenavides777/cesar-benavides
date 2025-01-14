@@ -2,7 +2,6 @@ import LoginForm from "@/components/ui/login-form";
 import { getClient } from "@/providers/apollo/rsc";
 import { gql } from "@apollo/client";
 
-
 const LOGIN_CLIENTS = gql`
   query LoginClients {
     loginClients {
@@ -17,14 +16,14 @@ const LOGIN_CLIENTS = gql`
 `;
 
 export default async function Page(props) {
- const { searchParams, params } = await props;
- const sParams = await searchParams;
- const redirect = sParams.redirect;
- const client = await getClient();
+  const { searchParams, params } = await props;
+  const sParams = await searchParams;
+  const redirect = sParams.redirect;
+  const client = await getClient();
 
- const { data } = await client.query({
+  const { data } = await client.query({
     query: LOGIN_CLIENTS,
- });
+  });
   const { loginClients } = data || {};
 
   return (

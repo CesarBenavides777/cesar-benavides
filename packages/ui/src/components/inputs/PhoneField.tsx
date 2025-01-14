@@ -1,4 +1,7 @@
-import type { PhoneField as PhoneFieldType, FieldError } from "@workspace/ui/types/wp";
+import type {
+  PhoneField as PhoneFieldType,
+  FieldError,
+} from "@workspace/ui/types/wp";
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
@@ -17,9 +20,21 @@ const DEFAULT_VALUE = "";
 
 import React from "react";
 
-export default function PhoneField({ field, fieldErrors, formId }: Props): React.ReactElement {
-  const { id, type, label, description, cssClass, isRequired, placeholder, databaseId } =
-    field;
+export default function PhoneField({
+  field,
+  fieldErrors,
+  formId,
+}: Props): React.ReactElement {
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    isRequired,
+    placeholder,
+    databaseId,
+  } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
@@ -29,9 +44,7 @@ export default function PhoneField({ field, fieldErrors, formId }: Props): React
 
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
-      <Label 
-        htmlFor={htmlId}
-      >
+      <Label htmlFor={htmlId}>
         {isRequired ? (
           <>
             {label}
@@ -41,7 +54,7 @@ export default function PhoneField({ field, fieldErrors, formId }: Props): React
           label
         )}
       </Label>
-      <Input 
+      <Input
         type="tel"
         name={String(databaseId)}
         id={htmlId}
@@ -53,12 +66,11 @@ export default function PhoneField({ field, fieldErrors, formId }: Props): React
           dispatch({
             type: ACTION_TYPES.updatePhoneFieldValue,
             fieldValue: {
-                id: databaseId,
-                value: event.target.value,
-              },
-            });
-          }
-        }
+              id: databaseId,
+              value: event.target.value,
+            },
+          });
+        }}
       />
       {description ? (
         <p className="field-description font-body text-sm italic">

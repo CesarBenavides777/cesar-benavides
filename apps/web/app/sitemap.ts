@@ -10,13 +10,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const sitemapItems = [
     ...pages.map((page: Page) => ({
-        url: `https://www.cesarbenavides.com/${page.slug}`,
-        lastModified: page.modified,
+      url: `https://www.cesarbenavides.com/${page.slug}`,
+      lastModified: page.modified,
     })),
     ...posts.map((post) => ({
-        url: `https://www.cesarbenavides.com/blog/${post.slug}`,
-        lastModified: post.modified,
+      url: `https://www.cesarbenavides.com/blog/${post.slug}`,
+      lastModified: post.modified,
     })),
-  ]
+  ];
   return sitemapItems;
 }

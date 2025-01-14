@@ -39,13 +39,13 @@ const CheckboxField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
-    (fieldValue: FieldValue) => fieldValue.id === databaseId
+    (fieldValue: FieldValue) => fieldValue.id === databaseId,
   ) as CheckboxFieldValue | undefined;
   const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE;
 
   function handleChange(inputId: number, checked: boolean, value: string) {
     const otherCheckboxValues = checkboxValues.filter(
-      (checkboxValue: CheckboxInput) => checkboxValue.inputId !== inputId
+      (checkboxValue: CheckboxInput) => checkboxValue.inputId !== inputId,
     );
     const newCheckboxValues = checked
       ? [...otherCheckboxValues, { inputId, value }]
@@ -77,9 +77,12 @@ const CheckboxField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
               onCheckedChange={(checked) => {
                 if (checked === undefined) return;
 
-                handleChange(Number(inputId), checked as boolean, String(value));
-              }
-              }
+                handleChange(
+                  Number(inputId),
+                  checked as boolean,
+                  String(value),
+                );
+              }}
             />
             <Label
               htmlFor={`input_${formId}_${id}_${inputId}`}
@@ -104,6 +107,6 @@ const CheckboxField = ({ field, fieldErrors, formId }: Props): JSX.Element => {
       )}
     </fieldset>
   );
-}
+};
 
 export default CheckboxField;

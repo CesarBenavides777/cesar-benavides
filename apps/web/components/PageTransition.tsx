@@ -31,8 +31,8 @@ const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
   const key = usePathname();
 
   return (
-    <AnimatePresence 
-      mode="wait" 
+    <AnimatePresence
+      mode="wait"
       initial={false}
       onExitComplete={() => window.scrollTo(0, 0)}
     >

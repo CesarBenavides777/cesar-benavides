@@ -4,7 +4,6 @@ import { getClient } from "@/providers/apollo/rsc";
 import { gql } from "@apollo/client";
 import { User } from "@/types/wp";
 
-
 const REFRESH_TOKEN_MUTATION = gql`
   mutation refreshToken(
     $token: String! # The user's refreshToken.
@@ -17,9 +16,8 @@ const REFRESH_TOKEN_MUTATION = gql`
   }
 `;
 
-
 export const refreshAuthToken: (
-  refreshToken: string
+  refreshToken: string,
 ) => Promise<User["auth"]> = async (refreshToken: string) => {
   const variables = {
     token: refreshToken,

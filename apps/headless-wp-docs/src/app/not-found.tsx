@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -16,9 +22,7 @@ export default function NotFound() {
         </CardContent>
         <CardFooter>
           <Button asChild>
-            <Link href="/">
-              Return Home
-            </Link>
+            <Link href="/">Return Home</Link>
           </Button>
         </CardFooter>
       </Card>

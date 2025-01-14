@@ -1,4 +1,4 @@
-import {AuroraBackground} from "@workspace/ui/components/aurora-background";
+import { AuroraBackground } from "@workspace/ui/components/aurora-background";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -61,7 +61,7 @@ export default function NotFound() {
           {`Oops! Looks like you've wandered into the void.`}
         </p>
         <div>
-          <Link 
+          <Link
             className="text-foreground p-2 rounded-lg bg-accent hover:bg-accent-600 transition-colors"
             href="/"
           >

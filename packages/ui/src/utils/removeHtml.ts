@@ -1,7 +1,7 @@
 const removeHtml = (html: string): string => {
-    if (!html) return "";
+  if (!html) return "";
 
-    return html.replace(/<[^>]*>?/gm, "");
-}
+  return html.replace(/<[^>]*>?/gm, "");
+};
 
 export { removeHtml };

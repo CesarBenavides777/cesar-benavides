@@ -19,10 +19,9 @@ interface Props {
 
 const DEFAULT_VALUE = "";
 
-
-
 const TextAreaField: FC<Props> = ({ field, fieldErrors, formId }) => {
-  const { id, type, label, description, cssClass, isRequired, databaseId } = field;
+  const { id, type, label, description, cssClass, isRequired, databaseId } =
+    field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
@@ -73,6 +72,6 @@ const TextAreaField: FC<Props> = ({ field, fieldErrors, formId }) => {
         : null}
     </div>
   );
-}
+};
 
 export default TextAreaField;

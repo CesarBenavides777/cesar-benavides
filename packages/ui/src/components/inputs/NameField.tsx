@@ -48,8 +48,21 @@ const AUTOCOMPLETE_ATTRIBUTES: { [key: string]: string } = {
   suffix: "honorific-suffix",
 };
 
-export default function NameField({ field, fieldErrors, formId }: Props): JSX.Element {
-  const { id, type, label, description, cssClass, inputs, isRequired, databaseId } = field;
+export default function NameField({
+  field,
+  fieldErrors,
+  formId,
+}: Props): JSX.Element {
+  const {
+    id,
+    type,
+    label,
+    description,
+    cssClass,
+    inputs,
+    isRequired,
+    databaseId,
+  } = field;
   const htmlId = `field_${formId}_${databaseId}`;
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find(
@@ -136,14 +149,18 @@ export default function NameField({ field, fieldErrors, formId }: Props): JSX.El
                     id={`input_${formId}_${databaseId}_${key}`}
                     className={`form-input[type='text'] font-sans`}
                     required={Boolean(isRequired)}
-                    placeholder={placeholder || isRequired ? `${inputLabel}*` : inputLabel || ""}
+                    placeholder={
+                      placeholder || isRequired
+                        ? `${inputLabel}*`
+                        : inputLabel || ""
+                    }
                     value={nameValues?.[key] || ""}
                     onChange={handleChange}
                   />
                 </div>
               )
             );
-          }
+          },
         )}
       </fieldset>
       {description ? (

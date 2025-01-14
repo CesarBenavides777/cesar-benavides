@@ -5,10 +5,8 @@ import Link from "next/link";
 import AnimatedImage from "@workspace/ui/components/animated-image";
 
 export type PostCardProps = Post & {
-    className?: string;
-}
-
-
+  className?: string;
+};
 
 const PostCard = ({
   className,
@@ -18,15 +16,11 @@ const PostCard = ({
   uri,
   featuredImage,
   tags,
-  id
+  id,
 }: PostCardProps) => {
-
   if (!title || !uri) {
     return null;
   }
-
-
-   
 
   return (
     <Link href={uri} className="group">
@@ -49,10 +43,10 @@ const PostCard = ({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
         </motion.div> */}
-        <AnimatedImage 
-          media={featuredImage?.node} 
-          postId={id} 
-          main={true} 
+        <AnimatedImage
+          media={featuredImage?.node}
+          postId={id}
+          main={true}
           className="aspect-w-16 aspect-h-9 relative"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>

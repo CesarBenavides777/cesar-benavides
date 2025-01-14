@@ -17,9 +17,6 @@ const MENU_FRAGMENT = gql`
   }
 `;
 
-
-
-
 export const USER_FIELDS = gql`
   fragment UserFields on User {
     auth {
@@ -115,8 +112,6 @@ export const LOGIN_WITH_OAUTH = gql`
   ${USER_FIELDS}
 `;
 
-
-
 export const GET_ALL_POSTS = gql`
   query AllPostsQuery {
     posts(first: 100) {
@@ -194,7 +189,6 @@ export const MEDIA_ITEM_FRAGMENT = gql`
     srcSet
   }
 `;
-
 
 export const BLOCKS_FRAGMENT = gql`
   fragment BlocksFragment on PageContent {

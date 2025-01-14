@@ -28,14 +28,8 @@ function DisplayCard({
   wrapperActive,
   ...props
 }: DisplayCardProps) {
-
   return (
-    <div
-      className={cn(
-        className
-      )}
-      {...props}
-    >
+    <div className={cn(className)} {...props}>
       <div>
         {/* <span className="relative inline-block rounded-full bg-blue-800 p-1">
           {icon}
@@ -45,7 +39,7 @@ function DisplayCard({
             "text-lg font-medium",
             "whitespace-nowrap group-hover:whitespace-normal",
             "transition-all duration-700",
-            titleClassName
+            titleClassName,
           )}
         >
           {title}
@@ -72,7 +66,11 @@ interface DisplayCardsProps {
   active?: boolean;
 }
 
-export default function DisplayCards({ cards, className, active }: DisplayCardsProps): JSX.Element {
+export default function DisplayCards({
+  cards,
+  className,
+  active,
+}: DisplayCardsProps): JSX.Element {
   const displayCards = cards;
 
   if (!displayCards) {
