@@ -6,9 +6,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
-import {
-  getConfig,
-} from "@faustwp/core";
+import { getConfig } from "@faustwp/core/dist/mjs/config/index.js";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
