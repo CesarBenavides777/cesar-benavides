@@ -1,5 +1,5 @@
 
-import { getClient } from "@faustwp/experimental-app-router";
+import { getClient } from "@/providers/apollo/rsc";
 import { GET_ALL_POSTS } from "@/queries";
 const getAllPosts = async () => {
   const client = await getClient();

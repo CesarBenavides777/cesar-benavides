@@ -804,6 +804,25 @@ export enum AmPmEnum {
   Pm = 'PM'
 }
 
+/** The Headless Login authentication data. */
+export type AuthenticationData = {
+  __typename?: 'AuthenticationData';
+  /** A new authentication token to use in future requests. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** Whether the user secret has been revoked. */
+  isUserSecretRevoked?: Maybe<Scalars['Boolean']['output']>;
+  /** A list of linked identities from the Headless Login provider. */
+  linkedIdentities?: Maybe<Array<Maybe<LinkedIdentity>>>;
+  /** A new refresh token to use in future requests. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The refresh token expiration timestamp. */
+  refreshTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** The user secret. */
+  userSecret?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   __typename?: 'Avatar';
@@ -2557,8 +2576,6 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Experience = 'EXPERIENCE',
   /** The Type of Content object */
-  GraphqlDocument = 'GRAPHQL_DOCUMENT',
-  /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
   Post = 'POST',
@@ -2688,12 +2705,6 @@ export type ContentTypeToTaxonomyConnectionPageInfo = PageInfo & TaxonomyConnect
 export enum ContentTypesOfCategoryEnum {
   /** The Type of Content object */
   Post = 'POST'
-}
-
-/** Allowed Content Types of the GraphqlDocumentGroup taxonomy. */
-export enum ContentTypesOfGraphqlDocumentGroupEnum {
-  /** The Type of Content object */
-  GraphqlDocument = 'GRAPHQL_DOCUMENT'
 }
 
 /** Allowed Content Types of the PostFormat taxonomy. */
@@ -8245,68 +8256,6 @@ export type CreateExperiencePayload = {
   experience?: Maybe<Experience>;
 };
 
-/** Input for the createGraphqlDocumentGroup mutation. */
-export type CreateGraphqlDocumentGroupInput = {
-  /** The slug that the graphql_document_group will be an alias of */
-  aliasOf?: InputMaybe<Scalars['String']['input']>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the graphql_document_group object */
-  description?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the graphql_document_group object to mutate */
-  name: Scalars['String']['input'];
-  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
-  slug?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the createGraphqlDocumentGroup mutation. */
-export type CreateGraphqlDocumentGroupPayload = {
-  __typename?: 'CreateGraphqlDocumentGroupPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The created graphql_document_group */
-  graphqlDocumentGroup?: Maybe<GraphqlDocumentGroup>;
-};
-
-/** Input for the createGraphqlDocument mutation. */
-export type CreateGraphqlDocumentInput = {
-  /** Alias names for saved GraphQL query documents */
-  alias?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>;
-  /** Description for the saved GraphQL document */
-  description?: InputMaybe<Scalars['String']['input']>;
-  /** Allow, deny or default access grant for specific query */
-  grant?: InputMaybe<Scalars['String']['input']>;
-  /** Set connections between the graphqlDocument and graphqlDocumentGroups */
-  graphqlDocumentGroups?: InputMaybe<GraphqlDocumentGraphqlDocumentGroupsInput>;
-  /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-  maxAgeHeader?: InputMaybe<Scalars['Int']['input']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>;
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the createGraphqlDocument mutation. */
-export type CreateGraphqlDocumentPayload = {
-  __typename?: 'CreateGraphqlDocumentPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The Post object mutation type. */
-  graphqlDocument?: Maybe<GraphqlDocument>;
-};
-
 /** Input for the createMediaItem mutation. */
 export type CreateMediaItemInput = {
   /** Alternative text to display when mediaItem is not displayed */
@@ -8851,48 +8800,6 @@ export type DeleteGfEntryPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The entry object before it was deleted. */
   entry?: Maybe<GfSubmittedEntry>;
-};
-
-/** Input for the deleteGraphqlDocumentGroup mutation. */
-export type DeleteGraphqlDocumentGroupInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the graphqlDocumentGroup to delete */
-  id: Scalars['ID']['input'];
-};
-
-/** The payload for the deleteGraphqlDocumentGroup mutation. */
-export type DeleteGraphqlDocumentGroupPayload = {
-  __typename?: 'DeleteGraphqlDocumentGroupPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The ID of the deleted object */
-  deletedId?: Maybe<Scalars['ID']['output']>;
-  /** The deleted term object */
-  graphqlDocumentGroup?: Maybe<GraphqlDocumentGroup>;
-};
-
-/** Input for the deleteGraphqlDocument mutation. */
-export type DeleteGraphqlDocumentInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** Whether the object should be force deleted instead of being moved to the trash */
-  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The ID of the graphqlDocument to delete */
-  id: Scalars['ID']['input'];
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** The payload for the deleteGraphqlDocument mutation. */
-export type DeleteGraphqlDocumentPayload = {
-  __typename?: 'DeleteGraphqlDocumentPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The ID of the deleted object */
-  deletedId?: Maybe<Scalars['ID']['output']>;
-  /** The object before it was deleted */
-  graphqlDocument?: Maybe<GraphqlDocument>;
 };
 
 /** Input for the deleteMediaItem mutation. */
@@ -9441,7 +9348,7 @@ export enum EntryTypeEnum {
 }
 
 /** The experience type */
-export type Experience = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
+export type Experience = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfPageContent & {
   __typename?: 'Experience';
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
   ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
@@ -9512,6 +9419,8 @@ export type Experience = ContentNode & DatabaseIdentifier & HierarchicalContentN
   modified?: Maybe<Scalars['String']['output']>;
   /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
   modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Fields of the PageContent ACF Field Group */
+  pageContent?: Maybe<PageContent>;
   /** The parent of the node. The parent object can be of various types */
   parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
   /** Database id of the parent node */
@@ -9640,6 +9549,36 @@ export type ExperienceToPreviewConnectionEdge = Edge & ExperienceConnectionEdge 
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: Experience;
+};
+
+/** The Login client options for the facebook provider. */
+export type FacebookClientOptions = LoginClientOptions & {
+  __typename?: 'FacebookClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** Enable the Facebook Beta Tier. */
+  enableBetaTier?: Maybe<Scalars['Boolean']['output']>;
+  /** The Facebook Graph API version. */
+  graphApiVersion?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The fields to request from the Facebook Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available fields. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the facebook provider. */
+export type FacebookLoginOptions = LoginOptions & {
+  __typename?: 'FacebookLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Field error. */
@@ -11805,6 +11744,32 @@ export type GfSubmittedEntryConnectionPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** The Login client options for the github provider. */
+export type GithubClientOptions = LoginClientOptions & {
+  __typename?: 'GithubClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the provider. See https://docs.github.com/en/developers/apps/building-headless-login-apps/scope-for-headless-login-apps for a list of available scope. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the github provider. */
+export type GithubLoginOptions = LoginOptions & {
+  __typename?: 'GithubLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The &quot;GlobalOptions&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type GlobalOptions = AcfFieldGroup & AcfFieldGroupFields & GlobalOptions_Fields & {
   __typename?: 'GlobalOptions';
@@ -11856,767 +11821,45 @@ export enum GlobalStylesheetTypesEnum {
   Variables = 'VARIABLES'
 }
 
-/** The graphqlDocument type */
-export type GraphqlDocument = ContentNode & DatabaseIdentifier & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
-  __typename?: 'GraphqlDocument';
-  /** Alias names for saved GraphQL query documents */
-  alias?: Maybe<Array<Scalars['String']['output']>>;
-  /**
-   * The ancestors of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  ancestors?: Maybe<GraphqlDocumentToGraphqlDocumentConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** Description for the saved GraphQL document */
-  description?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** Allow, deny or default access grant for specific query */
-  grant?: Maybe<Scalars['String']['output']>;
-  /** Connection between the GraphqlDocument type and the graphqlDocumentGroup type */
-  graphqlDocumentGroups?: Maybe<GraphqlDocumentToGraphqlDocumentGroupConnection>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  graphqlDocumentId: Scalars['Int']['output'];
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** Whether the graphql_document object is password protected. */
-  hasPassword?: Maybe<Scalars['Boolean']['output']>;
-  /** The globally unique identifier of the graphql_document object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-  maxAgeHeader?: Maybe<Scalars['Int']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /**
-   * The parent of the content node.
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  parent?: Maybe<GraphqlDocumentToParentConnectionEdge>;
-  /** The password for the graphql_document object. */
-  password?: Maybe<Scalars['String']['output']>;
-  /**
-   * Connection between the GraphqlDocument type and the graphqlDocument type
-   * @deprecated The &quot;GraphqlDocument&quot; Type is not publicly queryable and does not support previews. This field will be removed in the future.
-   */
-  preview?: Maybe<GraphqlDocumentToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The Yoast SEO data of the ContentNode */
-  seo?: Maybe<PostTypeSeo>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Connection between the GraphqlDocument type and the TermNode type */
-  terms?: Maybe<GraphqlDocumentToTermNodeConnection>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
+/** The Login client options for the google provider. */
+export type GoogleClientOptions = LoginClientOptions & {
+  __typename?: 'GoogleClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The Google Cloud organization the OAuth prompt is optimized for. If `*` the prompt is optimized for general use with any Google Cloud organization. */
+  hostedDomain?: Maybe<Scalars['String']['output']>;
+  /** The prompt used for authentication and consent. Defaults to `consent`. */
+  promptType?: Maybe<GoogleProviderPromptTypeEnum>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the Google Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
 };
 
-
-/** The graphqlDocument type */
-export type GraphqlDocumentAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+/** The Headless Login options for the google provider. */
+export type GoogleLoginOptions = LoginOptions & {
+  __typename?: 'GoogleLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
 };
 
-
-/** The graphqlDocument type */
-export type GraphqlDocumentContentArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-
-/** The graphqlDocument type */
-export type GraphqlDocumentEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The graphqlDocument type */
-export type GraphqlDocumentEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The graphqlDocument type */
-export type GraphqlDocumentGraphqlDocumentGroupsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<GraphqlDocumentToGraphqlDocumentGroupConnectionWhereArgs>;
-};
-
-
-/** The graphqlDocument type */
-export type GraphqlDocumentTermsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<GraphqlDocumentToTermNodeConnectionWhereArgs>;
-};
-
-
-/** The graphqlDocument type */
-export type GraphqlDocumentTitleArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-/** Connection to graphqlDocument Nodes */
-export type GraphqlDocumentConnection = {
-  /** A list of edges (relational context) between RootQuery and connected graphqlDocument Nodes */
-  edges: Array<GraphqlDocumentConnectionEdge>;
-  /** A list of connected graphqlDocument Nodes */
-  nodes: Array<GraphqlDocument>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentConnectionPageInfo;
-};
-
-/** Edge between a Node and a connected graphqlDocument */
-export type GraphqlDocumentConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected graphqlDocument Node */
-  node: GraphqlDocument;
-};
-
-/** Page Info on the connected GraphqlDocumentConnectionEdge */
-export type GraphqlDocumentConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Set relationships between the graphqlDocument to graphqlDocumentGroups */
-export type GraphqlDocumentGraphqlDocumentGroupsInput = {
-  /** If true, this will append the graphqlDocumentGroup to existing related graphqlDocumentGroups. If false, this will replace existing relationships. Default true. */
-  append?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The input list of items to set. */
-  nodes?: InputMaybe<Array<InputMaybe<GraphqlDocumentGraphqlDocumentGroupsNodeInput>>>;
-};
-
-/** List of graphqlDocumentGroups to connect the graphqlDocument to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
-export type GraphqlDocumentGraphqlDocumentGroupsNodeInput = {
-  /** The description of the graphqlDocumentGroup. This field is used to set a description of the graphqlDocumentGroup if a new one is created during the mutation. */
-  description?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the graphqlDocumentGroup. If present, this will be used to connect to the graphqlDocument. If no existing graphqlDocumentGroup exists with this ID, no connection will be made. */
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /** The name of the graphqlDocumentGroup. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the graphqlDocumentGroup. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
-  slug?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The graphqlDocumentGroup type */
-export type GraphqlDocumentGroup = DatabaseIdentifier & Node & TermNode & UniformResourceIdentifiable & {
-  __typename?: 'GraphqlDocumentGroup';
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the GraphqlDocumentGroup type and the ContentNode type */
-  contentNodes?: Maybe<GraphqlDocumentGroupToContentNodeConnection>;
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  graphqlDocumentGroupId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the GraphqlDocumentGroup type and the graphqlDocument type */
-  graphqlDocuments?: Maybe<GraphqlDocumentGroupToGraphqlDocumentConnection>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The link to the term */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The Yoast SEO data of the Groups taxonomy. */
-  seo?: Maybe<TaxonomySeo>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** Connection between the GraphqlDocumentGroup type and the Taxonomy type */
-  taxonomy?: Maybe<GraphqlDocumentGroupToTaxonomyConnectionEdge>;
-  /** The name of the taxonomy that the object is associated with */
-  taxonomyName?: Maybe<Scalars['String']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']['output']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** The graphqlDocumentGroup type */
-export type GraphqlDocumentGroupContentNodesArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<GraphqlDocumentGroupToContentNodeConnectionWhereArgs>;
-};
-
-
-/** The graphqlDocumentGroup type */
-export type GraphqlDocumentGroupEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The graphqlDocumentGroup type */
-export type GraphqlDocumentGroupEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-/** The graphqlDocumentGroup type */
-export type GraphqlDocumentGroupGraphqlDocumentsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<GraphqlDocumentGroupToGraphqlDocumentConnectionWhereArgs>;
-};
-
-/** Connection to graphqlDocumentGroup Nodes */
-export type GraphqlDocumentGroupConnection = {
-  /** A list of edges (relational context) between RootQuery and connected graphqlDocumentGroup Nodes */
-  edges: Array<GraphqlDocumentGroupConnectionEdge>;
-  /** A list of connected graphqlDocumentGroup Nodes */
-  nodes: Array<GraphqlDocumentGroup>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentGroupConnectionPageInfo;
-};
-
-/** Edge between a Node and a connected graphqlDocumentGroup */
-export type GraphqlDocumentGroupConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected graphqlDocumentGroup Node */
-  node: GraphqlDocumentGroup;
-};
-
-/** Page Info on the connected GraphqlDocumentGroupConnectionEdge */
-export type GraphqlDocumentGroupConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
-export enum GraphqlDocumentGroupIdType {
-  /** The Database ID for the node */
-  DatabaseId = 'DATABASE_ID',
-  /** The hashed Global ID */
-  Id = 'ID',
-  /** The name of the node */
-  Name = 'NAME',
-  /** Url friendly name of the node */
-  Slug = 'SLUG',
-  /** The URI for the node */
-  Uri = 'URI'
+/** The Google OAuth2 Provider prompt type. */
+export enum GoogleProviderPromptTypeEnum {
+  /** TThe authorization server prompts the user for consent before returning information to the client. */
+  Consent = 'CONSENT',
+  /** The authorization server does not display any authentication or user consent screens; it will return an error if the user is not already authenticated and has not pre-configured consent for the requested scopes. You can use none to check for existing authentication and/or consent. */
+  None = 'NONE',
+  /** The authorization server prompts the user to select a user account. This allows a user who has multiple accounts at the authorization server to select amongst the multiple accounts that they may have current sessions for. */
+  SelectAccount = 'SELECT_ACCOUNT'
 }
-
-/** Connection between the GraphqlDocumentGroup type and the ContentNode type */
-export type GraphqlDocumentGroupToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'GraphqlDocumentGroupToContentNodeConnection';
-  /** Edges for the GraphqlDocumentGroupToContentNodeConnection connection */
-  edges: Array<GraphqlDocumentGroupToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentGroupToContentNodeConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type GraphqlDocumentGroupToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'GraphqlDocumentGroupToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
-
-/** Page Info on the &quot;GraphqlDocumentGroupToContentNodeConnection&quot; */
-export type GraphqlDocumentGroupToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'GraphqlDocumentGroupToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the GraphqlDocumentGroupToContentNodeConnection connection */
-export type GraphqlDocumentGroupToContentNodeConnectionWhereArgs = {
-  /** The Types of content to filter */
-  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfGraphqlDocumentGroupEnum>>>;
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Connection between the GraphqlDocumentGroup type and the graphqlDocument type */
-export type GraphqlDocumentGroupToGraphqlDocumentConnection = Connection & GraphqlDocumentConnection & {
-  __typename?: 'GraphqlDocumentGroupToGraphqlDocumentConnection';
-  /** Edges for the GraphqlDocumentGroupToGraphqlDocumentConnection connection */
-  edges: Array<GraphqlDocumentGroupToGraphqlDocumentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<GraphqlDocument>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type GraphqlDocumentGroupToGraphqlDocumentConnectionEdge = Edge & GraphqlDocumentConnectionEdge & {
-  __typename?: 'GraphqlDocumentGroupToGraphqlDocumentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: GraphqlDocument;
-};
-
-/** Page Info on the &quot;GraphqlDocumentGroupToGraphqlDocumentConnection&quot; */
-export type GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo = GraphqlDocumentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the GraphqlDocumentGroupToGraphqlDocumentConnection connection */
-export type GraphqlDocumentGroupToGraphqlDocumentConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Connection between the GraphqlDocumentGroup type and the Taxonomy type */
-export type GraphqlDocumentGroupToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
-  __typename?: 'GraphqlDocumentGroupToTaxonomyConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Taxonomy;
-};
-
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
-export enum GraphqlDocumentIdType {
-  /** Identify a resource by the Database ID. */
-  DatabaseId = 'DATABASE_ID',
-  /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID',
-  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
-  Slug = 'SLUG',
-  /** Identify a resource by the URI. */
-  Uri = 'URI'
-}
-
-/** Connection between the GraphqlDocument type and the graphqlDocument type */
-export type GraphqlDocumentToGraphqlDocumentConnection = Connection & GraphqlDocumentConnection & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentConnection';
-  /** Edges for the GraphqlDocumentToGraphqlDocumentConnection connection */
-  edges: Array<GraphqlDocumentToGraphqlDocumentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<GraphqlDocument>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentToGraphqlDocumentConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type GraphqlDocumentToGraphqlDocumentConnectionEdge = Edge & GraphqlDocumentConnectionEdge & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated This content type is not hierarchical and typically will not have ancestors
-   */
-  node: GraphqlDocument;
-};
-
-/** Page Info on the &quot;GraphqlDocumentToGraphqlDocumentConnection&quot; */
-export type GraphqlDocumentToGraphqlDocumentConnectionPageInfo = GraphqlDocumentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Connection between the GraphqlDocument type and the graphqlDocumentGroup type */
-export type GraphqlDocumentToGraphqlDocumentGroupConnection = Connection & GraphqlDocumentGroupConnection & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentGroupConnection';
-  /** Edges for the GraphqlDocumentToGraphqlDocumentGroupConnection connection */
-  edges: Array<GraphqlDocumentToGraphqlDocumentGroupConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<GraphqlDocumentGroup>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type GraphqlDocumentToGraphqlDocumentGroupConnectionEdge = Edge & GraphqlDocumentGroupConnectionEdge & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentGroupConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The Yoast SEO Primary graphql_document_group */
-  isPrimary?: Maybe<Scalars['Boolean']['output']>;
-  /** The item at the end of the edge */
-  node: GraphqlDocumentGroup;
-};
-
-/** Page Info on the &quot;GraphqlDocumentToGraphqlDocumentGroupConnection&quot; */
-export type GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo = GraphqlDocumentGroupConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the GraphqlDocumentToGraphqlDocumentGroupConnection connection */
-export type GraphqlDocumentToGraphqlDocumentGroupConnectionWhereArgs = {
-  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
-  cacheDomain?: InputMaybe<Scalars['String']['input']>;
-  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
-  childOf?: InputMaybe<Scalars['Int']['input']>;
-  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
-  childless?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Retrieve terms where the description is LIKE the input value. Default empty. */
-  descriptionLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
-  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
-  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
-  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
-  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Array of term ids to include. Default empty array. */
-  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of names to return term(s) for. Default empty. */
-  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Retrieve terms where the name is LIKE the input value. Default empty. */
-  nameLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of object IDs. Results will be limited to terms associated with these objects. */
-  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Direction the connection should be ordered in */
-  order?: InputMaybe<OrderEnum>;
-  /** Field(s) to order terms by. Defaults to 'name'. */
-  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
-  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
-  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Parent term ID to retrieve direct-child terms of. Default empty. */
-  parent?: InputMaybe<Scalars['Int']['input']>;
-  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Array of slugs to return term(s) for. Default empty. */
-  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to prime meta caches for matched terms. Default true. */
-  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** Connection between the GraphqlDocument type and the graphqlDocument type */
-export type GraphqlDocumentToParentConnectionEdge = Edge & GraphqlDocumentConnectionEdge & OneToOneConnection & {
-  __typename?: 'GraphqlDocumentToParentConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The node of the connection, without the edges
-   * @deprecated This content type is not hierarchical and typically will not have a parent
-   */
-  node: GraphqlDocument;
-};
-
-/** Connection between the GraphqlDocument type and the graphqlDocument type */
-export type GraphqlDocumentToPreviewConnectionEdge = Edge & GraphqlDocumentConnectionEdge & OneToOneConnection & {
-  __typename?: 'GraphqlDocumentToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /**
-   * The node of the connection, without the edges
-   * @deprecated The &quot;GraphqlDocument&quot; Type is not publicly queryable and does not support previews. This field will be removed in the future.
-   */
-  node: GraphqlDocument;
-};
-
-/** Connection between the GraphqlDocument type and the TermNode type */
-export type GraphqlDocumentToTermNodeConnection = Connection & TermNodeConnection & {
-  __typename?: 'GraphqlDocumentToTermNodeConnection';
-  /** Edges for the GraphqlDocumentToTermNodeConnection connection */
-  edges: Array<GraphqlDocumentToTermNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<TermNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentToTermNodeConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type GraphqlDocumentToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
-  __typename?: 'GraphqlDocumentToTermNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: TermNode;
-};
-
-/** Page Info on the &quot;GraphqlDocumentToTermNodeConnection&quot; */
-export type GraphqlDocumentToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
-  __typename?: 'GraphqlDocumentToTermNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the GraphqlDocumentToTermNodeConnection connection */
-export type GraphqlDocumentToTermNodeConnectionWhereArgs = {
-  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
-  cacheDomain?: InputMaybe<Scalars['String']['input']>;
-  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
-  childOf?: InputMaybe<Scalars['Int']['input']>;
-  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
-  childless?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Retrieve terms where the description is LIKE the input value. Default empty. */
-  descriptionLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
-  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
-  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
-  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
-  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Array of term ids to include. Default empty array. */
-  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of names to return term(s) for. Default empty. */
-  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Retrieve terms where the name is LIKE the input value. Default empty. */
-  nameLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of object IDs. Results will be limited to terms associated with these objects. */
-  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Direction the connection should be ordered in */
-  order?: InputMaybe<OrderEnum>;
-  /** Field(s) to order terms by. Defaults to 'name'. */
-  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
-  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
-  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Parent term ID to retrieve direct-child terms of. Default empty. */
-  parent?: InputMaybe<Scalars['Int']['input']>;
-  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Array of slugs to return term(s) for. Default empty. */
-  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The Taxonomy to filter terms by */
-  taxonomies?: InputMaybe<Array<InputMaybe<TaxonomyEnum>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to prime meta caches for matched terms. Default true. */
-  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
-};
 
 /** A block used for editing the site */
 export type GravityformsForm = EditorBlock & {
@@ -13228,6 +12471,92 @@ export type ImageInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** The Login client options for the instagram provider. */
+export type InstagramClientOptions = LoginClientOptions & {
+  __typename?: 'InstagramClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the Instagram Graph API. See https://developers.facebook.com/docs/instagram-basic-display-api/overview#permissions for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the instagram provider. */
+export type InstagramLoginOptions = LoginOptions & {
+  __typename?: 'InstagramLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the LinkUserIdentity mutation. */
+export type LinkUserIdentityInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The user identity to use when logging in. Required by the SiteToken provider. */
+  identity?: InputMaybe<Scalars['String']['input']>;
+  /** The parsed response from an OAuth2 Authentication Provider. */
+  oauthResponse?: InputMaybe<OAuthProviderResponseInput>;
+  /** The Headless Login provider to use when logging in. */
+  provider: LoginProviderEnum;
+  /** The user ID to link the identity to. Accepts either a global or database ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the LinkUserIdentity mutation. */
+export type LinkUserIdentityPayload = {
+  __typename?: 'LinkUserIdentityPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Whether the identity was successfully linked to the user. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+  /** The user that was logged in. */
+  user?: Maybe<User>;
+};
+
+/** The linked identity from the login provider. */
+export type LinkedIdentity = {
+  __typename?: 'LinkedIdentity';
+  /** The internal user identifier from the login provider. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** The login provider which provided the identity. */
+  provider?: Maybe<LoginProviderEnum>;
+};
+
+/** The Login client options for the linkedin provider. */
+export type LinkedinClientOptions = LoginClientOptions & {
+  __typename?: 'LinkedinClientOptions';
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The scope to request from the provider. See https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication?context=linkedin%2Fcontext#permission-types for a list of available scopes. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the linkedin provider. */
+export type LinkedinLoginOptions = LoginOptions & {
+  __typename?: 'LinkedinLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A Gravity Forms list field. */
 export type ListField = FormField & GfFieldWithAddIconUrlSetting & GfFieldWithAdminLabelSetting & GfFieldWithChoices & GfFieldWithColumnsSetting & GfFieldWithConditionalLogicSetting & GfFieldWithCssClassSetting & GfFieldWithDeleteIconUrlSetting & GfFieldWithDescriptionSetting & GfFieldWithErrorMessageSetting & GfFieldWithLabelPlacementSetting & GfFieldWithLabelSetting & GfFieldWithMaxRowsSetting & GfFieldWithPersonalData & GfFieldWithPrepopulateFieldSetting & GfFieldWithRulesSetting & Node & {
   __typename?: 'ListField';
@@ -13311,41 +12640,89 @@ export type ListFieldValue = {
   values?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
-/** Input for the loginWithCookies mutation. */
-export type LoginWithCookiesInput = {
+/** The Headless Login client. */
+export type LoginClient = {
+  __typename?: 'LoginClient';
+  /** The authorization URL. */
+  authorizationUrl?: Maybe<Scalars['String']['output']>;
+  /** The client ID. */
+  clientId?: Maybe<Scalars['ID']['output']>;
+  /** The client options. */
+  clientOptions?: Maybe<LoginClientOptions>;
+  /** Whether the client is enabled. */
+  isEnabled?: Maybe<Scalars['Boolean']['output']>;
+  /** The login options. */
+  loginOptions?: Maybe<LoginOptions>;
+  /** The client name. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** A field used for ordering clients. */
+  order?: Maybe<Scalars['Int']['output']>;
+  /** The provider type. */
+  provider?: Maybe<LoginProviderEnum>;
+};
+
+/** The Client Options for the Headless Login provider. */
+export type LoginClientOptions = {
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the Login mutation. */
+export type LoginInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** Input your user/e-mail. */
-  login: Scalars['String']['input'];
-  /** Input your password. */
-  password: Scalars['String']['input'];
-  /** Whether to "remember" the user. Increases the time that the cookie will be kept. Default false. */
-  rememberMe?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The WordPress user credentials. Required by the Password provider. */
+  credentials?: InputMaybe<PasswordProviderResponseInput>;
+  /** The user identity to use when logging in. Required by the SiteToken provider. */
+  identity?: InputMaybe<Scalars['String']['input']>;
+  /** The parsed response from an OAuth2 Authentication Provider. */
+  oauthResponse?: InputMaybe<OAuthProviderResponseInput>;
+  /** The Headless Login provider to use when logging in. */
+  provider: LoginProviderEnum;
 };
 
-/** The payload for the loginWithCookies mutation. */
-export type LoginWithCookiesPayload = {
-  __typename?: 'LoginWithCookiesPayload';
+/** The login options for the Headless Login provider. */
+export type LoginOptions = {
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The payload for the Login mutation. */
+export type LoginPayload = {
+  __typename?: 'LoginPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** Login operation status */
-  status?: Maybe<Scalars['String']['output']>;
+  /** Refresh Token that can be used to refresh the JWT Token. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The refresh token expiration timestamp. */
+  refreshTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** The user that was logged in. */
+  user?: Maybe<User>;
 };
 
-/** Input for the logout mutation. */
-export type LogoutInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the logout mutation. */
-export type LogoutPayload = {
-  __typename?: 'LogoutPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** Logout operation status */
-  status?: Maybe<Scalars['String']['output']>;
-};
+/** The Headless Login Provider. */
+export enum LoginProviderEnum {
+  /** The Facebook provider. */
+  Facebook = 'FACEBOOK',
+  /** The GitHub provider. */
+  Github = 'GITHUB',
+  /** The Google provider. */
+  Google = 'GOOGLE',
+  /** The Instagram provider. */
+  Instagram = 'INSTAGRAM',
+  /** The LinkedIn provider. */
+  Linkedin = 'LINKEDIN',
+  /** The OAuth2 (Generic) provider. */
+  Oauth2Generic = 'OAUTH2_GENERIC',
+  /** The Password provider. */
+  Password = 'PASSWORD',
+  /** The Site Token provider. */
+  Sitetoken = 'SITETOKEN'
+}
 
 /** File details for a Media Item */
 export type MediaDetails = {
@@ -14854,6 +14231,48 @@ export enum NumberFieldFormatEnum {
   DecimalDot = 'DECIMAL_DOT'
 }
 
+/** The parsed response from the OAuth Provider. */
+export type OAuthProviderResponseInput = {
+  /** The authorization code returned from the OAuth provider. */
+  code: Scalars['String']['input'];
+  /** The state returned from the OAuth provider. */
+  state?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The Login client options for the oauth2-generic provider. */
+export type Oauth2GenericClientOptions = LoginClientOptions & {
+  __typename?: 'Oauth2GenericClientOptions';
+  /** The URL to request an access token. */
+  accessTokenUrl?: Maybe<Scalars['String']['output']>;
+  /** The URL to redirect the user to in order to authorize the client. */
+  authorizationUrl?: Maybe<Scalars['String']['output']>;
+  /** The client ID. */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** The client Secret. */
+  clientSecret?: Maybe<Scalars['String']['output']>;
+  /** The client redirect URI. */
+  redirectUri?: Maybe<Scalars['String']['output']>;
+  /** The URL to request the resource owner details. */
+  resourceOwnerUrl?: Maybe<Scalars['String']['output']>;
+  /** The fields to request from the Generic Graph API. See https://developers.facebook.com/docs/graph-api/reference/user for a list of available fields. */
+  scope?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The scope separator to use when building the authorization URL. Defaults to `,`. */
+  scopeSeparator?: Maybe<Scalars['String']['output']>;
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the oauth2-generic provider. */
+export type Oauth2GenericLoginOptions = LoginOptions & {
+  __typename?: 'Oauth2GenericLoginOptions';
+  /** Whether to create users if none exist. */
+  createUserIfNoneExists?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to link existing users. */
+  linkExistingUsers?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
 export type OneToOneConnection = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -15990,6 +15409,13 @@ export type PageToRevisionConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** The Login client options for the password provider. */
+export type PasswordClientOptions = LoginClientOptions & {
+  __typename?: 'PasswordClientOptions';
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** A Gravity Forms password field. */
 export type PasswordField = FormField & GfFieldWithAdminLabelSetting & GfFieldWithConditionalLogicSetting & GfFieldWithCssClassSetting & GfFieldWithDescriptionSetting & GfFieldWithErrorMessageSetting & GfFieldWithInputs & GfFieldWithLabelPlacementSetting & GfFieldWithLabelSetting & GfFieldWithPasswordSetting & GfFieldWithPasswordStrengthSetting & GfFieldWithPasswordVisibilitySetting & GfFieldWithPersonalData & GfFieldWithRulesSetting & GfFieldWithSizeSetting & GfFieldWithSubLabelPlacementSetting & Node & {
   __typename?: 'PasswordField';
@@ -16072,6 +15498,21 @@ export type PasswordInputProperty = GfFieldInput & GfFieldInputWithPasswordSetti
   label?: Maybe<Scalars['String']['output']>;
   /** Placeholder text to give the user a hint on how to fill out the field. This is not submitted with the form. */
   placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Headless Login options for the password provider. */
+export type PasswordLoginOptions = LoginOptions & {
+  __typename?: 'PasswordLoginOptions';
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The parsed response from the Password Provider. */
+export type PasswordProviderResponseInput = {
+  /** The password for the WordPress user. */
+  password: Scalars['String']['input'];
+  /** The WordPress username to authenticate ass */
+  username: Scalars['String']['input'];
 };
 
 /** A Gravity Forms phone field. */
@@ -21559,6 +21000,52 @@ export enum RecaptchaTypeEnum {
   Invisible = 'INVISIBLE'
 }
 
+/** Input for the RefreshToken mutation. */
+export type RefreshTokenInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** A valid, previously issued JWT refresh token. If valid, a new JWT authentication token will be provided. If invalid, expired, revoked or otherwise invalid, the `authToken` will return null, and the `success` field will return `false`. */
+  refreshToken: Scalars['String']['input'];
+};
+
+/** The payload for the RefreshToken mutation. */
+export type RefreshTokenPayload = {
+  __typename?: 'RefreshTokenPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** The authentication token expiration timestamp. */
+  authTokenExpiration?: Maybe<Scalars['String']['output']>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Whether the auth token was successfully refreshed. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the RefreshUserSecret mutation. */
+export type RefreshUserSecretInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The current WordPress user ID. Accepts either a global or database ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the RefreshUserSecret mutation. */
+export type RefreshUserSecretPayload = {
+  __typename?: 'RefreshUserSecretPayload';
+  /** JWT Token that can be used in future requests for Authentication. */
+  authToken?: Maybe<Scalars['String']['output']>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** JWT Token that can be used in future requests for Authentication. */
+  refreshToken?: Maybe<Scalars['String']['output']>;
+  /** The revoked user secret. */
+  revokedUserSecret?: Maybe<Scalars['String']['output']>;
+  /** Whether the User secret was successfully revoked. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+  /** The new user secret. */
+  userSecret?: Maybe<Scalars['String']['output']>;
+};
+
 /** Input for the registerUser mutation. */
 export type RegisterUserInput = {
   /** User's AOL IM account. */
@@ -21654,6 +21141,25 @@ export type RestoreCommentPayload = {
   restoredId?: Maybe<Scalars['ID']['output']>;
 };
 
+/** Input for the RevokeUserSecret mutation. */
+export type RevokeUserSecretInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The WordPress user ID. Accepts either a database or global ID. */
+  userId: Scalars['ID']['input'];
+};
+
+/** The payload for the RevokeUserSecret mutation. */
+export type RevokeUserSecretPayload = {
+  __typename?: 'RevokeUserSecretPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The revoked user secret. */
+  revokedUserSecret?: Maybe<Scalars['String']['output']>;
+  /** Whether the User secret was successfully revoked. */
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The root mutation */
 export type RootMutation = {
   __typename?: 'RootMutation';
@@ -21663,10 +21169,6 @@ export type RootMutation = {
   createComment?: Maybe<CreateCommentPayload>;
   /** The createExperience mutation */
   createExperience?: Maybe<CreateExperiencePayload>;
-  /** The createGraphqlDocument mutation */
-  createGraphqlDocument?: Maybe<CreateGraphqlDocumentPayload>;
-  /** The createGraphqlDocumentGroup mutation */
-  createGraphqlDocumentGroup?: Maybe<CreateGraphqlDocumentGroupPayload>;
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
@@ -21693,10 +21195,6 @@ export type RootMutation = {
   deleteGfDraftEntry?: Maybe<DeleteGfDraftEntryPayload>;
   /** The deleteGfEntry mutation */
   deleteGfEntry?: Maybe<DeleteGfEntryPayload>;
-  /** The deleteGraphqlDocument mutation */
-  deleteGraphqlDocument?: Maybe<DeleteGraphqlDocumentPayload>;
-  /** The deleteGraphqlDocumentGroup mutation */
-  deleteGraphqlDocumentGroup?: Maybe<DeleteGraphqlDocumentGroupPayload>;
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
@@ -21717,16 +21215,22 @@ export type RootMutation = {
   generateAuthorizationCode?: Maybe<GenerateAuthorizationCodePayload>;
   /** Increase the count. */
   increaseCount?: Maybe<Scalars['Int']['output']>;
-  /** The loginWithCookies mutation */
-  loginWithCookies?: Maybe<LoginWithCookiesPayload>;
-  /** The logout mutation */
-  logout?: Maybe<LogoutPayload>;
+  /** The LinkUserIdentity mutation */
+  linkUserIdentity?: Maybe<LinkUserIdentityPayload>;
+  /** The Login mutation */
+  login?: Maybe<LoginPayload>;
+  /** The RefreshToken mutation */
+  refreshToken?: Maybe<RefreshTokenPayload>;
+  /** The RefreshUserSecret mutation */
+  refreshUserSecret?: Maybe<RefreshUserSecretPayload>;
   /** The registerUser mutation */
   registerUser?: Maybe<RegisterUserPayload>;
   /** The resetUserPassword mutation */
   resetUserPassword?: Maybe<ResetUserPasswordPayload>;
   /** The restoreComment mutation */
   restoreComment?: Maybe<RestoreCommentPayload>;
+  /** The RevokeUserSecret mutation */
+  revokeUserSecret?: Maybe<RevokeUserSecretPayload>;
   /** Send password reset email to user */
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmailPayload>;
   /** The submitGfDraftEntry mutation */
@@ -21743,10 +21247,6 @@ export type RootMutation = {
   updateGfDraftEntry?: Maybe<UpdateGfDraftEntryPayload>;
   /** The updateGfEntry mutation */
   updateGfEntry?: Maybe<UpdateGfEntryPayload>;
-  /** The updateGraphqlDocument mutation */
-  updateGraphqlDocument?: Maybe<UpdateGraphqlDocumentPayload>;
-  /** The updateGraphqlDocumentGroup mutation */
-  updateGraphqlDocumentGroup?: Maybe<UpdateGraphqlDocumentGroupPayload>;
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
@@ -21785,18 +21285,6 @@ export type RootMutationCreateCommentArgs = {
 /** The root mutation */
 export type RootMutationCreateExperienceArgs = {
   input: CreateExperienceInput;
-};
-
-
-/** The root mutation */
-export type RootMutationCreateGraphqlDocumentArgs = {
-  input: CreateGraphqlDocumentInput;
-};
-
-
-/** The root mutation */
-export type RootMutationCreateGraphqlDocumentGroupArgs = {
-  input: CreateGraphqlDocumentGroupInput;
 };
 
 
@@ -21879,18 +21367,6 @@ export type RootMutationDeleteGfEntryArgs = {
 
 
 /** The root mutation */
-export type RootMutationDeleteGraphqlDocumentArgs = {
-  input: DeleteGraphqlDocumentInput;
-};
-
-
-/** The root mutation */
-export type RootMutationDeleteGraphqlDocumentGroupArgs = {
-  input: DeleteGraphqlDocumentGroupInput;
-};
-
-
-/** The root mutation */
 export type RootMutationDeleteMediaItemArgs = {
   input: DeleteMediaItemInput;
 };
@@ -21951,14 +21427,26 @@ export type RootMutationIncreaseCountArgs = {
 
 
 /** The root mutation */
-export type RootMutationLoginWithCookiesArgs = {
-  input: LoginWithCookiesInput;
+export type RootMutationLinkUserIdentityArgs = {
+  input: LinkUserIdentityInput;
 };
 
 
 /** The root mutation */
-export type RootMutationLogoutArgs = {
-  input: LogoutInput;
+export type RootMutationLoginArgs = {
+  input: LoginInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRefreshTokenArgs = {
+  input: RefreshTokenInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRefreshUserSecretArgs = {
+  input: RefreshUserSecretInput;
 };
 
 
@@ -21977,6 +21465,12 @@ export type RootMutationResetUserPasswordArgs = {
 /** The root mutation */
 export type RootMutationRestoreCommentArgs = {
   input: RestoreCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRevokeUserSecretArgs = {
+  input: RevokeUserSecretInput;
 };
 
 
@@ -22025,18 +21519,6 @@ export type RootMutationUpdateGfDraftEntryArgs = {
 /** The root mutation */
 export type RootMutationUpdateGfEntryArgs = {
   input: UpdateGfEntryInput;
-};
-
-
-/** The root mutation */
-export type RootMutationUpdateGraphqlDocumentArgs = {
-  input: UpdateGraphqlDocumentInput;
-};
-
-
-/** The root mutation */
-export type RootMutationUpdateGraphqlDocumentGroupArgs = {
-  input: UpdateGraphqlDocumentGroupInput;
 };
 
 
@@ -22151,19 +21633,10 @@ export type RootQuery = WithAcfOptionsPageSiteSettings & {
   gfSubmittedEntry?: Maybe<GfSubmittedEntry>;
   /** Returns the stylesheet resulting of merging core, theme, and user data. */
   globalStylesheet?: Maybe<Scalars['String']['output']>;
-  /** An object of the graphqlDocument Type. Saved GraphQL Documents */
-  graphqlDocument?: Maybe<GraphqlDocument>;
-  /**
-   * A graphqlDocument object
-   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
-   */
-  graphqlDocumentBy?: Maybe<GraphqlDocument>;
-  /** A 0bject */
-  graphqlDocumentGroup?: Maybe<GraphqlDocumentGroup>;
-  /** Connection between the RootQuery type and the graphqlDocumentGroup type */
-  graphqlDocumentGroups?: Maybe<RootQueryToGraphqlDocumentGroupConnection>;
-  /** Connection between the RootQuery type and the graphqlDocument type */
-  graphqlDocuments?: Maybe<RootQueryToGraphqlDocumentConnection>;
+  /** The Headless Login client for the provided client ID. */
+  loginClient?: Maybe<LoginClient>;
+  /** The registered Headless Login clients. */
+  loginClients?: Maybe<Array<Maybe<LoginClient>>>;
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>;
   /**
@@ -22426,46 +21899,8 @@ export type RootQueryGlobalStylesheetArgs = {
 
 
 /** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentArgs = {
-  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
-  id: Scalars['ID']['input'];
-  idType?: InputMaybe<GraphqlDocumentIdType>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentByArgs = {
-  graphqlDocumentId?: InputMaybe<Scalars['Int']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  uri?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentGroupArgs = {
-  id: Scalars['ID']['input'];
-  idType?: InputMaybe<GraphqlDocumentGroupIdType>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentGroupsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToGraphqlDocumentGroupConnectionWhereArgs>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgs>;
+export type RootQueryLoginClientArgs = {
+  provider: LoginProviderEnum;
 };
 
 
@@ -23375,160 +22810,6 @@ export type RootQueryToGfSubmittedEntryConnectionWhereArgs = {
   orderby?: InputMaybe<EntriesConnectionOrderbyInput>;
   /** Entry status. Default is "ACTIVE". */
   status?: InputMaybe<EntryStatusEnum>;
-};
-
-/** Connection between the RootQuery type and the graphqlDocument type */
-export type RootQueryToGraphqlDocumentConnection = Connection & GraphqlDocumentConnection & {
-  __typename?: 'RootQueryToGraphqlDocumentConnection';
-  /** Edges for the RootQueryToGraphqlDocumentConnection connection */
-  edges: Array<RootQueryToGraphqlDocumentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<GraphqlDocument>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToGraphqlDocumentConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToGraphqlDocumentConnectionEdge = Edge & GraphqlDocumentConnectionEdge & {
-  __typename?: 'RootQueryToGraphqlDocumentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: GraphqlDocument;
-};
-
-/** Page Info on the &quot;RootQueryToGraphqlDocumentConnection&quot; */
-export type RootQueryToGraphqlDocumentConnectionPageInfo = GraphqlDocumentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToGraphqlDocumentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the RootQueryToGraphqlDocumentConnection connection */
-export type RootQueryToGraphqlDocumentConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Connection between the RootQuery type and the graphqlDocumentGroup type */
-export type RootQueryToGraphqlDocumentGroupConnection = Connection & GraphqlDocumentGroupConnection & {
-  __typename?: 'RootQueryToGraphqlDocumentGroupConnection';
-  /** Edges for the RootQueryToGraphqlDocumentGroupConnection connection */
-  edges: Array<RootQueryToGraphqlDocumentGroupConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<GraphqlDocumentGroup>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToGraphqlDocumentGroupConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToGraphqlDocumentGroupConnectionEdge = Edge & GraphqlDocumentGroupConnectionEdge & {
-  __typename?: 'RootQueryToGraphqlDocumentGroupConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: GraphqlDocumentGroup;
-};
-
-/** Page Info on the &quot;RootQueryToGraphqlDocumentGroupConnection&quot; */
-export type RootQueryToGraphqlDocumentGroupConnectionPageInfo = GraphqlDocumentGroupConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToGraphqlDocumentGroupConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-/** Arguments for filtering the RootQueryToGraphqlDocumentGroupConnection connection */
-export type RootQueryToGraphqlDocumentGroupConnectionWhereArgs = {
-  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
-  cacheDomain?: InputMaybe<Scalars['String']['input']>;
-  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
-  childOf?: InputMaybe<Scalars['Int']['input']>;
-  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
-  childless?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Retrieve terms where the description is LIKE the input value. Default empty. */
-  descriptionLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
-  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
-  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
-  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
-  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Array of term ids to include. Default empty array. */
-  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of names to return term(s) for. Default empty. */
-  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Retrieve terms where the name is LIKE the input value. Default empty. */
-  nameLike?: InputMaybe<Scalars['String']['input']>;
-  /** Array of object IDs. Results will be limited to terms associated with these objects. */
-  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Direction the connection should be ordered in */
-  order?: InputMaybe<OrderEnum>;
-  /** Field(s) to order terms by. Defaults to 'name'. */
-  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
-  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
-  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Parent term ID to retrieve direct-child terms of. Default empty. */
-  parent?: InputMaybe<Scalars['Int']['input']>;
-  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
-  search?: InputMaybe<Scalars['String']['input']>;
-  /** Array of slugs to return term(s) for. Default empty. */
-  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Whether to prime meta caches for matched terms. Default true. */
-  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Connection between the RootQuery type and the mediaItem type */
@@ -24642,7 +23923,6 @@ export type SeoContentTypeArchive = {
 export type SeoContentTypes = {
   __typename?: 'SEOContentTypes';
   experience?: Maybe<SeoContentType>;
-  graphqlDocument?: Maybe<SeoContentType>;
   mediaItem?: Maybe<SeoContentType>;
   page?: Maybe<SeoContentType>;
   post?: Maybe<SeoContentType>;
@@ -25319,6 +24599,20 @@ export type SiteSettings = AcfOptionsPage & Node & WithAcfGlobalOptions & {
   parentId?: Maybe<Scalars['String']['output']>;
 };
 
+/** The Login client options for the siteToken provider. */
+export type SiteTokenClientOptions = LoginClientOptions & {
+  __typename?: 'SiteTokenClientOptions';
+  /** This field exists solely to generate the  ClientOptions interface, in lieu of the shared custom fields that will be added in a future release */
+  todo?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** The Headless Login options for the siteToken provider. */
+export type SiteTokenLoginOptions = LoginOptions & {
+  __typename?: 'SiteTokenLoginOptions';
+  /** Whether to set a WordPress authentication cookie on successful login. */
+  useAuthenticationCookie?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** The Confirmation object returned on submission. Null if the submission was not successful. */
 export type SubmissionConfirmation = {
   __typename?: 'SubmissionConfirmation';
@@ -25908,8 +25202,6 @@ export type TaxonomyConnectionPageInfo = {
 export enum TaxonomyEnum {
   /** Taxonomy enum category */
   Category = 'CATEGORY',
-  /** Taxonomy enum graphql_document_group */
-  Graphqldocumentgroup = 'GRAPHQLDOCUMENTGROUP',
   /** Taxonomy enum post_format */
   Postformat = 'POSTFORMAT',
   /** Taxonomy enum project_tag */
@@ -26786,74 +26078,6 @@ export type UpdateGfEntryPayload = {
   errors?: Maybe<Array<Maybe<FieldError>>>;
 };
 
-/** Input for the updateGraphqlDocumentGroup mutation. */
-export type UpdateGraphqlDocumentGroupInput = {
-  /** The slug that the graphql_document_group will be an alias of */
-  aliasOf?: InputMaybe<Scalars['String']['input']>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the graphql_document_group object */
-  description?: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the graphqlDocumentGroup object to update */
-  id: Scalars['ID']['input'];
-  /** The name of the graphql_document_group object to mutate */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
-  slug?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the updateGraphqlDocumentGroup mutation. */
-export type UpdateGraphqlDocumentGroupPayload = {
-  __typename?: 'UpdateGraphqlDocumentGroupPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The created graphql_document_group */
-  graphqlDocumentGroup?: Maybe<GraphqlDocumentGroup>;
-};
-
-/** Input for the updateGraphqlDocument mutation. */
-export type UpdateGraphqlDocumentInput = {
-  /** Alias names for saved GraphQL query documents */
-  alias?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>;
-  /** Description for the saved GraphQL document */
-  description?: InputMaybe<Scalars['String']['input']>;
-  /** Allow, deny or default access grant for specific query */
-  grant?: InputMaybe<Scalars['String']['input']>;
-  /** Set connections between the graphqlDocument and graphqlDocumentGroups */
-  graphqlDocumentGroups?: InputMaybe<GraphqlDocumentGraphqlDocumentGroupsInput>;
-  /** The ID of the graphqlDocument object */
-  id: Scalars['ID']['input'];
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
-  /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-  maxAgeHeader?: InputMaybe<Scalars['Int']['input']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>;
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The payload for the updateGraphqlDocument mutation. */
-export type UpdateGraphqlDocumentPayload = {
-  __typename?: 'UpdateGraphqlDocumentPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  /** The Post object mutation type. */
-  graphqlDocument?: Maybe<GraphqlDocument>;
-};
-
 /** Input for the updateMediaItem mutation. */
 export type UpdateMediaItemInput = {
   /** Alternative text to display when mediaItem is not displayed */
@@ -27228,6 +26452,8 @@ export type UploadPayload = {
 /** A User object */
 export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdentifiable & {
   __typename?: 'User';
+  /** Headless Login authentication data. */
+  auth?: Maybe<AuthenticationData>;
   /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
   avatar?: Maybe<Avatar>;
   /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */

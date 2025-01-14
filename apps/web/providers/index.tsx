@@ -22,7 +22,7 @@ const Providers = ({ children }) => {
     <FaustProvider>
       <ThemeProvider>
         {isDev ? (
-          <>{children}</>
+          children
         ) : (
           <PostHogProvider client={posthog}>{children}</PostHogProvider>
         )}

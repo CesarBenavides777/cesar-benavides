@@ -1,8 +1,9 @@
 import { PleaseLogin } from "@/components/please-login";
 import type { User } from "@/types/wp";
 import { gql } from "@apollo/client";
-import { getAuthClient } from "@faustwp/experimental-app-router";
-import { logoutAction } from "./action";
+import { getAuthClient } from "@/providers/apollo/rsc";
+import { USER_FIELDS } from "@/queries";
+import MyAccount from "@/features/User/my-account";
 
 export default async function Page() {
   const client = await getAuthClient();
@@ -10,40 +11,20 @@ export default async function Page() {
   if (!client) {
     return <PleaseLogin />;
   }
-
-  const { data } = await client.query({
-    query: gql`
-      query GetViewer {
-        viewer {
-          name
-          firstName
-          posts {
-            nodes {
-              id
-              title
-            }
+    const { data, errors } = await client.query({
+      query: gql`
+        query GetViewer {
+          viewer {
+            ...UserFields
           }
         }
-      }
-    `,
-  });
-
-  const { firstName } = data.viewer as User;
+        ${USER_FIELDS}
+      `,
+    });
 
   return (
-    <>
-      <h2>Hello {firstName} </h2>
-
-      <h3>My Posts</h3>
-      <ul>
-        {data.viewer.posts.nodes.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-
-      <form action={logoutAction}>
-        <button type="submit">Logout</button>
-      </form>
-    </>
+    <MyAccount 
+      user={data?.viewer as User}
+    />
   );
 }

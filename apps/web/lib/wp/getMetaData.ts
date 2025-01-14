@@ -1,6 +1,6 @@
 import { SEO_CONFIG_FRAGMENT, SEO_FRAGMENT } from "@/queries";
 import { gql } from "@apollo/client";
-import { getClient } from "@faustwp/experimental-app-router";
+import { getClient } from "@/providers/apollo/rsc";
 
 interface GetPageDataProps {
   slug: string;

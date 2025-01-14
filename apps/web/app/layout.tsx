@@ -1,4 +1,4 @@
-import { getClient } from "@faustwp/experimental-app-router";
+
 import "@/faust.config.js";
 import "@/styles/global.css";
 import Providers from "@/providers";
@@ -11,7 +11,10 @@ import { Footer } from "@/components/Footer";
 import { Toaster } from "sonner";
 import Script from "next/script";
 import PageTransitionEffect from "@/components/PageTransition";
+import { getClient } from "@/providers/apollo/rsc";
 
+
+const isDevelopment = process.env.NODE_ENV === "development";
 export default async function RootLayout({ children }) {
   const client = await getClient();
 
@@ -38,7 +41,7 @@ export default async function RootLayout({ children }) {
       <link rel="preconnect" href="https://cms.cesarbenavides.com" />
       <link rel="preconnect" href="https://us-assets.i.posthog.com" />
       <DynamicFavicon />
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen overflow-x-hidden">
         <Providers>
           <Header
             title={name}

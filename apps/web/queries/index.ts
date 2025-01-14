@@ -18,16 +18,14 @@ const MENU_FRAGMENT = gql`
 `;
 
 
+
+
 export const USER_FIELDS = gql`
   fragment UserFields on User {
     auth {
       authToken
       authTokenExpiration
       isUserSecretRevoked
-      linkedIdentities {
-        provider
-        identifier
-      }
       refreshToken
       refreshTokenExpiration
       userSecret
@@ -51,7 +49,7 @@ export const USER_FIELDS = gql`
     email
     firstName
     id
-    lastname
+    lastName
     name
     nicename
     nickname
@@ -60,17 +58,64 @@ export const USER_FIELDS = gql`
 `;
 
 export const LOGIN = gql`
-  mutation Login($input: LoginInput!) {
-    login(input: $input) {
+  mutation loginWithPassword($username: String!, $password: String!) {
+    login(
+      input: {
+        provider: PASSWORD # This tells the mutation to use the WordPress username/password authentication method.
+        credentials: {
+          # This is the input required for the PASSWORD provider.
+          username: $username
+          password: $password
+        }
+      }
+    ) {
       authToken
+      authTokenExpiration
       refreshToken
+      refreshTokenExpiration
+      user {
+        # The authenticated WordPress user.
+        ...UserFields
+      }
+      # The following fields are available if WPGraphQL for WooCommerce is installed.
+      wooSessionToken
+      # customer {
+      #   ...MyCustomerFrag
+      # }
+    }
+  }
+  ${USER_FIELDS}
+`;
+
+export const LOGIN_WITH_OAUTH = gql`
+  mutation login(
+    $provider: LoginProviderEnum! # One of the enabled Authentication Provider types. e.g. FACEBOOK, or OAUTH2_GENERIC
+    $code: String! # The Authorization Code sent by the Authentication Provider to the frontend's callback URI.
+    $state: String # A randomly-generated string used to verify the authenticity of the response sent by the Provider.
+  ) {
+    login(
+      input: {
+        provider: $provider
+        oauthResponse: { state: $state, code: $code }
+      }
+    ) {
+      authToken
+      authTokenExpiration
+      refreshToken
+      refreshTokenExpiration
       user {
         ...UserFields
       }
+      wooSessionToken
+      # customer {
+      #   ...MyCustomerFrag
+      # }
     }
-    ${USER_FIELDS}
   }
+  ${USER_FIELDS}
 `;
+
+
 
 export const GET_ALL_POSTS = gql`
   query AllPostsQuery {

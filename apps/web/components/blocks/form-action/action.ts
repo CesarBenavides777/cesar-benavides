@@ -1,7 +1,7 @@
 "use server";
 
 import { gql } from "@apollo/client";
-import { getClient } from "@faustwp/experimental-app-router";
+import { getClient } from "@/providers/apollo/rsc";
 
 export const submitForm = async (prevData: any, data: FormData) => {
   const client = await getClient();

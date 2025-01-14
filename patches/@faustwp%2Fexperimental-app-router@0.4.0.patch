@@ -1,3 +1,17 @@
+diff --git a/dist/client/rsc.js b/dist/client/rsc.js
+index 55dc6e077b919bd08bd89c6430e03ba4ebf9ec3e..14863111f82538844332efbceb7c71112f8c6f30 100644
+--- a/dist/client/rsc.js
++++ b/dist/client/rsc.js
+@@ -1,7 +1,7 @@
+ // eslint-disable-next-line import/extensions
+ import { ApolloClient, InMemoryCache } from '@apollo/client';
+-// eslint-disable-next-line import/extensions
+-import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rsc';
++
++import { registerApolloClient } from '@apollo/experimental-nextjs-app-support';
+ import { fetchAccessToken } from '../server/auth/fetchAccessToken.js';
+ import { createApolloConfig } from './config.js';
+ export function createRSCApolloClient(authenticated = false) {
 diff --git a/dist/client/ssr.js b/dist/client/ssr.js
 index 4010f7c80374b8d8c13183fb8abda78b894f3a4e..f85862074d0cb4530ab07ef85324aaf3fceb4fbb 100644
 --- a/dist/client/ssr.js
@@ -27,6 +41,16 @@ index 4010f7c80374b8d8c13183fb8abda78b894f3a4e..f85862074d0cb4530ab07ef85324aaf3
      });
  }
  export function FaustSSRProvider({ children }) {
+diff --git a/dist/index.js b/dist/index.js
+index 26b73f850362b08eb8efb8271e80360d5d044f31..4a64153d7795853916de37653d071630640ce7e5 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,4 +1,4 @@
+-export { getClient, getAuthClient } from './client/rsc.js';
++// export { getClient, getAuthClient } from './client/rsc.js';
+ export { faustRouteHandler } from './server/routeHandler/index.js';
+ export { fetchAccessToken } from './server/auth/fetchAccessToken.js';
+ export { onLogout } from './server-actions/logoutAction.js';
 diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
 index ac898fa819de4e249c1bd0a70d8214ffed56426e..5ed8940de63d78c96729f965ce3a5cee02b486c5 100644
 --- a/dist/server/auth/fetchTokens.js
@@ -94,13 +118,36 @@ index 236a4912cc0e775155ead38a8b2349ee48c0f3ad..282c16daacec6ccebe25907a93d3fdde
              status: 200,
          });
          res.cookies.set(cookieName, data.refreshToken, {
+diff --git a/dist/server-actions/loginAction.js b/dist/server-actions/loginAction.js
+index e7896172d4f909c9f4834d36f5861b15c7ffadba..981b74919bf6b150f828ff482d573521ffd130b4 100644
+--- a/dist/server-actions/loginAction.js
++++ b/dist/server-actions/loginAction.js
+@@ -1,3 +1,5 @@
++
++
+ import { gql } from '@apollo/client';
+ // eslint-disable-next-line import/extensions
+ import { print } from '@apollo/client/utilities';
+@@ -25,7 +27,6 @@ export const validationError = {
+     error: 'There were validation errors. Please ensure your login action has two inputs, "usernameEmail" and "password"',
+ };
+ export async function onLogin(formData) {
+-    'use server';
+     try {
+         const usernameEmail = formData.get('usernameEmail');
+         const password = formData.get('password');
 diff --git a/dist/server-actions/logoutAction.js b/dist/server-actions/logoutAction.js
-index 1057ac5343a446d7f9aad81c3e68a023ae6a4a2f..edf84f7894ae1923c159cfb3abbc8c7d9920bcaa 100644
+index 1057ac5343a446d7f9aad81c3e68a023ae6a4a2f..4e974442c5af5f48c16f11ffa37669e687dc3f41 100644
 --- a/dist/server-actions/logoutAction.js
 +++ b/dist/server-actions/logoutAction.js
-@@ -3,7 +3,7 @@ import { getWpUrl } from '../faust-core-utils.js';
+@@ -1,9 +1,11 @@
++'use server';
++
+ import { cookies } from 'next/headers.js';
+ import { getWpUrl } from '../faust-core-utils.js';
  export async function onLogout() {
-     'use server';
+-    'use server';
++    
      const wpCookieName = `${getWpUrl()}-rt`;
 -    const cookieStore = cookies();
 +    const cookieStore = await cookies();

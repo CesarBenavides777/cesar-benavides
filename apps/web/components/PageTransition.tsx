@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { use, useRef } from "react";
@@ -31,8 +31,8 @@ const PageTransitionEffect = ({ children }: { children: React.ReactNode }) => {
   const key = usePathname();
 
   return (
-    <AnimatePresence
-      mode="wait"
+    <AnimatePresence 
+      mode="wait" 
       initial={false}
       onExitComplete={() => window.scrollTo(0, 0)}
     >

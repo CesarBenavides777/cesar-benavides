@@ -1,9 +1,10 @@
 "use server";
 
-import { onLogout } from "@faustwp/experimental-app-router";
-import { redirect } from "next/navigation";
+import { signOut } from "@/auth";
 
 export async function logoutAction() {
-  await onLogout();
-  redirect("/login");
+  await signOut({
+    redirect: true,
+    redirectTo: "/login",
+  });
 }

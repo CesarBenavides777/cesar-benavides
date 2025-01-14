@@ -1,5 +1,5 @@
 import { GET_ALL_PAGES } from "@/queries";
-import { getClient } from "@faustwp/experimental-app-router";
+import { getClient } from "@/providers/apollo/rsc";
 
 
 const getAllPages = async () => {

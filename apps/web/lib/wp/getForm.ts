@@ -1,5 +1,5 @@
 import { FORM_QUERY } from "@/queries";
-import { getClient } from "@faustwp/experimental-app-router";
+import { getClient } from "@/providers/apollo/rsc";
 
 export const getForm = async (id: string) => {
   const client = await getClient();

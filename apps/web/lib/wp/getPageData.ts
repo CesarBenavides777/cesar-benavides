@@ -1,6 +1,6 @@
 import { GET_PAGE } from "@/queries";
 import { ContentNodeIdTypeEnum } from "@/types/wp";
-import { getAuthClient, getClient } from "@faustwp/experimental-app-router";
+import { getAuthClient, getClient } from "@/providers/apollo/rsc";
 import { getForm } from "./getForm";
 
 type GetPageData = {

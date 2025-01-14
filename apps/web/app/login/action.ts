@@ -1,21 +1,42 @@
 "use server";
 
-import { onLogin } from "@faustwp/experimental-app-router";
-import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export async function loginAction(prevData: any, formData: FormData) {
-  const res = await onLogin(formData);
+  const usernameEmail = formData.get("usernameEmail");
+  const password = formData.get("password");
 
-  const redirectUrl = formData.get("redirect");
+  try {
+    await signIn("credentials", {
+      usernameEmail,
+      password,
+      redirectTo: "/my-account",
+    });
 
-  if (res.error) {
-    return res;
+  } catch (error) {
+    
+    return {
+      error: error
+    }
   }
+}
 
-  if (redirectUrl) {
-    redirect(redirectUrl as string);
-  } else {
-    redirect("/my-account");
+export async function loginWithOAuthAction(prevData: any, formData: FormData) {
+  const provider = formData.get("provider");
+  const code = formData.get("code");
+  const state = formData.get("state");
+
+  try {
+    await signIn(provider as string, {
+      code,
+      state,
+      redirectTo: "/my-account",
+    });
+
+  } catch (error) {
+    
+    return {
+      error: error
+    }
   }
 }
