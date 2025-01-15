@@ -33,23 +33,40 @@ export const loginWithUserNameAndPassword = async ({
 export const loginWithOAuth = async (
   provider: string,
   code: string,
-  state: string,
+  state?: string
 ) => {
-  const client = await getClient();
-  // query
-  const { data } = await client.query({
-    query: LOGIN_WITH_OAUTH,
-    variables: {
-      provider,
-      code,
-      state,
-    },
-    fetchPolicy: "no-cache",
-  });
+  // console.log("loginWithOAuth running with:", { provider, code, state });
 
-  if (!data?.login?.user) {
+  const client = await getClient();
+
+  try {
+    const { data } = await client.mutate({
+      mutation: LOGIN_WITH_OAUTH,
+      variables: {
+        provider, // Example: "GITHUB"
+        code, // The OAuth `code` from the GitHub callback
+        state, // Optional `state` from OAuth flow
+      },
+      fetchPolicy: "no-cache",
+    });
+    
+    
+    if (!data?.login) {
+      console.warn("Login with OAuth failed. No user data returned.");
+      console.error("Data:", data);
+      return null;
+    }
+
+    return data.login;
+
+  } catch (error) {
+    // @ts-ignore
+    const errors = error?.graphQLErrors;
+    if (errors) {
+      errors.forEach((err: any) => {
+        console.error("Error during loginWithOAuth:", err);
+      });
+    }
     return null;
   }
-
-  return data.login.user;
 };

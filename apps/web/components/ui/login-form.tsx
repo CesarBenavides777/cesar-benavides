@@ -1,7 +1,6 @@
 "use client";
 
-// import { useActionState } from "react";
-import { loginAction, loginWithOAuthAction } from "@/app/login/action";
+import { loginAction } from "@/app/login/action";
 import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 
@@ -14,9 +13,10 @@ import {
   CardFooter,
 } from "@workspace/ui/components/card";
 import { GithubIcon } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { LoginClient } from "@/types/wp";
 import { Button } from "./button";
+import { toast } from "sonner";
 
 type LoginFormProps = {
   redirect?: string;
@@ -32,20 +32,31 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     error: undefined,
   });
 
-  console.log("State", state);
-
-  const [oAuthState, loginWithOAuthFormAction, isOAuthPending] = useActionState(
-    loginWithOAuthAction,
-    {
-      error: undefined,
-    },
-  );
+  // const [oAuthState, loginWithOAuthFormAction, isOAuthPending] = useActionState(
+  //   loginWithOAuthAction,
+  //   {
+  //     error: undefined,
+  //   },
+  // );
 
   const filteredLoginClients = loginClients?.filter(
     (client) => client.provider !== "PASSWORD",
   );
 
-  console.log("filteredLoginClients", filteredLoginClients);
+  // console.log("Filtered Login Clients", filteredLoginClients);
+
+  useEffect(() => {
+
+    // console.log("State", state);
+    if (state?.error) {
+      toast.error(state?.error);
+    }
+
+    // if (oAuthState?.error) {
+    //   toast.error(oAuthState?.error);
+    // }
+
+  }, [state]);
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -110,31 +121,34 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
           if (!client.provider) {
             return null;
           }
+
+          const { clientId } = client || {};
+          const authUrl = new URL(client.authorizationUrl as string);
+          const state = authUrl.searchParams.get("state") || "";
+
+          const onClick = () => {
+            const baseURL = "https://github.com/login/oauth/authorize";
+            const redirectUri = `${process.env.NEXT_PUBLIC_URL}/api/auth/custom/github`;
+            const endpoint = new URL(baseURL);
+            endpoint.searchParams.append("client_id", clientId);
+            endpoint.searchParams.append("redirect_uri", redirectUri);
+            endpoint.searchParams.append("state", state);
+
+            window.location.href = endpoint.toString();
+          };
+
           return (
-            <form action={loginWithOAuthFormAction} key={client.provider}>
-              <input 
-                type="hidden" 
-                name="provider" 
-                value={client.provider.toLowerCase() ?? ""} 
-                id="provider"
-              />
-              {/* Call back url */}
-              <input
-                type="hidden"
-                name="callbackUrl"
-                id="callbackUrl"
-                value={client.authorizationUrl ?? ""}
-              />
-              <Button
-                variant="secondary"
-                className="w-full cursor-pointer flex flex-row gap-2"
-                type="submit"
-                disabled={isOAuthPending}
-              >
-                <ProviderIcon className="w-4 h-4" />
-                {isOAuthPending ? "Loading..." : `Continue with ${client.name}`}
-              </Button>
-            </form>
+            <Button
+              variant="secondary"
+              className="w-full cursor-pointer flex flex-row gap-2"
+              type="submit"
+              // disabled={isOAuthPending}
+              onClick={onClick}
+              key={`login-client-${client.provider}`}
+            >
+              <ProviderIcon className="w-4 h-4" />
+              {client.name}
+            </Button>
           );
         })}
       </CardFooter>

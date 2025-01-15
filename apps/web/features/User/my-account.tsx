@@ -82,7 +82,6 @@ export default function UserPage({ user }: { user: User }) {
             <Tabs defaultValue="profile" className="w-fit">
               <TabsList className="flex flex-row gap-4 items-start justify-start">
                 <TabsTrigger value="profile">Profile</TabsTrigger>
-                <TabsTrigger value="capabilities">Capabilities</TabsTrigger>
                 <TabsTrigger value="security">Security</TabsTrigger>
               </TabsList>
               <TabsContent value="profile" className="py-6">
@@ -108,15 +107,6 @@ export default function UserPage({ user }: { user: User }) {
                     <dd className="text-lg">{user?.description}</dd>
                   </div>
                 </dl>
-              </TabsContent>
-              <TabsContent value="capabilities" className="py-6">
-                <div className="flex flex-wrap gap-2">
-                  {user?.capabilities.map((capability) => (
-                    <Badge key={capability} variant="secondary">
-                      {capability}
-                    </Badge>
-                  ))}
-                </div>
               </TabsContent>
               <TabsContent value="security" className="py-6">
                 <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">

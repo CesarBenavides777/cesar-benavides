@@ -1,0 +1,27 @@
+diff --git a/dist/generatePossibleTypes.js b/dist/generatePossibleTypes.js
+index 2ac74ef879f45588a216255a4e21d499764b2a11..099f638a5e875b8a091fc5778daedafa48d5b469 100644
+--- a/dist/generatePossibleTypes.js
++++ b/dist/generatePossibleTypes.js
+@@ -10,6 +10,7 @@ export async function generatePossibleTypes() {
+             headers: {
+                 'Content-Type': 'application/json',
+                 'x-faust-secret': getWpSecret() || '',
++                'Origin': getWpUrl(),
+             },
+             body: JSON.stringify({
+                 variables: {},
+diff --git a/dist/index.js b/dist/index.js
+old mode 100644
+new mode 100755
+diff --git a/src/generatePossibleTypes.ts b/src/generatePossibleTypes.ts
+index 6dcb2aa16eed148c52f1fb5f3dfd67d735bcda2c..0e04c778f754aa51eec3bc6f634e838e4e921b22 100644
+--- a/src/generatePossibleTypes.ts
++++ b/src/generatePossibleTypes.ts
+@@ -26,6 +26,7 @@ export async function generatePossibleTypes(): Promise<void> {
+       headers: {
+         'Content-Type': 'application/json',
+         'x-faust-secret': getWpSecret() || '',
++        'Origin': getWpUrl(),
+       },
+       body: JSON.stringify({
+         variables: {},

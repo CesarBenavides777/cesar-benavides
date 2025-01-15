@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typescript-nhost": "^0.0.2",
     "@graphql-codegen/typescript-operations": "^4.4.0",
     "@graphql-codegen/typescript-react-apollo": "^4.3.2",
     "@svgr/webpack": "^8.1.0",
@@ -90,8 +91,5 @@
     "turbo": "^2.3.3",
     "typescript": "^5.7.3"
   },
-  "packageManager": "bun@1.1.43",
-  "patchedDependencies": {
-    "@faustwp/experimental-app-router@0.3.1": "/apps/web/patches/@faustwp%2Fexperimental-app-router@0.3.1.patch"
-  }
+  "packageManager": "bun@1.1.43"
 }

@@ -40,7 +40,6 @@ export const USER_FIELDS = gql`
       url
       width
     }
-    capabilities
     databaseId
     description
     email
@@ -64,6 +63,7 @@ export const LOGIN = gql`
           username: $username
           password: $password
         }
+        
       }
     ) {
       authToken

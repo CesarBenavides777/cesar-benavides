@@ -20,7 +20,8 @@ export async function getClient() {
 
 export async function getAuthClient() {
   const session = await auth();
-  if (!session || !session?.isLoggedIn) {
+  console.log("session", session);
+  if (!session?.isLoggedIn) {
     return null;
   }
   const faustApolloClient = createRSCApolloClient(true);

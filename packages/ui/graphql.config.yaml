@@ -1,10 +1,13 @@
 schema:
-  - ${NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql
+  - ${NEXT_PUBLIC_WORDPRESS_URL}/index.php?graphql:
+      headers: 
+        Origin: https://localhost:3000
 generates:
   ./src/types/wp.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
+      - 'typescript-nhost'
     config:
       withRefetchFn: true

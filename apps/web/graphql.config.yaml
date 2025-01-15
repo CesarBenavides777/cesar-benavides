@@ -1,11 +1,14 @@
 schema:
-  - https://cms.cesarbenavides.com/index.php?graphql
+  - https://cms.cesarbenavides.com/index.php?graphql:
+      headers:
+          origin: https://localhost:3000
 generates:
   ./types/wp.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
+      - 'typescript-nhost'
     config:
       withRefetchFn: true
 preview_file_uploads:

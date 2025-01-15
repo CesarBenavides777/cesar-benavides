@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
 import Credentials from "next-auth/providers/credentials";
 import type { Provider } from "next-auth/providers";
 import { loginWithUserNameAndPassword } from "./lib/wp/auth/login";
@@ -12,22 +11,43 @@ const providers: Provider[] = [
     credentials: {
       password: { label: "Password", type: "password" },
       usernameEmail: { label: "Username or Email", type: "text" },
+      user: { label: "User", type: "text" },
     },
-    async authorize(c) {
-      const { password, usernameEmail } = c;
-      const user = await loginWithUserNameAndPassword({
-        username: usernameEmail as string,
-        password: password as string,
+  async authorize(c, req) {
+    // console.log("Credentials", c);
+    // console.log("Request", req);
+    const userAndPassWordEmptyString = c.usernameEmail === "" && c.password === "";
+    if (c.usernameEmail && c.password) {
+      const userData = await loginWithUserNameAndPassword({
+        username: c.usernameEmail as string,
+        password: c.password as string,
       });
 
-      if (!user) {
+      if (!userData) {
         return null;
       }
 
-      return user;
-    },
+      return userData
+    }
+
+    // If you do "signIn('credentials', { user }, { redirect: false })",
+    // NextAuth merges { user } into the authorize() credentials. 
+    // So we can check for c.user here:
+    if (c?.user && userAndPassWordEmptyString) {
+      // c.user is a JSON-serialized object from the signIn call
+      const user = typeof c.user === "string" ? JSON.parse(c.user) : c.user
+      return user
+    }
+
+    // If no valid login, return null
+    return null
+  }
+
   }),
-  GitHub,
+  // GitHub({
+  //   clientId: process.env.AUTH_GITHUB_ID as string,
+  //   clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+  // }),
 ];
 
 export const providerMap = providers
@@ -51,23 +71,6 @@ type SignInCallbackParams = {
   redirectTo: string;
 };
 
-type SessionCallbackParams = {
-  session: {
-    isLoggedIn: boolean;
-    userData: any;
-    authToken?: string;
-    refreshToken?: string;
-  };
-  token: User & {
-    auth: {
-      authToken: string;
-      refreshToken: string;
-    };
-    name: string;
-    email: string;
-    sub: string;
-  };
-};
 
 const callbacks = {
   signIn: async ({
@@ -87,15 +90,6 @@ const callbacks = {
         return true;
       }
 
-      if (account.provider === "github") {
-        const { auth } = user;
-        const { authToken, refreshToken } = auth;
-
-        if (!authToken && !refreshToken) {
-          return false;
-        }
-        return true;
-      }
 
       return false;
     } catch (error) {
@@ -111,8 +105,20 @@ const callbacks = {
       return false;
     }
   },
-  jwt: async ({ token, user, trigger }) => {
-    const expired = isTokenExpired(token?.auth?.authToken);
+  jwt: async ({ token, user, trigger }: {
+    token: {
+      auth?: {
+        authToken: string;
+        authTokenExpiration: number;
+        refreshToken: string;
+        refreshTokenExpiration: number;
+      };
+    };
+    user: User;
+    trigger: string;
+  }) => {
+    const expired = isTokenExpired(token?.auth?.authToken as string);
+
 
     if (trigger === "signOut") {
       // Clear tokens when the user logs out
@@ -134,7 +140,7 @@ const callbacks = {
 
     if (expired) {
       try {
-        const tokens = await refreshAuthToken(token.auth.refreshToken);
+        const tokens = await refreshAuthToken(token?.auth?.refreshToken as string);
 
         if (tokens) {
           return {
@@ -159,14 +165,20 @@ const callbacks = {
 
     return token;
   },
-
-  session: async ({ session, token }) => {
-
+  session: async ({ session, token }: {
+    session: {
+      isLoggedIn: boolean;
+      user: User | null;
+      authToken: string | null;
+      refreshToken: string | null;
+    };
+    token: User;
+  }) => {
     if (token?.auth?.authToken) {
       session.isLoggedIn = true;
       session.user = token;
       session.authToken = token.auth.authToken;
-      session.refreshToken = token.auth.refreshToken;
+      session.refreshToken = token.auth.refreshToken as string;
     } else {
       session.isLoggedIn = false;
       session.user = null;
@@ -178,6 +190,8 @@ const callbacks = {
   },
 };
 
+
+
 export const config = {
   providers,
   pages: {
@@ -186,7 +200,9 @@ export const config = {
     error: "/login",
   },
   callbacks,
-  experimental: { enableWebAuthn: true },
+  debug: true,
 };
 
-export const { signIn, signOut, handlers, auth } = NextAuth(config);
+
+
+export const { signIn, signOut, handlers, auth, unstable_update } = NextAuth(config);

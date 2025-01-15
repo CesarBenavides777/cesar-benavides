@@ -7,10 +7,11 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typescript-nhost": "^0.0.2",
     "@graphql-codegen/typescript-operations": "^4.3.1",
     "@graphql-codegen/typescript-react-apollo": "^4.3.2",
-    "@workspace/typescript-config": "workspace:*",
     "@types/babel__traverse": "^7.20.6",
+    "@workspace/typescript-config": "workspace:*",
     "autoprefixer": "^10.4.20",
     "child_process": "^1.0.2",
     "dotenv": "^16.4.5",
