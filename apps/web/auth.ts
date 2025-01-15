@@ -200,7 +200,7 @@ export const config = {
     error: "/login",
   },
   callbacks,
-  debug: true,
+  // debug: true,
 };
 
 

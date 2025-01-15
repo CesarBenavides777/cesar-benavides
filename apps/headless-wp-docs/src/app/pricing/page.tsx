@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { BookText, Check, House } from "lucide-react";
 import Link from "next/link";
@@ -27,7 +27,7 @@ function PricingCard({
   highlighted?: boolean;
 }) {
   return (
-    <motion.div
+    <m.div
       className={`p-6 rounded-xl border ${
         highlighted ? "border-primary" : "border-border"
       } bg-card text-card-foreground relative flex flex-col`}
@@ -53,7 +53,7 @@ function PricingCard({
       <Button className="w-full" asChild>
         <Link href={buttonLink}>{buttonText}</Link>
       </Button>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -116,7 +116,7 @@ export default function PricingPage() {
         <Link className="self-start cursor-pointer" href="/">
           <House size={32} />
         </Link>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -129,7 +129,7 @@ export default function PricingPage() {
             Choose the perfect plan for your needs. No hidden fees, no
             surprises.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Pricing Toggle */}
         <div className="flex items-center space-x-4">

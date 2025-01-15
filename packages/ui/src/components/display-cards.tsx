@@ -31,15 +31,16 @@ function DisplayCard({
   return (
     <div className={cn(className)} {...props}>
       <div>
-        {/* <span className="relative inline-block rounded-full bg-blue-800 p-1">
+        <span className="relative inline-block rounded-full bg-blue-800 p-1">
           {icon}
-        </span> */}
+        </span>
         <p
           className={cn(
             "text-lg font-medium",
-            "whitespace-nowrap group-hover:whitespace-normal",
-            "transition-all duration-700",
             titleClassName,
+            {
+              "whitespace-nowrap": !wrapperActive,
+            }
           )}
         >
           {title}
@@ -49,8 +50,9 @@ function DisplayCard({
         <div
           className={cn(
             "text-sm font-mono",
-            "whitespace-nowrap group-hover:whitespace-normal",
-            "transition-all duration-700",
+            {
+              "whitespace-nowrap": !wrapperActive,
+            }
           )}
           dangerouslySetInnerHTML={{ __html: description }}
         />
@@ -80,7 +82,11 @@ export default function DisplayCards({
   return (
     <div className={className}>
       {displayCards.map((cardProps, index) => (
-        <DisplayCard key={index} {...cardProps} />
+        <DisplayCard 
+          key={`display-card-${cardProps.title}-${index}`}
+          wrapperActive={active}
+          {...cardProps} 
+        />
       ))}
     </div>
   );

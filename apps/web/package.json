@@ -3,8 +3,6 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "predev": "bun generate",
-    "prebuild": "bun generate",
     "dev": "faust dev --experimental-https --turbo",
     "build": "faust build",
     "generate": "faust generatePossibleTypes && bun codegen",

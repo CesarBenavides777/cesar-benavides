@@ -12,12 +12,30 @@ import {
   SiGatsby,
   SiContentful,
   SiStrapi,
+  SiGraphql,
+  SiTypescript,
+  SiPython
 } from "react-icons/si";
 import { useState } from "react";
+import { Button } from "@workspace/ui/components/button";
 
 type ProjectsBlockProps = PageContentBlocksProjectsBlockLayout & {
   className?: string;
   id?: string;
+};
+
+
+const icons = {
+  typescript: <SiTypescript className="size-4 text-blue-300" />,
+  graphql: <SiGraphql className="size-4 text-blue-300" />,
+  strapi: <SiStrapi className="size-4 text-blue-300" />,
+  contentful: <SiContentful className="size-4 text-blue-300" />,
+  gatsby: <SiGatsby className="size-4 text-blue-300" />,
+  homebridge: <SiHomebridge className="size-4 text-blue-300" />,
+  shadcnui: <SiShadcnui className="size-4 text-blue-300" />,
+  turborepo: <SiTurborepo className="size-4 text-blue-300" />,
+  wordpress: <FaWordpress className="size-4 text-blue-300" />,
+  python: <SiPython className="size-4 text-blue-300" />,
 };
 
 const calculateOffset = (index: number, totalItems: number) => {
@@ -50,6 +68,8 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
     (project) => project.node,
   ) as Project[];
 
+  console.log("projects", projects);
+
   return (
     <section
       className={cn(
@@ -57,16 +77,26 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
         className,
         {
           "overflow-auto": isActive,
-        },
+        }
       )}
       id={id}
-      onMouseEnter={() => setIsActive(true)}
-      onMouseLeave={() => setIsActive(false)}
     >
-      <div className={"flex flex-col sticky left-0"}>
+      <div className={"flex flex-row gap-4 items-center justify-between py-4"}>
         <h2 className={"font-sans text-3xl md:text-4xl font-bold"}>Projects</h2>
+        {isActive && (
+          <Button
+            className={"text-xs"}
+            onClick={() => setIsActive(false)}
+            variant={"default"}
+          >
+            Put Away
+          </Button>
+        )}
       </div>
-      <div className={"flex flex-col gap-4 relative"}>
+      <div
+        className={"flex flex-col gap-4 relative"}
+        onMouseEnter={() => setIsActive(true)}
+      >
         {hasProjects && (
           <DisplayCards
             className={cn(
@@ -75,16 +105,18 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
               {
                 "grid [grid-template-areas:'stack'] place-items-start":
                   !isActive,
-                "flex flex-row gap-4 w-fit relative overflow-scroll": isActive,
-              },
+                "grid grid-cols-1 md:grid-cols-3 gap-2": isActive,
+              }
             )}
             active={isActive}
             cards={[
               ...projects.map((project, i) => {
                 const { xOffset, yOffset } = calculateOffset(
                   i,
-                  projects.length,
+                  projects.length
                 );
+                const { projectTags } = project as Project;
+                console.log("projectTags", projectTags);
 
                 return {
                   icon: <Sparkles className="size-4 text-blue-300" />,
@@ -93,7 +125,7 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                   date: project.date || "",
                   className: cn(
                     // Core layout and positioning
-                    "flex group relative flex-col justify-between min-h-36 max-w-[22rem] px-4 py-3 min-w-[10rem]",
+                    "flex group relative flex-col justify-between px-4 py-3 min-w-[10rem]",
                     "rounded-xl",
 
                     // Background and border styles
@@ -113,8 +145,8 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                     "before:left-0 before:top-0",
 
                     // After pseudo-element for gradient effect
-                    "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[10rem]",
-                    "after:bg-gradient-to-l after:from-background after:to-transparent after:content-['']",
+                    // "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[10rem]",
+                    // "after:bg-gradient-to-l after:from-background after:to-transparent after:content-['']",
 
                     // Children styles
                     "[&>*]:flex [&>*]:items-center [&>*]:gap-2",
@@ -123,9 +155,10 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                     // Dynamic offsets
                     isActive ? "" : `${xOffset} ${yOffset}`,
                     {
-                      "[grid-area:stack] select-none -skew-y-[8deg]": !isActive,
-                      "min-w-[6rem]": isActive,
-                    },
+                      "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[10rem] [grid-area:stack]  after:bg-gradient-to-l after:from-background after:to-transparent after:content-[''] select-none -skew-y-[8deg] min-h-32 md:max-w-[22rem]":
+                        !isActive,
+                      "min-w-[6rem] min-h-52": isActive,
+                    }
                   ),
                 };
               }),

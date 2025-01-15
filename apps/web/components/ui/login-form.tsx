@@ -13,10 +13,11 @@ import {
   CardFooter,
 } from "@workspace/ui/components/card";
 import { GithubIcon } from "lucide-react";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { LoginClient } from "@/types/wp";
 import { Button } from "./button";
 import { toast } from "sonner";
+import { PasswordInput } from "@workspace/ui/components/inputs/PasswordInput";
 
 type LoginFormProps = {
   redirect?: string;
@@ -58,6 +59,8 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
 
   }, [state]);
 
+  	const [currentPassword, setCurrentPassword] = useState("");
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="space-y-1">
@@ -79,7 +82,15 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" name="password" type="password" required />
+            {/* <Input id="password" name="password" type="password" required /> */}
+            <PasswordInput
+              id="password"
+              name="password"
+              required
+              value={currentPassword}
+              autoComplete="current-password"
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
           </div>
           <input
             type="hidden"
@@ -89,6 +100,7 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
           <Button
             className="w-full cursor-pointer"
             disabled={isPending}
+            variant={"default"}
             type={isPending ? "button" : "submit"}
           >
             {isPending ? "Loading..." : "Login"}
@@ -127,27 +139,33 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
           const state = authUrl.searchParams.get("state") || "";
 
           const onClick = () => {
-            const baseURL = "https://github.com/login/oauth/authorize";
-            const redirectUri = `${process.env.NEXT_PUBLIC_URL}/api/auth/custom/github`;
-            const endpoint = new URL(baseURL);
-            endpoint.searchParams.append("client_id", clientId);
-            endpoint.searchParams.append("redirect_uri", redirectUri);
-            endpoint.searchParams.append("state", state);
+            if (client.provider === "GITHUB") {
+              const baseURL = "https://github.com/login/oauth/authorize";
+              const redirectUri = `${process.env.NEXT_PUBLIC_URL}/api/auth/custom/github`;
+              const endpoint = new URL(baseURL);
+              endpoint.searchParams.append("client_id", clientId);
+              endpoint.searchParams.append("redirect_uri", redirectUri);
+              endpoint.searchParams.append("state", state);
 
-            window.location.href = endpoint.toString();
+              window.location.href = endpoint.toString();
+            } else {
+              // @TODO: Implement other OAuth providers
+            }
           };
+
+          console.log("Client", client);
 
           return (
             <Button
               variant="secondary"
-              className="w-full cursor-pointer flex flex-row gap-2"
+              className="rounded-full cursor-pointer flex items-center w-12 h-12"
               type="submit"
               // disabled={isOAuthPending}
               onClick={onClick}
               key={`login-client-${client.provider}`}
             >
-              <ProviderIcon className="w-4 h-4" />
-              {client.name}
+              <ProviderIcon />
+              <span className="sr-only text-foreground">{client?.name}</span>
             </Button>
           );
         })}

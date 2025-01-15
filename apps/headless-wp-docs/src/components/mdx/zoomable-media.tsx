@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, MotionConfig } from "motion/react";
+import { m, AnimatePresence, MotionConfig } from "motion/react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -41,11 +41,11 @@ export function ZoomableMedia({
 
   return (
     <MotionConfig transition={{ duration: 0.3, type: "spring", bounce: 0 }}>
-      <motion.div
+      <m.div
         id="media-container"
         className={cn("relative w-full h-auto border", className)}
       >
-        <motion.img
+        <m.img
           src={src}
           alt={alt}
           width={width}
@@ -54,10 +54,10 @@ export function ZoomableMedia({
           layoutId={`media-container-${src}`}
           onClick={handleZoom}
         />
-      </motion.div>
+      </m.div>
       <AnimatePresence>
         {isZoomed && (
-          <motion.div
+          <m.div
             layout
             layoutRoot
             className="fixed inset-0 w-screen h-screen bg-black/50 flex items-center justify-center z-50 p-4 md:p-8 lg:p-12 cursor-zoom-out"
@@ -66,13 +66,13 @@ export function ZoomableMedia({
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             onClick={handleZoom}
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <motion.img
+              <m.img
                 src={src}
                 alt={alt}
                 width={width}
@@ -80,8 +80,8 @@ export function ZoomableMedia({
                 className="max-w-full max-h-full object-contain"
                 layoutId={`media-container-${src}`}
               />
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </MotionConfig>
