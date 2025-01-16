@@ -62,24 +62,7 @@ export const CodeBlock = ({
   return (
     <div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
       <div className="flex flex-col gap-4">
-        {tabsExist && (
-          <div className="flex overflow-x-auto">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={`px-3 !py-2 text-xs transition-colors font-sans ${
-                  activeTab === index
-                    ? "text-white"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
-          </div>
-        )}
-        <div className="flex items-center justify-end gap-2 absolute right-6 top-6">
+        <div className="flex items-center justify-end gap-2 md:absolute right-6 top-6">
           <button
             onClick={copyToClipboard}
             className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors font-sans"
@@ -108,6 +91,23 @@ export const CodeBlock = ({
             </a>
           )}
         </div>
+        {tabsExist && (
+          <div className="flex overflow-x-auto">
+            {tabs.map((tab, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                className={`px-3 !py-2 text-xs transition-colors font-sans ${
+                  activeTab === index
+                    ? "text-white"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+        )}
         <SyntaxHighlighter
           language={activeLanguage}
           style={atomDark}
