@@ -68,8 +68,6 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
     (project) => project.node,
   ) as Project[];
 
-  console.log("projects", projects);
-
   return (
     <section
       className={cn(
@@ -116,7 +114,6 @@ const ProjectsBlock: React.FC<ProjectsBlockProps> = ({
                   projects.length
                 );
                 const { projectTags } = project as Project;
-                console.log("projectTags", projectTags);
 
                 return {
                   icon: <Sparkles className="size-4 text-blue-300" />,

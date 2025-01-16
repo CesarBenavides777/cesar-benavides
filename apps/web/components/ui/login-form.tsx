@@ -33,20 +33,9 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     error: undefined,
   });
 
-  // const [oAuthState, loginWithOAuthFormAction, isOAuthPending] = useActionState(
-  //   loginWithOAuthAction,
-  //   {
-  //     error: undefined,
-  //   },
-  // );
-
   const filteredLoginClients = loginClients?.filter(
     (client) => client.provider !== "PASSWORD",
   );
-
-  console.log("Redirect", redirect);
-
-  // console.log("Filtered Login Clients", filteredLoginClients);
 
   useEffect(() => {
 
@@ -54,10 +43,6 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     if (state?.error) {
       toast.error(state?.error);
     }
-
-    // if (oAuthState?.error) {
-    //   toast.error(oAuthState?.error);
-    // }
 
   }, [state]);
 
@@ -108,12 +93,6 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
             {isPending ? "Loading..." : "Login"}
           </Button>
         </form>
-        {/* {state.error && (
-          <p
-            className="mt-4 text-sm text-red-500"
-            dangerouslySetInnerHTML={{ __html: state.error }}
-          />
-        )} */}
       </CardContent>
       <CardFooter className="flex flex-col items-center">
         <div className="relative w-full mb-4">
@@ -155,14 +134,11 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
             }
           };
 
-          console.log("Client", client);
-
           return (
             <Button
               variant="secondary"
               className="rounded-full cursor-pointer flex items-center w-12 h-12"
               type="submit"
-              // disabled={isOAuthPending}
               onClick={onClick}
               key={`login-client-${client.provider}`}
             >

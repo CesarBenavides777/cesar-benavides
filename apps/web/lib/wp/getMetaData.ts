@@ -20,7 +20,6 @@ export const getMetaData = async ({ slug, asPreview, idType, p }: GetPageDataPro
     const client = await clientFunction(asPreview as boolean)();
   
     if (!client) {
-      console.log("Failed to get client");
       throw new Error("Failed to get client");
     }
 
@@ -50,8 +49,6 @@ export const getMetaData = async ({ slug, asPreview, idType, p }: GetPageDataPro
       idType: asPreview || isBlog ? "DATABASE_ID" : "URI",
     },
   });
-
-  console.log("Data", data);
 
   if (!data.contentNode) {
     return {

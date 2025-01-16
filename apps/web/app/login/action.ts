@@ -7,7 +7,6 @@ export async function loginAction(prevData: any, formData: FormData) {
   const usernameEmail = formData.get("usernameEmail");
   const password = formData.get("password");
   const redirectURL = formData.get("redirect");
-  console.log("Redirect URL", redirectURL);
   try {
     const res = await signIn("credentials", {
       usernameEmail,

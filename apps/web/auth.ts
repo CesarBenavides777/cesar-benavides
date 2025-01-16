@@ -14,8 +14,6 @@ const providers: Provider[] = [
       user: { label: "User", type: "text" },
     },
   async authorize(c, req) {
-    // console.log("Credentials", c);
-    // console.log("Request", req);
     const userAndPassWordEmptyString = c.usernameEmail === "" && c.password === "";
     if (c.usernameEmail && c.password) {
       const userData = await loginWithUserNameAndPassword({
@@ -39,11 +37,11 @@ const providers: Provider[] = [
       return user
     }
 
-    // If no valid login, return null
     return null
   }
 
   }),
+  // Removed in favor of custom callback solution /api/auth/custom/github
   // GitHub({
   //   clientId: process.env.AUTH_GITHUB_ID as string,
   //   clientSecret: process.env.AUTH_GITHUB_SECRET as string,
