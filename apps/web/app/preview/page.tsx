@@ -11,19 +11,14 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export function generateMetadata(): Metadata {
-  return {
-    title: "Preview",
-    openGraph: {
-      title: "Preview",
-    },
-  };
+export const metadata: Metadata = {
+  title: 'Preview' ,
 }
 
 export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
-  const p = searchParams.preview_id || searchParams.p;
-  const preview = searchParams.preview;
+  const p = searchParams?.preview_id || searchParams?.p;
+  const preview = searchParams?.preview;
   const redirectUrl = encodeURIComponent(
     `${process.env.NEXT_PUBLIC_URL}/preview?p=${p}&preview=${preview}`
   );
@@ -33,16 +28,13 @@ export default async function Page(props: Props) {
   });
 
   const session = await auth();
-
- 
-
   const pageData = await getPageData({
     pageId: p as ContentNodeIdTypeEnum,
     asPreview: isPreview,
   });
-
   const { data, hasClient } = pageData;
-   if (!session || !hasClient) {
+
+   if (!session  ) {
      return <PleaseLogin redirect={redirectUrl} />;
    }
   const { pageContent, title, id: pageId } = data?.page ?? {};
