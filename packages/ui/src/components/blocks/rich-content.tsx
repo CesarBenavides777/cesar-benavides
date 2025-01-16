@@ -4,6 +4,7 @@ import type { PageContentBlocksRichContentLayout } from "@workspace/ui/types/wp"
 import { cn } from "@workspace/ui/lib/utils";
 import parse, { domToReact, Element } from "html-react-parser";
 import { CodeBlock } from "@workspace/ui/components/code-block";
+import { Button } from "@workspace/ui/components/button";
 
 type RichContentProps = PageContentBlocksRichContentLayout & {
   className?: string;
@@ -72,26 +73,40 @@ const RichContent: React.FC<RichContentProps> = ({
       )}
       <div className="content-wrapper flex flex-col gap-8 py-6">
         {paragraphs &&
-          paragraphs.map(({ title, content }, index) => (
-            <div
-              key={index}
-              className={cn(
-                "flex flex-col gap-4",
-                lineSeparated ? "border-b border-foreground/20 pb-4" : "",
-              )}
-            >
-              {title && (
-                <h3 className="font-sans text-xl md:text-2xl font-semibold">
-                  {title}
-                </h3>
-              )}
-              {content && (
-                <div className="font-sans text-sm md:text-base lg:text-lg content-wrapper w-full text-foreground">
-                  {renderContent(content)}
-                </div>
-              )}
-            </div>
-          ))}
+          paragraphs.map(({ title, content, cta }, index) => {
+            const { title: ctaTitle, url } = cta || {};
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "flex flex-col gap-4",
+                  lineSeparated ? "border-b border-foreground/20 pb-4" : ""
+                )}
+              >
+                {title && (
+                  <h3 className="font-sans text-xl md:text-2xl font-semibold">
+                    {title}
+                  </h3>
+                )}
+                {content && (
+                  <div className="font-sans text-sm md:text-base lg:text-lg content-wrapper w-full text-foreground">
+                    {renderContent(content)}
+                  </div>
+                )}
+                {cta && (
+                  <Button
+                    variant="outline"
+                    href={url}
+                    target="_blank"
+                    className="w-fit"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {ctaTitle}
+                  </Button>
+                )}
+              </div>
+            );
+          })}
       </div>
     </section>
   );

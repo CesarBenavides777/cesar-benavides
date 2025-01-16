@@ -8,7 +8,12 @@
       "env": [
         "FAUST_SECRET_KEY",
         "NEXT_PUBLIC_URL",
-        "NEXT_PUBLIC_WORDPRESS_URL"
+        "NEXT_PUBLIC_WORDPRESS_URL",
+        "AUTH_GITHUB_ID",
+        "AUTH_GITHUB_SECRET",
+        "AUTH_SECRET",
+        "SECRET_COOKIE_PASSWORD"
+
       ],
       "outputs": [".next/**/*", "!.next/cache/**"]
     },

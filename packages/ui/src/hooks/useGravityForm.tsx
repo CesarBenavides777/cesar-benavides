@@ -12,7 +12,6 @@ import type {
   CheckboxFieldInput,
   EmailFieldInput,
   NameFieldInput,
-  FileUploadFieldValue as FileUpload,
 } from "@workspace/ui/types/wp";
 
 export interface FieldValue {
@@ -153,7 +152,7 @@ const GravityFormContext = createContext<{
   dispatch: () => null,
 });
 
-export function GravityFormProvider({ children }: { children: ReactNode }) {
+export function GravityFormProvider({ children }: { children: ReactNode }): JSX.Element {
   const [state, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
   return (

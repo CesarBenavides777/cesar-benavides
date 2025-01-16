@@ -18,7 +18,7 @@ interface Props {
   styled?: boolean;
 }
 
-const GravityForm = ({
+const GravityForm: React.FC<Props> = ({ 
   form,
   formId,
   showTitle = true,
@@ -39,7 +39,6 @@ const GravityForm = ({
         useToast={useToast}
         styled={styled}
       />
-      {/* @ts-ignore */}
       {useToast && <Toaster {...toastProps} />}
     </GravityFormProvider>
   );

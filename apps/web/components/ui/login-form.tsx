@@ -44,6 +44,8 @@ export default function LoginForm({ redirect, loginClients }: LoginFormProps) {
     (client) => client.provider !== "PASSWORD",
   );
 
+  console.log("Redirect", redirect);
+
   // console.log("Filtered Login Clients", filteredLoginClients);
 
   useEffect(() => {

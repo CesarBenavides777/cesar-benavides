@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 export async function loginAction(prevData: any, formData: FormData) {
   const usernameEmail = formData.get("usernameEmail");
   const password = formData.get("password");
+  const redirectURL = formData.get("redirect");
+  console.log("Redirect URL", redirectURL);
   try {
     const res = await signIn("credentials", {
       usernameEmail,
@@ -23,7 +25,7 @@ export async function loginAction(prevData: any, formData: FormData) {
   } catch (error: any) {
     return { error: error?.cause?.message || error.message || "Login failed" };
   } finally {
-    redirect(`${process.env.NEXT_PUBLIC_URL}/my-account`);
+    redirect(redirectURL as string || `${process.env.NEXT_PUBLIC_URL}/my-account` as string);
   }
 }
 

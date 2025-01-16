@@ -15,6 +15,7 @@ export default withFaust({
     serverActions: {
       bodySizeLimit: "10mb",
     },
+    ppr: "incremental",
     reactCompiler: true,
   },
   typescript: {

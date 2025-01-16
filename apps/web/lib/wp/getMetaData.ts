@@ -1,18 +1,28 @@
 import { SEO_CONFIG_FRAGMENT, SEO_FRAGMENT } from "@/queries";
 import { gql } from "@apollo/client";
 import { getClient } from "@/providers/apollo/rsc";
+import { ContentNodeIdTypeEnum } from "@/types/wp";
+import { clientFunction } from "./getPageData";
 
 interface GetPageDataProps {
   slug: string;
   asPreview?: boolean;
   page?: number;
+  idType?: ContentNodeIdTypeEnum;
+  p?: number;
 }
 
-export const getMetaData = async ({ slug, asPreview }: GetPageDataProps) => {
-  const client = await getClient();
+export const getMetaData = async ({ slug, asPreview, idType, p }: GetPageDataProps) => {
 
   const isBlog = slug === "blog";
-  const blogId = 259; // Blog page ID for Archive page query
+  const blogId = p || 259; // Blog page ID for Archive page query
+
+    const client = await clientFunction(asPreview as boolean)();
+  
+    if (!client) {
+      console.log("Failed to get client");
+      throw new Error("Failed to get client");
+    }
 
   const { data } = await client.query({
     query: gql`
@@ -40,6 +50,8 @@ export const getMetaData = async ({ slug, asPreview }: GetPageDataProps) => {
       idType: asPreview || isBlog ? "DATABASE_ID" : "URI",
     },
   });
+
+  console.log("Data", data);
 
   if (!data.contentNode) {
     return {

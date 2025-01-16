@@ -8,7 +8,7 @@ type GetPageData = {
   asPreview: boolean;
 };
 
-const clientFunction = (asPreview: boolean) => {
+export const clientFunction = (asPreview: boolean) => {
   return asPreview ? getAuthClient : getClient;
 };
 
@@ -17,10 +17,14 @@ const getPageData = async ({ pageId, asPreview }: GetPageData) => {
     throw new Error("Page ID is required");
   }
 
+
   const client = await clientFunction(asPreview)();
 
   if (!client) {
-    throw new Error("Failed to get client");
+    return {
+      data: null,
+      hasClient: false,
+    }
   }
   // @ts-expect-error
   const isBlog = pageId === "blog";

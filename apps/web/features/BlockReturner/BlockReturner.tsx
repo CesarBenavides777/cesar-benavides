@@ -4,6 +4,7 @@ import type { PageContentBlocksHeroLayout, GfForm } from "@/types/wp";
 // import ProjectsBlock from "@/components/blocks/projects-block";
 import PostsBlock from "@workspace/ui/components/blocks/posts-block";
 import RichContent from "@workspace/ui/components/blocks/rich-content";
+// import CodeBlock from "@workspace/ui/components/blocks/code-block";
 
 import dynamic from "next/dynamic";
 
@@ -11,6 +12,8 @@ const ProjectsBlock = dynamic(
   () => import("@/components/blocks/projects-block"),
 );
 const FormBlock = dynamic(() => import("@/components/blocks/form-block"));
+
+const CodeBlock = dynamic(() => import("@workspace/ui/components/blocks/code-block"));
 
 type Block = PageContentBlocksHeroLayout & {
   __typename: string;
@@ -30,6 +33,7 @@ const componentMap = {
   PageContentBlocksProjectsBlockLayout: ProjectsBlock,
   PageContentBlocksPostsBlockLayout: PostsBlock,
   PageContentBlocksRichContentLayout: RichContent,
+  PageContentBlocksCodeBlockLayout: CodeBlock,
 };
 
 const BlockReturner: React.FC<BlockReturnerProps> = ({

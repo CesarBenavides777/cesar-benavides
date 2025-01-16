@@ -283,6 +283,20 @@ export const BLOCKS_FRAGMENT = gql`
           }
         }
       }
+      # Code Block
+      ... on PageContentBlocksCodeBlockLayout {
+        mainTitle
+        accordion
+        files {
+          filename
+          code
+          language
+          source {
+            url
+            title
+          }
+        }
+      }
     }
   }
 `;

@@ -3,12 +3,14 @@
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, ExternalLink } from "lucide-react";
+
 
 type CodeBlockProps = {
   language: string;
   filename: string;
   highlightLines?: number[];
+  source?: string;
 } & (
   | {
       code: string;
@@ -21,6 +23,7 @@ type CodeBlockProps = {
         code: string;
         language?: string;
         highlightLines?: number[];
+        source?: string;
       }>;
     }
 );
@@ -28,6 +31,7 @@ type CodeBlockProps = {
 export const CodeBlock = ({
   language,
   filename,
+  source,
   code,
   highlightLines = [],
   tabs = [],
@@ -53,10 +57,11 @@ export const CodeBlock = ({
   const activeHighlightLines = tabsExist
     ? tabs[activeTab].highlightLines || []
     : highlightLines;
+  const activeSource = tabsExist ? tabs[activeTab].source || source : source;
 
   return (
     <div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {tabsExist && (
           <div className="flex overflow-x-auto">
             {tabs.map((tab, index) => (
@@ -74,48 +79,60 @@ export const CodeBlock = ({
             ))}
           </div>
         )}
-        {!tabsExist && filename && (
-          <div className="flex justify-between items-center py-2">
-            <div className="text-xs text-zinc-400">{filename}</div>
-            <button
-              onClick={copyToClipboard}
+        <div className="flex items-center justify-end gap-2 absolute right-6 top-6">
+          <button
+            onClick={copyToClipboard}
+            className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors font-sans"
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" />
+                Copy code
+              </>
+            )}
+          </button>
+          {activeSource && (
+            <a
+              href={activeSource}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors font-sans"
             >
-              {copied ? (
-                // @ts-ignore
-                <Check className="h-3.5 w-3.5" />
-              ) : (
-                // @ts-ignore
-                <Copy className="h-3.5 w-3.5" />
-              )}
-            </button>
-          </div>
-        )}
+              <ExternalLink className="h-3.5 w-3.5" />
+              See source
+            </a>
+          )}
+        </div>
+        <SyntaxHighlighter
+          language={activeLanguage}
+          style={atomDark}
+          customStyle={{
+            margin: 0,
+            padding: 0,
+            background: "transparent",
+            fontSize: "0.875rem",
+          }}
+          wrapLines={true}
+          showLineNumbers={true}
+          lineProps={(lineNumber) => ({
+            style: {
+              backgroundColor: activeHighlightLines.includes(lineNumber)
+                ? "rgba(255,255,255,0.1)"
+                : "transparent",
+              display: "block",
+              width: "100%",
+            },
+          })}
+          PreTag="div"
+        >
+          {String(activeCode)}
+        </SyntaxHighlighter>
       </div>
-      <SyntaxHighlighter
-        language={activeLanguage}
-        style={atomDark}
-        customStyle={{
-          margin: 0,
-          padding: 0,
-          background: "transparent",
-          fontSize: "0.875rem",
-        }}
-        wrapLines={true}
-        showLineNumbers={true}
-        lineProps={(lineNumber) => ({
-          style: {
-            backgroundColor: activeHighlightLines.includes(lineNumber)
-              ? "rgba(255,255,255,0.1)"
-              : "transparent",
-            display: "block",
-            width: "100%",
-          },
-        })}
-        PreTag="div"
-      >
-        {String(activeCode)}
-      </SyntaxHighlighter>
     </div>
   );
 };
