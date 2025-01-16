@@ -89,7 +89,7 @@ const RichContent: React.FC<RichContentProps> = ({
                   </h3>
                 )}
                 {content && (
-                  <div className="font-sans text-sm md:text-base lg:text-lg content-wrapper w-full text-foreground">
+                  <div className="font-sans text-sm md:text-base lg:text-lg content-wrapper w-full text-foreground relative max-w-full overflow-clip">
                     {renderContent(content)}
                   </div>
                 )}
