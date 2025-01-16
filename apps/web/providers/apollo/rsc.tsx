@@ -3,8 +3,8 @@ import { registerApolloClient } from "@apollo/experimental-nextjs-app-support";
 import { createApolloConfig } from "./config";
 import { auth } from "@/auth";
 
-export function createRSCApolloClient(authenticated = false) {
-  const [inMemoryCacheObject, linkChain] = createApolloConfig(authenticated);
+export function createRSCApolloClient(authenticated = false, preview = false) {
+  const [inMemoryCacheObject, linkChain] = createApolloConfig(authenticated, preview);
   return new ApolloClient({
     cache: new InMemoryCache(inMemoryCacheObject),
     link: linkChain,
@@ -18,13 +18,9 @@ export async function getClient() {
   return client.getClient();
 }
 
-export async function getAuthClient() {
+export async function getAuthClient(preview = false) {
   const session = await auth();
-  console.log("session", session);
-  if (!session?.isLoggedIn) {
-    return null;
-  }
-  const faustApolloClient = createRSCApolloClient(true);
+  const faustApolloClient = createRSCApolloClient(session?.isLoggedIn, preview);
   const client = registerApolloClient(() => faustApolloClient);
 
   return client.getClient();

@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import getPreviewToken from "@/lib/wp/getPreviewToken";
 import {
   ApolloLink,
   InMemoryCacheConfig,
@@ -6,6 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
+// import { fetchAccessToken } from "@faustwp/experimental-app-router";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -21,8 +23,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
+
+
 export function createApolloConfig(
   authenticated = false,
+  preview = false,
 ): [InMemoryCacheConfig, ApolloLink] {
   let inMemoryCacheObject: InMemoryCacheConfig = {
     typePolicies: {
@@ -48,6 +53,9 @@ export function createApolloConfig(
   });
 
   // @todo Create hook for client and options.
+  // console.log("Preview", preview);
+  // console.log("Authenticated", authenticated);
+  
 
   // If the request is coming from the auth client, apply the auth link.
   if (authenticated) {
@@ -65,7 +73,6 @@ export function createApolloConfig(
       };
     }).concat(linkChain);
   }
-
   /**
    * @todo
    * Configure GET requests and persisted queries options.

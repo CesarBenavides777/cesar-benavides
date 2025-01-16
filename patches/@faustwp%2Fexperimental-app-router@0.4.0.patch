@@ -1,0 +1,20 @@
+diff --git a/dist/server/auth/fetchTokens.js b/dist/server/auth/fetchTokens.js
+index ac898fa819de4e249c1bd0a70d8214ffed56426e..7095f3306f84a916c85d9a19e083ff71a7887e7f 100644
+--- a/dist/server/auth/fetchTokens.js
++++ b/dist/server/auth/fetchTokens.js
+@@ -11,13 +11,14 @@ import { getWpUrl } from '../../faust-core-utils.js';
+  */
+ export async function fetchTokens(code) {
+     var _a;
+-    const cookieStore = cookies();
++    const cookieStore = await cookies();
+     const cookieName = `${getWpUrl()}-rt`;
+     if (!((_a = cookieStore.get(cookieName)) === null || _a === void 0 ? void 0 : _a.value) && !code) {
+         // The user is not authenticated.
+         return null;
+     }
+     let url = `${getUrl()}/api/faust/token`;
++    console.log('fetchTokens', url);
+     if (code) {
+         url += `?code=${encodeURIComponent(code)}`;
+     }

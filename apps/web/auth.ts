@@ -136,30 +136,32 @@ const callbacks = {
       return token;
     }
 
+    console.log("Token expired:", expired);
+    console.log("Token:", token);
+    console.log("User:", user);
+
     if (expired) {
       try {
-        console.log("Refreshing token...", token);
         const tokens = await refreshAuthToken(token?.auth?.refreshToken as string);
-
         if (tokens) {
           return {
             ...token,
             auth: {
               ...token.auth,
-              authToken: tokens.authToken,
-              authTokenExpiration: tokens.authTokenExpiration,
-              refreshToken: tokens.refreshToken,
-              refreshTokenExpiration: tokens.refreshTokenExpiration,
+              ...tokens,
             },
           };
-        } else {
-          // Refresh token failed, clear auth data
-          delete token.auth;
         }
       } catch (error) {
         console.error("Error refreshing token:", error);
-        delete token.auth;
+        if (shouldRetry(error)) {
+          // Retry logic
+        } else {
+          delete token.auth;
+        }
       }
+    } else {
+      console.log("Token is not expired, but user is not logged in.");
     }
 
     return token;

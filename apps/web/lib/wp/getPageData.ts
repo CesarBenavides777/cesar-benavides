@@ -7,25 +7,24 @@ type GetPageData = {
   pageId: ContentNodeIdTypeEnum;
   asPreview: boolean;
 };
-
 export const clientFunction = (asPreview: boolean) => {
-  return asPreview ? getAuthClient : getClient;
+  return asPreview
+    ? () => getAuthClient(asPreview) // Return a callable function that includes asPreview
+    : () => getClient(); // Always return a callable function
 };
 
 const getPageData = async ({ pageId, asPreview }: GetPageData) => {
-  if (!pageId) {
-    throw new Error("Page ID is required");
-  }
 
-
+  // Ensure `clientFunction` always returns a callable function
   const client = await clientFunction(asPreview)();
 
-  if (!client) {
+  if (!client || !pageId) {
     return {
       data: null,
       hasClient: false,
-    }
+    };
   }
+
   // @ts-expect-error
   const isBlog = pageId === "blog";
   const blogId = 259; // Blog page ID for Archive page query

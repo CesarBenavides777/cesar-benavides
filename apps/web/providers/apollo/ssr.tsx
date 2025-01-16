@@ -5,8 +5,9 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
-import React, { PropsWithChildren } from "react";
+
 import { createApolloConfig } from "./config";
+import type { ReactNode } from "react";
 
 export function createSSRApolloClient(authenticated: boolean) {
   const [inMemoryCacheObject, linkChain] = createApolloConfig(authenticated);
@@ -16,9 +17,12 @@ export function createSSRApolloClient(authenticated: boolean) {
   });
 }
 
-export function ApolloProvider({ children }: PropsWithChildren<object>) {
+export function ApolloProvider({ children, isPreview }: {
+  children: ReactNode;
+  isPreview?: boolean;
+}) {
   return (
-    <ApolloNextAppProvider makeClient={() => createSSRApolloClient(false)}>
+    <ApolloNextAppProvider makeClient={() => createSSRApolloClient(!!isPreview)}>
       {children}
     </ApolloNextAppProvider>
   );

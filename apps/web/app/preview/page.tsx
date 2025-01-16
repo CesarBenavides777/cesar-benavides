@@ -4,13 +4,14 @@ import BlockReturner from "@/features/BlockReturner/BlockReturner";
 import { ContentNodeIdTypeEnum } from "@/types/wp";
 import getPageData from "@/lib/wp/getPageData";
 import type { Metadata } from "next";
+import { auth } from "@/auth";
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export const metadata: Metadata = {
-  title: 'Preview' ,
+  title: 'Preview',
 }
 
 export default async function Page(props: Props) {
@@ -27,8 +28,9 @@ export default async function Page(props: Props) {
   });
 
   const { data, hasClient } = pageData;
+  const session = await auth();
 
-  if (!hasClient) {
+  if (!session) {
     return <PleaseLogin redirect={redirectUrl} />;
   }
 
