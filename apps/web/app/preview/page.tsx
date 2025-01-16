@@ -22,7 +22,7 @@ export function generateMetadata(): Metadata {
 
 export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
-  const p = searchParams.p;
+  const p = searchParams.preview_id || searchParams.p;
   const preview = searchParams.preview;
   const redirectUrl = encodeURIComponent(
     `${process.env.NEXT_PUBLIC_URL}/en/preview?p=${p}&preview=${preview}`
