@@ -138,6 +138,7 @@ const callbacks = {
 
     if (expired) {
       try {
+        console.log("Refreshing token...", token);
         const tokens = await refreshAuthToken(token?.auth?.refreshToken as string);
 
         if (tokens) {
