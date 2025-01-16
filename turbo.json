@@ -6,9 +6,13 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "env": [
+        "NODE_ENV",
         "FAUST_SECRET_KEY",
         "NEXT_PUBLIC_URL",
+        "NEXT_PUBLIC_SITE_URL",
         "NEXT_PUBLIC_WORDPRESS_URL",
+        "NEXT_PUBLIC_POSTHOG_KEY",
+        "NEXT_PUBLIC_POSTHOG_HOST",
         "AUTH_GITHUB_ID",
         "AUTH_GITHUB_SECRET",
         "AUTH_SECRET",
