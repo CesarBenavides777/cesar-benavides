@@ -145,3 +145,7 @@ gradients from color to transparent
     transparent
   )!important;
 }
+
+.balanced {
+  text-wrap: balance;
+}

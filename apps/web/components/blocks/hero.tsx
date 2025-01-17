@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({
           {title && (
             <h1
               className={cn(
-                "font-sans text-3xl md:text-4xl xl:text-5xl font-bold",
+                "font-sans text-3xl md:text-4xl xl:text-5xl font-bold balanced",
                 {
                   "text-center": isHome,
                 }

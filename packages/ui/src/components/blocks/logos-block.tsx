@@ -1,12 +1,10 @@
-"use client";
+
 import React from "react";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { PageContentBlocksLogosblockLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
-import dynamic from "next/dynamic";
-
-const MorphingText = dynamic(() => import("@workspace/ui/components/morphing-text").then((mod) => mod.MorphingText));
+import { AlternatingText } from "@workspace/ui/components/alternating-text";
 
 
 type LogosBlockProps = PageContentBlocksLogosblockLayout & {
@@ -62,7 +60,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
   };
 
   const gridClasses = `grid gap-4 ${
-    variant === "grid"
+    variant[0] === "grid"
       ? `grid-cols-${columnsMobile} md:grid-cols-${columns}`
       : "grid-cols-2 md:grid-cols-4"
   }`;
@@ -71,11 +69,14 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
     <section className="py-12">
       <div className="container mx-auto px-4 flex flex-col gap-1">
         <div className="text-center flex flex-col">
-          {title && <h2 className="text-2xl font-bold font-sans">{title}</h2>}
-          <MorphingText
-            texts={morphingTitles.map((title) => title.morph)}
-            className="my-16"
-          />
+          {title && (
+            <h2 className="text-4xl font-bold font-sans">
+              {title}{" "}
+              <AlternatingText
+                texts={morphingTitles.map((title) => title.morph)}
+              />
+            </h2>
+          )}
         </div>
         {content && (
           <div
