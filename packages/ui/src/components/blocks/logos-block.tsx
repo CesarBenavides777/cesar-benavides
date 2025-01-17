@@ -1,14 +1,17 @@
-
+"use client";
 import React from "react";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { PageContentBlocksLogosblockLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
-import { MorphingText } from "@workspace/ui/components/morphing-text";
+import dynamic from "next/dynamic";
+
+const MorphingText = dynamic(() => import("@workspace/ui/components/morphing-text").then((mod) => mod.MorphingText));
 
 
 type LogosBlockProps = PageContentBlocksLogosblockLayout & {
     className?: string;
+    children?: React.ReactNode;
 }
 
 const LogosBlock: React.FC<LogosBlockProps> = ({
@@ -20,7 +23,8 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
   columns,
   columnsMobile,
   logos,
-  morphingTitles
+  morphingTitles,
+  children,
 }) => {
 
   const renderLogos = () => {
@@ -97,6 +101,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
           </div>
         )}
       </div>
+      {children && <div className="container mx-auto px-4">{children}</div>}
     </section>
   );
 };

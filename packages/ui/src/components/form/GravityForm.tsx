@@ -39,6 +39,7 @@ const GravityForm: React.FC<Props> = ({
         useToast={useToast}
         styled={styled}
       />
+      {/* @ts-expect-error - not sure why this doesn't work with types */}
       {useToast && <Toaster {...toastProps} />}
     </GravityFormProvider>
   );

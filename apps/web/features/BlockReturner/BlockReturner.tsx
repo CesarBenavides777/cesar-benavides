@@ -1,28 +1,21 @@
+
+import type { PageContentBlocks_Layout, GfForm } from "@/types/wp";
+// Blocks
 import Hero from "@/components/blocks/hero";
-// import FormBlock from "@/components/blocks/form-block";
-import type { PageContentBlocksHeroLayout, GfForm } from "@/types/wp";
-// import ProjectsBlock from "@/components/blocks/projects-block";
 import PostsBlock from "@workspace/ui/components/blocks/posts-block";
 import RichContent from "@workspace/ui/components/blocks/rich-content";
-// import CodeBlock from "@workspace/ui/components/blocks/code-block";
 import LogosBlock from "@workspace/ui/components/blocks/logos-block";
-
 import dynamic from "next/dynamic";
 
-
-const ProjectsBlock = dynamic(
-  () => import("@/components/blocks/projects-block"),
-);
+const ProjectsBlock = dynamic(() => import("@/components/blocks/projects-block"),);
 const FormBlock = dynamic(() => import("@/components/blocks/form-block"));
-
 const CodeBlock = dynamic(() => import("@workspace/ui/components/blocks/code-block"));
 
-// const LogosBlock = dynamic(() => import("@workspace/ui/components/blocks/logos-block"));
-
-
-type Block = PageContentBlocksHeroLayout & {
+type Block = PageContentBlocks_Layout & {
   __typename: string;
   form?: GfForm;
+  tags?: string[];
+  postId?: string;
 };
 
 type BlockReturnerProps = {
@@ -51,11 +44,10 @@ const BlockReturner: React.FC<BlockReturnerProps> = ({
   if (!blocks || blocks.length === 0) {
     return <Hero title={title} />;
   }
-
   return (
     <div className={"flex flex-col gap-4"}>
       {blocks.map((block, index) => {
-        const Component = componentMap[block.__typename];
+        const Component = componentMap[block.__typename as keyof typeof componentMap] as React.FC<Block>;
         return Component ? (
           <Component
             key={`${block.__typename}-${index}`}
