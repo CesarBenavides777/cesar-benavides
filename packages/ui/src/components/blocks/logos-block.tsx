@@ -67,11 +67,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
     <section className="py-12">
       <div className="container mx-auto px-4 flex flex-col gap-1">
         <div className="text-center flex flex-col">
-          {title && (
-            <h2 className="text-2xl font-bold font-sans">
-              {title}
-            </h2>
-          )}
+          {title && <h2 className="text-2xl font-bold font-sans">{title}</h2>}
           <MorphingText
             texts={morphingTitles.map((title) => title.morph)}
             className="my-24"
@@ -87,16 +83,18 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
         {variant[0] === "grid" ? (
           <div className={gridClasses}>{renderLogos()}</div>
         ) : (
-          <Marquee
-            pauseOnHover={pauseOnHover}
-            gradient={true}
-            className={"flex flex-row items-center justify-center min-h-[104px]"}
-            autoFill
-            loop={0}
-            gradientWidth={100}
-          >
-            <div className="flex">{renderLogos()}</div>
-          </Marquee>
+          <div className="min-h-[104px]">
+            <Marquee
+              pauseOnHover={pauseOnHover}
+              gradient={true}
+              className={"flex flex-row items-center justify-center"}
+              autoFill
+              loop={0}
+              gradientWidth={100}
+            >
+              <div className="flex">{renderLogos()}</div>
+            </Marquee>
+          </div>
         )}
       </div>
     </section>
