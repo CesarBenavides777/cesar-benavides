@@ -306,6 +306,9 @@ export const BLOCKS_FRAGMENT = gql`
         pauseOnHover
         columns
         columnsMobile
+        morphingTitles {
+          morph
+        }
         logos {
           logo {
             node {

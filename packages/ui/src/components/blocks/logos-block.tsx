@@ -4,6 +4,7 @@ import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { PageContentBlocksLogosblockLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
+import { MorphingText } from "@workspace/ui/components/morphing-text";
 
 
 type LogosBlockProps = PageContentBlocksLogosblockLayout & {
@@ -19,6 +20,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
   columns,
   columnsMobile,
   logos,
+  morphingTitles
 }) => {
 
   const renderLogos = () => {
@@ -64,7 +66,17 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
   return (
     <section className="py-12">
       <div className="container mx-auto px-4 flex flex-col gap-1">
-        {title && <h2 className="text-2xl font-bold font-sans text-center">{title}</h2>}
+        <div className="text-center flex flex-col">
+          {title && (
+            <h2 className="text-2xl font-bold font-sans">
+              {title}
+            </h2>
+          )}
+          <MorphingText
+            texts={morphingTitles.map((title) => title.morph)}
+            className="my-24"
+          />
+        </div>
         {content && (
           <div
             className="text-md font-sans font-light text-center text-foreground/70"
