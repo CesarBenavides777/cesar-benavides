@@ -297,6 +297,28 @@ export const BLOCKS_FRAGMENT = gql`
           }
         }
       }
+      # LogosBlock
+      ... on PageContentBlocksLogosblockLayout {
+        title
+        content
+        uniqueId
+        variant
+        pauseOnHover
+        columns
+        columnsMobile
+        logos {
+          logo {
+            node {
+              ...MediaItemFragment
+            }
+          }
+          logoDark {
+            node {
+              ...MediaItemFragment
+            }
+          }
+        }
+      }
     }
   }
 `;

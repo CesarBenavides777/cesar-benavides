@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -101,4 +102,46 @@
     .transition-child p {
       @apply transition-all duration-700 delay-200;
     }
+
+    
+
+    
+}
+
+
+
+/* 
+// gradientColor={theme === "dark" ? "#242424" : "#f9f9f9"}
+gradients from color to transparent
+*/
+.dark .rfm-overlay:before {
+  background: linear-gradient(
+    to right,
+    #242424,
+    transparent
+  )!important;
+}
+
+.rfm-overlay:before {
+  background: linear-gradient(
+    to right,
+    #f9f9f9,
+    transparent
+  )!important;
+}
+
+.dark .rfm-overlay:after {
+  background: linear-gradient(
+    to right,
+    #242424,
+    transparent
+  )!important;
+}
+
+.rfm-overlay:after {
+  background: linear-gradient(
+    to right,
+    #f9f9f9,
+    transparent
+  )!important;
 }
