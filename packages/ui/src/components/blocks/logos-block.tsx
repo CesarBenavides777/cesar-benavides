@@ -90,7 +90,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
           <Marquee
             pauseOnHover={pauseOnHover}
             gradient={true}
-            className={"flex flex-row items-center justify-center"}
+            className={"flex flex-row items-center justify-center min-h-[104px]"}
             autoFill
             loop={0}
             gradientWidth={100}
