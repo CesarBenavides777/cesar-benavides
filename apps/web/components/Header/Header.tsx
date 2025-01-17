@@ -106,6 +106,8 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
           width={50}
           height={50}
           alt={`${title} | ${subTitle}`}
+          loading="eager"
+          priority
         />
         <Image
           className="hidden dark:block"
@@ -113,6 +115,8 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
           width={50}
           height={50}
           alt={`${title} | ${subTitle}`}
+          loading="eager"
+          priority
         />
         <div className="flex-col gap-[2px] hidden lg:flex">
           <h1 className="text-2xl font-medium">{title}</h1>

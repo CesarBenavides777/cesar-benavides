@@ -37,6 +37,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
               "dark:hidden": logo?.logoDark,
             })}
             loading="eager"
+            priority
           />
         )}
         {logo?.logoDark && (
@@ -47,6 +48,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
             height={logo?.logoDark.node.mediaDetails.height}
             className="min-w-16 max-w-24 md:max-w-32 h-auto hidden dark:block"
             loading="eager"
+            priority
           />
         )}
       </div>
