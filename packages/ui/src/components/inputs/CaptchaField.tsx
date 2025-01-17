@@ -1,9 +1,12 @@
 import React, { useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 import useGravityForm, {
   ACTION_TYPES,
 } from "@workspace/ui/hooks/useGravityForm";
 import { FieldError } from "@workspace/ui/types/wp";
+import dynamic from "next/dynamic";
+
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"));
 
 interface Props {
   field: any;

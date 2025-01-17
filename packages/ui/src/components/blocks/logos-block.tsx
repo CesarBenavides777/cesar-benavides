@@ -70,7 +70,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
           {title && <h2 className="text-2xl font-bold font-sans">{title}</h2>}
           <MorphingText
             texts={morphingTitles.map((title) => title.morph)}
-            className="my-24"
+            className="my-16"
           />
         </div>
         {content && (
@@ -83,7 +83,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
         {variant[0] === "grid" ? (
           <div className={gridClasses}>{renderLogos()}</div>
         ) : (
-          <div className="min-h-[104px]">
+          <div className="min-h-[96px] md:min-h-[104px]">
             <Marquee
               pauseOnHover={pauseOnHover}
               gradient={true}
