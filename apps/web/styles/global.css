@@ -149,3 +149,7 @@ gradients from color to transparent
 .balanced {
   text-wrap: balance;
 }
+
+.linenumber {
+  color: rgba(135,134,144);
+}

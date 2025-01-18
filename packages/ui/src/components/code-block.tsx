@@ -4,6 +4,7 @@ import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { Check, Copy, ExternalLink } from "lucide-react";
+import "@workspace/ui/styles/synthwave.css";
 
 
 type CodeBlockProps = {
@@ -60,7 +61,7 @@ export const CodeBlock = ({
   const activeSource = tabsExist ? tabs[activeTab].source || source : source;
 
   return (
-    <div className="relative w-full rounded-lg bg-slate-900 p-4 font-mono text-sm">
+    <div className="relative w-full rounded-lg bg-[rgba(40,33,55)] p-4 font-mono text-sm">
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-end gap-2 md:absolute right-6 top-6">
           <button
@@ -110,12 +111,12 @@ export const CodeBlock = ({
         )}
         <SyntaxHighlighter
           language={activeLanguage}
-          style={atomDark}
+          style={"@workspace/ui/styles/synthwave.css"}
           customStyle={{
             margin: 0,
             padding: 0,
-            background: "transparent",
             fontSize: "0.875rem",
+            background: "rgba(40,33,55)",
           }}
           wrapLines={true}
           showLineNumbers={true}
