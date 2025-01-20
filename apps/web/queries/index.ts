@@ -190,6 +190,21 @@ export const MEDIA_ITEM_FRAGMENT = gql`
   }
 `;
 
+export const SVG_ITEM_FRAGMENT = gql`
+  fragment SvgItemFragment on MediaItem {
+    id
+    altText
+    sourceUrl
+    mediaDetails {
+      height
+      width
+    }
+    sizes
+    sourceUrl
+    srcSet
+  }
+`;
+
 export const BLOCKS_FRAGMENT = gql`
   fragment BlocksFragment on PageContent {
     blocks {
@@ -312,15 +327,43 @@ export const BLOCKS_FRAGMENT = gql`
         logos {
           logo {
             node {
-              ...MediaItemFragment
+              ...SvgItemFragment
             }
           }
           logoDark {
             node {
-              ...MediaItemFragment
+              ...SvgItemFragment
             }
           }
         }
+      }
+      # Cards Block
+      ... on PageContentBlocksCardsBlockLayout {
+        title
+        content
+        cards {
+          title
+          content
+          image {
+            node {
+              ...MediaItemFragment
+            }
+          }
+          imageDark {
+            node {
+              ...SvgItemFragment
+            }
+          }
+          video {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        variant
+        columns
+        columnsMobile
+        uniqueId
       }
     }
   }
@@ -339,6 +382,7 @@ export const GET_POST_CONTENT_FRAGMENT = gql`
   }
   ${MEDIA_ITEM_FRAGMENT}
   ${BLOCKS_FRAGMENT}
+  ${SVG_ITEM_FRAGMENT}
 `;
 
 export const GET_PAGE_CONTENT_FRAGMENT = gql`
@@ -349,6 +393,7 @@ export const GET_PAGE_CONTENT_FRAGMENT = gql`
   }
   ${MEDIA_ITEM_FRAGMENT}
   ${BLOCKS_FRAGMENT}
+  ${SVG_ITEM_FRAGMENT}
 `;
 
 export const SEO_FRAGMENT = gql`

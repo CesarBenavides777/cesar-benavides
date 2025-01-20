@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <section
-      className={cn("px-2 md:px-4 py-6 md:py-12", className)}
+      className={cn("py-6 md:py-12", className)}
       id={uniqueId || undefined}
     >
       <div
@@ -42,9 +42,9 @@ const Hero: React.FC<HeroProps> = ({
             <h1
               className={cn(
                 "font-sans text-3xl md:text-4xl xl:text-5xl font-bold balanced",
-                {
-                  "text-center": isHome,
-                }
+                // {
+                //   "text-center": isHome,
+                // }
               )}
             >
               {title}
@@ -67,9 +67,9 @@ const Hero: React.FC<HeroProps> = ({
             <p
               className={cn(
                 "font-sans text-sm md:text-md xl:text-xl text-foreground/70",
-                {
-                  "text-center": isHome,
-                }
+                // {
+                //   "text-center": isHome,
+                // }
               )}
             >
               {subCaption}
@@ -79,9 +79,9 @@ const Hero: React.FC<HeroProps> = ({
             <div
               className={cn(
                 "font-sans text-sm md:text-base lg:text-lg content-wrapper w-full",
-                {
-                  "text-center": isHome,
-                }
+                // {
+                //   "text-center": isHome,
+                // }
               )}
               // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
               dangerouslySetInnerHTML={{ __html: body }}

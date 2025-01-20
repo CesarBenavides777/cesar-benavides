@@ -22,17 +22,6 @@ interface Props {
   styled?: boolean;
 }
 
-const successOptions = {
-  position: "bottom-center",
-};
-
-const fieldError = {
-  autoClose: 3000,
-  hideProgressBar: false,
-  position: "bottom-center",
-  pauseOnHover: true,
-};
-
 const submitGfForm = gql`
   mutation SubmitGfForm($input: SubmitGfFormInput!) {
     submitGfForm(input: $input) {
@@ -166,7 +155,7 @@ const GravityFormsForm = ({ form, formId, showTitle, submitForm }: Props) => {
                 : null}
               <Button
                 className="w-fit rounded"
-                variant="outline"
+                variant="default"
                 size="lg"
                 type="submit"
                 disabled={loading}

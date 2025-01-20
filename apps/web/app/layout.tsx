@@ -12,8 +12,10 @@ import Script from "next/script";
 import PageTransitionEffect from "@/components/PageTransition";
 import { getClient } from "@/providers/apollo/rsc";
 
-const isDevelopment = process.env.NODE_ENV === "development";
-export default async function RootLayout({ children }) {
+
+export default async function RootLayout({ children }: {
+  children: React.ReactNode;
+}) {
   const client = await getClient();
 
   const { data } = await client.query({

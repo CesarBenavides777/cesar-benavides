@@ -26,6 +26,10 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
 }) => {
 
   const renderLogos = () => {
+    if (!logos || logos.length === 0) {
+      return <div></div>;
+    }
+
     return logos.map((logo, index) => (
       <div
         key={`${uniqueId}-logo-${index}`}
@@ -37,7 +41,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
             alt={logo.logo.node.altText || `Logo ${index + 1}`}
             width={logo.logo.node.mediaDetails.width}
             height={logo.logo.node.mediaDetails.height}
-            className={cn("min-w-16 max-w-24 md:max-w-32 h-auto", {
+            className={cn("min-w-24 max-w-24 md:max-w-32 h-auto", {
               "dark:hidden": logo?.logoDark,
             })}
             loading="eager"
@@ -50,7 +54,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
             alt={logo?.logoDark.node.altText || `Logo ${index + 1}`}
             width={logo?.logoDark.node.mediaDetails.width}
             height={logo?.logoDark.node.mediaDetails.height}
-            className="min-w-16 max-w-24 md:max-w-32 h-auto hidden dark:block"
+            className="min-w-24 max-w-24 md:max-w-32 h-auto hidden dark:block"
             loading="eager"
             priority
           />
@@ -67,23 +71,25 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
 
   return (
     <section className="py-12">
-      <div className="container mx-auto px-4 flex flex-col gap-1">
-        <div className="text-center flex flex-col">
-          {title && (
-            <h2 className="text-4xl font-bold font-sans">
-              {title}{" "}
-              <AlternatingText
-                texts={morphingTitles.map((title) => title.morph)}
-              />
-            </h2>
+      <div className="container mx-auto flex flex-col gap-[48px]">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between text-left">
+          <div className="text-left flex flex-col md:flex-row items-start gap-2">
+            {title && (
+              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-sans flex flex-col md:flex-row items-start gap-2 text-left">
+                {title}{" "}
+                <AlternatingText
+                  texts={morphingTitles.map((title) => title.morph)}
+                />
+              </h2>
+            )}
+          </div>
+          {content && (
+            <div
+              className="text-md font-sans font-light text-center text-foreground/70"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
           )}
         </div>
-        {content && (
-          <div
-            className="text-md font-sans font-light text-center text-foreground/70"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
-        )}
 
         {variant[0] === "grid" ? (
           <div className={gridClasses}>{renderLogos()}</div>

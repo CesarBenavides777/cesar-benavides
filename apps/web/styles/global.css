@@ -52,6 +52,10 @@
     @apply dark:bg-[#242424] bg-[#f9f9f9];
   }
 
+  .content-wrapper p {
+    @apply text-foreground;
+  }
+
   .content-wrapper a {
     @apply underline hover:text-muted-foreground hover:transition-colors hover:duration-200;
   }

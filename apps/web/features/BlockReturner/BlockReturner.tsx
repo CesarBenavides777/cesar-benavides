@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 const ProjectsBlock = dynamic(() => import("@/components/blocks/projects-block"),);
 const FormBlock = dynamic(() => import("@/components/blocks/form-block"));
 const CodeBlock = dynamic(() => import("@workspace/ui/components/blocks/code-block"));
+const CardsBlock = dynamic(() => import("@workspace/ui/components/blocks/cards-block"));
 
 type Block = PageContentBlocks_Layout & {
   __typename: string;
@@ -33,6 +34,7 @@ const componentMap = {
   PageContentBlocksRichContentLayout: RichContent,
   PageContentBlocksCodeBlockLayout: CodeBlock,
   PageContentBlocksLogosblockLayout: LogosBlock,
+  PageContentBlocksCardsBlockLayout: CardsBlock
 };
 
 const BlockReturner: React.FC<BlockReturnerProps> = ({
