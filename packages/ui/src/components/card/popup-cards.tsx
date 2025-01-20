@@ -74,6 +74,8 @@ const PopupCard = ({
             className={cn("w-full h-64 object-cover rounded-t-2xl", {
               hidden: imageDark || playVideo || isExpanded,
             })}
+            placeholder="blur"
+            blurDataURL={image.node.dataUrl}
           />
         )}
         {imageDark && (
@@ -88,6 +90,8 @@ const PopupCard = ({
                 hidden: playVideo || isExpanded,
               }
             )}
+            placeholder="blur"
+            blurDataURL={image.node.dataUrl}
           />
         )}
         {video && (playVideo || isExpanded) && (
@@ -134,7 +138,7 @@ const PopupCard = ({
             <motion.div
               key={`content-${title}`}
               className={cn(
-                "text-sm text-foreground content-wrapper overflow-hidden",
+                "text-sm text-foreground content-wrapper overflow-hidden"
               )}
               initial={{ opacity: 0, y: -10 }}
               animate={{
