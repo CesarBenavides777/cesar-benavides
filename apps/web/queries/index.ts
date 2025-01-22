@@ -302,6 +302,7 @@ export const BLOCKS_FRAGMENT = gql`
       ... on PageContentBlocksCodeBlockLayout {
         mainTitle
         accordion
+        content
         files {
           filename
           code

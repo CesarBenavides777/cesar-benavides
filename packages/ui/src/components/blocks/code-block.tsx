@@ -23,6 +23,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   className,
   mainTitle,
   accordion,
+  content
 }: CodeBlockProps) => {
   const hasFiles = files && files.length > 0;
 
@@ -32,9 +33,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       tabs={files?.map((file) => ({
         name: file.filename,
         code: file.code,
-        language: file.language[0],
-        source: file.source.url,
+        language: file?.language[0],
+        source: file?.source?.url || undefined,
+        title: mainTitle,
+        description: content
       }))}
+      title={mainTitle}
+      description={content}
     />
   );
 
