@@ -8,7 +8,7 @@ import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@workspace/ui/lib/utils";
 const loadFeatures = () =>
-  import("@/src/utils/expandedFeatures").then((res) => res.default);
+  import("@workspace/ui/utils/expandedFeatures").then((res) => res.default);
 
 type PopupCardProps = {
   card: PageContentBlocksCardsBlockLayout["cards"][number];
