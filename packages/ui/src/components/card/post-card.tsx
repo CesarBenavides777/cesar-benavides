@@ -25,31 +25,13 @@ const PostCard = ({
   return (
     <Link href={uri} className="group">
       <article className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105">
-        {/* <motion.div
-          layoutId={`animated-image-${id}`}
-          className="aspect-w-16 aspect-h-9 relative"
-        >
-          {featuredImage?.node.sourceUrl && (
-            <Image
-              src={featuredImage.node.sourceUrl}
-              alt={featuredImage.node.altText || title}
-              //   @ts-expect-error
-              width={featuredImage?.node?.mediaDetails.width}
-              //   @ts-expect-error
-              height={featuredImage?.node?.mediaDetails.height}
-              placeholder="blur"
-              blurDataURL={featuredImage.node.dataUrl}
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
-        </motion.div> */}
         <AnimatedImage
           media={featuredImage?.node}
           postId={id}
           main={true}
           className="aspect-w-16 aspect-h-9 relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent"></div>
         </AnimatedImage>
         <div className="absolute bottom-0 left-0 right-0 p-4 ">
           <h2 className="mb-2 text-2xl font-bold leading-tight text-foreground">
@@ -66,7 +48,7 @@ const PostCard = ({
               {tags.nodes.map((tag, index) => (
                 <span
                   key={`${tag?.id}-${index}`}
-                  className="rounded-full bg-background/20 px-2 py-1 text-xs font-semibold backdrop-blur-sm"
+                  className="rounded-full bg-background/20 px-2 py-1 text-xs font-semibold backdrop-blur-xs"
                 >
                   {/* @ts-ignore */}
                   {tag?.name || ""}

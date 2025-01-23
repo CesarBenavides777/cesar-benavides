@@ -17,14 +17,10 @@ import WebsiteField from "@workspace/ui/components/inputs/WebsiteField";
 import NumberField from "@workspace/ui/components/inputs/NumberField";
 import FileUploadField from "@workspace/ui/components/inputs/FileUploadField";
 import HTMLField from "@workspace/ui/components/inputs/HTMLField";
-// import CaptchaField from "@workspace/ui/components/inputs/CaptchaField";
 import ConsentField from "@workspace/ui/components/inputs/ConsentField";
 
 import dynamic from "next/dynamic";
 
-const CaptchaField = dynamic(
-  () => import("@workspace/ui/components/inputs/CaptchaField"),
-);
 
 interface Props {
   field: any;
@@ -70,10 +66,16 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
       return (
         <ConsentField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
-    case "CAPTCHA":
+    case "CAPTCHA":{
+      // Loaded in dynamically for speed
+      const CaptchaField = dynamic(
+        () => import("@workspace/ui/components/inputs/CaptchaField")
+      );
+      
       return (
         <CaptchaField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
+    }
     case "NAME":
       return field ? (
         <NameField field={field} fieldErrors={fieldErrors} formId={formId} />

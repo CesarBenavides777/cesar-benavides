@@ -6,7 +6,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-night focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-night dark:focus-visible:ring-slate-300 hover:cursor-pointer",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-night focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-night dark:focus-visible:ring-slate-300 hover:cursor-pointer",
   {
     variants: {
       variant: {

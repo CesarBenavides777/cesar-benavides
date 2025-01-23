@@ -12,6 +12,34 @@ type LogosBlockProps = PageContentBlocksLogosblockLayout & {
     children?: React.ReactNode;
 }
 
+const desktopGrid = {
+  "2": "md:grid-cols-2",
+  "3": "md:grid-cols-3",
+  "4": "md:grid-cols-4",
+  "5": "md:grid-cols-5",
+  "6": "md:grid-cols-6",
+  "7": "md:grid-cols-7",
+  "8": "md:grid-cols-8",
+  "9": "md:grid-cols-9",
+  "10": "md:grid-cols-10",
+  "11": "md:grid-cols-11",
+  "12": "md:grid-cols-12",
+}
+
+const mobileGrid = {
+  "2": "grid-cols-2",
+  "3": "grid-cols-3",
+  "4": "grid-cols-4",
+  "5": "grid-cols-5",
+  "6": "grid-cols-6",
+  "7": "grid-cols-7",
+  "8": "grid-cols-8",
+  "9": "grid-cols-9",
+  "10": "grid-cols-10",
+  "11": "grid-cols-11",
+  "12": "grid-cols-12",
+}
+
 const LogosBlock: React.FC<LogosBlockProps> = ({
   title,
   content,
@@ -65,7 +93,7 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
 
   const gridClasses = `grid gap-4 ${
     variant[0] === "grid"
-      ? `grid-cols-${columnsMobile} md:grid-cols-${columns}`
+      ? `${desktopGrid[columns]} ${mobileGrid[columnsMobile]}`
       : "grid-cols-2 md:grid-cols-4"
   }`;
 

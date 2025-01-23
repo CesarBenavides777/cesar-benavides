@@ -17,6 +17,7 @@ import { cn, flatListToHierarchical } from "@/lib/utils";
 import { useScroll, useMotionValueEvent } from "motion/react";
 import { useRef, useState } from "react";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 type SpecialMenuItem = MenuItem & {
   children: SpecialMenuItem[];
@@ -41,6 +42,9 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
     }
   });
 
+const pathname = usePathname();
+const isHome = pathname === "/" ? true : false;
+
   function renderMenu(items) {
     return (
       <NavigationMenuList>
@@ -53,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
           }
 
           // check if url contains cms.
-          const isFile = path && path?.includes("cms") ? true : false;
+          const isFile = path && path?.includes("pdf") ? true : false;
 
           return (
             <NavigationMenuItem key={id} className={cn(cssClasses)}>
@@ -96,12 +100,12 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
         "rounded-lg",
         {
           "shadow-lg": hasScrolledDown,
-        },
+        }
       )}
     >
       <Link href="/" className="flex flex-row items-start gap-2">
         <Image
-          className="dark:hidden"
+          className={cn("dark:hidden")}
           src="/assets/logo/logo.svg"
           width={50}
           height={50}
@@ -118,7 +122,10 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
           loading="eager"
           priority
         />
-        <div className="flex-col gap-[2px] hidden lg:flex">
+        <div className={cn("flex-col gap-[2px]", {
+          "hidden": isHome,
+          "hidden lg:flex": !isHome
+        })}>
           <h1 className="text-2xl font-medium">{title}</h1>
           <p className="text-sm font-light">{subTitle}</p>
         </div>
