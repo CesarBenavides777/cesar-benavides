@@ -1,4 +1,4 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
+// import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import Navbar from "@/components/navbar";
 
@@ -8,7 +8,8 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
+    // <SidebarProvider>
+    <>
       <AppSidebar />
       <main className="flex-1 w-full">
         <div className="sticky top-0 z-50 bg-background">
@@ -16,6 +17,7 @@ export default function DocsLayout({
         </div>
         <div className="max-w-7xl mx-auto">{children}</div>
       </main>
-    </SidebarProvider>
+    </>
+    // </SidebarProvider>
   );
 }

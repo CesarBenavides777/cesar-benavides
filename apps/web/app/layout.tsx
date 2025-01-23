@@ -9,7 +9,6 @@ import { DynamicFavicon } from "@/components/DynamicFavicon";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "sonner";
 import Script from "next/script";
-import PageTransitionEffect from "@/components/PageTransition";
 import { getClient } from "@/providers/apollo/rsc";
 
 
@@ -32,11 +31,11 @@ export default async function RootLayout({ children }: {
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <Script
+      {/* <Script
         src="https://www.google.com/recaptcha/api.js"
         async
         defer
-      ></Script>
+      ></Script> */}
       <link rel="preconnect" href="https://gstatic.com" />
       <link rel="preconnect" href="https://cms.cesarbenavides.com" />
       <link rel="preconnect" href="https://us-assets.i.posthog.com" />
@@ -48,7 +47,7 @@ export default async function RootLayout({ children }: {
             subTitle={"Design Engineer & Software Architect"}
             menuItems={primaryMenuItems?.nodes}
           />
-          <PageTransitionEffect>{children}</PageTransitionEffect>
+          {children}
           <Footer
             githubUrl={githubLink}
             linkedinUrl={linkedinLink}

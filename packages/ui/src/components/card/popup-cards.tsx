@@ -1,7 +1,7 @@
 "use client";
 
 import type { PageContentBlocksCardsBlockLayout } from "@workspace/ui/types/wp";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@workspace/ui/components/button";
 import { Plus, X } from "lucide-react";
@@ -37,7 +37,19 @@ const PopupCard = ({
   onCollapse,
 }: PopupCardProps) => {
   const [playVideo, setPlayVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null); // Reference for the video element
   const { title, content, image, imageDark, video } = card || {};
+
+  // Effect to play or pause the video programmatically
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isExpanded || playVideo) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isExpanded, playVideo]);
 
   return (
     <motion.div
@@ -94,18 +106,20 @@ const PopupCard = ({
             blurDataURL={image.node.dataUrl}
           />
         )}
-        {video && (playVideo || isExpanded) && (
+        {video && (
           <video
+            ref={videoRef} // Attach the ref to the video element
             src={video.node.mediaItemUrl}
-            autoPlay
             loop
             playsInline
             controls={false}
             muted
-            className="w-full h-64 object-cover rounded-t-2xl"
+            className={cn("w-full h-64 object-cover rounded-t-2xl", {
+              hidden: !playVideo && !isExpanded,
+            })}
           />
         )}
-        {/* Add lose button when open */}
+
         {isExpanded && (
           <Button
             variant="outline"
