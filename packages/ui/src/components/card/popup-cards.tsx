@@ -2,11 +2,13 @@
 
 import type { PageContentBlocksCardsBlockLayout } from "@workspace/ui/types/wp";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LazyMotion, m, useInView } from "motion/react";
 import { Button } from "@workspace/ui/components/button";
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@workspace/ui/lib/utils";
+const loadFeatures = () =>
+  import("@/src/utils/expandedFeatures").then((res) => res.default);
 
 type PopupCardProps = {
   card: PageContentBlocksCardsBlockLayout["cards"][number];
@@ -14,7 +16,6 @@ type PopupCardProps = {
   onExpand: () => void;
   onCollapse: () => void;
 };
-
 
 // expanded & not expanded variants
 const variants = {
@@ -38,6 +39,8 @@ const PopupCard = ({
 }: PopupCardProps) => {
   const [playVideo, setPlayVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null); // Reference for the video element
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.1 });
   const { title, content, image, imageDark, video } = card || {};
 
   // Effect to play or pause the video programmatically
@@ -52,7 +55,8 @@ const PopupCard = ({
   }, [isExpanded, playVideo]);
 
   return (
-    <motion.div
+    <m.div
+      ref={cardRef}
       className={cn(
         "rounded-2xl bg-background/70 hover:bg-background/50 backdrop-blur-lg flex flex-col cursor-pointer min-h-60",
         "overflow-hidden",
@@ -65,7 +69,7 @@ const PopupCard = ({
       layout
       layoutId={`card-${title}`}
       variants={variants}
-      initial="collapsed"
+      initial={false}
       animate={isExpanded ? "expanded" : "collapsed"}
       transition={{
         type: "spring",
@@ -76,49 +80,61 @@ const PopupCard = ({
       onMouseEnter={() => setPlayVideo(true)}
       onMouseLeave={() => setPlayVideo(false)}
     >
-      <motion.div className="relative w-full" layoutId={`image-${title}`}>
-        {(image || !imageDark) && (
-          <Image
-            src={image.node.sourceUrl}
-            alt={image.node.altText || "Card Image"}
-            width={image.node.mediaDetails.width}
-            height={image.node.mediaDetails.height}
-            className={cn("w-full h-64 object-cover rounded-t-2xl", {
-              hidden: imageDark || playVideo || isExpanded,
-            })}
-            placeholder="blur"
-            blurDataURL={image.node.dataUrl}
-          />
-        )}
-        {imageDark && (
-          <Image
-            src={imageDark.node.sourceUrl}
-            alt={imageDark.node.altText || "Card Image"}
-            width={imageDark.node.mediaDetails.width}
-            height={imageDark.node.mediaDetails.height}
-            className={cn(
-              "w-full h-64 object-cover rounded-t-2xl hidden dark:block",
-              {
-                hidden: playVideo || isExpanded,
-              }
-            )}
-            placeholder="blur"
-            blurDataURL={image.node.dataUrl}
-          />
-        )}
-        {video && (
-          <video
-            ref={videoRef} // Attach the ref to the video element
-            src={video.node.mediaItemUrl}
-            loop
-            playsInline
-            controls={false}
-            muted
-            className={cn("w-full h-64 object-cover rounded-t-2xl", {
-              hidden: !playVideo && !isExpanded,
-            })}
-          />
-        )}
+      <m.div className="relative w-full " layoutId={`image-${title}`}>
+        <div className="h-64 overflow-clip">
+          {(image || !imageDark) && (
+            <Image
+              src={image.node.sourceUrl || "/placeholder.svg"}
+              alt={image.node.altText || "Card Image"}
+              width={image.node.mediaDetails.width}
+              height={image.node.mediaDetails.height}
+              className={cn(
+                "w-full object-cover rounded-t-2xl",
+                "transition-all duration-300 ease-in-out",
+                {
+                  hidden: imageDark || playVideo || isExpanded,
+                }
+              )}
+              placeholder="blur"
+              blurDataURL={image.node.dataUrl}
+            />
+          )}
+          {imageDark && (
+            <Image
+              src={imageDark.node.sourceUrl || "/placeholder.svg"}
+              alt={imageDark.node.altText || "Card Image"}
+              width={imageDark.node.mediaDetails.width}
+              height={imageDark.node.mediaDetails.height}
+              className={cn(
+                "w-full object-cover rounded-t-2xl hidden dark:block",
+                "transition-all duration-300 ease-in-out",
+                {
+                  hidden: playVideo || isExpanded,
+                }
+              )}
+              placeholder="blur"
+              blurDataURL={image.node.dataUrl}
+            />
+          )}
+          {video && (
+            <video
+              ref={videoRef} // Attach the ref to the video element
+              src={video.node.mediaItemUrl}
+              loop
+              playsInline
+              controls={false}
+              muted
+              className={cn(
+                "w-full h-64 object-cover rounded-t-2xl",
+                "transition-all duration-300 ease-in-out",
+                {
+                  hidden: !playVideo && !isExpanded,
+                }
+              )}
+              preload="none"
+            />
+          )}
+        </div>
 
         {isExpanded && (
           <Button
@@ -129,8 +145,8 @@ const PopupCard = ({
             <X />
           </Button>
         )}
-      </motion.div>
-      <motion.div
+      </m.div>
+      <m.div
         className={cn("flex gap-4 justify-between py-4 px-5 overflow-hidden", {
           "flex-row items-end": !isExpanded,
           "flex-col items-start": isExpanded,
@@ -150,7 +166,7 @@ const PopupCard = ({
         )}
         <AnimatePresence mode="wait">
           {isExpanded && (
-            <motion.div
+            <m.div
               key={`content-${title}`}
               className={cn(
                 "text-sm text-foreground content-wrapper overflow-hidden"
@@ -169,12 +185,10 @@ const PopupCard = ({
             />
           )}
         </AnimatePresence>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 };
-
-
 
 type PopupCardsProps = {
   cards?: PageContentBlocksCardsBlockLayout["cards"];
@@ -188,33 +202,35 @@ const PopupCards = ({ cards }: PopupCardsProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-2 items-start relative">
-      {cards.map((card, index) => (
-        <div key={`popup-card-${index}`} className="relative">
-          <PopupCard
-            card={card}
-            isExpanded={expandedCard === `card-${card.title}`}
-            onExpand={() => setExpandedCard(`card-${card.title}`)}
-            onCollapse={() => setExpandedCard(null)}
-          />
-        </div>
-      ))}
-      <AnimatePresence>
-        {expandedCard && (
-          <motion.div
-            key="overlay"
-            className="fixed inset-0 z-40 bg-background/70 backdrop-blur-xs"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setExpandedCard(null)}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+    <LazyMotion
+      features={loadFeatures}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-2 items-start relative">
+        {cards.map((card, index) => (
+          <div key={`popup-card-${index}`} className="relative">
+            <PopupCard
+              card={card}
+              isExpanded={expandedCard === `card-${card.title}`}
+              onExpand={() => setExpandedCard(`card-${card.title}`)}
+              onCollapse={() => setExpandedCard(null)}
+            />
+          </div>
+        ))}
+        <AnimatePresence>
+          {expandedCard && (
+            <m.div
+              key="overlay"
+              className="fixed inset-0 z-40 bg-background/70 backdrop-blur-xs"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setExpandedCard(null)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </LazyMotion>
   );
 };
-
-
 
 export default PopupCards;
