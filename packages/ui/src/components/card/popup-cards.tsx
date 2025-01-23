@@ -131,6 +131,7 @@ const PopupCard = ({
         {!isExpanded && (
           <Button variant="outline" className="rounded-full w-10 h-10 p-3">
             <Plus />
+            <span className="sr-only">Expand</span>
           </Button>
         )}
         <AnimatePresence mode="wait">

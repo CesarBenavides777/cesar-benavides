@@ -32,6 +32,7 @@ export default withFaust({
     defaultLocale: "en",
   },
   trailingSlash: false,
+  productionBrowserSourceMaps: true,
   async redirects() {
     return [
       {
