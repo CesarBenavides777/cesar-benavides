@@ -1,16 +1,14 @@
-
 import React from "react";
-import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { PageContentBlocksLogosblockLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
 import { AlternatingText } from "@workspace/ui/components/alternating-text";
-
+import { Marquee } from "@workspace/ui/components/marquee";
 
 type LogosBlockProps = PageContentBlocksLogosblockLayout & {
-    className?: string;
-    children?: React.ReactNode;
-}
+  className?: string;
+  children?: React.ReactNode;
+};
 
 const desktopGrid = {
   "2": "md:grid-cols-2",
@@ -24,7 +22,7 @@ const desktopGrid = {
   "10": "md:grid-cols-10",
   "11": "md:grid-cols-11",
   "12": "md:grid-cols-12",
-}
+};
 
 const mobileGrid = {
   "2": "grid-cols-2",
@@ -38,7 +36,7 @@ const mobileGrid = {
   "10": "grid-cols-10",
   "11": "grid-cols-11",
   "12": "grid-cols-12",
-}
+};
 
 const LogosBlock: React.FC<LogosBlockProps> = ({
   title,
@@ -52,14 +50,13 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
   morphingTitles,
   children,
 }) => {
-
   const renderLogos = () => {
     if (!logos || logos.length === 0) {
-      return <div></div>;
+      return null;
     }
 
     return logos.map((logo, index) => (
-      <div
+      <figure
         key={`${uniqueId}-logo-${index}`}
         className="p-4 grid place-items-center"
       >
@@ -87,56 +84,57 @@ const LogosBlock: React.FC<LogosBlockProps> = ({
             priority
           />
         )}
-      </div>
+      </figure>
     ));
   };
 
-  const gridClasses = `grid gap-4 ${
-    variant[0] === "grid"
-      ? `${desktopGrid[columns]} ${mobileGrid[columnsMobile]}`
-      : "grid-cols-2 md:grid-cols-4"
-  }`;
-
   return (
     <section className="py-12">
-      <div className="container mx-auto flex flex-col gap-[48px]">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between text-left">
-          <div className="text-left flex flex-col md:flex-row items-start gap-2">
+      <div className="container mx-auto flex flex-col gap-12">
+        {/* Title and Content */}
+        {(title || content) && (
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
             {title && (
-              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-sans flex flex-col md:flex-row items-start gap-2 text-left">
+              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold flex flex-col gap-2">
                 {title}{" "}
-                <AlternatingText
-                  texts={morphingTitles.map((title) => title.morph)}
-                />
+                {morphingTitles && (
+                  <AlternatingText
+                    texts={morphingTitles.map((title) => title.morph)}
+                  />
+                )}
               </h2>
             )}
+            {content && (
+              <div
+                className="text-md font-light text-foreground/70 text-center md:text-left"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            )}
           </div>
-          {content && (
-            <div
-              className="text-md font-sans font-light text-center text-foreground/70"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
-          )}
-        </div>
+        )}
 
+        {/* Grid or Marquee */}
         {variant[0] === "grid" ? (
-          <div className={gridClasses}>{renderLogos()}</div>
+          <div
+            className={cn(
+              "grid gap-4",
+              desktopGrid[columns],
+              mobileGrid[columnsMobile]
+            )}
+          >
+            {renderLogos()}
+          </div>
         ) : (
-          <div className="min-h-[96px] md:min-h-[104px]">
-            <Marquee
-              pauseOnHover={pauseOnHover}
-              gradient={true}
-              className={"flex flex-row items-center justify-center"}
-              autoFill
-              loop={0}
-              gradientWidth={100}
-            >
-              <div className="flex">{renderLogos()}</div>
+          <div className="relative">
+            <Marquee pauseOnHover={pauseOnHover} className="[--duration:20s]">
+              {renderLogos()}
             </Marquee>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r dark:from-[#242424] from-[#f9f9f9]"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l dark:from-[#242424] from-[#f9f9f9]"></div>
           </div>
         )}
       </div>
-      {children && <div className="container mx-auto px-4">{children}</div>}
+      {children && <div className="container mx-auto">{children}</div>}
     </section>
   );
 };
