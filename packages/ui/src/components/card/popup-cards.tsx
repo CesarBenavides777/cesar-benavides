@@ -2,7 +2,7 @@
 
 import type { PageContentBlocksCardsBlockLayout } from "@workspace/ui/types/wp";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, LazyMotion, m, useInView } from "motion/react";
+import { AnimatePresence, LazyMotion, m } from "motion/react";
 import { Button } from "@workspace/ui/components/button";
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
@@ -40,7 +40,6 @@ const PopupCard = ({
   const [playVideo, setPlayVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null); // Reference for the video element
   const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: true, amount: 0.1 });
   const { title, content, image, imageDark, video } = card || {};
 
   // Effect to play or pause the video programmatically
