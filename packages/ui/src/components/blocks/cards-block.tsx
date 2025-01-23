@@ -1,5 +1,7 @@
 import { PageContentBlocksCardsBlockLayout } from "@workspace/ui/types/wp";
-import PopupCards from "@workspace/ui/components/card/popup-cards";
+import dynamic from "next/dynamic";
+const PopupCards = dynamic(() => import("@workspace/ui/components/card/popup-cards"));
+
 
 type CardsBlockProps = PageContentBlocksCardsBlockLayout & {
   className?: string;

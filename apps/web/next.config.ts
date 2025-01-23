@@ -25,7 +25,13 @@ export default withFaust({
     includePaths: ["node_modules"],
   },
   images: {
-    domains: [getWpHostname()],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: getWpHostname(),
+        port: "",
+      }
+    ]
   },
   i18n: {
     locales: ["en"],
