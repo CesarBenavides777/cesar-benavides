@@ -15,6 +15,7 @@ type PopupCardProps = {
   isExpanded: boolean;
   onExpand: () => void;
   onCollapse: () => void;
+  index: number;
 };
 
 // expanded & not expanded variants
@@ -36,6 +37,7 @@ const PopupCard = ({
   isExpanded,
   onExpand,
   onCollapse,
+  index
 }: PopupCardProps) => {
   const [playVideo, setPlayVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null); // Reference for the video element
@@ -96,6 +98,7 @@ const PopupCard = ({
               )}
               placeholder="blur"
               blurDataURL={image.node.dataUrl}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           )}
           {imageDark && (
@@ -113,6 +116,7 @@ const PopupCard = ({
               )}
               placeholder="blur"
               blurDataURL={image.node.dataUrl}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           )}
           {video && (
@@ -212,6 +216,7 @@ const PopupCards = ({ cards }: PopupCardsProps) => {
               isExpanded={expandedCard === `card-${card.title}`}
               onExpand={() => setExpandedCard(`card-${card.title}`)}
               onCollapse={() => setExpandedCard(null)}
+              index={index}
             />
           </div>
         ))}
