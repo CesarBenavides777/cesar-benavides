@@ -3,8 +3,6 @@
 import { cn } from "@/lib/utils";
 import type { PageContentBlocksHeroLayout } from "@/types/wp";
 import AnimatedImage from "@workspace/ui/components/animated-image";
-import Image from "next/image";
-import { motion } from "motion/react";
 
 type HeroProps = PageContentBlocksHeroLayout & {
   className?: string;
@@ -28,7 +26,10 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <section
-      className={cn("py-6 md:py-12", className)}
+      className={cn("", className, {
+        "py-6 md:py-12 lg:py-24": !isHome,
+        "py-20 md:py-24 lg:py-48": isHome,
+      })}
       id={uniqueId || undefined}
     >
       <div

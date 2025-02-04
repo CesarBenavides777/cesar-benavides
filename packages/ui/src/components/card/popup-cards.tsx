@@ -206,7 +206,7 @@ const PopupCards = ({ cards }: PopupCardsProps) => {
     <LazyMotion
       features={loadFeatures}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-2 items-start relative overscroll-contain">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-2 items-start relative overscroll-contain">
         {cards.map((card, index) => (
           <div key={`popup-card-${index}`} className="relative min-h-[350px] md:min-h-none">
             <PopupCard
