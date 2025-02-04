@@ -1,19 +1,10 @@
 import { PageContentBlocksCardsBlockLayout } from "@workspace/ui/types/wp";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
-const PopupCards = dynamic(
-  () => import("@workspace/ui/components/card/popup-cards"),
-  {
-    loading: () => (
-      <div className="h-64 bg-gray-200 animate-pulse rounded-2xl"></div>
-    ),
-  }
-);
+import PopupCards from "@workspace/ui/components/card/popup-cards";
 
 type CardsBlockProps = PageContentBlocksCardsBlockLayout & {
   className?: string;
 };
+
 
 export const CardsBlock = ({
   title,
@@ -38,13 +29,7 @@ export const CardsBlock = ({
           />
         )}
       </div>
-      <Suspense
-        fallback={
-          <div className="h-64 bg-gray-200 animate-pulse rounded-2xl"></div>
-        }
-      >
-        <PopupCards cards={cards} />
-      </Suspense>
+      <PopupCards cards={cards} />
     </div>
   );
 };

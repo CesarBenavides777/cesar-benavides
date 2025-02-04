@@ -1,0 +1,205 @@
+/* ./index.css */
+@import "tailwindcss" source("../../../");
+
+@import "./shadcn.css";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-radius: var(--radius);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --font-family-sans: var(--font-geist-sans);
+  --font-family-mono: var(--font-geist-mono);
+
+  --chart-1: var(--chart-1);
+  --chart-2: var(--chart-2);
+  --chart-3: var(--chart-3);
+  --chart-4: var(--chart-4);
+  --chart-5: var(--chart-5);
+
+  --sidebar-background: var(--sidebar-background);
+  --sidebar-foreground: var(--sidebar-foreground);
+  --sidebar-primary: var(--sidebar-primary);
+  --sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --sidebar-accent: var(--sidebar-accent);
+  --sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --sidebar-border: var(--sidebar-border);
+  --sidebar-ring: var(--sidebar-ring);
+
+  
+}
+
+body {
+  @apply dark:bg-[#242424] bg-[#f9f9f9];
+}
+
+.content-wrapper p {
+  @apply text-foreground;
+}
+
+.content-wrapper a {
+  @apply underline hover:text-muted-foreground hover:transition-colors hover:duration-200;
+}
+
+.content-wrapper ul {
+  @apply list-disc list-inside my-4 ml-6;
+  /* Adjusted for better indentation */
+}
+
+.content-wrapper ol {
+  @apply list-decimal list-inside my-4 ml-6;
+  /* Added ordered list styles */
+}
+
+.content-wrapper li {
+  @apply leading-relaxed text-foreground;
+  /* Improved spacing and color */
+}
+
+.content-wrapper ul ul,
+.content-wrapper ol ol,
+.content-wrapper ul ol,
+.content-wrapper ol ul {
+  @apply list-disc ml-6 mt-0 text-muted-foreground;
+  /* Styling for nested lists */
+}
+
+.content-wrapper ul ul {
+  @apply list-disc;
+  /* Specific nested unordered list styles */
+}
+
+.content-wrapper ol ol {
+  @apply list-decimal;
+  /* Specific nested ordered list styles */
+}
+
+.content-wrapper ul>li::marker {
+  @apply text-primary;
+  /* Custom marker color for unordered lists */
+}
+
+.content-wrapper ol>li::marker {
+  @apply text-secondary;
+  /* Custom marker color for ordered lists */
+}
+
+.transition-child p {
+  @apply transition-all duration-700 delay-200;
+}
+
+.dark .rfm-overlay:before {
+  background: linear-gradient(
+    to right,
+    #242424,
+    transparent
+  )!important;
+}
+
+.rfm-overlay:before {
+  background: linear-gradient(
+    to right,
+    #f9f9f9,
+    transparent
+  )!important;
+}
+
+.dark .rfm-overlay:after {
+  background: linear-gradient(
+    to right,
+    #242424,
+    transparent
+  )!important;
+}
+
+.rfm-overlay:after {
+  background: linear-gradient(
+    to right,
+    #f9f9f9,
+    transparent
+  )!important;
+}
+
+.balanced {
+  text-wrap: balance;
+}
+
+.linenumber {
+  color: rgba(135,134,144);
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+/* Utility Classes for Marquee */
+.animate-marquee {
+  animation: marquee var(--duration, 20s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 20s) linear infinite;
+}
+
+.group-hover\:animate-paused:hover {
+  animation-play-state: paused;
+}
+
+.animate-reverse {
+  animation-direction: reverse;
+}

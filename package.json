@@ -16,10 +16,10 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "apollo-upload-client": "^18.0.1",
-    "babel-plugin-react-compiler": "^19.0.0-beta-e552027-20250112",
+    "babel-plugin-react-compiler": "^19.0.0-beta-decd7b8-20250118",
     "graphql-tag": "^2.12.6",
     "object-path": "^0.11.8",
-    "prismjs": "",
+    "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recursive-iterator": "^3.3.0"
@@ -31,7 +31,7 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",
-    "turbo": "^2.3.3",
+    "turbo": "^2.3.4",
     "typescript": "^5.7.3"
   },
   "engines": {
