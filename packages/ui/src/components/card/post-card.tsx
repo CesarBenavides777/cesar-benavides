@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Post } from "@workspace/ui/types/wp";
 import Link from "next/link";

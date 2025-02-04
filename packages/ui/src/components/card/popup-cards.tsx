@@ -22,12 +22,10 @@ type PopupCardProps = {
 const variants = {
   expanded: {
     scale: 1.2,
-    margin: "auto",
     origin: "center",
   },
   collapsed: {
     scale: 1,
-    margin: "0",
     origin: "center",
   },
 };
@@ -62,7 +60,7 @@ const PopupCard = ({
         "rounded-2xl bg-background/70 hover:bg-background/50 backdrop-blur-lg flex flex-col cursor-pointer min-h-60",
         "overflow-hidden",
         {
-          "fixed inset-0 z-50 overflow-auto px-4 md:px-0 max-w-[85vw] mx-auto md:max-w-[50vw] max-h-fit":
+          "fixed inset-0 z-50 overflow-auto px-4 md:px-0 max-w-[85vw] mx-auto md:max-w-[50vw] max-h-fit my-auto":
             isExpanded,
           "justify-between min-h-[350px]": !isExpanded,
         }
@@ -208,9 +206,9 @@ const PopupCards = ({ cards }: PopupCardsProps) => {
     <LazyMotion
       features={loadFeatures}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-2 items-start relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-2 items-start relative overscroll-contain">
         {cards.map((card, index) => (
-          <div key={`popup-card-${index}`} className="relative">
+          <div key={`popup-card-${index}`} className="relative min-h-[350px] md:min-h-none">
             <PopupCard
               card={card}
               isExpanded={expandedCard === `card-${card.title}`}
