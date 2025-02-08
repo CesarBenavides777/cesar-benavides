@@ -128,8 +128,7 @@ export default function Home() {
           <Button size="lg" className="w-full" asChild>
             <Link href="/docs" className="gap-2">
               <BookText size={20} />
-              View Documentation
-              <ArrowRight size={16} className="ml-auto" />
+              Get Started
             </Link>
           </Button>
           <Button size="lg" variant="outline" className="w-full" asChild>

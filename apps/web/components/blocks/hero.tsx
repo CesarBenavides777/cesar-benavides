@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({
     <section
       className={cn("", className, {
         "py-6 md:py-12 lg:py-24": !isHome,
-        "py-20 md:py-24 lg:py-48": isHome,
+        "py-20 md:py-24": isHome,
       })}
       id={uniqueId || undefined}
     >

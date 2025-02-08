@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { siteConfig } from "@/config/site.config";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@workspace/ui/components/sidebar";
 
 export default function Navbar() {
   return (

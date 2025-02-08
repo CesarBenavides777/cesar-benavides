@@ -11,7 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@workspace/ui/components/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 

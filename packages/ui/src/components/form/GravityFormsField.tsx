@@ -6,7 +6,7 @@ import AddressField from "@workspace/ui/components/inputs/AddressField";
 import CheckboxField from "@workspace/ui/components/inputs/CheckboxField";
 import DateField from "@workspace/ui/components/inputs/DateField";
 import EmailField from "@workspace/ui/components/inputs/EmailField";
-import MultiSelectField from "@workspace/ui/components/inputs/MultiSelectField";
+// import MultiSelectField from "@workspace/ui/components/inputs/MultiSelectField";
 import NameField from "@workspace/ui/components/inputs/NameField";
 import PhoneField from "@workspace/ui/components/inputs/PhoneField";
 import RadioField from "@workspace/ui/components/inputs/RadioField";
@@ -54,7 +54,10 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
       return (
         <NumberField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
-    case "MULTISELECT":
+    case "MULTISELECT": {
+      const MultiSelectField = dynamic(
+        () => import("@workspace/ui/components/inputs/MultiSelectField")
+      );
       return (
         <MultiSelectField
           field={field}
@@ -62,6 +65,7 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
           formId={formId}
         />
       );
+    }
     case "CONSENT":
       return (
         <ConsentField field={field} fieldErrors={fieldErrors} formId={formId} />

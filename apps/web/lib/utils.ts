@@ -9,7 +9,7 @@ export function flatListToHierarchical(
   data = [],
   { idKey = "id", parentKey = "parentId", childrenKey = "children" } = {},
 ) {
-  const tree = [];
+  const tree = [] as any[];
   const childrenOf = {};
   // biome-ignore lint/complexity/noForEach: <explanation>
   data.forEach((item) => {
