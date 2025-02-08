@@ -32,7 +32,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
   function renderMenu(items: MenuItem[]) {
     return (
-      <NavigationMenuList className="gap-2 flex flex-row">
+      <NavigationMenuList className="gap-1 md:gap-2 flex flex-row">
         {items.map((item) => (
           <NavigationMenuItem key={item.id}>
             {item.path.includes(".pdf") ? (
@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle, menuItems }) => {
   return (
       <header
         className={cn(
-          "container max-w-6xl mx-auto flex flex-row justify-between items-center px-4 py-2 md:px-6",
+          "w-full max-w-6xl mx-auto flex flex-row justify-between items-center px-2 py-2 md:px-6",
           "transition-all duration-200 ease-in-out",
           "dark:bg-[#242424] bg-[#f9f9f9] z-50",
           "rounded-lg",
