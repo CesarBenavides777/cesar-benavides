@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/tools/oltorf-train-tracker",
+      "schedule": "*/3 * * * *"
+    }
+  ]
+}
