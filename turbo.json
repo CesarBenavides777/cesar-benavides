@@ -16,8 +16,9 @@
         "AUTH_GITHUB_ID",
         "AUTH_GITHUB_SECRET",
         "AUTH_SECRET",
-        "SECRET_COOKIE_PASSWORD"
-
+        "SECRET_COOKIE_PASSWORD",
+        "TWILIO_ACCOUNT_SID",
+        "TWILIO_AUTH_TOKEN"
       ],
       "outputs": [".next/**/*", "!.next/cache/**"]
     },
