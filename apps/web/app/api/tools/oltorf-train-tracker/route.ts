@@ -9,13 +9,14 @@ const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 const client: Twilio = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 export async function GET(request: Request) {
-  if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
+  // if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  // }
     const response = await fetch(ENDPOINT)
     const data = await response.json()
 
-    const isDown = data.features.attrubutes.RAILROAD === "Down"
+    const status = data.features[0].attributes.RAILROAD
+    const isDown = status === "DOWN";
 
     // send text message if isDown is true
     if (isDown) {
@@ -24,6 +25,7 @@ export async function GET(request: Request) {
             from: '+18887943792',
             to: '+12104145798'
         })
+        console.log('sent text message')
     }
     return NextResponse.json({ isDown })
 }
