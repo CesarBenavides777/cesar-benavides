@@ -18,7 +18,8 @@
         "AUTH_SECRET",
         "SECRET_COOKIE_PASSWORD",
         "TWILIO_ACCOUNT_SID",
-        "TWILIO_AUTH_TOKEN"
+        "TWILIO_AUTH_TOKEN",
+        "CRON_SECRET"
       ],
       "outputs": [".next/**/*", "!.next/cache/**"]
     },
