@@ -1,7 +1,7 @@
-"use client";
+// "use client";
 
-import { MediaItem } from "@workspace/ui/types/wp";
-import { motion } from "motion/react";
+import type { MediaItem } from "@workspace/ui/types/wp";
+// import { motion } from "motion/react";
 import Image from "next/image";
 import { ReactNode } from "react";
 
@@ -30,22 +30,22 @@ const AnimatedImage: React.FC<AnimatedImageProps> = ({
   const width = mediaDetails?.width || 0;
   const height = mediaDetails?.height || 0;
 
-  const variants = {
-    initial: !main ? { opacity: 0 } : null,
-    animate: !main
-      ? { opacity: 1, transition: { delay: 0.2 } }
-      : { opacity: 1 },
-    exit: !main ? { opacity: 0 } : null,
-  };
+  // const variants = {
+  //   initial: !main ? { opacity: 0 } : null,
+  //   animate: !main
+  //     ? { opacity: 1, transition: { delay: 0.2 } }
+  //     : { opacity: 1 },
+  //   exit: !main ? { opacity: 0 } : null,
+  // };
 
   return (
-    <motion.div
+    <div
       className={className}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={variants}
-      layoutId={`animated-image-${postId}`}
+      // initial="initial"
+      // animate="animate"
+      // exit="exit"
+      // variants={variants}
+      // layoutId={`animated-image-${postId}`}
     >
       <Image
         src={sourceUrl}
@@ -57,7 +57,7 @@ const AnimatedImage: React.FC<AnimatedImageProps> = ({
         loading={loading}
       />
       {children}
-    </motion.div>
+    </div>
   );
 };
 
