@@ -2,7 +2,6 @@
 
 import type { FieldError } from "@workspace/ui/types/wp";
 
-import CheckboxField from "@workspace/ui/components/inputs/CheckboxField";
 import EmailField from "@workspace/ui/components/inputs/EmailField";
 import PhoneField from "@workspace/ui/components/inputs/PhoneField";
 import RadioField from "@workspace/ui/components/inputs/RadioField";
@@ -14,6 +13,7 @@ import FileUploadField from "@workspace/ui/components/inputs/FileUploadField";
 import HTMLField from "@workspace/ui/components/inputs/HTMLField";
 import ConsentField from "@workspace/ui/components/inputs/ConsentField";
 import { Skeleton } from "@workspace/ui/components/skeleton";
+import NameField from "@workspace/ui/components/inputs/NameField";
 
 import dynamic from "next/dynamic";
 
@@ -57,7 +57,23 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
         <AddressField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
     }
-    case "CHECKBOX":
+    case "CHECKBOX": {
+      const CheckboxField = dynamic(
+        () => import("@workspace/ui/components/inputs/CheckboxField"),
+        {
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+            </div>
+          ),
+          ssr: false,
+        }
+      );
+
       return (
         <CheckboxField
           field={field}
@@ -65,6 +81,7 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
           formId={formId}
         />
       );
+    }
     case "DATE": {
       const DateField = dynamic(
         () => import("@workspace/ui/components/inputs/DateField"),
@@ -133,28 +150,6 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
       );
     }
     case "NAME": {
-      const NameField = dynamic(
-        () => import("@workspace/ui/components/inputs/NameField"),
-        {
-          loading: () => (
-            <div className={"flex flex-col gap-2"}>
-              <div className={"flex flex-col md:flex-row gap-2"}>
-                <Skeleton
-                  className={
-                    "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
-                  }
-                />
-                <Skeleton
-                  className={
-                    "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
-                  }
-                />
-              </div>
-            </div>
-          ),
-          ssr: false,
-        }
-      );
 
       return (
         <NameField field={field} fieldErrors={fieldErrors} formId={formId} />

@@ -122,6 +122,7 @@ const Hero: React.FC<HeroProps> = ({
               placeholder="blur"
               blurDataURL={media?.node?.dataUrl || ""}
               loading="eager"
+              className="md:max-w-1/3"
             />
         )}
       </div>
