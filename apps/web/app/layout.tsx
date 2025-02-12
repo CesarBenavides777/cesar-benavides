@@ -38,7 +38,6 @@ export default async function RootLayout({ children }: {
       ></Script> */}
       <link rel="preconnect" href="https://gstatic.com" />
       <link rel="preconnect" href="https://cms.cesarbenavides.com" />
-      <link rel="preconnect" href="https://us-assets.i.posthog.com" />
       <DynamicFavicon />
       <body className="flex flex-col min-h-screen overflow-x-hidden scroll-state-container">
         <Providers>
