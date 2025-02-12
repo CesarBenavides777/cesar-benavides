@@ -1,5 +1,4 @@
-"use client";
-
+"use client";;
 import {
   RadioGroup,
   RadioGroupItem,
@@ -14,6 +13,8 @@ import type {
   RadioField as RadioFieldType,
   FieldError,
 } from "@workspace/ui/types/wp";
+
+import type { JSX } from "react";
 
 interface Props {
   field: RadioFieldType;

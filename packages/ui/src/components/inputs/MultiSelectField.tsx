@@ -23,7 +23,7 @@ export default function MultiSelectField({
   field,
   fieldErrors,
   formId,
-}: Props): React.ReactElement {
+}: Props): React.ReactElement<any> {
   const {
     id,
     type,

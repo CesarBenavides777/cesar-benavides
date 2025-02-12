@@ -1,5 +1,4 @@
-"use client";
-
+"use client";;
 import { Checkbox } from "@workspace/ui/components/checkbox";
 import { Label } from "@workspace/ui/components/label";
 import useGravityForm, {
@@ -12,6 +11,8 @@ import type {
   CheckboxFieldInput as CheckboxInput,
   FieldError,
 } from "@workspace/ui/types/wp";
+
+import type { JSX } from "react";
 
 interface Props {
   field: CheckboxFieldType;

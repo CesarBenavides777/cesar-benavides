@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  useContext,
-  useReducer,
-} from "react";
+import { createContext, Dispatch, ReactNode, useContext, useReducer, type JSX } from "react";
 import type {
   AddressFieldInput,
   CheckboxFieldInput,

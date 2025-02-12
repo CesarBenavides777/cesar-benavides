@@ -15,7 +15,7 @@ export default function HTMLField({
   field,
   fieldErrors,
   formId,
-}: Props): React.ReactElement {
+}: Props): React.ReactElement<any> {
   const { id, type, label, content, cssClass, databaseId } = field;
   const htmlId = `field_${formId}_${databaseId}`;
 

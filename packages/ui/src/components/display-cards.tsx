@@ -1,7 +1,8 @@
-"use client";
-
+"use client";;
 import { cn } from "@workspace/ui/lib/utils";
 import { Sparkles } from "lucide-react";
+
+import type { JSX } from "react";
 
 interface DisplayCardProps {
   className?: string;

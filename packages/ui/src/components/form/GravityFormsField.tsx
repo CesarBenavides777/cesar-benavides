@@ -3,13 +3,9 @@
 import type { FieldError } from "@workspace/ui/types/wp";
 
 import CheckboxField from "@workspace/ui/components/inputs/CheckboxField";
-import DateField from "@workspace/ui/components/inputs/DateField";
 import EmailField from "@workspace/ui/components/inputs/EmailField";
-// import MultiSelectField from "@workspace/ui/components/inputs/MultiSelectField";
-// import NameField from "@workspace/ui/components/inputs/NameField";
 import PhoneField from "@workspace/ui/components/inputs/PhoneField";
 import RadioField from "@workspace/ui/components/inputs/RadioField";
-// import SelectField from "@workspace/ui/components/inputs/SelectField";
 import TextAreaField from "@workspace/ui/components/inputs/TextAreaField";
 import TextField from "@workspace/ui/components/inputs/TextField";
 import WebsiteField from "@workspace/ui/components/inputs/WebsiteField";
@@ -69,10 +65,27 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
           formId={formId}
         />
       );
-    case "DATE":
+    case "DATE": {
+      const DateField = dynamic(
+        () => import("@workspace/ui/components/inputs/DateField"),
+        {
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+            </div>
+          ),
+          ssr: false,
+        }
+      );
+
       return (
         <DateField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
+    }
     case "EMAIL":
       return (
         <EmailField field={field} fieldErrors={fieldErrors} formId={formId} />

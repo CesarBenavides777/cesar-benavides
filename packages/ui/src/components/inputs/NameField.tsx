@@ -12,6 +12,8 @@ import { gql } from "@apollo/client";
 import { Label } from "@workspace/ui/components/label";
 import { Input } from "@workspace/ui/components/input";
 
+import type { JSX } from "react";
+
 export const NAME_FIELD_FIELDS = gql`
   fragment NameFieldFields on NameField {
     id

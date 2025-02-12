@@ -1,8 +1,7 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import type { PageContentBlocksHeroLayout } from "@/types/wp";
-import AnimatedImage from "@workspace/ui/components/animated-image";
+// import AnimatedImage from "@workspace/ui/components/animated-image";
+import Image from "next/image";
 
 type HeroProps = PageContentBlocksHeroLayout & {
   className?: string;
@@ -108,13 +107,22 @@ const Hero: React.FC<HeroProps> = ({
           //     loading="eager"
           //   />
           // </motion.div>
-          <AnimatedImage
-            media={media?.node}
-            className="flex flex-col"
-            postId={postId}
-            loading="eager"
-            main={true}
-          />
+          // <AnimatedImage
+          //   media={media?.node}
+          //   className="flex flex-col"
+          //   postId={postId}
+          //   loading="eager"
+          //   main={true}
+          // />
+            <Image
+              src={media?.node?.sourceUrl || ""}
+              alt={media?.node?.altText || ""}
+              width={media?.node?.mediaDetails?.width || 0}
+              height={media?.node?.mediaDetails?.height || 0}
+              placeholder="blur"
+              blurDataURL={media?.node?.dataUrl || ""}
+              loading="eager"
+            />
         )}
       </div>
     </section>
