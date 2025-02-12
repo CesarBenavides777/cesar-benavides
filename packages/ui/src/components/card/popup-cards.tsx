@@ -60,7 +60,7 @@ const PopupCard = ({
         "rounded-2xl bg-background/70 hover:bg-background/50 backdrop-blur-lg flex flex-col cursor-pointer min-h-60",
         "overflow-hidden",
         {
-          "fixed inset-0 z-50 overflow-auto px-4 md:px-0 max-w-[85vw] mx-auto md:max-w-[50vw] max-h-fit my-auto":
+          "fixed inset-0 z-50 overflow-auto px-4 md:px-0 max-w-[85vw] mx-auto md:max-w-xl max-h-fit my-auto":
             isExpanded,
           "justify-between min-h-[350px]": !isExpanded,
         }

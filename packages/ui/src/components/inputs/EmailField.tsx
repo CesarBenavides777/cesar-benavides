@@ -43,7 +43,7 @@ export default function EmailField({
   const value = fieldValue?.emailValues?.value || DEFAULT_VALUE;
 
   return (
-    <div className={`gfield gfield-${type} ${cssClass ?? ""}`.trim()}>
+    <div className={`flex flex-col gap-1 gfield gfield-${type} ${cssClass ?? ""}`.trim()}>
       <Label htmlFor={htmlId}>
         {isRequired ? (
           <>

@@ -2,15 +2,14 @@
 
 import type { FieldError } from "@workspace/ui/types/wp";
 
-import AddressField from "@workspace/ui/components/inputs/AddressField";
 import CheckboxField from "@workspace/ui/components/inputs/CheckboxField";
 import DateField from "@workspace/ui/components/inputs/DateField";
 import EmailField from "@workspace/ui/components/inputs/EmailField";
 // import MultiSelectField from "@workspace/ui/components/inputs/MultiSelectField";
-import NameField from "@workspace/ui/components/inputs/NameField";
+// import NameField from "@workspace/ui/components/inputs/NameField";
 import PhoneField from "@workspace/ui/components/inputs/PhoneField";
 import RadioField from "@workspace/ui/components/inputs/RadioField";
-import SelectField from "@workspace/ui/components/inputs/SelectField";
+// import SelectField from "@workspace/ui/components/inputs/SelectField";
 import TextAreaField from "@workspace/ui/components/inputs/TextAreaField";
 import TextField from "@workspace/ui/components/inputs/TextField";
 import WebsiteField from "@workspace/ui/components/inputs/WebsiteField";
@@ -18,6 +17,7 @@ import NumberField from "@workspace/ui/components/inputs/NumberField";
 import FileUploadField from "@workspace/ui/components/inputs/FileUploadField";
 import HTMLField from "@workspace/ui/components/inputs/HTMLField";
 import ConsentField from "@workspace/ui/components/inputs/ConsentField";
+import { Skeleton } from "@workspace/ui/components/skeleton";
 
 import dynamic from "next/dynamic";
 
@@ -30,10 +30,37 @@ interface Props {
 
 const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
   switch (field?.type) {
-    case "ADDRESS":
+    case "ADDRESS": {
+      const AddressField = dynamic(
+        () => import("@workspace/ui/components/inputs/AddressField"),
+        {
+          ssr: false,
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+            </div>
+          ),
+        }
+      );
+
       return (
         <AddressField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
+    }
     case "CHECKBOX":
       return (
         <CheckboxField
@@ -56,7 +83,19 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
       );
     case "MULTISELECT": {
       const MultiSelectField = dynamic(
-        () => import("@workspace/ui/components/inputs/MultiSelectField")
+        () => import("@workspace/ui/components/inputs/MultiSelectField"),
+        {
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+            </div>
+          ),
+          ssr: false,
+        }
       );
       return (
         <MultiSelectField
@@ -80,10 +119,34 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
         <CaptchaField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
     }
-    case "NAME":
-      return field ? (
+    case "NAME": {
+      const NameField = dynamic(
+        () => import("@workspace/ui/components/inputs/NameField"),
+        {
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <div className={"flex flex-col md:flex-row gap-2"}>
+                <Skeleton
+                  className={
+                    "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                  }
+                />
+                <Skeleton
+                  className={
+                    "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                  }
+                />
+              </div>
+            </div>
+          ),
+          ssr: false,
+        }
+      );
+
+      return (
         <NameField field={field} fieldErrors={fieldErrors} formId={formId} />
-      ) : null;
+      );
+    }
     case "PHONE":
       return (
         <PhoneField field={field} fieldErrors={fieldErrors} formId={formId} />
@@ -92,10 +155,27 @@ const GravityFormsField = ({ field, fieldErrors, formId }: Props) => {
       return (
         <RadioField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
-    case "SELECT":
+    case "SELECT": {
+      const SelectField = dynamic(
+        () => import("@workspace/ui/components/inputs/SelectField"),
+        {
+          loading: () => (
+            <div className={"flex flex-col gap-2"}>
+              <Skeleton
+                className={
+                  "flex h-[60px] w-full rounded-md border border-input bg-background px-3 py-1 text-base shadow-xs"
+                }
+              />
+            </div>
+          ),
+          ssr: false,
+        }
+      );
+
       return (
         <SelectField field={field} fieldErrors={fieldErrors} formId={formId} />
       );
+    }
     case "TEXT":
       return (
         <TextField field={field} fieldErrors={fieldErrors} formId={formId} />

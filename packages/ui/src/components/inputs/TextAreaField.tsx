@@ -30,7 +30,9 @@ const TextAreaField: FC<Props> = ({ field, fieldErrors, formId }) => {
   const value = fieldValue?.value || DEFAULT_VALUE;
 
   return (
-    <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
+    <div
+      className={`flex flex-col gap-1 gfield gfield-${type} ${cssClass}`.trim()}
+    >
       <Label htmlFor={htmlId}>
         {isRequired ? (
           <>
