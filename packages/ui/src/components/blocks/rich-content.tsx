@@ -3,8 +3,17 @@
 import type { PageContentBlocksRichContentLayout } from "@workspace/ui/types/wp";
 import { cn } from "@workspace/ui/lib/utils";
 import parse, { domToReact, Element } from "html-react-parser";
-import { CodeBlock } from "@workspace/ui/components/code-block";
+// import { CodeBlock } from "@workspace/ui/components/code-block";
 import { Button } from "@workspace/ui/components/button";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@workspace/ui/components/skeleton";
+
+const CodeBlock = dynamic(() => import("@workspace/ui/components/code-block").then(
+  (mod) => mod.CodeBlock
+), {
+  ssr: false,
+  loading: () => <Skeleton className={"flex w-full h-60 rounded-md"} />,
+});
 
 type RichContentProps = PageContentBlocksRichContentLayout & {
   className?: string;
